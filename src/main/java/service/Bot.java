@@ -5,8 +5,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import repository.Storage;
 
 public class Bot extends TelegramLongPollingBot {
+    private boolean isEaes = false;
+    private boolean isOther = false;
 
     //singleton Bot creation
     public static class BotHolder {
@@ -30,24 +33,42 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         //if user send us smth
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            //take the message - it is the object which contains all information about message (id, type (text, video, sticker), date and so on - all info is here)
-            Message inputMessage = update.getMessage();
-            //take the chat id where we must send the answer
-            String chatId = inputMessage.getChatId().toString();
-            //take the user's message
-            String response = inputMessage.getText() + " - hello!";
-            //create the response object - we need this object to execute it, we can put there whatever we want to send
-            SendMessage outputMessage = new SendMessage();
-            outputMessage.setChatId(chatId);
-            outputMessage.setText(response);
-            try {
-                //this method sends our object to the user's chat
-                execute(outputMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+        SendMessage sendMessage;
+        Message inputMessage = update.getMessage();
+        try {
+            if (update.hasMessage() && inputMessage.hasText()) {
+                sendMessage = checkInputMessage(inputMessage);
+            } else sendMessage = sorryMessage(inputMessage);
+            execute(sendMessage);
+        } catch (
+                TelegramApiException e) {
+            e.printStackTrace();
         }
+    }
+
+    private SendMessage checkInputMessage(Message message) {
+        String usersMessage = message.getText();
+        SendMessage sendMessage;
+        switch (usersMessage) {
+            case Storage.START -> sendMessage = greetingStep(message);
+            case Storage.EAES, Storage.OTHER_COUNTRIES -> sendMessage = whereAutoStepChecker(message);
+            default -> sendMessage = sorryMessage(message);
+        }
+        return sendMessage;
+    }
+
+    private SendMessage sorryMessage(Message message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("sorry, wrong data, try again");
+        sendMessage.setChatId(message.getChatId().toString());
+        return sendMessage;
+    }
+
+    private SendMessage greetingStep(Message message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText(Storage.GREETING_TEXT);
+        sendMessage.setChatId(message.getChatId().toString());
+        return sendMessage;
     }
 
     @Override
@@ -57,5 +78,22 @@ public class Bot extends TelegramLongPollingBot {
 
     public static Bot getBot() {
         return BotHolder.bot;
+    }
+
+    private SendMessage whereAutoStepChecker(Message inputMessage) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(inputMessage.getChatId().toString());
+        switch (inputMessage.getText()) {
+            case Storage.EAES -> {
+                sendMessage.setText("/eaes" + " your choise");
+                isEaes = true;
+            }
+            case Storage.OTHER_COUNTRIES -> {
+                sendMessage.setText("/other" + " your choise");
+                isOther = true;
+            }
+            default -> sendMessage.setText("input error");
+        }
+        return sendMessage;
     }
 }
