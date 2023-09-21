@@ -7,6 +7,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import repository.Storage;
 
+import java.io.PrintWriter;
+
 public class Bot extends TelegramLongPollingBot {
     private boolean isEaes = false;
     private boolean isOther = false;
@@ -15,6 +17,13 @@ public class Bot extends TelegramLongPollingBot {
     private boolean is3Years = false;
     private boolean is3And7Years = false;
     private boolean isMore7Years = false;
+    private boolean isGas = false;
+    private boolean isElectric = false;
+    private boolean isLess1000 = false;
+    private boolean isBetween1000and2000 = false;
+    private boolean isBetween2000and3000 = false;
+    private boolean isBetween3000and3500 = false;
+    private boolean isMore3500 = false;
 
     //singleton Bot creation
     public static class BotHolder {
@@ -59,6 +68,9 @@ public class Bot extends TelegramLongPollingBot {
             case Storage.EAES, Storage.OTHER_COUNTRIES -> sendMessage = whereAutoStepChecker(message);
             case Storage.PHYSICAL, Storage.JURIDICAL -> sendMessage = whoIsPersonChecker(message);
             case Storage.LESS_3_YEARS, Storage.BETWEEN_3_AND_7_YEARS, Storage.MORE_7_YEARS -> sendMessage = whatIsTheAgeAuto(message);
+            case Storage.GAS, Storage.ELECTRIC -> sendMessage = whatIsTheEngineType(message);
+            case Storage.VOLUME_LESS_1000, Storage.VOLUME_BETWEEN_1000_2000, Storage.VOLUME_BETWEEN_2000_3000,
+                    Storage.VOLUME_BETWEEN_3000_3500, Storage.VOLUME_MORE_3500 -> sendMessage = whatIsTheEngineVolume(message);
             default -> sendMessage = sorryMessage(message);
         }
         return sendMessage;
@@ -115,18 +127,75 @@ public class Bot extends TelegramLongPollingBot {
         return createSendMessage(inputMessage.getChatId().toString());
     }
 
+    private SendMessage whatIsTheEngineType(Message message) {
+        booleanCleaner(4);
+        switch (message.getText()) {
+            case Storage.GAS -> isGas = true;
+            case Storage.ELECTRIC -> isElectric = true;
+        }
+        return createSendMessage(message.getChatId().toString());
+    }
+
+    private SendMessage whatIsTheEngineVolume(Message message) {
+        booleanCleaner(5);
+        switch (message.getText()) {
+            case Storage.VOLUME_LESS_1000 -> isLess1000 = true;
+            case Storage.VOLUME_BETWEEN_1000_2000 -> isBetween1000and2000 = true;
+            case Storage.VOLUME_BETWEEN_2000_3000 -> isBetween2000and3000 = true;
+            case Storage.VOLUME_BETWEEN_3000_3500 -> isBetween3000and3500 = true;
+            case Storage.VOLUME_MORE_3500 -> isMore3500 = true;
+        }
+        return createSendMessage(message.getChatId().toString());
+    }
+
     private String createSummaryString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(createUsersChoiceString());
 
-        if ((isEaes || isOther) && (!isPhysical && !isJuridical)) {
-            stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
-        } else {
-            if (isPhysical || isJuridical && (!is3Years && !is3And7Years && !isMore7Years)) {
-                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
+        if (isEaes) {
+            if (!isPhysical && !isJuridical) {
+                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
             } else {
-                if (is3Years || is3And7Years || isMore7Years) {
+                if (!is3Years && !is3And7Years && !isMore7Years) {
+                    stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
+                } else {
                     stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
+                }
+            }
+        }
+
+        if (isOther) {
+            if (!isPhysical && !isJuridical) {
+                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
+            } else {
+                if (isPhysical) {
+                    if (!is3Years && !is3And7Years && !isMore7Years) {
+                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
+                    }
+                    if (is3Years || is3And7Years || isMore7Years) {
+                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
+                    }
+                }
+                if (isJuridical) {
+                    if (!isElectric && !isGas) {
+                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.GAS_OR_ELECTRIC_ENGINE));
+                    } else {
+                        if (isElectric) {
+                            if (!is3Years && !is3And7Years && !isMore7Years) {
+                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
+                            } else {
+                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
+                            }
+                        } else {
+                            if (!isLess1000 && !isBetween1000and2000 && !isBetween2000and3000 && !isBetween3000and3500 && !isMore3500) {
+                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.GAS_ENGINE_VOLUME));
+                            } else {
+                                if (!is3Years && !is3And7Years && !isMore7Years) {
+                                    stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
+                                } else stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -163,6 +232,30 @@ public class Bot extends TelegramLongPollingBot {
                     }
                 }
             }
+
+            if (isElectric || isGas) {
+                if (isElectric) {
+                    sb.append(Storage.ELECTRIC_STRING);
+                } else {
+                    sb.append(Storage.GAS_STRING);
+                }
+            }
+
+            if (isLess1000 || isBetween1000and2000 || isBetween2000and3000 || isBetween3000and3500 || isMore3500) {
+                if (isLess1000) {
+                    sb.append(Storage.VOLUME_LESS_1000_STRING);
+                } else {
+                    if (isBetween1000and2000) {
+                        sb.append(Storage.VOLUME_BETWEEN_1000_2000_STRING);
+                    } else {
+                        if (isBetween2000and3000) {
+                            sb.append(Storage.VOLUME_BETWEEN_2000_3000_STRING);
+                        } else {
+                            sb.append(Storage.VOLUME_MORE_3500_STRING);
+                        }
+                    }
+                }
+            }
         }
         return sb.toString();
     }
@@ -184,6 +277,13 @@ public class Bot extends TelegramLongPollingBot {
                 is3Years = false;
                 is3And7Years = false;
                 isMore7Years = false;
+                isElectric = false;
+                isGas = false;
+                isLess1000 = false;
+                isBetween1000and2000 = false;
+                isBetween2000and3000 = false;
+                isBetween3000and3500 = false;
+                isMore3500 = false;
             }
             case 2 -> {
                 isJuridical = false;
@@ -191,8 +291,38 @@ public class Bot extends TelegramLongPollingBot {
                 is3Years = false;
                 is3And7Years = false;
                 isMore7Years = false;
+                isElectric = false;
+                isGas = false;
+                isLess1000 = false;
+                isBetween1000and2000 = false;
+                isBetween2000and3000 = false;
+                isBetween3000and3500 = false;
+                isMore3500 = false;
             }
             case 3 -> {
+                is3Years = false;
+                is3And7Years = false;
+                isMore7Years = false;
+            }
+            case 4 -> {
+                isElectric = false;
+                isGas = false;
+                is3Years = false;
+                is3And7Years = false;
+                isMore7Years = false;
+                isLess1000 = false;
+                isBetween1000and2000 = false;
+                isBetween2000and3000 = false;
+                isBetween3000and3500 = false;
+                isMore3500 = false;
+            }
+
+            case 5 -> {
+                isLess1000 = false;
+                isBetween1000and2000 = false;
+                isBetween2000and3000 = false;
+                isBetween3000and3500 = false;
+                isMore3500 = false;
                 is3Years = false;
                 is3And7Years = false;
                 isMore7Years = false;
