@@ -10,6 +10,8 @@ import repository.Storage;
 public class Bot extends TelegramLongPollingBot {
     private boolean isEaes = false;
     private boolean isOther = false;
+    private boolean isPhysical = false;
+    private boolean isJuridical = false;
 
     //singleton Bot creation
     public static class BotHolder {
@@ -52,6 +54,7 @@ public class Bot extends TelegramLongPollingBot {
         switch (usersMessage) {
             case Storage.START -> sendMessage = greetingStep(message);
             case Storage.EAES, Storage.OTHER_COUNTRIES -> sendMessage = whereAutoStepChecker(message);
+            case Storage.PHYSICAL, Storage.JURIDICAL -> sendMessage = whoIsPersonChecker(message);
             default -> sendMessage = sorryMessage(message);
         }
         return sendMessage;
@@ -85,14 +88,31 @@ public class Bot extends TelegramLongPollingBot {
         sendMessage.setChatId(inputMessage.getChatId().toString());
         switch (inputMessage.getText()) {
             case Storage.EAES -> {
-                sendMessage.setText("/eaes" + " your choise");
+                sendMessage.setText(Storage.YOUR_CHOICE + Storage.EAES_STRING + "\n" + Storage.PHYSICAL_OR_JURIDICAL);
                 isEaes = true;
             }
             case Storage.OTHER_COUNTRIES -> {
-                sendMessage.setText("/other" + " your choise");
+                sendMessage.setText(Storage.YOUR_CHOICE + Storage.OTHER_COUNTRIES_STRING  + "\n" + Storage.PHYSICAL_OR_JURIDICAL);
                 isOther = true;
             }
-            default -> sendMessage.setText("input error");
+            default -> sendMessage = sorryMessage(inputMessage);
+        }
+        return sendMessage;
+    }
+
+    private SendMessage whoIsPersonChecker(Message inputMessage) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(inputMessage.getChatId().toString());
+        switch (inputMessage.getText()) {
+            case Storage.JURIDICAL -> {
+                sendMessage.setText("/juridical" + " your choise");
+                isJuridical  = true;
+            }
+            case Storage.PHYSICAL -> {
+                sendMessage.setText("/physical" + " your choise");
+                isPhysical = true;
+            }
+            default -> sendMessage = sorryMessage(inputMessage);
         }
         return sendMessage;
     }
