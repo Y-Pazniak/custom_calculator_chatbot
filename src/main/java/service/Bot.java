@@ -5,13 +5,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import repository.CountryOrigin;
 import repository.Storage;
 
-import java.io.PrintWriter;
-
 public class Bot extends TelegramLongPollingBot {
-    private boolean isEaes = false;
-    private boolean isOther = false;
+    private CountryOrigin countryOrigin = null;
     private boolean isPhysical = false;
     private boolean isJuridical = false;
     private boolean is3Years = false;
@@ -52,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
         try {
             if (update.hasMessage() && inputMessage.hasText()) {
                 sendMessage = checkInputMessage(inputMessage);
-            } else sendMessage = sorryMessage(inputMessage);
+            } else sendMessage = getSorryMessage(inputMessage);
             execute(sendMessage);
         } catch (
                 TelegramApiException e) {
@@ -64,26 +62,26 @@ public class Bot extends TelegramLongPollingBot {
         String usersMessage = message.getText();
         SendMessage sendMessage;
         switch (usersMessage) {
-            case Storage.START -> sendMessage = greetingStep(message);
-            case Storage.EAES, Storage.OTHER_COUNTRIES -> sendMessage = whereAutoStepChecker(message);
-            case Storage.PHYSICAL, Storage.JURIDICAL -> sendMessage = whoIsPersonChecker(message);
-            case Storage.LESS_3_YEARS, Storage.BETWEEN_3_AND_7_YEARS, Storage.MORE_7_YEARS -> sendMessage = whatIsTheAgeAuto(message);
-            case Storage.GAS, Storage.ELECTRIC -> sendMessage = whatIsTheEngineType(message);
+            case Storage.START -> sendMessage = getGreetingMessage(message);
+            case Storage.EAES, Storage.OTHER_COUNTRIES -> sendMessage = getOriginCarMessage(message);
+            case Storage.PHYSICAL, Storage.JURIDICAL -> sendMessage = getTypeOfOwnerMessage(message);
+            case Storage.LESS_3_YEARS, Storage.BETWEEN_3_AND_7_YEARS, Storage.MORE_7_YEARS -> sendMessage = getAutoAgeMessage(message);
+            case Storage.GAS, Storage.ELECTRIC -> sendMessage = getEngineTypeMessage(message);
             case Storage.VOLUME_LESS_1000, Storage.VOLUME_BETWEEN_1000_2000, Storage.VOLUME_BETWEEN_2000_3000,
-                    Storage.VOLUME_BETWEEN_3000_3500, Storage.VOLUME_MORE_3500 -> sendMessage = whatIsTheEngineVolume(message);
-            default -> sendMessage = sorryMessage(message);
+                    Storage.VOLUME_BETWEEN_3000_3500, Storage.VOLUME_MORE_3500 -> sendMessage = getEngineVolumeMessage(message);
+            default -> sendMessage = getSorryMessage(message);
         }
         return sendMessage;
     }
 
-    private SendMessage sorryMessage(Message message) {
+    private SendMessage getSorryMessage(Message message) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText("sorry, wrong data, try again");
         sendMessage.setChatId(message.getChatId().toString());
         return sendMessage;
     }
 
-    private SendMessage greetingStep(Message message) {
+    private SendMessage getGreetingMessage(Message message) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(Storage.GREETING_TEXT);
         sendMessage.setChatId(message.getChatId().toString());
@@ -99,17 +97,17 @@ public class Bot extends TelegramLongPollingBot {
         return BotHolder.bot;
     }
 
-    private SendMessage whereAutoStepChecker(Message inputMessage) {
-        booleanCleaner(1);
+    private SendMessage getOriginCarMessage(Message inputMessage) {
+        cleanBooleans(1);
         switch (inputMessage.getText()) {
-            case Storage.EAES -> isEaes = true;
-            case Storage.OTHER_COUNTRIES -> isOther = true;
+            case Storage.EAES -> countryOrigin = CountryOrigin.EAES;
+            case Storage.OTHER_COUNTRIES -> countryOrigin = CountryOrigin.OTHER;
         }
         return createSendMessage(inputMessage.getChatId().toString());
     }
 
-    private SendMessage whoIsPersonChecker(Message inputMessage) {
-        booleanCleaner(2);
+    private SendMessage getTypeOfOwnerMessage(Message inputMessage) {
+        cleanBooleans(2);
         switch (inputMessage.getText()) {
             case Storage.JURIDICAL -> isJuridical = true;
             case Storage.PHYSICAL -> isPhysical = true;
@@ -117,8 +115,8 @@ public class Bot extends TelegramLongPollingBot {
         return createSendMessage(inputMessage.getChatId().toString());
     }
 
-    private SendMessage whatIsTheAgeAuto(Message inputMessage) {
-        booleanCleaner(3);
+    private SendMessage getAutoAgeMessage(Message inputMessage) {
+        cleanBooleans(3);
         switch (inputMessage.getText()) {
             case Storage.LESS_3_YEARS -> is3Years = true;
             case Storage.BETWEEN_3_AND_7_YEARS -> is3And7Years = true;
@@ -127,8 +125,8 @@ public class Bot extends TelegramLongPollingBot {
         return createSendMessage(inputMessage.getChatId().toString());
     }
 
-    private SendMessage whatIsTheEngineType(Message message) {
-        booleanCleaner(4);
+    private SendMessage getEngineTypeMessage(Message message) {
+        cleanBooleans(4);
         switch (message.getText()) {
             case Storage.GAS -> isGas = true;
             case Storage.ELECTRIC -> isElectric = true;
@@ -136,8 +134,8 @@ public class Bot extends TelegramLongPollingBot {
         return createSendMessage(message.getChatId().toString());
     }
 
-    private SendMessage whatIsTheEngineVolume(Message message) {
-        booleanCleaner(5);
+    private SendMessage getEngineVolumeMessage(Message message) {
+        cleanBooleans(5);
         switch (message.getText()) {
             case Storage.VOLUME_LESS_1000 -> isLess1000 = true;
             case Storage.VOLUME_BETWEEN_1000_2000 -> isBetween1000and2000 = true;
@@ -152,7 +150,7 @@ public class Bot extends TelegramLongPollingBot {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(createUsersChoiceString());
 
-        if (isEaes) {
+        if (CountryOrigin.EAES.equals(countryOrigin)) {
             if (!isPhysical && !isJuridical) {
                 stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
             } else {
@@ -164,7 +162,7 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
 
-        if (isOther) {
+        if (CountryOrigin.OTHER.equals(countryOrigin)) {
             if (!isPhysical && !isJuridical) {
                 stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
             } else {
@@ -206,20 +204,19 @@ public class Bot extends TelegramLongPollingBot {
     private String createUsersChoiceString() {
         StringBuilder sb = new StringBuilder();
         sb.append(Storage.YOUR_CHOICE);
-        if (isEaes || isOther) {
-            if (isEaes) {
+        if (countryOrigin == null) {
+            if (CountryOrigin.EAES.equals(countryOrigin)) {
                 sb.append(Storage.EAES_STRING);
             } else {
                 sb.append(Storage.OTHER_COUNTRIES_STRING);
             }
 
-            if (isPhysical || isJuridical) {
-                if (isPhysical) {
-                    sb.append(Storage.PHYSICAL_STRING);
-                } else {
-                    sb.append(Storage.JURIDICAL_STRING);
-                }
+            if (isPhysical) {
+                sb.append(Storage.PHYSICAL_STRING);
+            } else if (isJuridical){
+                sb.append(Storage.JURIDICAL_STRING);
             }
+
 
             if (is3Years || is3And7Years || isMore7Years) {
                 if (is3Years) {
@@ -267,67 +264,110 @@ public class Bot extends TelegramLongPollingBot {
         return sendMessage;
     }
 
-    private void booleanCleaner(int stepCleaner) {
-        switch (stepCleaner) {
-            case 1 -> {
-                isEaes = false;
-                isOther = false;
-                isPhysical = false;
-                isJuridical = false;
-                is3Years = false;
-                is3And7Years = false;
-                isMore7Years = false;
-                isElectric = false;
-                isGas = false;
-                isLess1000 = false;
-                isBetween1000and2000 = false;
-                isBetween2000and3000 = false;
-                isBetween3000and3500 = false;
-                isMore3500 = false;
-            }
-            case 2 -> {
-                isJuridical = false;
-                isPhysical = false;
-                is3Years = false;
-                is3And7Years = false;
-                isMore7Years = false;
-                isElectric = false;
-                isGas = false;
-                isLess1000 = false;
-                isBetween1000and2000 = false;
-                isBetween2000and3000 = false;
-                isBetween3000and3500 = false;
-                isMore3500 = false;
-            }
-            case 3 -> {
-                is3Years = false;
-                is3And7Years = false;
-                isMore7Years = false;
-            }
-            case 4 -> {
-                isElectric = false;
-                isGas = false;
-                is3Years = false;
-                is3And7Years = false;
-                isMore7Years = false;
-                isLess1000 = false;
-                isBetween1000and2000 = false;
-                isBetween2000and3000 = false;
-                isBetween3000and3500 = false;
-                isMore3500 = false;
-            }
-
-            case 5 -> {
-                isLess1000 = false;
-                isBetween1000and2000 = false;
-                isBetween2000and3000 = false;
-                isBetween3000and3500 = false;
-                isMore3500 = false;
-                is3Years = false;
-                is3And7Years = false;
-                isMore7Years = false;
-            }
+    private void cleanBooleans(int stepCleaner) {
+        if (stepCleaner <= 1) {
+            countryOrigin = null;
         }
+        if (stepCleaner <= 2) {
+            isPhysical = false;
+            isJuridical = false;
+        }
+        if (stepCleaner <= 3) {
+            is3Years = false;
+            is3And7Years = false;
+            isMore7Years = false;
+        }
+
+        if (stepCleaner <= 4) {
+            isElectric = false;
+            isGas = false;
+            isLess1000 = false;
+            isBetween1000and2000 = false;
+            isBetween2000and3000 = false;
+            isBetween3000and3500 = false;
+            isMore3500 = false;
+        }
+
+        if (stepCleaner <= 5) {
+            isLess1000 = false;
+            isBetween1000and2000 = false;
+            isBetween2000and3000 = false;
+            isBetween3000and3500 = false;
+            isMore3500 = false;
+            is3Years = false;
+            is3And7Years = false;
+            isMore7Years = false;
+        }
+
+//        if (stepCleaner <= 5) {
+//            isElectric = false;
+//            isGas = false;
+//            isLess1000 = false;
+//            isBetween1000and2000 = false;
+//            isBetween2000and3000 = false;
+//            isBetween3000and3500 = false;
+//            isMore3500 = false;
+//        }
+//        switch (stepCleaner) {
+//            case 1 -> {
+//                isEaes = false;
+//                isOther = false;
+//                isPhysical = false;
+//                isJuridical = false;
+//                is3Years = false;
+//                is3And7Years = false;
+//                isMore7Years = false;
+//                isElectric = false;
+//                isGas = false;
+//                isLess1000 = false;
+//                isBetween1000and2000 = false;
+//                isBetween2000and3000 = false;
+//                isBetween3000and3500 = false;
+//                isMore3500 = false;
+//            }
+//            case 2 -> {
+//                isJuridical = false;
+//                isPhysical = false;
+//                is3Years = false;
+//                is3And7Years = false;
+//                isMore7Years = false;
+//                isElectric = false;
+//                isGas = false;
+//                isLess1000 = false;
+//                isBetween1000and2000 = false;
+//                isBetween2000and3000 = false;
+//                isBetween3000and3500 = false;
+//                isMore3500 = false;
+//            }
+//            case 3 -> {
+//                is3Years = false;
+//                is3And7Years = false;
+//                isMore7Years = false;
+//            }
+//            case 4 -> {
+//                isElectric = false;
+//                isGas = false;
+//                is3Years = false;
+//                is3And7Years = false;
+//                isMore7Years = false;
+//                isLess1000 = false;
+//                isBetween1000and2000 = false;
+//                isBetween2000and3000 = false;
+//                isBetween3000and3500 = false;
+//                isMore3500 = false;
+//            }
+//
+//            case 5 -> {
+//                isLess1000 = false;
+//                isBetween1000and2000 = false;
+//                isBetween2000and3000 = false;
+//                isBetween3000and3500 = false;
+//                isMore3500 = false;
+//                is3Years = false;
+//                is3And7Years = false;
+//                isMore7Years = false;
+//            }
+//        }
     }
 
     private String stringBuilderAppender(String... strings) {

@@ -60,5 +60,4 @@ public class Storage {
     public static final String VOLUME_BETWEEN_3000_3500 = "/3000_3500";
     public static final String VOLUME_MORE_3500 = "/more_3500";
 
-
 }
