@@ -1,4 +1,4 @@
-package repository;
+package repository.steps;
 
 public enum CountryOrigin {
     EAES, OTHER;

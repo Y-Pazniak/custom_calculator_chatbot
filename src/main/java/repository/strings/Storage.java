@@ -1,4 +1,4 @@
-package repository;
+package repository.strings;
 
 public class Storage {
     public static final String GREETING_TEXT = "Добрый день. Я чат-бот, который поможет вам бесплатно рассчитать стоимость утильсбора в Беларуси " +
@@ -17,7 +17,7 @@ public class Storage {
             Storage.MORE_7_YEARS + " - старше 7 лет.\n";
 
     public static final String GAS_OR_ELECTRIC_ENGINE = "Какой тип двигателя?\n" +
-            Storage.GAS + " - если бензиновый или гибридный двигатель; \n" +
+            Storage.GASOLINE + " - если бензиновый или гибридный двигатель; \n" +
             Storage.ELECTRIC + " - если электрический двигатель.\n";
 
     public static final String GAS_ENGINE_VOLUME = "Какой объем двигателя?\n" +
@@ -52,7 +52,7 @@ public class Storage {
     public static final String LESS_3_YEARS = "/less_3";
     public static final String BETWEEN_3_AND_7_YEARS = "/3_7_years";
     public static final String MORE_7_YEARS = "/more_7";
-    public static final String GAS = "/gas";
+    public static final String GASOLINE = "/gas";
     public static final String ELECTRIC = "/electric";
     public static final String VOLUME_LESS_1000 = "/less_1000";
     public static final String VOLUME_BETWEEN_1000_2000 = "/1000_2000";
