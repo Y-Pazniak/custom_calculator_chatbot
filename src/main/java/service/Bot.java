@@ -141,110 +141,140 @@ public class Bot extends TelegramLongPollingBot {
     private String createSummaryString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(createUsersChoiceString());
-
-        if (CountryOrigin.EAES.equals(countryOrigin)) {
-            if (ownersType == null) {
-                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
-            } else {
-                if (carAge == null) {
-                    stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
-                } else {
-                    stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
-                }
-            }
+        switch (countryOrigin) {
+            case EAES -> stringBuilder.append(getStringOptionsForEaes());
+            case OTHER -> stringBuilder.append(getStringOptionsForOtherCountries());
+            case null -> createSummaryString();
         }
-
-        if (CountryOrigin.OTHER.equals(countryOrigin)) {
-            if (ownersType == null) {
-                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PHYSICAL_OR_JURIDICAL));
-            } else {
-                if (ownersType.equals(OwnersType.PHYSICAL)) {
-                    if (carAge == null) {
-                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
-                    } else {
-                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
-                    }
-                }
-                if (ownersType.equals(OwnersType.JURIDICAL)) {
-                    if (typeOfEngine != null) {
-                        stringBuilder.append(stringBuilderAppender(".", "\n", Storage.GAS_OR_ELECTRIC_ENGINE));
-                    } else {
-                        if (typeOfEngine.equals(TypeOfEngine.GASOLINE)) {
-                            if (carAge == null) {
-                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
-                            } else {
-                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
-                            }
-                        } else {
-                            if (volumeOfEngine == null) {
-                                stringBuilder.append(stringBuilderAppender(".", "\n", Storage.GAS_ENGINE_VOLUME));
-                            } else {
-                                if (carAge == null) {
-                                    stringBuilder.append(stringBuilderAppender(".", "\n", Storage.AGE_OF_AUTO));
-                                } else stringBuilder.append(stringBuilderAppender(".", "\n", Storage.PRICE_STRING));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         return stringBuilder.toString();
+    }
+
+    private String getStringOptionsForOtherCountries() {
+        StringBuilder sb = new StringBuilder();
+        switch (ownersType) {
+            case PHYSICAL -> sb.append(getStringOptionsForOtherCountriesPhysical());
+            case JURIDICAL -> sb.append(getStringOptionsForOtherCountriesJuridical());
+            case null -> sb.append(stringBuilderAppender(getStringOptionsTypeOfOwner()));
+        }
+
+        return sb.toString();
+    }
+
+    private String getStringOptionsForOtherCountriesJuridical() {
+        StringBuilder sb = new StringBuilder();
+        switch (typeOfEngine) {
+            case null -> sb.append(stringBuilderAppender(".", "\n", Storage.GAS_OR_ELECTRIC_ENGINE));
+            case GASOLINE -> sb.append(getStringOptionsForEngineVolume());
+            case ELECTRIC -> sb.append(getStringOptionsForAgeAuto());
+        }
+        return sb.toString();
+    }
+
+    private String getStringOptionsForEngineVolume() {
+        StringBuilder sb = new StringBuilder();
+        if (volumeOfEngine == null) {
+            sb.append(stringBuilderAppender(".", "\n", Storage.GAS_ENGINE_VOLUME));
+        } else {
+            sb.append(getStringOptionsForPrice());
+        }
+        return sb.toString();
+    }
+
+    private String getStringOptionsForAgeAuto() {
+        return "." +
+                "\n" +
+                Storage.AGE_OF_AUTO;
+    }
+
+    private String getStringOptionsForPrice() {
+        return "." +
+                "\n" +
+                Storage.PRICE_STRING;
+    }
+
+    private String getStringOptionsTypeOfOwner() {
+        return "." +
+                "\n" +
+                Storage.PHYSICAL_OR_JURIDICAL;
+    }
+
+    private String getStringOptionsForOtherCountriesPhysical() {
+        StringBuilder sb = new StringBuilder();
+        if (carAge == null) {
+            sb.append(stringBuilderAppender(getStringOptionsForAgeAuto()));
+        } else {
+            sb.append(stringBuilderAppender(getStringOptionsForPrice()));
+        }
+        return sb.toString();
+    }
+
+    private String getStringOptionsForEaes() {
+        StringBuilder sb = new StringBuilder();
+        if (ownersType == null) {
+            sb.append(stringBuilderAppender(getStringOptionsTypeOfOwner()));
+        } else {
+            if (carAge == null) {
+                sb.append(stringBuilderAppender(getStringOptionsForAgeAuto()));
+            } else {
+                sb.append(stringBuilderAppender(getStringOptionsForPrice()));
+            }
+        }
+        return sb.toString();
     }
 
     private String createUsersChoiceString() {
         StringBuilder sb = new StringBuilder();
         sb.append(Storage.YOUR_CHOICE);
-        if (countryOrigin != null) {
-            if (CountryOrigin.EAES.equals(countryOrigin)) {
-                sb.append(Storage.EAES_STRING);
-            } else {
-                sb.append(Storage.OTHER_COUNTRIES_STRING);
-            }
-
-            if (ownersType.equals(OwnersType.PHYSICAL)) {
-                sb.append(Storage.PHYSICAL_STRING);
-            } else if (ownersType.equals(OwnersType.JURIDICAL)) {
-                sb.append(Storage.JURIDICAL_STRING);
-            }
-
-
-            if (carAge != null) {
-                if (carAge.equals(CarAge.LESS_3_YEARS)) {
-                    sb.append(Storage.LESS_3_YEARS_STRING);
-                } else {
-                    if (carAge.equals(CarAge.BETWEEN_3_AND_7_YEARS)) {
-                        sb.append(Storage.BETWEEN_3_AND_7_YEARS_STRING);
-                    } else {
-                        sb.append(Storage.MORE_7_YEARS_STRING);
-                    }
-                }
-            }
-
-            if (typeOfEngine != null) {
-                if (typeOfEngine.equals(TypeOfEngine.ELECTRIC)) {
-                    sb.append(Storage.ELECTRIC_STRING);
-                } else {
-                    sb.append(Storage.GAS_STRING);
-                }
-            }
-
-            if (volumeOfEngine != null) {
-                if (volumeOfEngine.equals(VolumeOfEngine.LESS_1000)) {
-                    sb.append(Storage.VOLUME_LESS_1000_STRING);
-                } else {
-                    if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_1000_AND_2000)) {
-                        sb.append(Storage.VOLUME_BETWEEN_1000_2000_STRING);
-                    } else {
-                        if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_2000_AND_3000)) {
-                            sb.append(Storage.VOLUME_BETWEEN_2000_3000_STRING);
-                        } else {
-                            sb.append(Storage.VOLUME_MORE_3500_STRING);
-                        }
-                    }
-                }
-            }
-        }
+//        if (countryOrigin != null) {
+//            if (CountryOrigin.EAES.equals(countryOrigin)) {
+//                sb.append(Storage.EAES_STRING);
+//            } else {
+//                sb.append(Storage.OTHER_COUNTRIES_STRING);
+//            }
+//
+//            if (ownersType.equals(OwnersType.PHYSICAL)) {
+//                sb.append(Storage.PHYSICAL_STRING);
+//            } else if (ownersType.equals(OwnersType.JURIDICAL)) {
+//                sb.append(Storage.JURIDICAL_STRING);
+//            }
+//
+//
+//            if (carAge != null) {
+//                if (carAge.equals(CarAge.LESS_3_YEARS)) {
+//                    sb.append(Storage.LESS_3_YEARS_STRING);
+//                } else {
+//                    if (carAge.equals(CarAge.BETWEEN_3_AND_7_YEARS)) {
+//                        sb.append(Storage.BETWEEN_3_AND_7_YEARS_STRING);
+//                    } else {
+//                        sb.append(Storage.MORE_7_YEARS_STRING);
+//                    }
+//                }
+//            }
+//
+//            if (typeOfEngine != null) {
+//                if (typeOfEngine.equals(TypeOfEngine.ELECTRIC)) {
+//                    sb.append(Storage.ELECTRIC_STRING);
+//                } else {
+//                    sb.append(Storage.GAS_STRING);
+//                }
+//            }
+//
+//            if (volumeOfEngine != null) {
+//                if (volumeOfEngine.equals(VolumeOfEngine.LESS_1000)) {
+//                    sb.append(Storage.VOLUME_LESS_1000_STRING);
+//                } else {
+//                    if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_1000_AND_2000)) {
+//                        sb.append(Storage.VOLUME_BETWEEN_1000_2000_STRING);
+//                    } else {
+//                        if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_2000_AND_3000)) {
+//                            sb.append(Storage.VOLUME_BETWEEN_2000_3000_STRING);
+//                        } else {
+//                            sb.append(Storage.VOLUME_MORE_3500_STRING);
+//                        }
+//                    }
+//                }
+//            }
+//        }
         return sb.toString();
     }
 
