@@ -144,7 +144,6 @@ public class Bot extends TelegramLongPollingBot {
         switch (countryOrigin) {
             case EAES -> stringBuilder.append(getStringOptionsForEaes());
             case OTHER -> stringBuilder.append(getStringOptionsForOtherCountries());
-            case null -> createSummaryString();
         }
         return stringBuilder.toString();
     }
@@ -290,108 +289,15 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private void cleanBooleans(int stepCleaner) {
-//        if (stepCleaner >= 1) {
-//            countryOrigin = null;
-//        }
-//        if (stepCleaner >= 2) {
-//            isPhysical = false;
-//            isJuridical = false;
-//        }
-//        if (stepCleaner >= 3) {
-//            is3Years = false;
-//            is3And7Years = false;
-//            isMore7Years = false;
-//        }
-//
-//        if (stepCleaner >= 4) {
-//            isElectric = false;
-//            isGas = false;
-//            isLess1000 = false;
-//            isBetween1000and2000 = false;
-//            isBetween2000and3000 = false;
-//            isBetween3000and3500 = false;
-//            isMore3500 = false;
-//        }
-//
-//        if (stepCleaner >= 5) {
-//            isLess1000 = false;
-//            isBetween1000and2000 = false;
-//            isBetween2000and3000 = false;
-//            isBetween3000and3500 = false;
-//            isMore3500 = false;
-//            is3Years = false;
-//            is3And7Years = false;
-//            isMore7Years = false;
-//        }
-//        if (stepCleaner <= 5) {
-//            isElectric = false;
-//            isGas = false;
-//            isLess1000 = false;
-//            isBetween1000and2000 = false;
-//            isBetween2000and3000 = false;
-//            isBetween3000and3500 = false;
-//            isMore3500 = false;
-//        }
-//        switch (stepCleaner) {
-//            case 1 -> {
-//                isEaes = false;
-//                isOther = false;
-//                isPhysical = false;
-//                isJuridical = false;
-//                is3Years = false;
-//                is3And7Years = false;
-//                isMore7Years = false;
-//                isElectric = false;
-//                isGas = false;
-//                isLess1000 = false;
-//                isBetween1000and2000 = false;
-//                isBetween2000and3000 = false;
-//                isBetween3000and3500 = false;
-//                isMore3500 = false;
-//            }
-//            case 2 -> {
-//                isJuridical = false;
-//                isPhysical = false;
-//                is3Years = false;
-//                is3And7Years = false;
-//                isMore7Years = false;
-//                isElectric = false;
-//                isGas = false;
-//                isLess1000 = false;
-//                isBetween1000and2000 = false;
-//                isBetween2000and3000 = false;
-//                isBetween3000and3500 = false;
-//                isMore3500 = false;
-//            }
-//            case 3 -> {
-//                is3Years = false;
-//                is3And7Years = false;
-//                isMore7Years = false;
-//            }
-//            case 4 -> {
-//                isElectric = false;
-//                isGas = false;
-//                is3Years = false;
-//                is3And7Years = false;
-//                isMore7Years = false;
-//                isLess1000 = false;
-//                isBetween1000and2000 = false;
-//                isBetween2000and3000 = false;
-//                isBetween3000and3500 = false;
-//                isMore3500 = false;
-//            }
-//
-//            case 5 -> {
-//                isLess1000 = false;
-//                isBetween1000and2000 = false;
-//                isBetween2000and3000 = false;
-//                isBetween3000and3500 = false;
-//                isMore3500 = false;
-//                is3Years = false;
-//                is3And7Years = false;
-//                isMore7Years = false;
-//            }
-//        }
+        if (stepCleaner <= 1) {
+            countryOrigin = null;
+        }
+        if (stepCleaner <= 2) {
+            ownersType = null;
+        }
+        if (stepCleaner <= 3) {
+            carAge = null;
+        }
     }
 
     private String stringBuilderAppender(String... strings) {
