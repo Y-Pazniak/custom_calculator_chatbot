@@ -175,7 +175,7 @@ public class Bot extends TelegramLongPollingBot {
         if (volumeOfEngine == null) {
             sb.append(stringBuilderAppender(".", "\n", Storage.GAS_ENGINE_VOLUME));
         } else {
-            sb.append(getStringOptionsForPrice());
+            sb.append(getStringOptionsForAgeAuto());
         }
         return sb.toString();
     }
@@ -224,57 +224,61 @@ public class Bot extends TelegramLongPollingBot {
 
     private String createUsersChoiceString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Storage.YOUR_CHOICE);
-//        if (countryOrigin != null) {
-//            if (CountryOrigin.EAES.equals(countryOrigin)) {
-//                sb.append(Storage.EAES_STRING);
-//            } else {
-//                sb.append(Storage.OTHER_COUNTRIES_STRING);
-//            }
-//
-//            if (ownersType.equals(OwnersType.PHYSICAL)) {
-//                sb.append(Storage.PHYSICAL_STRING);
-//            } else if (ownersType.equals(OwnersType.JURIDICAL)) {
-//                sb.append(Storage.JURIDICAL_STRING);
-//            }
-//
-//
-//            if (carAge != null) {
-//                if (carAge.equals(CarAge.LESS_3_YEARS)) {
-//                    sb.append(Storage.LESS_3_YEARS_STRING);
-//                } else {
-//                    if (carAge.equals(CarAge.BETWEEN_3_AND_7_YEARS)) {
-//                        sb.append(Storage.BETWEEN_3_AND_7_YEARS_STRING);
-//                    } else {
-//                        sb.append(Storage.MORE_7_YEARS_STRING);
-//                    }
-//                }
-//            }
-//
-//            if (typeOfEngine != null) {
-//                if (typeOfEngine.equals(TypeOfEngine.ELECTRIC)) {
-//                    sb.append(Storage.ELECTRIC_STRING);
-//                } else {
-//                    sb.append(Storage.GAS_STRING);
-//                }
-//            }
-//
-//            if (volumeOfEngine != null) {
-//                if (volumeOfEngine.equals(VolumeOfEngine.LESS_1000)) {
-//                    sb.append(Storage.VOLUME_LESS_1000_STRING);
-//                } else {
-//                    if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_1000_AND_2000)) {
-//                        sb.append(Storage.VOLUME_BETWEEN_1000_2000_STRING);
-//                    } else {
-//                        if (volumeOfEngine.equals(VolumeOfEngine.BETWEEN_2000_AND_3000)) {
-//                            sb.append(Storage.VOLUME_BETWEEN_2000_3000_STRING);
-//                        } else {
-//                            sb.append(Storage.VOLUME_MORE_3500_STRING);
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        sb.append(Storage.YOUR_CHOICE_STRING);
+
+        switch (countryOrigin) {
+            case null -> {
+            }
+            case EAES -> sb.append(Storage.EAES_STRING);
+            case OTHER -> sb.append(Storage.OTHER_COUNTRIES_STRING);
+        }
+
+        switch (ownersType) {
+            case null -> {
+            }
+            case PHYSICAL -> sb.append(Storage.PHYSICAL_STRING);
+            case JURIDICAL -> sb.append(Storage.JURIDICAL_STRING);
+        }
+
+        switch (carAge) {
+            case null -> {
+            }
+            case LESS_3_YEARS -> sb.append(Storage.LESS_3_YEARS_STRING);
+            case BETWEEN_3_AND_7_YEARS -> sb.append(Storage.BETWEEN_3_AND_7_YEARS_STRING);
+            case MORE_7_YEARS -> sb.append(Storage.MORE_7_YEARS_STRING);
+        }
+
+        switch (typeOfEngine) {
+            case null -> {
+            }
+            case GASOLINE -> sb.append(Storage.GAS_STRING);
+            case ELECTRIC -> sb.append(Storage.ELECTRIC_STRING);
+        }
+
+        switch (volumeOfEngine) {
+            case null -> {
+            }
+            case LESS_1000 -> {
+                sb.append(",");
+                sb.append(Storage.VOLUME_LESS_1000_STRING);
+            }
+            case BETWEEN_1000_AND_2000 -> {
+                sb.append(",");
+                sb.append(Storage.VOLUME_BETWEEN_1000_2000_STRING);
+            }
+            case BETWEEN_2000_AND_3000 -> {
+                sb.append(",");
+                sb.append(Storage.VOLUME_BETWEEN_2000_3000_STRING);
+            }
+            case BETWEEN_3000_AND_3500 -> {
+                sb.append(",");
+                sb.append(Storage.VOLUME_BETWEEN_3000_3500_STRING);
+            }
+            case MORE_3500 -> {
+                sb.append(",");
+                sb.append(Storage.VOLUME_MORE_3500_STRING);
+            }
+        }
         return sb.toString();
     }
 

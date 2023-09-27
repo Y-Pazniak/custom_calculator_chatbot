@@ -27,7 +27,7 @@ public class Storage {
             Storage.VOLUME_BETWEEN_3000_3500 + " - " + Storage.VOLUME_BETWEEN_3000_3500_STRING + "\n" +
             Storage.VOLUME_MORE_3500 + " - " + Storage.VOLUME_MORE_3500_STRING;
 
-    public static final String YOUR_CHOICE = "Вы выбрали: ";
+    public static final String YOUR_CHOICE_STRING = "Вы выбрали: ";
     public static final String EAES_STRING = "автомобили из ЕАЭС";
     public static final String OTHER_COUNTRIES_STRING = "автомобили из иных стран";
     public static final String PHYSICAL_STRING = ", физическое лицо";
