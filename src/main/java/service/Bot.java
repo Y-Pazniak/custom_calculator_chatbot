@@ -14,9 +14,10 @@ public class Bot extends TelegramLongPollingBot {
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
+    private final CalculatorPassenger calculator;
 
     //singleton Bot creation
-    public static class BotHolder {
+    private static class BotHolder {
         private static final Bot bot = new Bot();
     }
 
@@ -25,6 +26,7 @@ public class Bot extends TelegramLongPollingBot {
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
+        calculator = CalculatorPassenger.getInstance();
     }
 
     //bot's token takes from the environmental variables
@@ -108,7 +110,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private SendMessage getAutoAgeMessage(Message inputMessage) {
-        cleanBooleans(3);
+        cleanBooleans(5);
         switch (inputMessage.getText()) {
             case Storage.LESS_3_YEARS -> carAge = CarAge.LESS_3_YEARS;
             case Storage.BETWEEN_3_AND_7_YEARS -> carAge = CarAge.BETWEEN_3_AND_7_YEARS;
@@ -118,7 +120,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private SendMessage getEngineTypeMessage(Message message) {
-        cleanBooleans(4);
+        cleanBooleans(3);
         switch (message.getText()) {
             case Storage.GASOLINE -> typeOfEngine = TypeOfEngine.GASOLINE;
             case Storage.ELECTRIC -> typeOfEngine = TypeOfEngine.ELECTRIC;
@@ -127,7 +129,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private SendMessage getEngineVolumeMessage(Message message) {
-        cleanBooleans(5);
+        cleanBooleans(4);
         switch (message.getText()) {
             case Storage.VOLUME_LESS_1000 -> volumeOfEngine = VolumeOfEngine.LESS_1000;
             case Storage.VOLUME_BETWEEN_1000_2000 -> volumeOfEngine = VolumeOfEngine.BETWEEN_1000_AND_2000;
@@ -164,9 +166,17 @@ public class Bot extends TelegramLongPollingBot {
         switch (typeOfEngine) {
             case null -> sb.append(stringBuilderAppender(".", "\n", Storage.GAS_OR_ELECTRIC_ENGINE));
             case GASOLINE -> sb.append(getStringOptionsForEngineVolume());
-            case ELECTRIC -> sb.append(getStringOptionsForAgeAuto());
+            case ELECTRIC -> sb.append(checkForElectricAutoAge());
         }
         return sb.toString();
+    }
+
+    private String checkForElectricAutoAge() {
+        if (carAge == null) {
+            return getStringOptionsForAgeAuto();
+        } else {
+            return getStringOptionsForPrice();
+        }
     }
 
     private String getStringOptionsForEngineVolume() {
@@ -174,7 +184,11 @@ public class Bot extends TelegramLongPollingBot {
         if (volumeOfEngine == null) {
             sb.append(stringBuilderAppender(".", "\n", Storage.GAS_ENGINE_VOLUME));
         } else {
-            sb.append(getStringOptionsForAgeAuto());
+            if (carAge == null) {
+                sb.append(getStringOptionsForAgeAuto());
+            } else {
+                sb.append(getStringOptionsForPrice());
+            }
         }
         return sb.toString();
     }
@@ -188,7 +202,11 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForPrice() {
         return "." +
                 "\n" +
-                Storage.PRICE_STRING;
+                Storage.PRICE_STRING + calculator.calculate(
+                countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
+        ) +
+                Storage.BYN_STRING +
+                Storage.FAREWELL_STRING;
     }
 
     private String getStringOptionsTypeOfOwner() {
@@ -296,6 +314,12 @@ public class Bot extends TelegramLongPollingBot {
             ownersType = null;
         }
         if (stepCleaner <= 3) {
+            typeOfEngine = null;
+        }
+        if (stepCleaner <= 4) {
+            volumeOfEngine = null;
+        }
+        if (stepCleaner <= 5) {
             carAge = null;
         }
     }
