@@ -1,7 +1,7 @@
-package service;
+package by.custom.utilcalculator.service;
 
-import repository.steps.*;
-import repository.strings.Storage;
+import by.custom.utilcalculator.repository.steps.*;
+import by.custom.utilcalculator.repository.resources.Prices;
 
 public class CalculatorPassenger {
     private static class CalculatorHolder {
@@ -26,10 +26,11 @@ public class CalculatorPassenger {
             case null -> {
                 return "calculator: countryOrigin is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: calculate() unknown error";
             }
         }
+//        return "calculator: calculate() unknown error";
     }
 
     private String countForOtherCountriesPrice(OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -43,10 +44,11 @@ public class CalculatorPassenger {
             case null -> {
                 return "calculator: ownersType is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: countForOtherCountriesPrice() unknown error";
             }
         }
+//        return "calculator: countForOtherCountriesPrice() unknown error";
     }
 
     private String countForJuridicalPrice(TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -60,10 +62,11 @@ public class CalculatorPassenger {
             case null -> {
                 return "calculator: typeOfEngine is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: countForJuridicalPrice() unknown error";
             }
         }
+//        return "calculator: countForJuridicalPrice() unknown error";
     }
 
     private String countForGasolineAutoPrice(VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -80,107 +83,112 @@ public class CalculatorPassenger {
             case null -> {
                 return "calculator: carAge is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: countForGasolineAutoPrice() unknown error";
             }
         }
+//        return "calculator: countForGasolineAutoPrice() unknown error";
     }
 
     private String getPriceForJuridicalGasolineMore7Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_OLDER_7_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_OLDER_7_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_OLDER_7_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_OLDER_7_YEARS;
             }
             case MORE_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3500_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3500_OLDER_7_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: getPriceForJuridicalGasolineMore7Years() unknown error";
             }
         }
+//        return "calculator: getPriceForJuridicalGasolineMore7Years() unknown error";
     }
 
     private String getPriceForJuridicalGasolineBetween3And7Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_3_TO_7_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_3_TO_7_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_3_TO_7_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_3_TO_7_YEARS;
             }
             case MORE_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3500_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3500_3_TO_7_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: getPriceForJuridicalGasolineBetween3And7Years() unknown error";
             }
         }
+//        return "calculator: getPriceForJuridicalGasolineBetween3And7Years() unknown error";
     }
 
     private String getPriceForJuridicalGasolineLess3Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_LESS_3_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_1000_2000_LESS_3_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_2000_3000_LESS_3_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3000_3500_LESS_3_YEARS;
             }
             case MORE_3500 -> {
-                return Storage.PRICE_PASSENGER_OTHER_GASOLINE_3500_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_OTHER_GASOLINE_3500_LESS_3_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: getPriceForJuridicalGasolineLess3Years() unknown error";
             }
         }
+        //return "calculator: getPriceForJuridicalGasolineLess3Years() unknown error";
     }
 
     private String countMostCommonPrice(CarAge carAge) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
         switch (carAge) {
             case LESS_3_YEARS -> {
-                return Storage.PRICE_PASSENGER_LESS_3_YEARS;
+                return Prices.PRICE_PASSENGER_LESS_3_YEARS;
             }
             case BETWEEN_3_AND_7_YEARS -> {
-                return Storage.PRICE_PASSENGER_3_TO_7_YEARS;
+                return Prices.PRICE_PASSENGER_3_TO_7_YEARS;
             }
             case MORE_7_YEARS -> {
-                return Storage.PRICE_PASSENGER_OLDER_7_YEARS;
+                return Prices.PRICE_PASSENGER_OLDER_7_YEARS;
             }
             case null -> {
                 return "calculator: carAge is null";
             }
-            case default -> {
+            default -> {
                 return "calculator: unknown error";
             }
         }
+        //return "calculator: unknown error";
     }
 }
