@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.repository.steps;
+package repository.steps;
 
 public enum CountryOrigin {
     EAES, OTHER;
