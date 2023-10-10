@@ -60,14 +60,14 @@ public class Bot extends TelegramLongPollingBot {
         String usersMessage = message.getText();
         SendMessage sendMessage;
         switch (usersMessage) {
-            case Commands.START_COMMAND -> sendMessage = getGreetingMessage(message);
-            case Commands.EAES_COMMAND, Commands.OTHER_COUNTRIES_COMMAND -> sendMessage = getOriginCarMessage(message);
-            case Commands.PHYSICAL_PERSON_COMMAND, Commands.JURIDICAL_PERSON_COMMAND -> sendMessage = getTypeOfOwnerMessage(message);
-            case Commands.LESS_3_YEARS_AGE_COMMAND, Commands.BETWEEN_3_AND_7_YEARS_AGE_COMMAND, Commands.MORE_7_YEARS_AGE_COMMAND ->
+            case Commands.START -> sendMessage = getGreetingMessage(message);
+            case Commands.EAES, Commands.OTHER_COUNTRIES -> sendMessage = getOriginCarMessage(message);
+            case Commands.PHYSICAL_PERSON, Commands.JURIDICAL_PERSON -> sendMessage = getTypeOfOwnerMessage(message);
+            case Commands.LESS_3_YEARS_AGE, Commands.BETWEEN_3_AND_7_YEARS_AGE, Commands.MORE_7_YEARS_AGE ->
                     sendMessage = getAutoAgeMessage(message);
-            case Commands.GASOLINE_TYPE_ENGINE_COMMAND, Commands.ELECTRIC_TYPE_ENGINE_COMMAND -> sendMessage = getEngineTypeMessage(message);
-            case Commands.VOLUME_LESS_1000_CM_COMMAND, Commands.VOLUME_BETWEEN_1000_2000_CM_COMMAND, Commands.VOLUME_BETWEEN_2000_3000_CM_COMMAND,
-                    Commands.VOLUME_BETWEEN_3000_3500_CM_COMMAND, Commands.VOLUME_MORE_3500_CM_COMMAND ->
+            case Commands.GASOLINE_TYPE_ENGINE, Commands.ELECTRIC_TYPE_ENGINE -> sendMessage = getEngineTypeMessage(message);
+            case Commands.VOLUME_LESS_1000_CM, Commands.VOLUME_BETWEEN_1000_2000_CM, Commands.VOLUME_BETWEEN_2000_3000_CM,
+                    Commands.VOLUME_BETWEEN_3000_3500_CM, Commands.VOLUME_MORE_3500_CM ->
                     sendMessage = getEngineVolumeMessage(message);
             default -> sendMessage = getSorryMessage(message);
         }
@@ -100,8 +100,8 @@ public class Bot extends TelegramLongPollingBot {
     private SendMessage getOriginCarMessage(Message inputMessage) {
         cleanBooleans(1);
         switch (inputMessage.getText()) {
-            case Commands.EAES_COMMAND -> countryOrigin = CountryOrigin.EAES;
-            case Commands.OTHER_COUNTRIES_COMMAND -> countryOrigin = CountryOrigin.OTHER;
+            case Commands.EAES -> countryOrigin = CountryOrigin.EAES;
+            case Commands.OTHER_COUNTRIES -> countryOrigin = CountryOrigin.OTHER;
         }
         return createSendMessage(inputMessage.getChatId().toString());
     }
@@ -109,8 +109,8 @@ public class Bot extends TelegramLongPollingBot {
     private SendMessage getTypeOfOwnerMessage(Message inputMessage) {
         cleanBooleans(2);
         switch (inputMessage.getText()) {
-            case Commands.JURIDICAL_PERSON_COMMAND -> ownersType = OwnersType.JURIDICAL;
-            case Commands.PHYSICAL_PERSON_COMMAND -> ownersType = OwnersType.PHYSICAL;
+            case Commands.JURIDICAL_PERSON -> ownersType = OwnersType.JURIDICAL;
+            case Commands.PHYSICAL_PERSON -> ownersType = OwnersType.PHYSICAL;
         }
         return createSendMessage(inputMessage.getChatId().toString());
     }
@@ -118,9 +118,9 @@ public class Bot extends TelegramLongPollingBot {
     private SendMessage getAutoAgeMessage(Message inputMessage) {
         cleanBooleans(5);
         switch (inputMessage.getText()) {
-            case Commands.LESS_3_YEARS_AGE_COMMAND -> carAge = CarAge.LESS_3_YEARS;
-            case Commands.BETWEEN_3_AND_7_YEARS_AGE_COMMAND -> carAge = CarAge.BETWEEN_3_AND_7_YEARS;
-            case Commands.MORE_7_YEARS_AGE_COMMAND -> carAge = CarAge.MORE_7_YEARS;
+            case Commands.LESS_3_YEARS_AGE -> carAge = CarAge.LESS_3_YEARS;
+            case Commands.BETWEEN_3_AND_7_YEARS_AGE -> carAge = CarAge.BETWEEN_3_AND_7_YEARS;
+            case Commands.MORE_7_YEARS_AGE -> carAge = CarAge.MORE_7_YEARS;
         }
         return createSendMessage(inputMessage.getChatId().toString());
     }
@@ -128,8 +128,8 @@ public class Bot extends TelegramLongPollingBot {
     private SendMessage getEngineTypeMessage(Message message) {
         cleanBooleans(3);
         switch (message.getText()) {
-            case Commands.GASOLINE_TYPE_ENGINE_COMMAND -> typeOfEngine = TypeOfEngine.GASOLINE;
-            case Commands.ELECTRIC_TYPE_ENGINE_COMMAND -> typeOfEngine = TypeOfEngine.ELECTRIC;
+            case Commands.GASOLINE_TYPE_ENGINE -> typeOfEngine = TypeOfEngine.GASOLINE;
+            case Commands.ELECTRIC_TYPE_ENGINE -> typeOfEngine = TypeOfEngine.ELECTRIC;
         }
         return createSendMessage(message.getChatId().toString());
     }
@@ -137,11 +137,11 @@ public class Bot extends TelegramLongPollingBot {
     private SendMessage getEngineVolumeMessage(Message message) {
         cleanBooleans(4);
         switch (message.getText()) {
-            case Commands.VOLUME_LESS_1000_CM_COMMAND -> volumeOfEngine = VolumeOfEngine.LESS_1000;
-            case Commands.VOLUME_BETWEEN_1000_2000_CM_COMMAND -> volumeOfEngine = VolumeOfEngine.BETWEEN_1000_AND_2000;
-            case Commands.VOLUME_BETWEEN_2000_3000_CM_COMMAND -> volumeOfEngine = VolumeOfEngine.BETWEEN_2000_AND_3000;
-            case Commands.VOLUME_BETWEEN_3000_3500_CM_COMMAND -> volumeOfEngine = VolumeOfEngine.BETWEEN_3000_AND_3500;
-            case Commands.VOLUME_MORE_3500_CM_COMMAND -> volumeOfEngine = VolumeOfEngine.MORE_3500;
+            case Commands.VOLUME_LESS_1000_CM -> volumeOfEngine = VolumeOfEngine.LESS_1000;
+            case Commands.VOLUME_BETWEEN_1000_2000_CM -> volumeOfEngine = VolumeOfEngine.BETWEEN_1000_AND_2000;
+            case Commands.VOLUME_BETWEEN_2000_3000_CM -> volumeOfEngine = VolumeOfEngine.BETWEEN_2000_AND_3000;
+            case Commands.VOLUME_BETWEEN_3000_3500_CM -> volumeOfEngine = VolumeOfEngine.BETWEEN_3000_AND_3500;
+            case Commands.VOLUME_MORE_3500_CM -> volumeOfEngine = VolumeOfEngine.MORE_3500;
         }
         return createSendMessage(message.getChatId().toString());
     }
@@ -207,11 +207,11 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForPrice() {
         return "." +
                 "\n" +
-                Answers.PRICE_ANSWER + calculator.calculate(
+                Answers.PRICE + calculator.calculate(
                 countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
         ) +
-                Answers.BYN_ANSWER +
-                Answers.FAREWELL_ANSWER;
+                Answers.BYN +
+                Answers.FAREWELL;
     }
 
     private String getStringOptionsTypeOfOwner() {
@@ -246,35 +246,35 @@ public class Bot extends TelegramLongPollingBot {
 
     private String createUsersChoiceString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Answers.YOUR_CHOICE_ANSWER);
+        sb.append(Answers.YOUR_CHOICE);
 
         switch (countryOrigin) {
             case null -> {
             }
-            case EAES -> sb.append(Answers.EAES_ANSWER);
-            case OTHER -> sb.append(Answers.OTHER_COUNTRIES_ANSWER);
+            case EAES -> sb.append(Answers.EAES);
+            case OTHER -> sb.append(Answers.OTHER_COUNTRIES);
         }
 
         switch (ownersType) {
             case null -> {
             }
-            case PHYSICAL -> sb.append(Answers.PHYSICAL_PERSON_ANSWER);
-            case JURIDICAL -> sb.append(Answers.JURIDICAL_PERSON_ANSWER);
+            case PHYSICAL -> sb.append(Answers.PHYSICAL_PERSON);
+            case JURIDICAL -> sb.append(Answers.JURIDICAL_PERSON);
         }
 
         switch (carAge) {
             case null -> {
             }
-            case LESS_3_YEARS -> sb.append(Answers.LESS_3_YEARS_OLD_ANSWER);
-            case BETWEEN_3_AND_7_YEARS -> sb.append(Answers.BETWEEN_3_AND_7_YEARS_OLD_ANSWER);
-            case MORE_7_YEARS -> sb.append(Answers.MORE_7_YEARS_OLD_ANSWER);
+            case LESS_3_YEARS -> sb.append(Answers.LESS_3_YEARS_OLD);
+            case BETWEEN_3_AND_7_YEARS -> sb.append(Answers.BETWEEN_3_AND_7_YEARS_OLD);
+            case MORE_7_YEARS -> sb.append(Answers.MORE_7_YEARS_OLD);
         }
 
         switch (typeOfEngine) {
             case null -> {
             }
-            case GASOLINE -> sb.append(Answers.GASOLINE_OR_HYBRID_ENGINE_ANSWER);
-            case ELECTRIC -> sb.append(Answers.ELECTRIC_ENGINE_ANSWER);
+            case GASOLINE -> sb.append(Answers.GASOLINE_OR_HYBRID_ENGINE);
+            case ELECTRIC -> sb.append(Answers.ELECTRIC_ENGINE);
         }
 
         switch (volumeOfEngine) {
@@ -282,23 +282,23 @@ public class Bot extends TelegramLongPollingBot {
             }
             case LESS_1000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_LESS_1000_CM_ANSWER);
+                sb.append(Answers.VOLUME_LESS_1000_CM);
             }
             case BETWEEN_1000_AND_2000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_1000_2000_CM_ANSWER);
+                sb.append(Answers.VOLUME_BETWEEN_1000_2000_CM);
             }
             case BETWEEN_2000_AND_3000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_2000_3000_CM_ANSWER);
+                sb.append(Answers.VOLUME_BETWEEN_2000_3000_CM);
             }
             case BETWEEN_3000_AND_3500 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_3000_3500_CM_ANSWER);
+                sb.append(Answers.VOLUME_BETWEEN_3000_3500_CM);
             }
             case MORE_3500 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_MORE_3500_CM_ANSWER);
+                sb.append(Answers.VOLUME_MORE_3500_CM);
             }
         }
         return sb.toString();
