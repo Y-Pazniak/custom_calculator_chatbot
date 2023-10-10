@@ -10,6 +10,15 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Bot extends TelegramLongPollingBot {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
@@ -17,6 +26,7 @@ public class Bot extends TelegramLongPollingBot {
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
     private final CalculatorPassenger calculator;
+    private ResourceBundle bundle = null;
 
     //singleton Bot creation
     private static class BotHolder {
@@ -29,6 +39,19 @@ public class Bot extends TelegramLongPollingBot {
     //private constructor to avoid wrong bot's creation
     private Bot() {
         calculator = CalculatorPassenger.getInstance();
+        createBundleResources();
+    }
+
+    private void createBundleResources() {
+        try {
+            File fileResources = new File("D:\\IdeaProjects\\custom_calculator_bot\\src\\main\\resources");
+            URL[] urls = {fileResources.toURI().toURL()};
+            ClassLoader loader = new URLClassLoader(urls);
+            bundle = ResourceBundle.getBundle("words", Locale.getDefault(), loader);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     //bot's token takes from the environmental variables
@@ -51,12 +74,12 @@ public class Bot extends TelegramLongPollingBot {
             } else sendMessage = getSorryMessage(inputMessage);
             execute(sendMessage);
         } catch (
-                TelegramApiException e) {
+                TelegramApiException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
-    private SendMessage checkInputMessage(Message message) {
+    private SendMessage checkInputMessage(Message message) throws UnsupportedEncodingException {
         String usersMessage = message.getText();
         SendMessage sendMessage;
         switch (usersMessage) {
@@ -65,7 +88,8 @@ public class Bot extends TelegramLongPollingBot {
             case Commands.PHYSICAL_PERSON, Commands.JURIDICAL_PERSON -> sendMessage = getTypeOfOwnerMessage(message);
             case Commands.LESS_3_YEARS_AGE, Commands.BETWEEN_3_AND_7_YEARS_AGE, Commands.MORE_7_YEARS_AGE ->
                     sendMessage = getAutoAgeMessage(message);
-            case Commands.GASOLINE_TYPE_ENGINE, Commands.ELECTRIC_TYPE_ENGINE -> sendMessage = getEngineTypeMessage(message);
+            case Commands.GASOLINE_TYPE_ENGINE, Commands.ELECTRIC_TYPE_ENGINE ->
+                    sendMessage = getEngineTypeMessage(message);
             case Commands.VOLUME_LESS_1000_CM, Commands.VOLUME_BETWEEN_1000_2000_CM, Commands.VOLUME_BETWEEN_2000_3000_CM,
                     Commands.VOLUME_BETWEEN_3000_3500_CM, Commands.VOLUME_MORE_3500_CM ->
                     sendMessage = getEngineVolumeMessage(message);
@@ -81,9 +105,10 @@ public class Bot extends TelegramLongPollingBot {
         return sendMessage;
     }
 
-    private SendMessage getGreetingMessage(Message message) {
+    private SendMessage getGreetingMessage(Message message) throws UnsupportedEncodingException {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(Questions.GREETING_TEXT);
+        //sendMessage.setText(Questions.GREETING_TEXT);
+        sendMessage.setText(bundle.getString("GREETING_TEXT"));
         sendMessage.setChatId(message.getChatId().toString());
         return sendMessage;
     }
@@ -169,7 +194,7 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForOtherCountriesJuridical() {
         StringBuilder sb = new StringBuilder();
         switch (typeOfEngine) {
-            case null -> sb.append(stringBuilderAppender(".", "\n", Questions.GAS_OR_ELECTRIC_ENGINE));
+            case null -> sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_OR_ELECTRIC_ENGINE")));
             case GASOLINE -> sb.append(getStringOptionsForEngineVolume());
             case ELECTRIC -> sb.append(checkForElectricAutoAge());
         }
@@ -187,7 +212,7 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForEngineVolume() {
         StringBuilder sb = new StringBuilder();
         if (volumeOfEngine == null) {
-            sb.append(stringBuilderAppender(".", "\n", Questions.GAS_ENGINE_VOLUME));
+            sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_ENGINE_VOLUME")));
         } else {
             if (carAge == null) {
                 sb.append(getStringOptionsForAgeAuto());
@@ -201,23 +226,23 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForAgeAuto() {
         return "." +
                 "\n" +
-                Questions.AGE_OF_AUTO;
+                bundle.getString("AGE_OF_AUTO");
     }
 
     private String getStringOptionsForPrice() {
         return "." +
                 "\n" +
-                Answers.PRICE + calculator.calculate(
+                bundle.getString("PRICE") + calculator.calculate(
                 countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
         ) +
-                Answers.BYN +
-                Answers.FAREWELL;
+                bundle.getString("BYN") +
+                bundle.getString("FAREWELL");
     }
 
     private String getStringOptionsTypeOfOwner() {
         return "." +
                 "\n" +
-                Questions.PHYSICAL_OR_JURIDICAL;
+                bundle.getString("PHYSICAL_OR_JURIDICAL");
     }
 
     private String getStringOptionsForOtherCountriesPhysical() {
@@ -246,35 +271,35 @@ public class Bot extends TelegramLongPollingBot {
 
     private String createUsersChoiceString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Answers.YOUR_CHOICE);
+        sb.append(bundle.getString("YOUR_CHOICE"));
 
         switch (countryOrigin) {
             case null -> {
             }
-            case EAES -> sb.append(Answers.EAES);
-            case OTHER -> sb.append(Answers.OTHER_COUNTRIES);
+            case EAES -> sb.append(bundle.getString("EAES"));
+            case OTHER -> sb.append(bundle.getString("OTHER_COUNTRIES"));
         }
 
         switch (ownersType) {
             case null -> {
             }
-            case PHYSICAL -> sb.append(Answers.PHYSICAL_PERSON);
-            case JURIDICAL -> sb.append(Answers.JURIDICAL_PERSON);
+            case PHYSICAL -> sb.append(bundle.getString("PHYSICAL_PERSON"));
+            case JURIDICAL -> sb.append(bundle.getString("JURIDICAL_PERSON"));
         }
 
         switch (carAge) {
             case null -> {
             }
-            case LESS_3_YEARS -> sb.append(Answers.LESS_3_YEARS_OLD);
-            case BETWEEN_3_AND_7_YEARS -> sb.append(Answers.BETWEEN_3_AND_7_YEARS_OLD);
-            case MORE_7_YEARS -> sb.append(Answers.MORE_7_YEARS_OLD);
+            case LESS_3_YEARS -> sb.append(bundle.getString("LESS_3_YEARS_OLD"));
+            case BETWEEN_3_AND_7_YEARS -> sb.append(bundle.getString("BETWEEN_3_AND_7_YEARS_OLD"));
+            case MORE_7_YEARS -> sb.append(bundle.getString("MORE_7_YEARS_OLD"));
         }
 
         switch (typeOfEngine) {
             case null -> {
             }
-            case GASOLINE -> sb.append(Answers.GASOLINE_OR_HYBRID_ENGINE);
-            case ELECTRIC -> sb.append(Answers.ELECTRIC_ENGINE);
+            case GASOLINE -> sb.append(bundle.getString("GASOLINE_OR_HYBRID_ENGINE"));
+            case ELECTRIC -> sb.append(bundle.getString("ELECTRIC_ENGINE"));
         }
 
         switch (volumeOfEngine) {
@@ -282,23 +307,23 @@ public class Bot extends TelegramLongPollingBot {
             }
             case LESS_1000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_LESS_1000_CM);
+                sb.append(bundle.getString("VOLUME_LESS_1000_CM"));
             }
             case BETWEEN_1000_AND_2000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_1000_2000_CM);
+                sb.append(bundle.getString("VOLUME_BETWEEN_1000_2000_CM"));
             }
             case BETWEEN_2000_AND_3000 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_2000_3000_CM);
+                sb.append(bundle.getString("VOLUME_BETWEEN_2000_3000_CM"));
             }
             case BETWEEN_3000_AND_3500 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_BETWEEN_3000_3500_CM);
+                sb.append(bundle.getString("VOLUME_BETWEEN_3000_3500_CM"));
             }
             case MORE_3500 -> {
                 sb.append(",");
-                sb.append(Answers.VOLUME_MORE_3500_CM);
+                sb.append(bundle.getString("VOLUME_MORE_3500_CM"));
             }
         }
         return sb.toString();
