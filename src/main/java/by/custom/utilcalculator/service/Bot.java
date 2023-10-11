@@ -1,8 +1,6 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.repository.resources.Answers;
 import by.custom.utilcalculator.repository.resources.Commands;
-import by.custom.utilcalculator.repository.resources.Questions;
 import by.custom.utilcalculator.repository.steps.*;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -14,10 +12,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Bot extends TelegramLongPollingBot {
     private CountryOrigin countryOrigin = null;
@@ -107,8 +102,9 @@ public class Bot extends TelegramLongPollingBot {
 
     private SendMessage getGreetingMessage(Message message) throws UnsupportedEncodingException {
         SendMessage sendMessage = new SendMessage();
-        //sendMessage.setText(Questions.GREETING_TEXT);
-        sendMessage.setText(bundle.getString("GREETING_TEXT"));
+        sendMessage.setText(stringBuilderAppender(bundle.getString("GREETING_TEXT"), "\n",
+                Commands.EAES, " ", bundle.getString("EAES_DETAILS"), "\n",
+                Commands.OTHER_COUNTRIES, " ", bundle.getString("OTHER_COUNTRIES_DETAILS")));
         sendMessage.setChatId(message.getChatId().toString());
         return sendMessage;
     }
@@ -194,7 +190,9 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForOtherCountriesJuridical() {
         StringBuilder sb = new StringBuilder();
         switch (typeOfEngine) {
-            case null -> sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_OR_ELECTRIC_ENGINE")));
+            case null -> sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_OR_ELECTRIC_ENGINE"),
+                    Commands.GASOLINE_TYPE_ENGINE, " ", bundle.getString("GASOLINE_ENGINE_DETAILS"),
+                    Commands.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("ELECTRIC_ENGINE_DETAILS")));
             case GASOLINE -> sb.append(getStringOptionsForEngineVolume());
             case ELECTRIC -> sb.append(checkForElectricAutoAge());
         }
@@ -212,7 +210,12 @@ public class Bot extends TelegramLongPollingBot {
     private String getStringOptionsForEngineVolume() {
         StringBuilder sb = new StringBuilder();
         if (volumeOfEngine == null) {
-            sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_ENGINE_VOLUME")));
+            sb.append(stringBuilderAppender(".", "\n", bundle.getString("GAS_ENGINE_VOLUME"), "\n",
+                    Commands.VOLUME_LESS_1000_CM, " ", bundle.getString("VOLUME_LESS_1000_DETAILS"), "\n",
+                    Commands.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("VOLUME_BETWEEN_1000_2000_DETAILS"), "\n",
+                    Commands.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("VOLUME_BETWEEN_2000_3000_DETAILS"), "\n",
+                    Commands.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("VOLUME_BETWEEN_3000_3500_DETAILS"), "\n",
+                    Commands.VOLUME_MORE_3500_CM, " ", bundle.getString("VOLUME_MORE_3500_DETAILS")));
         } else {
             if (carAge == null) {
                 sb.append(getStringOptionsForAgeAuto());
@@ -224,9 +227,10 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private String getStringOptionsForAgeAuto() {
-        return "." +
-                "\n" +
-                bundle.getString("AGE_OF_AUTO");
+        return stringBuilderAppender(".", "\n", bundle.getString("AGE_OF_AUTO"),
+                Commands.LESS_3_YEARS_AGE, " ", bundle.getString("LESS_3_YEARS_DETAILS"),
+                Commands.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("BETWEEN_3_AND_7_YEARS_DETAILS"),
+                Commands.MORE_7_YEARS_AGE, " ", bundle.getString("MORE_7_YEARS_DETAILS"));
     }
 
     private String getStringOptionsForPrice() {
@@ -240,9 +244,9 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private String getStringOptionsTypeOfOwner() {
-        return "." +
-                "\n" +
-                bundle.getString("PHYSICAL_OR_JURIDICAL");
+        return stringBuilderAppender(".", "\n", bundle.getString("PHYSICAL_OR_JURIDICAL"),
+                Commands.PHYSICAL_PERSON, " ", bundle.getString("PHYSICAL_PERSON_DETAILS"),
+                Commands.JURIDICAL_PERSON, " ", bundle.getString("JURIDICAL_PERSON_DETAILS"));
     }
 
     private String getStringOptionsForOtherCountriesPhysical() {
@@ -307,23 +311,23 @@ public class Bot extends TelegramLongPollingBot {
             }
             case LESS_1000 -> {
                 sb.append(",");
-                sb.append(bundle.getString("VOLUME_LESS_1000_CM"));
+                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_LESS_1000_DETAILS")));
             }
             case BETWEEN_1000_AND_2000 -> {
                 sb.append(",");
-                sb.append(bundle.getString("VOLUME_BETWEEN_1000_2000_CM"));
+                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_1000_2000_DETAILS")));
             }
             case BETWEEN_2000_AND_3000 -> {
                 sb.append(",");
-                sb.append(bundle.getString("VOLUME_BETWEEN_2000_3000_CM"));
+                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_2000_3000_DETAILS")));
             }
             case BETWEEN_3000_AND_3500 -> {
                 sb.append(",");
-                sb.append(bundle.getString("VOLUME_BETWEEN_3000_3500_CM"));
+                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_3000_3500_DETAILS")));
             }
             case MORE_3500 -> {
                 sb.append(",");
-                sb.append(bundle.getString("VOLUME_MORE_3500_CM"));
+                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_MORE_3500_DETAILS")));
             }
         }
         return sb.toString();
@@ -360,5 +364,9 @@ public class Bot extends TelegramLongPollingBot {
             stringBuilder.append(string);
         }
         return stringBuilder.toString();
+    }
+
+    private String trimFirstAndLastLetters(String toTrim) {
+        return toTrim.substring(1, toTrim.length() - 1);
     }
 }
