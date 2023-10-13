@@ -229,5 +229,4 @@ public class MessagesCreator {
     private static class MessagesCreatorHolder {
         private static final MessagesCreator MESSAGES_CREATOR = new MessagesCreator();
     }
-
 }

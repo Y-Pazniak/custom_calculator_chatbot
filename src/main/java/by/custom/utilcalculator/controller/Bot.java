@@ -10,8 +10,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.*;
-
 public class Bot extends TelegramLongPollingBot {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
@@ -55,6 +53,7 @@ public class Bot extends TelegramLongPollingBot {
         try {
             execute(messagesChecker.checkMessageBeforeExecutionAndGetResult(update));
         } catch (TelegramApiException e) {
+            System.out.println("Fail to process use request.");
             e.printStackTrace();
         }
     }
@@ -64,7 +63,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public SendMessage getOriginCarMessage(Message inputMessage) {
-        cleanBooleans(1);
+        cleanStepsAfterCurrent(1);
         switch (inputMessage.getText()) {
             case Commands.EAES -> countryOrigin = CountryOrigin.EAES;
             case Commands.OTHER_COUNTRIES -> countryOrigin = CountryOrigin.OTHER;
@@ -74,7 +73,7 @@ public class Bot extends TelegramLongPollingBot {
 
 
     public SendMessage getTypeOfOwnerMessage(Message inputMessage) {
-        cleanBooleans(2);
+        cleanStepsAfterCurrent(2);
         switch (inputMessage.getText()) {
             case Commands.JURIDICAL_PERSON -> ownersType = OwnersType.JURIDICAL;
             case Commands.PHYSICAL_PERSON -> ownersType = OwnersType.PHYSICAL;
@@ -83,7 +82,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public SendMessage getAutoAgeMessage(Message inputMessage) {
-        cleanBooleans(5);
+        cleanStepsAfterCurrent(5);
         switch (inputMessage.getText()) {
             case Commands.LESS_3_YEARS_AGE -> carAge = CarAge.LESS_3_YEARS;
             case Commands.BETWEEN_3_AND_7_YEARS_AGE -> carAge = CarAge.BETWEEN_3_AND_7_YEARS;
@@ -93,7 +92,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public SendMessage getEngineTypeMessage(Message message) {
-        cleanBooleans(3);
+        cleanStepsAfterCurrent(3);
         switch (message.getText()) {
             case Commands.GASOLINE_TYPE_ENGINE -> typeOfEngine = TypeOfEngine.GASOLINE;
             case Commands.ELECTRIC_TYPE_ENGINE -> typeOfEngine = TypeOfEngine.ELECTRIC;
@@ -102,7 +101,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public SendMessage getEngineVolumeMessage(Message message) {
-        cleanBooleans(4);
+        cleanStepsAfterCurrent(4);
         switch (message.getText()) {
             case Commands.VOLUME_LESS_1000_CM -> volumeOfEngine = VolumeOfEngine.LESS_1000;
             case Commands.VOLUME_BETWEEN_1000_2000_CM -> volumeOfEngine = VolumeOfEngine.BETWEEN_1000_AND_2000;
@@ -120,7 +119,7 @@ public class Bot extends TelegramLongPollingBot {
         return sendMessage;
     }
 
-    private void cleanBooleans(int stepCleaner) {
+    private void cleanStepsAfterCurrent(int stepCleaner) {
         if (stepCleaner <= 1) {
             countryOrigin = null;
         }
