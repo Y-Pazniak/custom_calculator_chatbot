@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.repository.resources;
+package by.custom.utilcalculator.directory.resources;
 
 public class Prices {
     //passenger cars - EAES or other countries, physical or juridical with electric engines

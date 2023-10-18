@@ -18,12 +18,17 @@ public class BundleResourcesServant {
         return BundleResourcesCreatorHolder.BUNDLE_INSTANCE;
     }
 
+    private static class BundleResourcesCreatorHolder {
+        private static final BundleResourcesServant BUNDLE_INSTANCE = new BundleResourcesServant();
+    }
+
     public String getString(String stringToGetFromBundle) {
         return bundle.getString(stringToGetFromBundle);
     }
 
     private void createBundleResources() {
         try {
+            //Main.class.getResource();
             File fileResources = new File("D:\\IdeaProjects\\custom_calculator_bot\\src\\main\\resources");
             URL[] urls = {fileResources.toURI().toURL()};
             ClassLoader loader = new URLClassLoader(urls);
@@ -31,9 +36,5 @@ public class BundleResourcesServant {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-    }
-
-    private static class BundleResourcesCreatorHolder {
-        private static final BundleResourcesServant BUNDLE_INSTANCE = new BundleResourcesServant();
     }
 }

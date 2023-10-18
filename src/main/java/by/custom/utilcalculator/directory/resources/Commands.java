@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.repository.resources;
+package by.custom.utilcalculator.directory.resources;
 
 public class Commands {
     //main command - start the calculator

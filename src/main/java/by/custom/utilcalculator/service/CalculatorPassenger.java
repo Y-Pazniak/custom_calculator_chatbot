@@ -1,9 +1,7 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.repository.steps.*;
-import by.custom.utilcalculator.repository.resources.Prices;
-
-import java.util.Objects;
+import by.custom.utilcalculator.directory.steps.*;
+import by.custom.utilcalculator.directory.resources.Prices;
 
 public class CalculatorPassenger {
     private static class CalculatorHolder {

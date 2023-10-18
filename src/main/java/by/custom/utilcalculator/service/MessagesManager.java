@@ -1,20 +1,21 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.repository.resources.Commands;
-import by.custom.utilcalculator.repository.steps.*;
+import by.custom.utilcalculator.directory.BotEntity;
+import by.custom.utilcalculator.directory.resources.Commands;
+import by.custom.utilcalculator.directory.steps.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class MessagesCreator {
+public class MessagesManager {
     private final BundleResourcesServant bundle;
     private final CalculatorPassenger calculator;
 
-    private MessagesCreator() {
+    private MessagesManager() {
         bundle = BundleResourcesServant.getInstance();
         calculator = CalculatorPassenger.getInstance();
     }
 
-    public static MessagesCreator getInstance() {
+    public static MessagesManager getInstance() {
         return MessagesCreatorHolder.MESSAGES_CREATOR;
     }
 
@@ -126,6 +127,7 @@ public class MessagesCreator {
         return sb.toString();
     }
 
+    //the first method which starts checking user's commands and building the message for user
     public String getCountryOrigin(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getUserChoice(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
@@ -172,8 +174,10 @@ public class MessagesCreator {
         String resultString;
         switch (typeOfEngine) {
             case null -> resultString = getTypeOfEngine();
-            case GASOLINE -> resultString = checkForGasolineAuoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
-            case ELECTRIC -> resultString = checkForElectricAutoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+            case GASOLINE ->
+                    resultString = checkForGasolineAuoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+            case ELECTRIC ->
+                    resultString = checkForElectricAutoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
         }
         return resultString;
     }
@@ -194,6 +198,14 @@ public class MessagesCreator {
 
     private String checkForElectricAutoAge(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
         return carAge == null ? getAgeAuto() : getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+    }
+
+    public SendMessage createSendMessage(String chatId, CountryOrigin countryOrigin,
+                                         OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(getCountryOrigin(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
+        return sendMessage;
     }
 
     SendMessage getGreetingMessage(Message message) {
@@ -222,11 +234,7 @@ public class MessagesCreator {
         return toTrim.substring(1, toTrim.length() - 1);
     }
 
-    public String getProperMessage(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
-        return getCountryOrigin(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
-    }
-
     private static class MessagesCreatorHolder {
-        private static final MessagesCreator MESSAGES_CREATOR = new MessagesCreator();
+        private static final MessagesManager MESSAGES_CREATOR = new MessagesManager();
     }
 }
