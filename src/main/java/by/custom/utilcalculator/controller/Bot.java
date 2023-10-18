@@ -23,7 +23,7 @@ public class Bot extends TelegramLongPollingBot {
         return BotHolder.bot;
     }
 
-    //bot's name
+    //bot's name "Бесплатный калькулятор утильсбора РБ"
     private static final String BOT_NAME = "Бесплатный калькулятор утильсбора РБ";
 
     //private constructor to avoid wrong bot's creation
