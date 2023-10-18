@@ -20,84 +20,84 @@ public class MessagesManager {
     }
 
     public String getGreeting() {
-        return stringBuilderAppender(bundle.getString("GREETING_TEXT"), "\n",
-                Commands.EAES, " ", bundle.getString("EAES_DETAILS"), "\n",
-                Commands.OTHER_COUNTRIES, " ", bundle.getString("OTHER_COUNTRIES_DETAILS"));
+        return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
+                Commands.EAES, " ", bundle.getString("answers.details.eaes"), "\n",
+                Commands.OTHER_COUNTRIES, " ", bundle.getString("answers.details.other"));
     }
 
     public String getTypeOfEngine() {
-        return stringBuilderAppender(".", "\n", bundle.getString("GAS_OR_ELECTRIC_ENGINE"),
-                Commands.GASOLINE_TYPE_ENGINE, " ", bundle.getString("GASOLINE_ENGINE_DETAILS"),
-                Commands.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("ELECTRIC_ENGINE_DETAILS"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
+                Commands.GASOLINE_TYPE_ENGINE, " ", bundle.getString("answers.details.gas.engine"),"\n",
+                Commands.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getEngineVolume() {
-        return stringBuilderAppender(".", "\n", bundle.getString("GAS_ENGINE_VOLUME"), "\n",
-                Commands.VOLUME_LESS_1000_CM, " ", bundle.getString("VOLUME_LESS_1000_DETAILS"), "\n",
-                Commands.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("VOLUME_BETWEEN_1000_2000_DETAILS"), "\n",
-                Commands.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("VOLUME_BETWEEN_2000_3000_DETAILS"), "\n",
-                Commands.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("VOLUME_BETWEEN_3000_3500_DETAILS"), "\n",
-                Commands.VOLUME_MORE_3500_CM, " ", bundle.getString("VOLUME_MORE_3500_DETAILS"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
+                Commands.VOLUME_LESS_1000_CM, " ", bundle.getString("answers.details.less.1000"), "\n",
+                Commands.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("answers.details.between.1000.2000"), "\n",
+                Commands.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("answers.details.between.2000.3000"), "\n",
+                Commands.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("answers.details.between.3000.3500"), "\n",
+                Commands.VOLUME_MORE_3500_CM, " ", bundle.getString("answers.details.more.3500"));
     }
 
     public String getAgeAuto() {
-        return stringBuilderAppender(".", "\n", bundle.getString("AGE_OF_AUTO"),
-                Commands.LESS_3_YEARS_AGE, " ", bundle.getString("LESS_3_YEARS_DETAILS"),
-                Commands.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("BETWEEN_3_AND_7_YEARS_DETAILS"),
-                Commands.MORE_7_YEARS_AGE, " ", bundle.getString("MORE_7_YEARS_DETAILS"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.age.auto"),"\n",
+                Commands.LESS_3_YEARS_AGE, " ", bundle.getString("answers.details.before.3"),"\n",
+                Commands.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"),"\n",
+                Commands.MORE_7_YEARS_AGE, " ", bundle.getString("answers.details.more.7"));
     }
 
     public String getResultAndFarewell(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
         return stringBuilderAppender("." +
                 "\n" +
-                bundle.getString("PRICE") + calculator.calculate(
+                bundle.getString("answers.summary.price") + calculator.calculate(
                 countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
-        ) +
-                bundle.getString("BYN") +
-                bundle.getString("FAREWELL"));
+        ) + " " +
+                bundle.getString("answers.summary.byn") + "\n",
+                bundle.getString("answers.summary.goodbye.add.info"));
     }
 
     public String getTypeOfOwner() {
-        return stringBuilderAppender(".", "\n", bundle.getString("PHYSICAL_OR_JURIDICAL"),
-                Commands.PHYSICAL_PERSON, " ", bundle.getString("PHYSICAL_PERSON_DETAILS"),
-                Commands.JURIDICAL_PERSON, " ", bundle.getString("JURIDICAL_PERSON_DETAILS"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"),"\n",
+                Commands.PHYSICAL_PERSON, " ", bundle.getString("answers.details.physical"),"\n",
+                Commands.JURIDICAL_PERSON, " ", bundle.getString("answers.details.juridical"));
     }
 
     public String getSorry() {
-        return bundle.getString("SORRY");
+        return bundle.getString("answers.sorry");
     }
 
     public String getUserChoice(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
         StringBuilder sb = new StringBuilder();
-        sb.append(bundle.getString("YOUR_CHOICE"));
+        sb.append(bundle.getString("answers.summary.beginning"));
 
         switch (countryOrigin) {
             case null -> {
             }
-            case EAES -> sb.append(bundle.getString("EAES"));
-            case OTHER -> sb.append(bundle.getString("OTHER_COUNTRIES"));
+            case EAES -> sb.append(bundle.getString("answers.summary.eaes"));
+            case OTHER -> sb.append(bundle.getString("answers.summary.other"));
         }
 
         switch (ownersType) {
             case null -> {
             }
-            case PHYSICAL -> sb.append(bundle.getString("PHYSICAL_PERSON"));
-            case JURIDICAL -> sb.append(bundle.getString("JURIDICAL_PERSON"));
+            case PHYSICAL -> sb.append(bundle.getString("answers.summary.physical"));
+            case JURIDICAL -> sb.append(bundle.getString("answers.summary.juridical"));
         }
 
         switch (carAge) {
             case null -> {
             }
-            case LESS_3_YEARS -> sb.append(bundle.getString("LESS_3_YEARS_OLD"));
-            case BETWEEN_3_AND_7_YEARS -> sb.append(bundle.getString("BETWEEN_3_AND_7_YEARS_OLD"));
-            case MORE_7_YEARS -> sb.append(bundle.getString("MORE_7_YEARS_OLD"));
+            case LESS_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
+            case BETWEEN_3_AND_7_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
+            case MORE_7_YEARS -> sb.append(bundle.getString("answers.summary.older.7"));
         }
 
         switch (typeOfEngine) {
             case null -> {
             }
-            case GASOLINE -> sb.append(bundle.getString("GASOLINE_OR_HYBRID_ENGINE"));
-            case ELECTRIC -> sb.append(bundle.getString("ELECTRIC_ENGINE"));
+            case GASOLINE -> sb.append(bundle.getString("answers.summary.gas"));
+            case ELECTRIC -> sb.append(bundle.getString("answers.summary.electro"));
         }
 
         switch (volumeOfEngine) {
@@ -105,23 +105,23 @@ public class MessagesManager {
             }
             case LESS_1000 -> {
                 sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_LESS_1000_DETAILS")));
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.less.1000")));
             }
             case BETWEEN_1000_AND_2000 -> {
                 sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_1000_2000_DETAILS")));
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.between.1000.2000")));
             }
             case BETWEEN_2000_AND_3000 -> {
                 sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_2000_3000_DETAILS")));
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.between.2000.3000")));
             }
             case BETWEEN_3000_AND_3500 -> {
                 sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_BETWEEN_3000_3500_DETAILS")));
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.between.3000.3500")));
             }
             case MORE_3500 -> {
                 sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("VOLUME_MORE_3500_DETAILS")));
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.more.3500")));
             }
         }
         return sb.toString();

@@ -30,8 +30,8 @@ public class BundleResourcesServant {
         try {
             //Main.class.getResource();
             File fileResources = new File("D:\\IdeaProjects\\custom_calculator_bot\\src\\main\\resources");
-            URL[] urls = {fileResources.toURI().toURL()};
-            ClassLoader loader = new URLClassLoader(urls);
+            URL[] resourcesFileUrls = {fileResources.toURI().toURL()};
+            ClassLoader loader = new URLClassLoader(resourcesFileUrls);
             bundle = ResourceBundle.getBundle("words", Locale.getDefault(), loader);
         } catch (MalformedURLException e) {
             e.printStackTrace();
