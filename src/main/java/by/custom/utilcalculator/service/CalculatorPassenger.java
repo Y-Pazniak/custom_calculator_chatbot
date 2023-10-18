@@ -32,7 +32,6 @@ public class CalculatorPassenger {
                 return "calculator: calculate() unknown error";
             }
         }
-//        return "calculator: calculate() unknown error";
     }
 
     private String countForOtherCountriesPrice(OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -50,7 +49,6 @@ public class CalculatorPassenger {
                 return "calculator: countForOtherCountriesPrice() unknown error";
             }
         }
-//        return "calculator: countForOtherCountriesPrice() unknown error";
     }
 
     private String countForJuridicalPrice(TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -68,7 +66,6 @@ public class CalculatorPassenger {
                 return "calculator: countForJuridicalPrice() unknown error";
             }
         }
-//        return "calculator: countForJuridicalPrice() unknown error";
     }
 
     private String countForElectricAutoPrice(CarAge carAge) {
@@ -93,7 +90,6 @@ public class CalculatorPassenger {
                 return "calculator: countForGasolineAutoPrice() unknown error";
             }
         }
-//        return "calculator: countForGasolineAutoPrice() unknown error";
     }
 
     private String getPriceForJuridicalGasolineMore7Years(VolumeOfEngine volumeOfEngine) {
@@ -120,7 +116,6 @@ public class CalculatorPassenger {
                 return "calculator: getPriceForJuridicalGasolineMore7Years() unknown error";
             }
         }
-//        return "calculator: getPriceForJuridicalGasolineMore7Years() unknown error";
     }
 
     private String getPriceForJuridicalGasolineBetween3And7Years(VolumeOfEngine volumeOfEngine) {
@@ -147,7 +142,6 @@ public class CalculatorPassenger {
                 return "calculator: getPriceForJuridicalGasolineBetween3And7Years() unknown error";
             }
         }
-//        return "calculator: getPriceForJuridicalGasolineBetween3And7Years() unknown error";
     }
 
     private String getPriceForJuridicalGasolineLess3Years(VolumeOfEngine volumeOfEngine) {
@@ -174,7 +168,6 @@ public class CalculatorPassenger {
                 return "calculator: getPriceForJuridicalGasolineLess3Years() unknown error";
             }
         }
-        //return "calculator: getPriceForJuridicalGasolineLess3Years() unknown error";
     }
 
     private String countMostCommonPrice(CarAge carAge) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
@@ -195,6 +188,5 @@ public class CalculatorPassenger {
                 return "calculator: unknown error";
             }
         }
-        //return "calculator: unknown error";
     }
 }
