@@ -1,6 +1,6 @@
 package by.custom.utilcalculator.directory.resources;
 
-public class Prices {
+public class Price {
     //passenger cars - EAES or other countries, physical or juridical with electric engines
     public static final String PASSENGER_LESS_3_YEARS = "544.5";
     public static final String PASSENGER_3_TO_7_YEARS = "816.7";

@@ -2,18 +2,18 @@ package by.custom.utilcalculator.directory;
 
 import by.custom.utilcalculator.directory.steps.*;
 
-public class BotEntity {
+public class UserProgress {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
 
-    private BotEntity() {
+    private UserProgress() {
 
     }
 
-    public static BotEntity getInstance() {
+    public static UserProgress getInstance() {
         return BotEntityHolder.BOT_ENTITY;
     }
 
@@ -58,6 +58,6 @@ public class BotEntity {
     }
 
     private static class BotEntityHolder {
-        private static final BotEntity BOT_ENTITY = new BotEntity();
+        private static final UserProgress BOT_ENTITY = new UserProgress();
     }
 }

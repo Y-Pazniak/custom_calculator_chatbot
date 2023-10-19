@@ -1,66 +1,66 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.directory.BotEntity;
-import by.custom.utilcalculator.directory.resources.Commands;
+import by.custom.utilcalculator.directory.UserProgress;
+import by.custom.utilcalculator.directory.resources.Command;
 import by.custom.utilcalculator.directory.steps.*;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class MessagesManager {
+public class MessagesCreator {
     private final BundleResourcesServant bundle;
     private final CalculatorPassenger calculator;
+    private final UserProgress botEntity;
 
-    private MessagesManager() {
+    private MessagesCreator() {
         bundle = BundleResourcesServant.getInstance();
         calculator = CalculatorPassenger.getInstance();
+        botEntity = UserProgress.getInstance();
     }
 
-    public static MessagesManager getInstance() {
+    public static MessagesCreator getInstance() {
         return MessagesCreatorHolder.MESSAGES_CREATOR;
     }
 
     public String getGreeting() {
         return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
-                Commands.EAES, " ", bundle.getString("answers.details.eaes"), "\n",
-                Commands.OTHER_COUNTRIES, " ", bundle.getString("answers.details.other"));
+                Command.EAES, " ", bundle.getString("answers.details.eaes"), "\n",
+                Command.OTHER_COUNTRIES, " ", bundle.getString("answers.details.other"));
     }
 
     public String getTypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Commands.GASOLINE_TYPE_ENGINE, " ", bundle.getString("answers.details.gas.engine"),"\n",
-                Commands.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE_TYPE_ENGINE, " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getEngineVolume() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
-                Commands.VOLUME_LESS_1000_CM, " ", bundle.getString("answers.details.less.1000"), "\n",
-                Commands.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("answers.details.between.1000.2000"), "\n",
-                Commands.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("answers.details.between.2000.3000"), "\n",
-                Commands.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("answers.details.between.3000.3500"), "\n",
-                Commands.VOLUME_MORE_3500_CM, " ", bundle.getString("answers.details.more.3500"));
+                Command.VOLUME_LESS_1000_CM, " ", bundle.getString("answers.details.less.1000"), "\n",
+                Command.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("answers.details.between.1000.2000"), "\n",
+                Command.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("answers.details.between.2000.3000"), "\n",
+                Command.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("answers.details.between.3000.3500"), "\n",
+                Command.VOLUME_MORE_3500_CM, " ", bundle.getString("answers.details.more.3500"));
     }
 
     public String getAgeAuto() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.age.auto"),"\n",
-                Commands.LESS_3_YEARS_AGE, " ", bundle.getString("answers.details.before.3"),"\n",
-                Commands.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"),"\n",
-                Commands.MORE_7_YEARS_AGE, " ", bundle.getString("answers.details.more.7"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.age.auto"), "\n",
+                Command.LESS_3_YEARS_AGE, " ", bundle.getString("answers.details.before.3"), "\n",
+                Command.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"), "\n",
+                Command.MORE_7_YEARS_AGE, " ", bundle.getString("answers.details.more.7"));
     }
 
     public String getResultAndFarewell(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
         return stringBuilderAppender("." +
-                "\n" +
-                bundle.getString("answers.summary.price") + calculator.calculate(
-                countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
-        ) + " " +
-                bundle.getString("answers.summary.byn") + "\n",
+                        "\n" +
+                        bundle.getString("answers.summary.price") + " " + calculator.calculate(
+                        countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
+                ) + " " +
+                        bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
 
     public String getTypeOfOwner() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"),"\n",
-                Commands.PHYSICAL_PERSON, " ", bundle.getString("answers.details.physical"),"\n",
-                Commands.JURIDICAL_PERSON, " ", bundle.getString("answers.details.juridical"));
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
+                Command.PHYSICAL_PERSON, " ", bundle.getString("answers.details.physical"), "\n",
+                Command.JURIDICAL_PERSON, " ", bundle.getString("answers.details.juridical"));
     }
 
     public String getSorry() {
@@ -128,14 +128,14 @@ public class MessagesManager {
     }
 
     //the first method which starts checking user's commands and building the message for user
-    public String getCountryOrigin(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    public String getCountryOrigin() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getUserChoice(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
-        switch (countryOrigin) {
+        stringBuilder.append(getUserChoice(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
+        switch (botEntity.getCountryOrigin()) {
             case EAES ->
-                    stringBuilder.append(getOptionsForEaes(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
+                    stringBuilder.append(getOptionsForEaes(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
             case OTHER ->
-                    stringBuilder.append(getOptionsForOtherCountries(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
+                    stringBuilder.append(getOptionsForOtherCountries(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
         }
         return stringBuilder.toString();
     }
@@ -200,28 +200,6 @@ public class MessagesManager {
         return carAge == null ? getAgeAuto() : getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
     }
 
-    public SendMessage createSendMessage(String chatId, CountryOrigin countryOrigin,
-                                         OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(getCountryOrigin(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge));
-        return sendMessage;
-    }
-
-    SendMessage getGreetingMessage(Message message) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(getGreeting());
-        sendMessage.setChatId(message.getChatId().toString());
-        return sendMessage;
-    }
-
-    public SendMessage getSorryMessage(Message message) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(getSorry());
-        sendMessage.setChatId(message.getChatId().toString());
-        return sendMessage;
-    }
-
     private String stringBuilderAppender(String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string : strings) {
@@ -235,6 +213,6 @@ public class MessagesManager {
     }
 
     private static class MessagesCreatorHolder {
-        private static final MessagesManager MESSAGES_CREATOR = new MessagesManager();
+        private static final MessagesCreator MESSAGES_CREATOR = new MessagesCreator();
     }
 }
