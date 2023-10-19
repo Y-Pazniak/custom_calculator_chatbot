@@ -58,10 +58,6 @@ public class MessageRouter {
         return sendMessage;
     }
 
-    public String createSendMessage() {
-        return messagesCreator.getCountryOrigin();
-    }
-
     public String getGreetingMessage() {
         return messagesCreator.getGreeting();
     }
