@@ -50,9 +50,7 @@ public class MessagesCreator {
     public String getResultAndFarewell(UserProgress userProgress) {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + calculator.calculate(
-                        userProgress.getCountryOrigin(), userProgress.getOwnersType(), userProgress.getTypeOfEngine(), userProgress.getVolumeOfEngine(), userProgress.getCarAge()
-                ) + " " +
+                        bundle.getString("answers.summary.price") + " " + calculator.calculate(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
