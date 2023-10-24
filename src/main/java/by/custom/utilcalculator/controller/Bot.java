@@ -42,7 +42,7 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         //if user send us smth
         try {
-            execute(messageRouter.checkMessageBeforeExecutionAndGetResult(update));
+            execute(messageRouter.route(update));
         } catch (TelegramApiException e) {
             System.out.println("Fail to process user's request.");
             e.printStackTrace();

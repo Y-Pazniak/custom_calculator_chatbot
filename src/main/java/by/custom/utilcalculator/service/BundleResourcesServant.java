@@ -28,11 +28,10 @@ public class BundleResourcesServant {
 
     private void createBundleResources() {
         try {
-            //Main.class.getResource();
             File fileResources = new File("D:\\IdeaProjects\\custom_calculator_bot\\src\\main\\resources");
             URL[] resourcesFileUrls = {fileResources.toURI().toURL()};
             ClassLoader loader = new URLClassLoader(resourcesFileUrls);
-            bundle = ResourceBundle.getBundle("words", Locale.getDefault(), loader);
+            bundle = ResourceBundle.getBundle("words", new Locale("ru"), loader);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

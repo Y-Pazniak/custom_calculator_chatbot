@@ -1,6 +1,6 @@
-package by.custom.utilcalculator.directory;
+package by.custom.utilcalculator.domain;
 
-import by.custom.utilcalculator.directory.steps.*;
+import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class UserProgress {
     private CountryOrigin countryOrigin = null;
@@ -14,7 +14,7 @@ public class UserProgress {
     }
 
     public static UserProgress getInstance() {
-        return BotEntityHolder.BOT_ENTITY;
+        return UserProgressHolder.BOT_ENTITY;
     }
 
     public CountryOrigin getCountryOrigin() {
@@ -57,7 +57,7 @@ public class UserProgress {
         this.volumeOfEngine = volumeOfEngine;
     }
 
-    private static class BotEntityHolder {
+    private static class UserProgressHolder {
         private static final UserProgress BOT_ENTITY = new UserProgress();
     }
 }

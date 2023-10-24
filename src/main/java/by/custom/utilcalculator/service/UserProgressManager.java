@@ -1,19 +1,19 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.directory.UserProgress;
-import by.custom.utilcalculator.directory.resources.Command;
-import by.custom.utilcalculator.directory.steps.*;
+import by.custom.utilcalculator.domain.UserProgress;
+import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.*;
 
-public class BotFieldsManager {
+public class UserProgressManager {
     private final UserProgress userProgress;
-    private final MessagesCreator messagesManager;
+    private final MessagesCreator messagesCreator;
 
-    public BotFieldsManager() {
+    public UserProgressManager() {
         userProgress = UserProgress.getInstance();
-        messagesManager = MessagesCreator.getInstance();
+        messagesCreator = MessagesCreator.getInstance();
     }
 
-    public static BotFieldsManager getInstance() {
+    public static UserProgressManager getInstance() {
         return BotFieldsManagerHolder.BOT_FIELDS_MANAGER;
     }
 
@@ -23,7 +23,7 @@ public class BotFieldsManager {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
         }
-        return messagesManager.getCountryOrigin();
+        return messagesCreator.getCountryOrigin();
     }
 
     public String processOwnerType(String command) {
@@ -32,7 +32,7 @@ public class BotFieldsManager {
             case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
             case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
         }
-        return messagesManager.getCountryOrigin();
+        return messagesCreator.getCountryOrigin();
     }
 
     public String processCarAge(String command) {
@@ -42,7 +42,7 @@ public class BotFieldsManager {
             case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.BETWEEN_3_AND_7_YEARS);
             case Command.MORE_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_7_YEARS);
         }
-        return messagesManager.getCountryOrigin();
+        return messagesCreator.getCountryOrigin();
     }
 
     public String processEngineType(String command) {
@@ -51,7 +51,7 @@ public class BotFieldsManager {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
         }
-        return messagesManager.getCountryOrigin();
+        return messagesCreator.getCountryOrigin();
     }
 
     public String processEngineVolume(String command) {
@@ -66,7 +66,7 @@ public class BotFieldsManager {
                     userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
             case Command.VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
         }
-        return messagesManager.getCountryOrigin();
+        return messagesCreator.getCountryOrigin();
     }
 
     private void cleanStepsAfterCurrent(int stepCleaner) {
@@ -88,6 +88,6 @@ public class BotFieldsManager {
     }
 
     private static class BotFieldsManagerHolder {
-        private static final BotFieldsManager BOT_FIELDS_MANAGER = new BotFieldsManager();
+        private static final UserProgressManager BOT_FIELDS_MANAGER = new UserProgressManager();
     }
 }

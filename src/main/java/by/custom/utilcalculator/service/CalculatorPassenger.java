@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.directory.steps.*;
-import by.custom.utilcalculator.directory.resources.Price;
+import by.custom.utilcalculator.domain.constants.Price;
+import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class CalculatorPassenger {
     private static class CalculatorHolder {
