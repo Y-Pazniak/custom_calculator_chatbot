@@ -1,8 +1,8 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.directory.UserProgress;
-import by.custom.utilcalculator.directory.resources.Command;
-import by.custom.utilcalculator.directory.steps.*;
+import by.custom.utilcalculator.domain.UserProgress;
+import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;

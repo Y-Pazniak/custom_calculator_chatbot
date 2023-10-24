@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.directory.resources;
+package by.custom.utilcalculator.domain.constants;
 
 public class Price {
     //passenger cars - EAES or other countries, physical or juridical with electric engines

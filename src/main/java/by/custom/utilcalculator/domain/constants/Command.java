@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.directory.resources;
+package by.custom.utilcalculator.domain.constants;
 
 public class Command {
     //main command - start the calculator

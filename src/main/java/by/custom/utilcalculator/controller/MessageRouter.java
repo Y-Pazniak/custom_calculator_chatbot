@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.directory.resources.Command;
-import by.custom.utilcalculator.service.BotFieldsManager;
+import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.service.UserProgressManager;
 import by.custom.utilcalculator.service.MessagesCreator;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -9,52 +9,52 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MessageRouter {
     private final MessagesCreator messagesCreator;
-    private final BotFieldsManager botFieldsManager;
+    private final UserProgressManager botFieldsManager;
 
     private MessageRouter() {
         messagesCreator = MessagesCreator.getInstance();
-        botFieldsManager = BotFieldsManager.getInstance();
+        botFieldsManager = UserProgressManager.getInstance();
     }
 
     public static MessageRouter getInstance() {
         return MessagesCheckerHolder.MESSAGES_CHECKER;
     }
 
-    public SendMessage checkMessageBeforeExecutionAndGetResult(Update update) {
+    public SendMessage route(Update update) {
         Message message = update.getMessage();
-        if (message.hasText()) {
-            return getCheckInputMessageAndGetAnswer(message);
-        } else {
+        if (!message.hasText()) {
             SendMessage sorrySendMessage = new SendMessage();
             sorrySendMessage.setChatId(update.getMessage().getChatId().toString());
             sorrySendMessage.setText(getSorryMessage());
             return sorrySendMessage;
         }
+        return getCheckInputMessageAndGetAnswer(message);
     }
 
     //we receive message from user, check it and handle it if it is ok here
     public SendMessage getCheckInputMessageAndGetAnswer(Message message) {
         String usersMessage = message.getText();
         String userID = message.getChatId().toString();
+        String answer;
+
+        switch (usersMessage) {
+            case Command.START -> answer = getGreetingMessage();
+            case Command.EAES, Command.OTHER_COUNTRIES -> answer = botFieldsManager.processCarOrigin(usersMessage);
+            case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
+                    answer = botFieldsManager.processOwnerType(usersMessage);
+            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
+                    answer = botFieldsManager.processCarAge(usersMessage);
+            case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
+                    answer = botFieldsManager.processEngineType(usersMessage);
+            case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
+                    Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
+                    answer = botFieldsManager.processEngineVolume(usersMessage);
+            default -> answer = getSorryMessage();
+        }
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(userID);
-
-        switch (usersMessage) {
-            case Command.START -> sendMessage.setText(getGreetingMessage());
-            case Command.EAES, Command.OTHER_COUNTRIES ->
-                    sendMessage.setText(botFieldsManager.processCarOrigin(usersMessage));
-            case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    sendMessage.setText(botFieldsManager.processOwnerType(usersMessage));
-            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
-                    sendMessage.setText(botFieldsManager.processCarAge(usersMessage));
-            case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    sendMessage.setText(botFieldsManager.processEngineType(usersMessage));
-            case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
-                    Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    sendMessage.setText(botFieldsManager.processEngineVolume(usersMessage));
-            default -> sendMessage.setText(getSorryMessage());
-        }
+        sendMessage.setText(answer);
         return sendMessage;
     }
 
