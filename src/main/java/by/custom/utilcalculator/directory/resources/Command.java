@@ -1,6 +1,6 @@
-package by.custom.utilcalculator.repository.resources;
+package by.custom.utilcalculator.directory.resources;
 
-public class Commands {
+public class Command {
     //main command - start the calculator
     public static final String START = "/start";
 

@@ -1,9 +1,7 @@
 package by.custom.utilcalculator.service;
 
-import by.custom.utilcalculator.repository.steps.*;
-import by.custom.utilcalculator.repository.resources.Prices;
-
-import java.util.Objects;
+import by.custom.utilcalculator.directory.steps.*;
+import by.custom.utilcalculator.directory.resources.Price;
 
 public class CalculatorPassenger {
     private static class CalculatorHolder {
@@ -69,7 +67,7 @@ public class CalculatorPassenger {
     }
 
     private String countForElectricAutoPrice(CarAge carAge) {
-        return carAge == CarAge.LESS_3_YEARS ? Prices.PASSENGER_LESS_3_YEARS : Prices.PASSENGER_3_TO_7_YEARS;
+        return carAge == CarAge.LESS_3_YEARS ? Price.PASSENGER_LESS_3_YEARS : Price.PASSENGER_3_TO_7_YEARS;
     }
 
     private String countForGasolineAutoPrice(VolumeOfEngine volumeOfEngine, CarAge carAge) {
@@ -95,19 +93,19 @@ public class CalculatorPassenger {
     private String getPriceForJuridicalGasolineMore7Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_OLDER_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_OLDER_7_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_2000_OLDER_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_2000_OLDER_7_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_2000_3000_OLDER_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_2000_3000_OLDER_7_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3000_3500_OLDER_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3000_3500_OLDER_7_YEARS;
             }
             case MORE_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3500_OLDER_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3500_OLDER_7_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
@@ -121,19 +119,19 @@ public class CalculatorPassenger {
     private String getPriceForJuridicalGasolineBetween3And7Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_3_TO_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_3_TO_7_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_2000_3_TO_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_2000_3_TO_7_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_2000_3000_3_TO_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_2000_3000_3_TO_7_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3000_3500_3_TO_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3000_3500_3_TO_7_YEARS;
             }
             case MORE_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3500_3_TO_7_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3500_3_TO_7_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
@@ -147,19 +145,19 @@ public class CalculatorPassenger {
     private String getPriceForJuridicalGasolineLess3Years(VolumeOfEngine volumeOfEngine) {
         switch (volumeOfEngine) {
             case LESS_1000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_LESS_3_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_LESS_3_YEARS;
             }
             case BETWEEN_1000_AND_2000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_1000_2000_LESS_3_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_1000_2000_LESS_3_YEARS;
             }
             case BETWEEN_2000_AND_3000 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_2000_3000_LESS_3_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_2000_3000_LESS_3_YEARS;
             }
             case BETWEEN_3000_AND_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3000_3500_LESS_3_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3000_3500_LESS_3_YEARS;
             }
             case MORE_3500 -> {
-                return Prices.PASSENGER_OTHER_GASOLINE_3500_LESS_3_YEARS;
+                return Price.PASSENGER_OTHER_GASOLINE_3500_LESS_3_YEARS;
             }
             case null -> {
                 return "calculator: volumeOfEngine is null";
@@ -173,13 +171,13 @@ public class CalculatorPassenger {
     private String countMostCommonPrice(CarAge carAge) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
         switch (carAge) {
             case LESS_3_YEARS -> {
-                return Prices.PASSENGER_LESS_3_YEARS;
+                return Price.PASSENGER_LESS_3_YEARS;
             }
             case BETWEEN_3_AND_7_YEARS -> {
-                return Prices.PASSENGER_3_TO_7_YEARS;
+                return Price.PASSENGER_3_TO_7_YEARS;
             }
             case MORE_7_YEARS -> {
-                return Prices.PASSENGER_OLDER_7_YEARS;
+                return Price.PASSENGER_OLDER_7_YEARS;
             }
             case null -> {
                 return "calculator: carAge is null";
