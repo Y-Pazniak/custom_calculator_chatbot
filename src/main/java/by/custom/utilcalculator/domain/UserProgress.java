@@ -9,12 +9,12 @@ public class UserProgress {
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
 
-    private UserProgress() {
+    public UserProgress() {
 
     }
 
     public static UserProgress getInstance() {
-        return UserProgressHolder.BOT_ENTITY;
+        return new UserProgress();
     }
 
     public CountryOrigin getCountryOrigin() {
@@ -22,6 +22,7 @@ public class UserProgress {
     }
 
     public void setCountryOrigin(CountryOrigin countryOrigin) {
+        cleanStepsAfterCurrent(1);
         this.countryOrigin = countryOrigin;
     }
 
@@ -30,6 +31,7 @@ public class UserProgress {
     }
 
     public void setOwnersType(OwnersType ownersType) {
+        cleanStepsAfterCurrent(2);
         this.ownersType = ownersType;
     }
 
@@ -38,6 +40,7 @@ public class UserProgress {
     }
 
     public void setCarAge(CarAge carAge) {
+        cleanStepsAfterCurrent(5);
         this.carAge = carAge;
     }
 
@@ -46,6 +49,7 @@ public class UserProgress {
     }
 
     public void setTypeOfEngine(TypeOfEngine typeOfEngine) {
+        cleanStepsAfterCurrent(3);
         this.typeOfEngine = typeOfEngine;
     }
 
@@ -54,10 +58,25 @@ public class UserProgress {
     }
 
     public void setVolumeOfEngine(VolumeOfEngine volumeOfEngine) {
+        cleanStepsAfterCurrent(4);
         this.volumeOfEngine = volumeOfEngine;
     }
 
-    private static class UserProgressHolder {
-        private static final UserProgress BOT_ENTITY = new UserProgress();
+    private void cleanStepsAfterCurrent(int stepCleaner) {
+        if (stepCleaner <= 1) {
+            this.countryOrigin = null;
+        }
+        if (stepCleaner <= 2) {
+            this.ownersType = null;
+        }
+        if (stepCleaner <= 3) {
+            this.typeOfEngine = null;
+        }
+        if (stepCleaner <= 4) {
+            this.volumeOfEngine = null;
+        }
+        if (stepCleaner <= 5) {
+            this.carAge = null;
+        }
     }
 }

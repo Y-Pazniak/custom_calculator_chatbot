@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.controller;
 
+import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.service.UserProgressManager;
 import by.custom.utilcalculator.service.MessagesCreator;
@@ -32,23 +33,25 @@ public class MessageRouter {
     }
 
     //we receive message from user, check it and handle it if it is ok here
-    public SendMessage getCheckInputMessageAndGetAnswer(Message message) {
+    private SendMessage getCheckInputMessageAndGetAnswer(Message message) {
         String usersMessage = message.getText();
         String userID = message.getChatId().toString();
+        UserProgress userProgress = UserStorageManager.getInstance().getUserProgress(userID);
         String answer;
 
         switch (usersMessage) {
             case Command.START -> answer = getGreetingMessage();
-            case Command.EAES, Command.OTHER_COUNTRIES -> answer = botFieldsManager.processCarOrigin(usersMessage);
+            case Command.EAES, Command.OTHER_COUNTRIES ->
+                    answer = botFieldsManager.processCarOrigin(usersMessage, userProgress);
             case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    answer = botFieldsManager.processOwnerType(usersMessage);
+                    answer = botFieldsManager.processOwnerType(usersMessage, userProgress);
             case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
-                    answer = botFieldsManager.processCarAge(usersMessage);
+                    answer = botFieldsManager.processCarAge(usersMessage, userProgress);
             case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    answer = botFieldsManager.processEngineType(usersMessage);
+                    answer = botFieldsManager.processEngineType(usersMessage, userProgress);
             case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
                     Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    answer = botFieldsManager.processEngineVolume(usersMessage);
+                    answer = botFieldsManager.processEngineVolume(usersMessage, userProgress);
             default -> answer = getSorryMessage();
         }
 
