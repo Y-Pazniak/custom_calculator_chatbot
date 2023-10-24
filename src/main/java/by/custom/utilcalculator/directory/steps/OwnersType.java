@@ -1,4 +1,4 @@
-package by.custom.utilcalculator.repository.steps;
+package by.custom.utilcalculator.directory.steps;
 
 public enum OwnersType {
     PHYSICAL, JURIDICAL
