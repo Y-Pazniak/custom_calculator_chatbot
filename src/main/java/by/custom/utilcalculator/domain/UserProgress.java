@@ -2,19 +2,18 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
 
-public class UserProgress {
+import java.io.Serializable;
+
+public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
+    private String chatID = null;
 
-    public UserProgress() {
-
-    }
-
-    public static UserProgress getInstance() {
-        return new UserProgress();
+    public UserProgress(String chatID) {
+        this.chatID = chatID;
     }
 
     public CountryOrigin getCountryOrigin() {
@@ -60,6 +59,10 @@ public class UserProgress {
     public void setVolumeOfEngine(VolumeOfEngine volumeOfEngine) {
         cleanStepsAfterCurrent(4);
         this.volumeOfEngine = volumeOfEngine;
+    }
+
+    public String getChatID() {
+        return chatID;
     }
 
     private void cleanStepsAfterCurrent(int stepCleaner) {

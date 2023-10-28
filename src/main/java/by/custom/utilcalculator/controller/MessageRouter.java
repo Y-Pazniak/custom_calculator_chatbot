@@ -36,7 +36,6 @@ public class MessageRouter {
     private SendMessage getCheckInputMessageAndGetAnswer(Message message) {
         String usersMessage = message.getText();
         String userID = message.getChatId().toString();
-        UserProgress userProgress = UserStorageManager.getInstance().getUserProgress(userID);
         String answer;
 
         switch (usersMessage) {

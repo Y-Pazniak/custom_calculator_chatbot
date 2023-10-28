@@ -1,15 +1,15 @@
 package by.custom.utilcalculator.service;
 
+import by.custom.utilcalculator.controller.UserStorageManager;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class UserProgressManager {
-    //private final UserProgress userProgress;
     private final MessagesCreator messagesCreator;
+    private final UserProgress userProgress;
 
     public UserProgressManager() {
-        //userProgress = UserProgress.getInstance();
         messagesCreator = MessagesCreator.getInstance();
     }
 
@@ -18,6 +18,7 @@ public class UserProgressManager {
     }
 
     public String processCarOrigin(String command, UserProgress userProgress) {
+        userProgress = UserStorageManager.getInstance().getUserProgress(userProgress.getChatID());
         switch (command) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
