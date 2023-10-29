@@ -1,7 +1,5 @@
 package by.custom.utilcalculator.domain;
 
-import org.telegram.telegrambots.meta.api.objects.User;
-
 import java.io.*;
 import java.util.HashMap;
 
@@ -30,6 +28,7 @@ public class UserProgressStorage {
 
     private void saveUserProgressIntoMap(UserProgress userProgress) {
         users.put(userProgress.getChatID(), userProgress);
+        saveMapIntoFile();
     }
 
     private void saveMapIntoFile() {
@@ -38,6 +37,7 @@ public class UserProgressStorage {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        updateMapFromFile();
     }
 
     private void updateMapFromFile() {

@@ -2,23 +2,25 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.controller.UserStorageManager;
 import by.custom.utilcalculator.domain.UserProgress;
+import by.custom.utilcalculator.domain.UserProgressStorage;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
-    private final UserProgress userProgress;
+    //private final UserProgress userProgress;
+    private final UserProgressStorage userProgressStorage;
 
     public UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
+        userProgressStorage = UserProgressStorage.getInstance();
     }
 
     public static UserProgressManager getInstance() {
         return BotFieldsManagerHolder.BOT_FIELDS_MANAGER;
     }
 
-    public String processCarOrigin(String command, UserProgress userProgress) {
-        userProgress = UserStorageManager.getInstance().getUserProgress(userProgress.getChatID());
+    public String processCarOrigin(String command, String userId) {
         switch (command) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
@@ -64,8 +66,6 @@ public class UserProgressManager {
         }
         return messagesCreator.getCountryOrigin(userProgress);
     }
-
-
 
     private static class BotFieldsManagerHolder {
         private static final UserProgressManager BOT_FIELDS_MANAGER = new UserProgressManager();

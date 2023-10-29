@@ -10,7 +10,7 @@ public class UserProgress implements Serializable {
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
-    private String chatID = null;
+    private final String chatID;
 
     public UserProgress(String chatID) {
         this.chatID = chatID;
