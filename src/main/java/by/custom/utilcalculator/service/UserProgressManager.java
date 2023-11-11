@@ -26,6 +26,7 @@ public class UserProgressManager {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
         }
+        userProgressStorage.save();
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
@@ -35,6 +36,7 @@ public class UserProgressManager {
             case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
             case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
         }
+        userProgressStorage.save();
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
@@ -45,6 +47,7 @@ public class UserProgressManager {
             case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.BETWEEN_3_AND_7_YEARS);
             case Command.MORE_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_7_YEARS);
         }
+        userProgressStorage.save();
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
@@ -54,6 +57,7 @@ public class UserProgressManager {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
         }
+        userProgressStorage.save();
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
@@ -69,6 +73,7 @@ public class UserProgressManager {
                     userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
             case Command.VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
         }
+        userProgressStorage.save();
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
