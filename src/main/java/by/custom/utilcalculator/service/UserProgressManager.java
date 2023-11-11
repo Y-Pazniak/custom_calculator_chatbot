@@ -49,7 +49,7 @@ public class UserProgressManager {
     }
 
     public String processEngineType(String command, Message message) {
-        UserProgress userProgress = getUserProgress(message);
+        UserProgress userProgress = getUserProgress(message); //test
         switch (command) {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
