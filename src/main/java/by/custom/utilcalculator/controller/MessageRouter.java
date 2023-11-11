@@ -10,11 +10,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MessageRouter {
     private final MessagesCreator messagesCreator;
-    private final UserProgressManager botFieldsManager;
+    private final UserProgressManager userProgressManager;
 
     private MessageRouter() {
         messagesCreator = MessagesCreator.getInstance();
-        botFieldsManager = UserProgressManager.getInstance();
+        userProgressManager = UserProgressManager.getInstance();
     }
 
     public static MessageRouter getInstance() {
@@ -41,16 +41,16 @@ public class MessageRouter {
         switch (usersMessage) {
             case Command.START -> answer = getGreetingMessage();
             case Command.EAES, Command.OTHER_COUNTRIES ->
-                    answer = botFieldsManager.processCarOrigin(usersMessage, userProgress);
+                    answer = userProgressManager.processCarOrigin(usersMessage, message);
             case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    answer = botFieldsManager.processOwnerType(usersMessage, userProgress);
+                    answer = userProgressManager.processOwnerType(usersMessage, message);
             case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
-                    answer = botFieldsManager.processCarAge(usersMessage, userProgress);
+                    answer = userProgressManager.processCarAge(usersMessage, message);
             case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    answer = botFieldsManager.processEngineType(usersMessage, userProgress);
+                    answer = userProgressManager.processEngineType(usersMessage, message);
             case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
                     Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    answer = botFieldsManager.processEngineVolume(usersMessage, userProgress);
+                    answer = userProgressManager.processEngineVolume(usersMessage, message);
             default -> answer = getSorryMessage();
         }
 

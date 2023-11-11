@@ -137,7 +137,7 @@ public class MessagesCreator {
     }
 
     private String getOptionsForOtherCountries(UserProgress userProgress) {
-        String resultString;
+        String resultString = null;
         switch (userProgress.getOwnersType()) {
             case PHYSICAL ->
                     resultString = getOptionsForOtherCountriesPhysical(userProgress);
@@ -167,7 +167,7 @@ public class MessagesCreator {
     }
 
     private String getOptionsForOtherCountriesJuridical(UserProgress userProgress) {
-        String resultString;
+        String resultString = null;
         switch (userProgress.getTypeOfEngine()) {
             case null -> resultString = getTypeOfEngine();
             case GASOLINE ->
