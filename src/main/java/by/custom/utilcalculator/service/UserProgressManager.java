@@ -8,16 +8,19 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
-    //private final UserProgress userProgress;
     private final UserProgressStorage userProgressStorage;
 
-    public UserProgressManager() {
+    private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
         userProgressStorage = UserProgressStorage.getInstance();
     }
 
     public static UserProgressManager getInstance() {
-        return BotFieldsManagerHolder.BOT_FIELDS_MANAGER;
+        return BotFieldsManagerHolder.USER_PROGRESS_MANAGER;
+    }
+
+    public void createNewUserProgress(Message message) {
+        userProgressStorage.checkAndCreateNewUser(message.getChatId().toString());
     }
 
     public String processCarOrigin(String command, Message message) {
@@ -52,7 +55,7 @@ public class UserProgressManager {
     }
 
     public String processEngineType(String command, Message message) {
-        UserProgress userProgress = getUserProgress(message); //test
+        UserProgress userProgress = getUserProgress(message);
         switch (command) {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
@@ -77,11 +80,11 @@ public class UserProgressManager {
         return messagesCreator.getCountryOrigin(userProgress);
     }
 
-    private UserProgress getUserProgress(Message message){
+    private UserProgress getUserProgress(Message message) {
         return userProgressStorage.getUser(message.getChatId().toString());
     }
 
     private static class BotFieldsManagerHolder {
-        private static final UserProgressManager BOT_FIELDS_MANAGER = new UserProgressManager();
+        private static final UserProgressManager USER_PROGRESS_MANAGER = new UserProgressManager();
     }
 }

@@ -1,5 +1,7 @@
 package by.custom.utilcalculator.domain;
 
+import org.telegram.telegrambots.meta.api.objects.Message;
+
 import java.io.*;
 import java.util.HashMap;
 
@@ -17,13 +19,15 @@ public class UserProgressStorage {
 
     public UserProgress getUser(String chatId) {
         get();
+        return users.get(chatId);
+    }
+
+    public void checkAndCreateNewUser(String chatId) {
         if (!users.containsKey(chatId)) {
             UserProgress userProgress = new UserProgress(chatId);
             users.put(chatId, userProgress);
-            return userProgress;
-        } else {
-            return users.get(chatId);
         }
+        save();
     }
 
     public void save() {

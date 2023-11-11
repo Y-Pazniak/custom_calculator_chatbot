@@ -39,7 +39,10 @@ public class MessageRouter {
         String answer;
 
         switch (usersMessage) {
-            case Command.START -> answer = getGreetingMessage();
+            case Command.START -> {
+                userProgressManager.createNewUserProgress(message);
+                answer = getGreetingMessage();
+            }
             case Command.EAES, Command.OTHER_COUNTRIES ->
                     answer = userProgressManager.processCarOrigin(usersMessage, message);
             case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
