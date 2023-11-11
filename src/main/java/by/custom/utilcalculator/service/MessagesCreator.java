@@ -7,12 +7,12 @@ import by.custom.utilcalculator.domain.constants.steps.*;
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
     private final CalculatorPassenger calculator;
-    private final UserProgress botEntity;
+    //private final UserProgress userProgress;
 
     private MessagesCreator() {
         bundle = BundleResourcesServant.getInstance();
         calculator = CalculatorPassenger.getInstance();
-        botEntity = UserProgress.getInstance();
+        //userProgress = UserProgress.getInstance();
     }
 
     public static MessagesCreator getInstance() {
@@ -47,12 +47,10 @@ public class MessagesCreator {
                 Command.MORE_7_YEARS_AGE, " ", bundle.getString("answers.details.more.7"));
     }
 
-    public String getResultAndFarewell(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    public String getResultAndFarewell(UserProgress userProgress) {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + calculator.calculate(
-                        countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge
-                ) + " " +
+                        bundle.getString("answers.summary.price") + " " + calculator.calculate(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
@@ -67,25 +65,25 @@ public class MessagesCreator {
         return bundle.getString("answers.sorry");
     }
 
-    public String getUserChoice(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    public String getUserChoice(UserProgress userProgress) {
         StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
 
-        switch (countryOrigin) {
+        switch (userProgress.getCountryOrigin()) {
             case null -> {
             }
             case EAES -> sb.append(bundle.getString("answers.summary.eaes"));
             case OTHER -> sb.append(bundle.getString("answers.summary.other"));
         }
 
-        switch (ownersType) {
+        switch (userProgress.getOwnersType()) {
             case null -> {
             }
             case PHYSICAL -> sb.append(bundle.getString("answers.summary.physical"));
             case JURIDICAL -> sb.append(bundle.getString("answers.summary.juridical"));
         }
 
-        switch (carAge) {
+        switch (userProgress.getCarAge()) {
             case null -> {
             }
             case LESS_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
@@ -93,14 +91,14 @@ public class MessagesCreator {
             case MORE_7_YEARS -> sb.append(bundle.getString("answers.summary.older.7"));
         }
 
-        switch (typeOfEngine) {
+        switch (userProgress.getTypeOfEngine()) {
             case null -> {
             }
             case GASOLINE -> sb.append(bundle.getString("answers.summary.gas"));
             case ELECTRIC -> sb.append(bundle.getString("answers.summary.electro"));
         }
 
-        switch (volumeOfEngine) {
+        switch (userProgress.getVolumeOfEngine()) {
             case null -> {
             }
             case LESS_1000 -> {
@@ -128,76 +126,74 @@ public class MessagesCreator {
     }
 
     //the first method which starts checking user's commands and building the message for user
-    public String getCountryOrigin() {
+    public String getCountryOrigin(UserProgress userProgress) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getUserChoice(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
-        switch (botEntity.getCountryOrigin()) {
-            case EAES ->
-                    stringBuilder.append(getOptionsForEaes(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
-            case OTHER ->
-                    stringBuilder.append(getOptionsForOtherCountries(botEntity.getCountryOrigin(), botEntity.getOwnersType(), botEntity.getTypeOfEngine(), botEntity.getVolumeOfEngine(), botEntity.getCarAge()));
+        stringBuilder.append(getUserChoice(userProgress));
+        switch (userProgress.getCountryOrigin()) {
+            case EAES -> stringBuilder.append(getOptionsForEaes(userProgress));
+            case OTHER -> stringBuilder.append(getOptionsForOtherCountries(userProgress));
         }
         return stringBuilder.toString();
     }
 
-    private String getOptionsForOtherCountries(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    private String getOptionsForOtherCountries(UserProgress userProgress) {
         String resultString;
-        switch (ownersType) {
+        switch (userProgress.getOwnersType()) {
             case PHYSICAL ->
-                    resultString = getOptionsForOtherCountriesPhysical(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                    resultString = getOptionsForOtherCountriesPhysical(userProgress);
             case JURIDICAL ->
-                    resultString = getOptionsForOtherCountriesJuridical(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                    resultString = getOptionsForOtherCountriesJuridical(userProgress);
             case null -> resultString = getTypeOfOwner();
         }
         return resultString;
     }
 
-    private String getOptionsForEaes(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    private String getOptionsForEaes(UserProgress userProgress) {
         String resultString;
-        if (ownersType == null) {
+        if (userProgress.getOwnersType() == null) {
             resultString = getTypeOfOwner();
         } else {
-            if (carAge == null) {
+            if (userProgress.getCarAge() == null) {
                 resultString = getAgeAuto();
             } else {
-                resultString = getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                resultString = getResultAndFarewell(userProgress);
             }
         }
         return resultString;
     }
 
-    private String getOptionsForOtherCountriesPhysical(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
-        return carAge == null ? getAgeAuto() : getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+    private String getOptionsForOtherCountriesPhysical(UserProgress userProgress) {
+        return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
     }
 
-    private String getOptionsForOtherCountriesJuridical(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    private String getOptionsForOtherCountriesJuridical(UserProgress userProgress) {
         String resultString;
-        switch (typeOfEngine) {
+        switch (userProgress.getTypeOfEngine()) {
             case null -> resultString = getTypeOfEngine();
             case GASOLINE ->
-                    resultString = checkForGasolineAuoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                    resultString = checkForGasolineAuoAge(userProgress);
             case ELECTRIC ->
-                    resultString = checkForElectricAutoAge(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                    resultString = checkForElectricAutoAge(userProgress);
         }
         return resultString;
     }
 
-    private String checkForGasolineAuoAge(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
+    private String checkForGasolineAuoAge(UserProgress userProgress) {
         String resultString;
-        if (volumeOfEngine == null) {
+        if (userProgress.getVolumeOfEngine() == null) {
             resultString = getEngineVolume();
         } else {
-            if (carAge == null) {
+            if (userProgress.getCarAge() == null) {
                 resultString = getAgeAuto();
             } else {
-                resultString = getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+                resultString = getResultAndFarewell(userProgress);
             }
         }
         return resultString;
     }
 
-    private String checkForElectricAutoAge(CountryOrigin countryOrigin, OwnersType ownersType, TypeOfEngine typeOfEngine, VolumeOfEngine volumeOfEngine, CarAge carAge) {
-        return carAge == null ? getAgeAuto() : getResultAndFarewell(countryOrigin, ownersType, typeOfEngine, volumeOfEngine, carAge);
+    private String checkForElectricAutoAge(UserProgress userProgress) {
+        return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
     }
 
     private String stringBuilderAppender(String... strings) {
