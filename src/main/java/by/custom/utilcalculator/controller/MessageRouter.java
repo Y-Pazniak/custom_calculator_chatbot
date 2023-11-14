@@ -35,30 +35,30 @@ public class MessageRouter {
     //we receive message from user, check it and handle it if it is ok here
     private SendMessage getCheckInputMessageAndGetAnswer(Message message) {
         String usersMessage = message.getText();
-        String userID = message.getChatId().toString();
+        String chatID = message.getChatId().toString();
         String answer;
 
         switch (usersMessage) {
             case Command.START -> {
-                userProgressManager.createNewUserProgress(message);
+                userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
             case Command.EAES, Command.OTHER_COUNTRIES ->
-                    answer = userProgressManager.processCarOrigin(usersMessage, message);
+                    answer = userProgressManager.processCarOrigin(usersMessage, chatID);
             case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    answer = userProgressManager.processOwnerType(usersMessage, message);
+                    answer = userProgressManager.processOwnerType(usersMessage, chatID);
             case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
-                    answer = userProgressManager.processCarAge(usersMessage, message);
+                    answer = userProgressManager.processCarAge(usersMessage, chatID);
             case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    answer = userProgressManager.processEngineType(usersMessage, message);
+                    answer = userProgressManager.processEngineType(usersMessage, chatID);
             case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
                     Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    answer = userProgressManager.processEngineVolume(usersMessage, message);
+                    answer = userProgressManager.processEngineVolume(usersMessage, chatID);
             default -> answer = getSorryMessage();
         }
 
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(userID);
+        sendMessage.setChatId(chatID);
         sendMessage.setText(answer);
         return sendMessage;
     }

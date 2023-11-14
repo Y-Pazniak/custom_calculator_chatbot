@@ -1,24 +1,26 @@
 package by.custom.utilcalculator.domain;
 
-import org.telegram.telegrambots.meta.api.objects.Message;
-
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
-public class UserProgressStorage {
-
-    private static class UserProgressStorageHolder {
-        private static final UserProgressStorage USER_PROGRESS_STORAGE = new UserProgressStorage();
+public class MapUserProgressStorage implements iUserProgressStorage {
+    public static MapUserProgressStorage getInstance() {
+        return UserProgressStorageHolder.USER_PROGRESS_STORAGE;
     }
 
-    private HashMap<String, UserProgress> users;
+    private static class UserProgressStorageHolder {
+        private static final MapUserProgressStorage USER_PROGRESS_STORAGE = new MapUserProgressStorage();
+    }
 
-    private UserProgressStorage() {
+    private Map<String, UserProgress> users;
+
+    private MapUserProgressStorage() {
         users = new HashMap<>();
     }
 
     public UserProgress getUser(String chatId) {
-        get();
+        get(chatId);
         return users.get(chatId);
     }
 
@@ -26,11 +28,12 @@ public class UserProgressStorage {
         if (!users.containsKey(chatId)) {
             UserProgress userProgress = new UserProgress(chatId);
             users.put(chatId, userProgress);
+            save(userProgress);
         }
-        save();
     }
 
-    public void save() {
+    @Override
+    public void save(UserProgress userProgress) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:/users.dat"))) {
             oos.writeObject(users);
         } catch (Exception ex) {
@@ -38,15 +41,12 @@ public class UserProgressStorage {
         }
     }
 
-    private void get() {
+    public UserProgress get(String chatID) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:/users.dat"))) {
             users = ((HashMap<String, UserProgress>) ois.readObject());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static UserProgressStorage getInstance() {
-        return UserProgressStorageHolder.USER_PROGRESS_STORAGE;
+        return null;
     }
 }
