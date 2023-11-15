@@ -12,7 +12,6 @@ public class MessagesCreator {
     private MessagesCreator() {
         bundle = BundleResourcesServant.getInstance();
         calculator = CalculatorPassenger.getInstance();
-        //userProgress = UserProgress.getInstance();
     }
 
     public static MessagesCreator getInstance() {

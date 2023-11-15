@@ -1,5 +1,7 @@
 package by.custom.utilcalculator.domain;
 
+import by.custom.utilcalculator.exception.UserFileNotFoundException;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,7 +31,7 @@ public class FileUserProgressStorage implements iUserProgressStorage {
     }
 
     @Override
-    public UserProgress get(String chatID) {
+    public UserProgress get(String chatID) throws UserFileNotFoundException {
         UserProgress localUserProgress;
         if (isUserFileExists(chatID)) {
             try {
@@ -40,17 +42,14 @@ public class FileUserProgressStorage implements iUserProgressStorage {
                 throw new RuntimeException(e);
             }
         } else {
-            return createNewUserFile(chatID);
+            throw new UserFileNotFoundException();
         }
     }
 
-    public UserProgress createNewUserFile(String chatID) {
+    public void createNewUserFile(String chatID) {
         if (!isUserFileExists(chatID)) {
             UserProgress userProgress = new UserProgress(chatID);
             save(userProgress);
-            return userProgress;
-        } else {
-            return get(chatID);
         }
     }
 
