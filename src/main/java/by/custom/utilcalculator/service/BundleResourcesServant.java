@@ -22,7 +22,7 @@ public class BundleResourcesServant {
         private static final BundleResourcesServant BUNDLE_INSTANCE = new BundleResourcesServant();
     }
 
-    public String getString(String stringToGetFromBundle) {
+    public String getString(final String stringToGetFromBundle) {
         return bundle.getString(stringToGetFromBundle);
     }
 

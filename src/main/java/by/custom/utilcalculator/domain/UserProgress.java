@@ -12,7 +12,7 @@ public class UserProgress implements Serializable {
     private VolumeOfEngine volumeOfEngine = null;
     private final String chatID;
 
-    public UserProgress(String chatID) {
+    public UserProgress(final String chatID) {
         this.chatID = chatID;
     }
 
@@ -20,7 +20,7 @@ public class UserProgress implements Serializable {
         return countryOrigin;
     }
 
-    public void setCountryOrigin(CountryOrigin countryOrigin) {
+    public void setCountryOrigin(final CountryOrigin countryOrigin) {
         cleanStepsAfterCurrent(1);
         this.countryOrigin = countryOrigin;
     }
@@ -29,7 +29,7 @@ public class UserProgress implements Serializable {
         return ownersType;
     }
 
-    public void setOwnersType(OwnersType ownersType) {
+    public void setOwnersType(final OwnersType ownersType) {
         cleanStepsAfterCurrent(2);
         this.ownersType = ownersType;
     }
@@ -38,7 +38,7 @@ public class UserProgress implements Serializable {
         return carAge;
     }
 
-    public void setCarAge(CarAge carAge) {
+    public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrent(5);
         this.carAge = carAge;
     }
@@ -47,7 +47,7 @@ public class UserProgress implements Serializable {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngine(TypeOfEngine typeOfEngine) {
+    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrent(3);
         this.typeOfEngine = typeOfEngine;
     }
@@ -56,7 +56,7 @@ public class UserProgress implements Serializable {
         return volumeOfEngine;
     }
 
-    public void setVolumeOfEngine(VolumeOfEngine volumeOfEngine) {
+    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
         cleanStepsAfterCurrent(4);
         this.volumeOfEngine = volumeOfEngine;
     }
@@ -65,7 +65,7 @@ public class UserProgress implements Serializable {
         return chatID;
     }
 
-    private void cleanStepsAfterCurrent(int stepCleaner) {
+    private void cleanStepsAfterCurrent(final int stepCleaner) {
         if (stepCleaner <= 1) {
             this.countryOrigin = null;
         }

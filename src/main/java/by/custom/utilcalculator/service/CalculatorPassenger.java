@@ -16,7 +16,7 @@ public class CalculatorPassenger {
         return CalculatorHolder.CALCULATOR_INSTANCE;
     }
 
-    public String calculate(UserProgress userProgress) {
+    public String calculate(final UserProgress userProgress) {
         switch (userProgress.getCountryOrigin()) {
             case EAES -> {
                 return countMostCommonPrice(userProgress);
@@ -33,7 +33,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String countForOtherCountriesPrice(UserProgress userProgress) {
+    private String countForOtherCountriesPrice(final UserProgress userProgress) {
         switch (userProgress.getOwnersType()) {
             case PHYSICAL -> {
                 return countMostCommonPrice(userProgress);
@@ -50,7 +50,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String countForJuridicalPrice(UserProgress userProgress) {
+    private String countForJuridicalPrice(final UserProgress userProgress) {
         switch (userProgress.getTypeOfEngine()) {
             case ELECTRIC -> {
                 return countForElectricAutoPrice(userProgress);
@@ -67,11 +67,11 @@ public class CalculatorPassenger {
         }
     }
 
-    private String countForElectricAutoPrice(UserProgress userProgress) {
+    private String countForElectricAutoPrice(final UserProgress userProgress) {
         return userProgress.getCarAge() == CarAge.LESS_3_YEARS ? Price.PASSENGER_LESS_3_YEARS : Price.PASSENGER_3_TO_7_YEARS;
     }
 
-    private String countForGasolineAutoPrice(UserProgress userProgress) {
+    private String countForGasolineAutoPrice(final UserProgress userProgress) {
         switch (userProgress.getCarAge()) {
             case LESS_3_YEARS -> {
                 return getPriceForJuridicalGasolineLess3Years(userProgress);
@@ -91,7 +91,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String getPriceForJuridicalGasolineMore7Years(UserProgress userProgress) {
+    private String getPriceForJuridicalGasolineMore7Years(final UserProgress userProgress) {
         switch (userProgress.getVolumeOfEngine()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_OLDER_7_YEARS;
@@ -117,7 +117,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String getPriceForJuridicalGasolineBetween3And7Years(UserProgress userProgress) {
+    private String getPriceForJuridicalGasolineBetween3And7Years(final UserProgress userProgress) {
         switch (userProgress.getVolumeOfEngine()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_3_TO_7_YEARS;
@@ -143,7 +143,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String getPriceForJuridicalGasolineLess3Years(UserProgress userProgress) {
+    private String getPriceForJuridicalGasolineLess3Years(final UserProgress userProgress) {
         switch (userProgress.getVolumeOfEngine()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_LESS_3_YEARS;
@@ -169,7 +169,7 @@ public class CalculatorPassenger {
         }
     }
 
-    private String countMostCommonPrice(UserProgress userProgress) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
+    private String countMostCommonPrice(final UserProgress userProgress) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
         switch (userProgress.getCarAge()) {
             case LESS_3_YEARS -> {
                 return Price.PASSENGER_LESS_3_YEARS;

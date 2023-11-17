@@ -39,7 +39,7 @@ public class Bot extends TelegramLongPollingBot {
 
     //method describes what to do after receiving message
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(final Update update) {
         //if user send us smth
         try {
             execute(messageRouter.route(update));

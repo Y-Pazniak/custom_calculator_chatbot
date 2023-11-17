@@ -64,7 +64,7 @@ public class MessagesCreator {
         return bundle.getString("answers.sorry");
     }
 
-    public String getUserChoice(UserProgress userProgress) {
+    public String getUserChoice(final UserProgress userProgress) {
         StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
 
@@ -125,7 +125,7 @@ public class MessagesCreator {
     }
 
     //the first method which starts checking user's commands and building the message for user
-    public String getCountryOrigin(UserProgress userProgress) {
+    public String getCountryOrigin(final UserProgress userProgress) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getUserChoice(userProgress));
         switch (userProgress.getCountryOrigin()) {
@@ -135,7 +135,7 @@ public class MessagesCreator {
         return stringBuilder.toString();
     }
 
-    private String getOptionsForOtherCountries(UserProgress userProgress) {
+    private String getOptionsForOtherCountries(final UserProgress userProgress) {
         String resultString = null;
         switch (userProgress.getOwnersType()) {
             case PHYSICAL ->
@@ -147,7 +147,7 @@ public class MessagesCreator {
         return resultString;
     }
 
-    private String getOptionsForEaes(UserProgress userProgress) {
+    private String getOptionsForEaes(final UserProgress userProgress) {
         String resultString;
         if (userProgress.getOwnersType() == null) {
             resultString = getTypeOfOwner();
@@ -161,11 +161,11 @@ public class MessagesCreator {
         return resultString;
     }
 
-    private String getOptionsForOtherCountriesPhysical(UserProgress userProgress) {
+    private String getOptionsForOtherCountriesPhysical(final UserProgress userProgress) {
         return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
     }
 
-    private String getOptionsForOtherCountriesJuridical(UserProgress userProgress) {
+    private String getOptionsForOtherCountriesJuridical(final UserProgress userProgress) {
         String resultString = null;
         switch (userProgress.getTypeOfEngine()) {
             case null -> resultString = getTypeOfEngine();
@@ -177,7 +177,7 @@ public class MessagesCreator {
         return resultString;
     }
 
-    private String checkForGasolineAuoAge(UserProgress userProgress) {
+    private String checkForGasolineAuoAge(final UserProgress userProgress) {
         String resultString;
         if (userProgress.getVolumeOfEngine() == null) {
             resultString = getEngineVolume();
@@ -191,11 +191,11 @@ public class MessagesCreator {
         return resultString;
     }
 
-    private String checkForElectricAutoAge(UserProgress userProgress) {
+    private String checkForElectricAutoAge(final UserProgress userProgress) {
         return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
     }
 
-    private String stringBuilderAppender(String... strings) {
+    private String stringBuilderAppender(final String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string : strings) {
             stringBuilder.append(string);
@@ -203,7 +203,7 @@ public class MessagesCreator {
         return stringBuilder.toString();
     }
 
-    private String trimFirstAndLastLetters(String toTrim) {
+    private String trimFirstAndLastLetters(final String toTrim) {
         return toTrim.substring(1, toTrim.length() - 1);
     }
 

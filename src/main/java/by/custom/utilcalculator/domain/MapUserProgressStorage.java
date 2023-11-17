@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapUserProgressStorage implements iUserProgressStorage {
+public class MapUserProgressStorage implements IUserProgressStorage {
     public static MapUserProgressStorage getInstance() {
         return UserProgressStorageHolder.USER_PROGRESS_STORAGE;
     }
@@ -24,7 +24,7 @@ public class MapUserProgressStorage implements iUserProgressStorage {
         return users.get(chatId);
     }
 
-    public void checkAndCreateNewUser(String chatId) {
+    public void createNewUser (String chatId) {
         if (!users.containsKey(chatId)) {
             UserProgress userProgress = new UserProgress(chatId);
             users.put(chatId, userProgress);
