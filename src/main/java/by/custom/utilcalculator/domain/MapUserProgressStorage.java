@@ -1,6 +1,5 @@
 package by.custom.utilcalculator.domain;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,40 +12,31 @@ public class MapUserProgressStorage implements IUserProgressStorage {
         private static final MapUserProgressStorage USER_PROGRESS_STORAGE = new MapUserProgressStorage();
     }
 
-    private Map<String, UserProgress> users;
+    private final Map<String, UserProgress> users;
 
     private MapUserProgressStorage() {
         users = new HashMap<>();
     }
-
-    public UserProgress getUser(String chatId) {
-        get(chatId);
-        return users.get(chatId);
-    }
-
-    public void createNewUser (String chatId) {
+    public void create(final String chatId) {
         if (!users.containsKey(chatId)) {
-            UserProgress userProgress = new UserProgress(chatId);
-            users.put(chatId, userProgress);
-            save(userProgress);
+            save(new UserProgress(chatId));
         }
     }
 
     @Override
-    public void save(UserProgress userProgress) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:/users.dat"))) {
-            oos.writeObject(users);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public void save(final UserProgress userProgress) {
+        users.put(userProgress.getChatID(), userProgress);
     }
 
-    public UserProgress get(String chatID) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:/users.dat"))) {
-            users = ((HashMap<String, UserProgress>) ois.readObject());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    public UserProgress get(final String chatID) {
+        if (!users.containsKey(chatID)) {
+            create(chatID);
         }
-        return null;
+        return users.get(chatID);
+    }
+
+    @Override
+    public String getPath(final String chatID) {
+        return "not available for a map";
     }
 }

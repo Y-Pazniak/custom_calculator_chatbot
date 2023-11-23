@@ -1,9 +1,11 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
 import by.custom.utilcalculator.exception.UserFileNotFoundException;
-import by.custom.utilcalculator.service.CustomSendMessage;
+import by.custom.utilcalculator.exception.UtilsborException;
+import by.custom.utilcalculator.exception.WritingUserProgressIntoFileException;
+import by.custom.utilcalculator.service.BundleResourcesServant;
 import by.custom.utilcalculator.service.UserProgressManager;
 import by.custom.utilcalculator.service.MessagesCreator;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -40,28 +42,43 @@ public class MessageRouter {
         String chatID = message.getChatId().toString();
         String answer;
         try {
-            switch (usersMessage) {
-                case Command.START -> {
-                    userProgressManager.createNewUserProgress(chatID);
-                    answer = getGreetingMessage();
-                }
-                case Command.EAES, Command.OTHER_COUNTRIES ->
-                        answer = userProgressManager.processCarOrigin(usersMessage, chatID);
-                case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                        answer = userProgressManager.processOwnerType(usersMessage, chatID);
-                case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
-                        answer = userProgressManager.processCarAge(usersMessage, chatID);
-                case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                        answer = userProgressManager.processEngineType(usersMessage, chatID);
-                case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
-                        Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                        answer = userProgressManager.processEngineVolume(usersMessage, chatID);
-                default -> answer = getSorryMessage();
+            answer = route(usersMessage, chatID);
+        } catch (UserFileNotFoundException | ReadingUserProgressFromFileException |
+                 WritingUserProgressIntoFileException e) {
+            e.printStackTrace();
+            System.out.println(e.getFileNameExceptionDetails(userProgressManager.getPathToFile(chatID)));
+            System.out.println(e.getUserChatIDExceptionDetails(chatID));
+            System.out.println(e.getUserCommandExceptionDetails(usersMessage));
+            String[] messageContent = e.getMessageInfo(message);
+            for (String s : messageContent) {
+                System.out.println(s);
             }
-        } catch (UserFileNotFoundException e) {
-            return new CustomSendMessage(chatID, e.getMessage());
+            return new SendMessage(chatID, getExceptionText(e));
         }
-        return new CustomSendMessage(chatID, answer);
+        return new SendMessage(chatID, answer);
+    }
+
+    private String route(final String usersMessage, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+        String answer;
+        switch (usersMessage) {
+            case Command.START -> {
+                userProgressManager.createNewUserProgress(chatID);
+                answer = getGreetingMessage();
+            }
+            case Command.EAES, Command.OTHER_COUNTRIES ->
+                    answer = userProgressManager.processCarOrigin(usersMessage, chatID);
+            case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
+                    answer = userProgressManager.processOwnerType(usersMessage, chatID);
+            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
+                    answer = userProgressManager.processCarAge(usersMessage, chatID);
+            case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
+                    answer = userProgressManager.processEngineType(usersMessage, chatID);
+            case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
+                    Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
+                    answer = userProgressManager.processEngineVolume(usersMessage, chatID);
+            default -> answer = getSorryMessage();
+        }
+        return answer;
     }
 
     public String getGreetingMessage() {
@@ -70,6 +87,10 @@ public class MessageRouter {
 
     public String getSorryMessage() {
         return messagesCreator.getSorry();
+    }
+
+    private String getExceptionText(UtilsborException e) {
+        return BundleResourcesServant.getInstance().getString("answers." + e.getExceptionCode());
     }
 
     private static class MessagesCheckerHolder {

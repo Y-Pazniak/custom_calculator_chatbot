@@ -2,13 +2,14 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
 import by.custom.utilcalculator.exception.UserFileNotFoundException;
+import by.custom.utilcalculator.exception.WritingUserProgressIntoFileException;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileUserProgressStorage implements IUserProgressStorage {
-    private final String databaseEnvVariable = System.getenv("CHATBOT_DATABASE_STORAGE");
+    private final String databaseEnvVariable = System.getenv("CHATBOT_FILE_STORAGE");
     private final String path = databaseEnvVariable + "%s.dat";
 
     private static class FileUserProgressStorageHolder {
@@ -27,12 +28,12 @@ public class FileUserProgressStorage implements IUserProgressStorage {
     }
 
     @Override
-    public void save(final UserProgress userProgress) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(buildFilePath(userProgress.getChatID())));
+    public void save(final UserProgress userProgress) throws WritingUserProgressIntoFileException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(buildFilePath(userProgress.getChatID())))){
             oos.writeObject(userProgress);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new WritingUserProgressIntoFileException();
         }
     }
 
@@ -41,9 +42,7 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         if (!isUserFileExists(chatID)) {
             throw new UserFileNotFoundException();
         }
-        ObjectInputStream ois;
-        try {
-            ois = new ObjectInputStream(new FileInputStream(buildFilePath(chatID)));
+        try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(buildFilePath(chatID)))){
             return (UserProgress) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -51,7 +50,7 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         }
     }
 
-    public void createNewUser (final String chatID) {
+    public void create(final String chatID) throws WritingUserProgressIntoFileException {
         if (!isUserFileExists(chatID)) {
             UserProgress userProgress = new UserProgress(chatID);
             save(userProgress);
@@ -64,5 +63,9 @@ public class FileUserProgressStorage implements IUserProgressStorage {
 
     private String buildFilePath(final String chatID) {
         return String.format(path, chatID);
+    }
+
+    public String getPath(final String chatID) {
+        return buildFilePath(chatID);
     }
 }
