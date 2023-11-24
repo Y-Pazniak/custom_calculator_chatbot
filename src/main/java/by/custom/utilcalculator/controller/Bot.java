@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.controller;
 
+import by.custom.utilcalculator.domain.PostgresUserProgress;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -22,6 +23,7 @@ public class Bot extends TelegramLongPollingBot {
     //private constructor to avoid wrong bot's creation
     private Bot() {
         messageRouter = MessageRouter.getInstance();
+        initDB();
     }
 
     @Override
@@ -47,5 +49,10 @@ public class Bot extends TelegramLongPollingBot {
             System.out.println("Fail to process user's request.");
             e.printStackTrace();
         }
+    }
+
+    private void initDB() {
+        PostgresUserProgress m = new PostgresUserProgress();
+        m.testDatabase();
     }
 }
