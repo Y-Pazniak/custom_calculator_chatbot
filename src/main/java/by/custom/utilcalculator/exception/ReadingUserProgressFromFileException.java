@@ -1,13 +1,11 @@
 package by.custom.utilcalculator.exception;
 
-import by.custom.utilcalculator.service.BundleResourcesServant;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import by.custom.utilcalculator.exception.constants.UtilsborErrorCode;
+import by.custom.utilcalculator.exception.constants.UtilsborErrorDescription;
 
 public class ReadingUserProgressFromFileException extends UtilsborException {
-    private static final String READING_FROM_FILE_EXCEPTION = "file_reading_error";
-    private static final String errorDescription = "read from file";
-
     public ReadingUserProgressFromFileException(final String chatID, final String fileName) {
-        super(READING_FROM_FILE_EXCEPTION, createStringForStackTrace(errorDescription, chatID, fileName));
+        super(UtilsborErrorCode.READING_FROM_FILE_EXCEPTION.getTitle(),
+                createStringForStackTrace(UtilsborErrorDescription.READING_FROM_FILE_ERROR_DESCRIPTION.getTitle(), chatID, fileName));
     }
 }
