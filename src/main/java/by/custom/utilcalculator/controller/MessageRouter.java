@@ -22,7 +22,7 @@ public class MessageRouter {
     }
 
     public static MessageRouter getInstance() {
-        return MessagesCheckerHolder.MESSAGES_CHECKER;
+        return MessagesRouterHolder.MESSAGES_ROUTER;
     }
 
     public SendMessage route(final Update update) {
@@ -43,22 +43,14 @@ public class MessageRouter {
         String answer;
         try {
             answer = route(usersMessage, chatID);
-        } catch (UserFileNotFoundException | ReadingUserProgressFromFileException |
-                 WritingUserProgressIntoFileException e) {
+        } catch (UtilsborException e) {
             e.printStackTrace();
-            System.out.println(e.getFileNameExceptionDetails(userProgressManager.getPathToFile(chatID)));
-            System.out.println(e.getUserChatIDExceptionDetails(chatID));
-            System.out.println(e.getUserCommandExceptionDetails(usersMessage));
-            String[] messageContent = e.getMessageInfo(message);
-            for (String s : messageContent) {
-                System.out.println(s);
-            }
             return new SendMessage(chatID, getExceptionText(e));
         }
         return new SendMessage(chatID, answer);
     }
 
-    private String route(final String usersMessage, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    private String route(final String usersMessage, final String chatID) throws UtilsborException {
         String answer;
         switch (usersMessage) {
             case Command.START -> {
@@ -90,10 +82,10 @@ public class MessageRouter {
     }
 
     private String getExceptionText(UtilsborException e) {
-        return BundleResourcesServant.getInstance().getString("answers." + e.getExceptionCode());
+        return BundleResourcesServant.getInstance().getString("answers." + e.getErrorCode());
     }
 
-    private static class MessagesCheckerHolder {
-        private static final MessageRouter MESSAGES_CHECKER = new MessageRouter();
+    private static class MessagesRouterHolder {
+        private static final MessageRouter MESSAGES_ROUTER = new MessageRouter();
     }
 }

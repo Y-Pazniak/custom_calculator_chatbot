@@ -29,24 +29,25 @@ public class FileUserProgressStorage implements IUserProgressStorage {
 
     @Override
     public void save(final UserProgress userProgress) throws WritingUserProgressIntoFileException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(buildFilePath(userProgress.getChatID())))){
+        String chatID = userProgress.getChatID();
+        String filePath = buildFilePath(chatID);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
             oos.writeObject(userProgress);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new WritingUserProgressIntoFileException();
+            throw new WritingUserProgressIntoFileException(chatID, filePath);
         }
     }
 
     @Override
     public UserProgress get(final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException {
+        String filePath = buildFilePath(chatID);
         if (!isUserFileExists(chatID)) {
-            throw new UserFileNotFoundException();
+            throw new UserFileNotFoundException(chatID, filePath);
         }
-        try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(buildFilePath(chatID)))){
+        try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(filePath))){
             return (UserProgress) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new ReadingUserProgressFromFileException();
+            throw new ReadingUserProgressFromFileException(chatID, filePath);
         }
     }
 

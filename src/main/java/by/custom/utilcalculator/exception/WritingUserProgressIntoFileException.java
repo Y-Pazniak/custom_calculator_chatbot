@@ -1,23 +1,10 @@
 package by.custom.utilcalculator.exception;
 
 public class WritingUserProgressIntoFileException extends UtilsborException {
-    @Override
-    public String getExceptionCode() {
-        return SAVING_INTO_FILE_EXCEPTION;
-    }
+    private static final String SAVING_INTO_FILE_EXCEPTION = "file_saving_error";
+    private static final String errorDescription = "save into the file";
 
-    @Override
-    public String getFileNameExceptionDetails(String filename) {
-        return "Impossible to save into: " + filename;
-    }
-
-    @Override
-    public String getUserChatIDExceptionDetails(String chatID) {
-        return  "Impossible to save user: " + chatID;
-    }
-
-    @Override
-    public String getUserCommandExceptionDetails(String userCommand) {
-        return "Impossible to save for command: " + userCommand;
+    public WritingUserProgressIntoFileException(final String chatID, final String fileName) {
+        super(SAVING_INTO_FILE_EXCEPTION, createStringForStackTrace(errorDescription, chatID, fileName));
     }
 }
