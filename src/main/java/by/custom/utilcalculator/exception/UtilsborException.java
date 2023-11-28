@@ -3,6 +3,10 @@ package by.custom.utilcalculator.exception;
 public abstract class UtilsborException extends Exception {
     private final String errorCode;
 
+    public UtilsborException(final String errorCode) {
+        this.errorCode = errorCode;
+    }
+
     public UtilsborException(final String errorCode, final String detailsAboutError) {
         super(detailsAboutError);
         this.errorCode = errorCode;
