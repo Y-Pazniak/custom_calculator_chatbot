@@ -3,18 +3,18 @@ package by.custom.utilcalculator.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapUserProgressStorage implements IUserProgressStorage {
-    public static MapUserProgressStorage getInstance() {
+public class MemoryUserProgressStorage implements IUserProgressStorage {
+    public static MemoryUserProgressStorage getInstance() {
         return UserProgressStorageHolder.USER_PROGRESS_STORAGE;
     }
 
     private static class UserProgressStorageHolder {
-        private static final MapUserProgressStorage USER_PROGRESS_STORAGE = new MapUserProgressStorage();
+        private static final MemoryUserProgressStorage USER_PROGRESS_STORAGE = new MemoryUserProgressStorage();
     }
 
     private final Map<String, UserProgress> users;
 
-    private MapUserProgressStorage() {
+    private MemoryUserProgressStorage() {
         users = new HashMap<>();
     }
     public void create(final String chatId) {
@@ -33,10 +33,5 @@ public class MapUserProgressStorage implements IUserProgressStorage {
             create(chatID);
         }
         return users.get(chatID);
-    }
-
-    @Override
-    public String getPath(final String chatID) {
-        return "not available for a map";
     }
 }

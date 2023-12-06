@@ -125,7 +125,7 @@ public class MessagesCreator {
     }
 
     //the first method which starts checking user's commands and building the message for user
-    public String getCountryOrigin(final UserProgress userProgress) {
+    private String getCountryOrigin(final UserProgress userProgress) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getUserChoice(userProgress));
         switch (userProgress.getCountryOrigin()) {
@@ -136,7 +136,7 @@ public class MessagesCreator {
     }
 
     private String getOptionsForOtherCountries(final UserProgress userProgress) {
-        String resultString = null;
+        String resultString;
         switch (userProgress.getOwnersType()) {
             case PHYSICAL ->
                     resultString = getOptionsForOtherCountriesPhysical(userProgress);
@@ -166,7 +166,7 @@ public class MessagesCreator {
     }
 
     private String getOptionsForOtherCountriesJuridical(final UserProgress userProgress) {
-        String resultString = null;
+        String resultString;
         switch (userProgress.getTypeOfEngine()) {
             case null -> resultString = getTypeOfEngine();
             case GASOLINE ->
@@ -201,6 +201,10 @@ public class MessagesCreator {
             stringBuilder.append(string);
         }
         return stringBuilder.toString();
+    }
+
+    public String getSummaryAnswer(final UserProgress userProgress) {
+        return getCountryOrigin(userProgress);
     }
 
     private String trimFirstAndLastLetters(final String toTrim) {

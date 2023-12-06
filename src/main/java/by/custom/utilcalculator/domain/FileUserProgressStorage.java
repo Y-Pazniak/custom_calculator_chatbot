@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
 import by.custom.utilcalculator.exception.UserFileNotFoundException;
+import by.custom.utilcalculator.exception.UtilsborException;
 import by.custom.utilcalculator.exception.WritingUserProgressIntoFileException;
 
 import java.io.*;
@@ -34,12 +35,12 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
             oos.writeObject(userProgress);
         } catch (IOException e) {
-            throw new WritingUserProgressIntoFileException(chatID, filePath);
+            throw new WritingUserProgressIntoFileException(chatID, filePath, e.getCause());
         }
     }
 
     @Override
-    public UserProgress get(final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException {
+    public UserProgress get(final String chatID) throws UtilsborException {
         String filePath = buildFilePath(chatID);
         if (!isUserFileExists(chatID)) {
             throw new UserFileNotFoundException(chatID, filePath);
@@ -47,16 +48,16 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(filePath))){
             return (UserProgress) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new ReadingUserProgressFromFileException(chatID, filePath);
+            throw new ReadingUserProgressFromFileException(chatID, filePath, e.getCause());
         }
     }
 
-    public void create(final String chatID) throws WritingUserProgressIntoFileException {
-        if (!isUserFileExists(chatID)) {
-            UserProgress userProgress = new UserProgress(chatID);
-            save(userProgress);
-        }
-    }
+//    public void create(final String chatID) throws WritingUserProgressIntoFileException {
+//        if (!isUserFileExists(chatID)) {
+//            UserProgress userProgress = new UserProgress(chatID);
+//            save(userProgress);
+//        }
+//    }
 
     private boolean isUserFileExists(final String chatID) {
         return Files.exists(Paths.get(buildFilePath(chatID)));

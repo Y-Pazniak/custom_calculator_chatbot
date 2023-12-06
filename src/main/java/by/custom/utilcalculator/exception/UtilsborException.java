@@ -7,8 +7,13 @@ public abstract class UtilsborException extends Exception {
         this.errorCode = errorCode;
     }
 
-    public UtilsborException(final String errorCode, final String detailsAboutError) {
-        super(detailsAboutError);
+    public UtilsborException(final String errorCode, final String errorDetails) {
+        super(errorDetails);
+        this.errorCode = errorCode;
+    }
+
+    public UtilsborException(String errorCode, String detailsAboutError, Throwable cause) {
+        super(detailsAboutError, cause);
         this.errorCode = errorCode;
     }
 

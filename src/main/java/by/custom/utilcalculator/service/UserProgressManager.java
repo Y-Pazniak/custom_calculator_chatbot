@@ -5,75 +5,73 @@ import by.custom.utilcalculator.domain.IUserProgressStorage;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
-import by.custom.utilcalculator.exception.UserFileNotFoundException;
-import by.custom.utilcalculator.exception.WritingUserProgressIntoFileException;
+import by.custom.utilcalculator.exception.UtilsborException;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
-    private final IUserProgressStorage fileUserProgressStorage;
+    private final IUserProgressStorage userProgressStorage;
 
     private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
-        fileUserProgressStorage = FileUserProgressStorage.getInstance();
+        userProgressStorage = FileUserProgressStorage.getInstance();
     }
 
     public static UserProgressManager getInstance() {
         return BotFieldsManagerHolder.USER_PROGRESS_MANAGER;
     }
 
-    public void createNewUserProgress(final String chatID) throws WritingUserProgressIntoFileException {
-        fileUserProgressStorage.create(chatID);
+    public void createNewUserProgress(final String chatID) throws UtilsborException {
+        userProgressStorage.save(new UserProgress(chatID));
     }
 
-    public String processCarOrigin(final String command, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    public String processCarOrigin(final String command, final String chatID) throws UtilsborException {
         UserProgress userProgress;
-            userProgress = fileUserProgressStorage.get(chatID);
+            userProgress = userProgressStorage.get(chatID);
             switch (command) {
                 case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
                 case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
             }
-            fileUserProgressStorage.save(userProgress);
-            return messagesCreator.getCountryOrigin(userProgress);
+            userProgressStorage.save(userProgress);
+            return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processOwnerType(final String command, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    public String processOwnerType(final String command, final String chatID) throws UtilsborException {
         UserProgress userProgress;
-            userProgress = fileUserProgressStorage.get(chatID);
+            userProgress = userProgressStorage.get(chatID);
             switch (command) {
                 case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
                 case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
             }
-            fileUserProgressStorage.save(userProgress);
-            return messagesCreator.getCountryOrigin(userProgress);
+            userProgressStorage.save(userProgress);
+            return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processCarAge(final String command, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    public String processCarAge(final String command, final String chatID) throws UtilsborException {
         UserProgress userProgress;
-            userProgress = fileUserProgressStorage.get(chatID);
+            userProgress = userProgressStorage.get(chatID);
             switch (command) {
                 case Command.LESS_3_YEARS_AGE -> userProgress.setCarAge(CarAge.LESS_3_YEARS);
                 case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.BETWEEN_3_AND_7_YEARS);
                 case Command.MORE_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_7_YEARS);
             }
-            fileUserProgressStorage.save(userProgress);
-            return messagesCreator.getCountryOrigin(userProgress);
+            userProgressStorage.save(userProgress);
+            return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processEngineType(final String command, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    public String processEngineType(final String command, final String chatID) throws UtilsborException {
         UserProgress userProgress;
-            userProgress = fileUserProgressStorage.get(chatID);
+            userProgress = userProgressStorage.get(chatID);
             switch (command) {
                 case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
                 case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
             }
-            fileUserProgressStorage.save(userProgress);
-            return messagesCreator.getCountryOrigin(userProgress);
+            userProgressStorage.save(userProgress);
+            return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processEngineVolume(final String command, final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException, WritingUserProgressIntoFileException {
+    public String processEngineVolume(final String command, final String chatID) throws UtilsborException {
         UserProgress userProgress;
-            userProgress = fileUserProgressStorage.get(chatID);
+            userProgress = userProgressStorage.get(chatID);
             switch (command) {
                 case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
                 case Command.VOLUME_BETWEEN_1000_2000_CM ->
@@ -84,12 +82,8 @@ public class UserProgressManager {
                         userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
                 case Command.VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
             }
-            fileUserProgressStorage.save(userProgress);
-            return messagesCreator.getCountryOrigin(userProgress);
-    }
-
-    public String getPathToFile(final String chatID){
-        return fileUserProgressStorage.getPath(chatID);
+            userProgressStorage.save(userProgress);
+            return messagesCreator.getSummaryAnswer(userProgress);
     }
 
     private static class BotFieldsManagerHolder {

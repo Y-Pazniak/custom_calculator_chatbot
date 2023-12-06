@@ -2,14 +2,13 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
 import by.custom.utilcalculator.exception.UserFileNotFoundException;
+import by.custom.utilcalculator.exception.UtilsborException;
 import by.custom.utilcalculator.exception.WritingUserProgressIntoFileException;
 
 public interface IUserProgressStorage {
-    void save(final UserProgress userProgress) throws WritingUserProgressIntoFileException;
+    void save(final UserProgress userProgress) throws UtilsborException;
 
-    UserProgress get(final String chatID) throws UserFileNotFoundException, ReadingUserProgressFromFileException;
+    UserProgress get(final String chatID) throws UtilsborException;
 
-    void create(final String chatID) throws WritingUserProgressIntoFileException;
-
-    String getPath(final String chatID);
+    //void create(final String chatID) throws UtilsborException;
 }

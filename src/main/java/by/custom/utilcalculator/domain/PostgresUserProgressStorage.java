@@ -2,10 +2,11 @@ package by.custom.utilcalculator.domain;
 
 import java.sql.*;
 
-public class PostgresUserProgress {
+public class PostgresUserProgressStorage {
 
-    public void testDatabase() {
-        String jdbcURL = "jdbc:postgresql://localhost:5432/test";
+    public void databaseConnect() {
+        //String jdbcURL = "jdbc:postgresql://localhost:5432/test";
+        String jdbcURL = System.getenv("POSTGRESQL_URL");
         String name = "postgres";
         String password = "postgres";
 
