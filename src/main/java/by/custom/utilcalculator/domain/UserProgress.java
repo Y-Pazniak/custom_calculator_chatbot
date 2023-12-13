@@ -2,26 +2,25 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
 
-public class UserProgress {
+import java.io.Serializable;
+
+public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
+    private final String chatID;
 
-    public UserProgress() {
-
-    }
-
-    public static UserProgress getInstance() {
-        return new UserProgress();
+    public UserProgress(final String chatID) {
+        this.chatID = chatID;
     }
 
     public CountryOrigin getCountryOrigin() {
         return countryOrigin;
     }
 
-    public void setCountryOrigin(CountryOrigin countryOrigin) {
+    public void setCountryOrigin(final CountryOrigin countryOrigin) {
         cleanStepsAfterCurrent(1);
         this.countryOrigin = countryOrigin;
     }
@@ -30,7 +29,7 @@ public class UserProgress {
         return ownersType;
     }
 
-    public void setOwnersType(OwnersType ownersType) {
+    public void setOwnersType(final OwnersType ownersType) {
         cleanStepsAfterCurrent(2);
         this.ownersType = ownersType;
     }
@@ -39,7 +38,7 @@ public class UserProgress {
         return carAge;
     }
 
-    public void setCarAge(CarAge carAge) {
+    public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrent(5);
         this.carAge = carAge;
     }
@@ -48,7 +47,7 @@ public class UserProgress {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngine(TypeOfEngine typeOfEngine) {
+    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrent(3);
         this.typeOfEngine = typeOfEngine;
     }
@@ -57,12 +56,16 @@ public class UserProgress {
         return volumeOfEngine;
     }
 
-    public void setVolumeOfEngine(VolumeOfEngine volumeOfEngine) {
+    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
         cleanStepsAfterCurrent(4);
         this.volumeOfEngine = volumeOfEngine;
     }
 
-    private void cleanStepsAfterCurrent(int stepCleaner) {
+    public String getChatID() {
+        return chatID;
+    }
+
+    private void cleanStepsAfterCurrent(final int stepCleaner) {
         if (stepCleaner <= 1) {
             this.countryOrigin = null;
         }
