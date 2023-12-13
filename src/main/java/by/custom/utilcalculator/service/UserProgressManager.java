@@ -5,6 +5,7 @@ import by.custom.utilcalculator.domain.IUserProgressStorage;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
+import by.custom.utilcalculator.exception.ReadingUserProgressFromFileException;
 import by.custom.utilcalculator.exception.UtilsborException;
 
 public class UserProgressManager {

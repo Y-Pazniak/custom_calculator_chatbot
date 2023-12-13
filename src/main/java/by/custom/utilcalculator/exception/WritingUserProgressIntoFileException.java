@@ -9,7 +9,7 @@ public class WritingUserProgressIntoFileException extends UtilsborException {
 
     public WritingUserProgressIntoFileException(final String chatID, final String fileName, Throwable cause) {
         super(UtilsborErrorCode.SAVING_INTO_FILE_EXCEPTION.getTitle(),
-                createStringForStackTrace(UtilsborErrorDescription.WRITING_INTO_FILE_ERROR_DESCRIPTION.getTitle(), chatID, fileName));
+                createStringForStackTrace(UtilsborErrorDescription.WRITING_INTO_FILE_ERROR_DESCRIPTION.getTitle(), chatID, fileName), cause);
         this.chatID = chatID;
         this.fileName = fileName;
     }

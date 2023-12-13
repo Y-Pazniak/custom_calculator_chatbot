@@ -35,7 +35,7 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
             oos.writeObject(userProgress);
         } catch (IOException e) {
-            throw new WritingUserProgressIntoFileException(chatID, filePath, e.getCause());
+            throw new WritingUserProgressIntoFileException(chatID, filePath, e);
         }
     }
 
@@ -48,16 +48,9 @@ public class FileUserProgressStorage implements IUserProgressStorage {
         try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(filePath))){
             return (UserProgress) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new ReadingUserProgressFromFileException(chatID, filePath, e.getCause());
+            throw new ReadingUserProgressFromFileException(chatID, filePath, e);
         }
     }
-
-//    public void create(final String chatID) throws WritingUserProgressIntoFileException {
-//        if (!isUserFileExists(chatID)) {
-//            UserProgress userProgress = new UserProgress(chatID);
-//            save(userProgress);
-//        }
-//    }
 
     private boolean isUserFileExists(final String chatID) {
         return Files.exists(Paths.get(buildFilePath(chatID)));

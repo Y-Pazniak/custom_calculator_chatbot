@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.domain;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryUserProgressStorage implements IUserProgressStorage {
     public static MemoryUserProgressStorage getInstance() {
@@ -15,7 +15,7 @@ public class MemoryUserProgressStorage implements IUserProgressStorage {
     private final Map<String, UserProgress> users;
 
     private MemoryUserProgressStorage() {
-        users = new HashMap<>();
+        users = new ConcurrentHashMap<>();
     }
     public void create(final String chatId) {
         if (!users.containsKey(chatId)) {
