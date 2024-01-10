@@ -22,7 +22,7 @@ public class Bot extends TelegramLongPollingBot {
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
-        initDB();
+        //initDB();
         messageRouter = MessageRouter.getInstance();
     }
 
@@ -52,7 +52,6 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     private void initDB() {
-        PostgresUserProgressStorage userStorageDataBase = new PostgresUserProgressStorage();
-        userStorageDataBase.databaseConnect();
+        //PostgresUserProgressStorage.getInstance();
     }
 }
