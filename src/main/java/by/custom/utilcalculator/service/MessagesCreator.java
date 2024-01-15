@@ -2,7 +2,7 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.steps.*;
+import by.custom.utilcalculator.domain.constants.steps.Step;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -16,6 +16,32 @@ public class MessagesCreator {
 
     public static MessagesCreator getInstance() {
         return MessagesCreatorHolder.MESSAGES_CREATOR;
+    }
+
+    //this method builds next questions for user to interact with chatbot
+    public String buildNextStepQuestion(final UserProgress userProgress) {
+        Step step = userProgress.getNextStep();
+        switch (step) {
+            case COUNTRY_ORIGIN -> {
+                return getGreeting();
+            }
+            case OWNERS_TYPE -> {
+                return getTypeOfOwner();
+            }
+            case TYPE_OF_ENGINE -> {
+                return getTypeOfEngine();
+            }
+            case VOLUME_OF_ENGINE -> {
+                return getEngineVolume();
+            }
+            case CAR_AGE -> {
+                return getAgeAuto();
+            }
+            case FAREWELL -> {
+                return getResultAndFarewell(userProgress);
+            }
+        }
+        return bundle.getString("answers.sorry");
     }
 
     public String getGreeting() {
@@ -64,7 +90,8 @@ public class MessagesCreator {
         return bundle.getString("answers.sorry");
     }
 
-    public String getUserChoice(final UserProgress userProgress) {
+    //this method builds summary string with user choices (just to show the user's path)
+    public String getUserChoiceSequence(final UserProgress userProgress) {
         StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
 
@@ -124,77 +151,6 @@ public class MessagesCreator {
         return sb.toString();
     }
 
-    //the first method which starts checking user's commands and building the message for user
-    private String getCountryOrigin(final UserProgress userProgress) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getUserChoice(userProgress));
-        switch (userProgress.getCountryOrigin()) {
-            case EAES -> stringBuilder.append(getOptionsForEaes(userProgress));
-            case OTHER -> stringBuilder.append(getOptionsForOtherCountries(userProgress));
-        }
-        return stringBuilder.toString();
-    }
-
-    private String getOptionsForOtherCountries(final UserProgress userProgress) {
-        String resultString;
-        switch (userProgress.getOwnersType()) {
-            case PHYSICAL ->
-                    resultString = getOptionsForOtherCountriesPhysical(userProgress);
-            case JURIDICAL ->
-                    resultString = getOptionsForOtherCountriesJuridical(userProgress);
-            case null -> resultString = getTypeOfOwner();
-        }
-        return resultString;
-    }
-
-    private String getOptionsForEaes(final UserProgress userProgress) {
-        String resultString;
-        if (userProgress.getOwnersType() == null) {
-            resultString = getTypeOfOwner();
-        } else {
-            if (userProgress.getCarAge() == null) {
-                resultString = getAgeAuto();
-            } else {
-                resultString = getResultAndFarewell(userProgress);
-            }
-        }
-        return resultString;
-    }
-
-    private String getOptionsForOtherCountriesPhysical(final UserProgress userProgress) {
-        return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
-    }
-
-    private String getOptionsForOtherCountriesJuridical(final UserProgress userProgress) {
-        String resultString;
-        switch (userProgress.getTypeOfEngine()) {
-            case null -> resultString = getTypeOfEngine();
-            case GASOLINE ->
-                    resultString = checkForGasolineAuoAge(userProgress);
-            case ELECTRIC ->
-                    resultString = checkForElectricAutoAge(userProgress);
-        }
-        return resultString;
-    }
-
-    private String checkForGasolineAuoAge(final UserProgress userProgress) {
-        String resultString;
-        if (userProgress.getVolumeOfEngine() == null) {
-            resultString = getEngineVolume();
-        } else {
-            if (userProgress.getCarAge() == null) {
-                resultString = getAgeAuto();
-            } else {
-                resultString = getResultAndFarewell(userProgress);
-            }
-        }
-        return resultString;
-    }
-
-    private String checkForElectricAutoAge(final UserProgress userProgress) {
-        return userProgress.getCarAge() == null ? getAgeAuto() : getResultAndFarewell(userProgress);
-    }
-
     private String stringBuilderAppender(final String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string : strings) {
@@ -204,7 +160,7 @@ public class MessagesCreator {
     }
 
     public String getSummaryAnswer(final UserProgress userProgress) {
-        return getCountryOrigin(userProgress);
+        return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
     }
 
     private String trimFirstAndLastLetters(final String toTrim) {

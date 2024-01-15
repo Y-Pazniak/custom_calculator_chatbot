@@ -11,6 +11,7 @@ public class UserProgress implements Serializable {
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
     private final String chatID;
+    private Step currentQuestion;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
@@ -22,6 +23,7 @@ public class UserProgress implements Serializable {
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
         cleanStepsAfterCurrent(1);
+        currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
     }
 
@@ -31,6 +33,7 @@ public class UserProgress implements Serializable {
 
     public void setOwnersType(final OwnersType ownersType) {
         cleanStepsAfterCurrent(2);
+        currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
     }
 
@@ -40,6 +43,7 @@ public class UserProgress implements Serializable {
 
     public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrent(5);
+        currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
     }
 
@@ -49,6 +53,7 @@ public class UserProgress implements Serializable {
 
     public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrent(3);
+        currentQuestion = Step.TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
 
@@ -58,11 +63,44 @@ public class UserProgress implements Serializable {
 
     public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
         cleanStepsAfterCurrent(4);
+        currentQuestion = Step.VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
     }
 
     public String getChatID() {
         return chatID;
+    }
+
+    //method checks for last answered question and sends next step, which depends on current user's answers
+    public Step getNextStep() {
+        switch (currentQuestion) {
+            case COUNTRY_ORIGIN -> {
+                return Step.OWNERS_TYPE;
+            }
+            case OWNERS_TYPE -> {
+                if (ownersType == OwnersType.PHYSICAL || countryOrigin == CountryOrigin.EAES) {
+                    return Step.CAR_AGE;
+                } else {
+                    return Step.TYPE_OF_ENGINE;
+                }
+            }
+            case TYPE_OF_ENGINE -> {
+                if (typeOfEngine == TypeOfEngine.GASOLINE) {
+                    return Step.VOLUME_OF_ENGINE;
+                } else {
+                    return Step.CAR_AGE;
+                }
+            }
+            case VOLUME_OF_ENGINE -> {
+                return Step.CAR_AGE;
+            }
+            case CAR_AGE, FAREWELL -> {
+                return Step.FAREWELL;
+            }
+            case null -> {
+                return Step.COUNTRY_ORIGIN;
+            }
+        }
     }
 
     private void cleanStepsAfterCurrent(final int stepCleaner) {
