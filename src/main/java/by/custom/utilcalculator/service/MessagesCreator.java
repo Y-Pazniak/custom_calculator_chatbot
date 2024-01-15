@@ -2,7 +2,7 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.steps.CurrentQuestion;
+import by.custom.utilcalculator.domain.constants.steps.Step;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -20,8 +20,8 @@ public class MessagesCreator {
 
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) {
-        CurrentQuestion currentQuestion = userProgress.getNextStep();
-        switch (currentQuestion) {
+        Step step = userProgress.getNextStep();
+        switch (step) {
             case COUNTRY_ORIGIN -> {
                 return getGreeting();
             }
