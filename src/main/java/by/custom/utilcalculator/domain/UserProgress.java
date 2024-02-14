@@ -1,8 +1,10 @@
 package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
+import by.custom.utilcalculator.exception.StepsQueueException;
 
 import java.io.Serializable;
+import java.nio.file.FileSystemNotFoundException;
 
 public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
@@ -12,9 +14,13 @@ public class UserProgress implements Serializable {
     private VolumeOfEngine volumeOfEngine = null;
     private final String chatID;
     private Step currentQuestion;
+    private Enum[] stepsData;
+    private PassengerStepsChecker passengerStepsChecker;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
+        stepsData = new Enum[5];
+        passengerStepsChecker = PassengerStepsChecker.getInstance();
     }
 
     public CountryOrigin getCountryOrigin() {
@@ -22,7 +28,9 @@ public class UserProgress implements Serializable {
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
-        cleanStepsAfterCurrent(1);
+        int stepID = 0;
+        cleanStepsAfterCurrent(stepID);
+        stepsData[stepID] = countryOrigin;
         currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
     }
@@ -31,8 +39,13 @@ public class UserProgress implements Serializable {
         return ownersType;
     }
 
-    public void setOwnersType(final OwnersType ownersType) {
-        cleanStepsAfterCurrent(2);
+    public void setOwnersType(final OwnersType ownersType) throws StepsQueueException {
+        int stepID = 1;
+        cleanStepsAfterCurrent(stepID);
+        stepsData[stepID] = ownersType;
+        if (!passengerStepsChecker.isStepOk(stepsData)) {
+            throw new StepsQueueException(chatID, "owners type is wrong");
+        }
         currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
     }
@@ -41,8 +54,12 @@ public class UserProgress implements Serializable {
         return carAge;
     }
 
-    public void setCarAge(final CarAge carAge) {
-        cleanStepsAfterCurrent(5);
+    public void setCarAge(final CarAge carAge) throws StepsQueueException {
+        cleanStepsAfterCurrent(4);
+        stepsData[2] = carAge;
+        if (!passengerStepsChecker.isStepOk(stepsData)) {
+            throw new StepsQueueException(chatID, "car age is wrong");
+        }
         currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
     }
@@ -51,8 +68,12 @@ public class UserProgress implements Serializable {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
-        cleanStepsAfterCurrent(3);
+    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) throws StepsQueueException {
+        cleanStepsAfterCurrent(2);
+        stepsData[4] = typeOfEngine;
+        if (!passengerStepsChecker.isStepOk(stepsData)) {
+            throw new StepsQueueException(chatID, "car engine is wrong");
+        }
         currentQuestion = Step.TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
@@ -61,8 +82,13 @@ public class UserProgress implements Serializable {
         return volumeOfEngine;
     }
 
-    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
-        cleanStepsAfterCurrent(4);
+    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) throws StepsQueueException {
+        int stepID = 3;
+        cleanStepsAfterCurrent(stepID);
+        stepsData[stepID] = volumeOfEngine;
+        if (!passengerStepsChecker.isStepOk(stepsData)) {
+            throw new StepsQueueException(chatID, "engine volume is wrong");
+        }
         currentQuestion = Step.VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
     }
@@ -104,20 +130,25 @@ public class UserProgress implements Serializable {
     }
 
     private void cleanStepsAfterCurrent(final int stepCleaner) {
-        if (stepCleaner <= 1) {
+        if (stepCleaner <= 0) {
             this.countryOrigin = null;
+            stepsData[0] = null;
+        }
+        if (stepCleaner <= 1) {
+            this.ownersType = null;
+            stepsData[1] = null;
         }
         if (stepCleaner <= 2) {
-            this.ownersType = null;
+            this.typeOfEngine = null;
+            stepsData[4] = null;
         }
         if (stepCleaner <= 3) {
-            this.typeOfEngine = null;
+            this.volumeOfEngine = null;
+            stepsData[3] = null;
         }
         if (stepCleaner <= 4) {
-            this.volumeOfEngine = null;
-        }
-        if (stepCleaner <= 5) {
             this.carAge = null;
+            stepsData[2] = null;
         }
     }
 }
