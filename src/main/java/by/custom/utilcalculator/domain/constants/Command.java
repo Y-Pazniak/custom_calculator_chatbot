@@ -27,4 +27,8 @@ public class Command {
     public static final String VOLUME_BETWEEN_2000_3000_CM = "/2000_3000";
     public static final String VOLUME_BETWEEN_3000_3500_CM = "/3000_3500";
     public static final String VOLUME_MORE_3500_CM = "/more_3500";
+
+    //command not for user - just for path checking
+    public static final String AGE = "age";
+    public static final String VOLUME = "volume";
 }
