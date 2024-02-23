@@ -9,9 +9,9 @@ public class Node implements Serializable {
     private final List<Node> children;
     private final String key;
 
-    public Node(Node parent, String answer) {
+    public Node(Node parent, String key) {
         this.parent = parent;
-        this.key = answer;
+        this.key = key;
         children = new ArrayList<>();
     }
 

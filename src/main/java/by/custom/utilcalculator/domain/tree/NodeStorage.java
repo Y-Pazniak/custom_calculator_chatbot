@@ -44,7 +44,7 @@ public class NodeStorage {
         Collections.addAll(nodes, other, otherPhysical, otherPhysicalEnd);
 
         //other juridical electric nodes queue
-        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON);
+        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON + "_other");
         other.addChildren(new ArrayList<>(Arrays.asList(otherPhysical, otherJuridical)));
         Node otherElectricEngine = new Node(otherJuridical, Command.ELECTRIC_TYPE_ENGINE);
         Node otherElectricEnd = new Node(otherElectricEngine, Command.AGE);
