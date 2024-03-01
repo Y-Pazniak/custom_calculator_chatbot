@@ -20,34 +20,21 @@ public class UserProgress implements Serializable {
     private final String chatID;
     private Step currentQuestion;
     private String currentCommand;
-    private final List<String> commands;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
-        commands = new ArrayList<>();
     }
 
     public void setCommand(final String command) {
         this.currentCommand = command;
-        commands.add(command);
-    }
-
-    public List<String> getCommands() {
-        return commands;
     }
 
     public void resetNodes() {
-        commands.clear();
         currentCommand = Command.START;
-        commands.add(currentCommand);
     }
 
     public CountryOrigin getCountryOrigin() {
         return countryOrigin;
-    }
-
-    public String getCurrentCommand() {
-        return commands.getLast();
     }
 
     public String[] getUserPath() {
