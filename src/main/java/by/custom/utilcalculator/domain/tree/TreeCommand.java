@@ -24,7 +24,11 @@ public class TreeCommand {
         if (isRequestingCommandInCurrentNodeKids(requestingCommand, node)) {
             return true;
         } else {
-            return isRequestingCommandInCurrentNodeParents(requestingCommand, node);
+            if (isRequestingCommandInCurrentNodeParents(requestingCommand, node)){
+                return true;
+            } else {
+                return isRequestingCommandEqualsCurrentNode(requestingCommand, node);
+            }
         }
     }
 
