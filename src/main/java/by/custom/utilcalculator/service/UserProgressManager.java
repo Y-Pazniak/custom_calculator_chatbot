@@ -5,25 +5,19 @@ import by.custom.utilcalculator.domain.IUserProgressStorage;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.domain.tree.Node;
-import by.custom.utilcalculator.domain.tree.NodeStorage;
-import by.custom.utilcalculator.domain.tree.Tree;
+import by.custom.utilcalculator.domain.tree.TreeCommand;
 import by.custom.utilcalculator.exception.StepsQueueException;
 import by.custom.utilcalculator.exception.UtilsborException;
-import org.w3c.dom.ls.LSOutput;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
     private final IUserProgressStorage userProgressStorage;
-    private final NodeStorage nodeStorage;
-
-    private final Tree tree;
+    private final TreeCommand treeCommand;
 
     private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
         userProgressStorage = FileUserProgressStorage.getInstance();
-        nodeStorage = NodeStorage.getInstance();
-        tree = Tree.getInstance();
+        treeCommand = TreeCommand.getInstance();
     }
 
     public static UserProgressManager getInstance() {
@@ -40,13 +34,13 @@ public class UserProgressManager {
 //        userProgressStorage.save(userProgress);
     }
 
-    public String processCarOrigin(final String command, final String chatID) throws UtilsborException {
+    public String processCarOrigin(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-        userProgress.setNode(nodeStorage.updateUserNode(command));
-        System.out.println(userProgress.getCurrentNode().getKey());
+        treeCommand.validateCommand(requestingCommand, userProgress);
+        userProgress.setCommand(requestingCommand);
         String message;
-        switch (command) {
+        switch (requestingCommand) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
 
@@ -56,26 +50,18 @@ public class UserProgressManager {
         return message;
     }
 
-
-    public String processOwnerType(final String command, final String chatID) throws UtilsborException {
+    public String processOwnerType(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-        String commandOnCountry;
 
-        if (userProgress.getCountryOrigin().equals(CountryOrigin.OTHER) && command.equals(Command.JURIDICAL_PERSON)) {
-            commandOnCountry = command + "_other";
-        } else {
-            commandOnCountry = command;
+        if (!treeCommand.validateCommand(requestingCommand, userProgress)) {
+            throw new StepsQueueException(chatID, requestingCommand);
         }
 
-        if (!tree.validateNode(userProgress.getCurrentNode(), commandOnCountry, userProgress.getNodes())) {
-            throw new StepsQueueException(chatID, command);
-        }
-
-        userProgress.setNode(nodeStorage.updateUserNode(commandOnCountry));
+        userProgress.setCommand(requestingCommand);
 
         String message;
-        switch (command) {
+        switch (requestingCommand) {
             case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
             case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
         }
@@ -85,17 +71,19 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processCarAge(final String command, final String chatID) throws UtilsborException {
+    public String processCarAge(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!tree.validateNode(userProgress.getCurrentNode(), Command.AGE, userProgress.getNodes())) {
-            throw new StepsQueueException(chatID, command);
+        if (!treeCommand.validateCommand(Command.AGE, userProgress)) {
+            throw new StepsQueueException(chatID, requestingCommand);
         }
+
+        userProgress.setCommand(Command.AGE);
 
         String message;
 
-        switch (command) {
+        switch (requestingCommand) {
             case Command.LESS_3_YEARS_AGE -> userProgress.setCarAge(CarAge.LESS_3_YEARS);
             case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.BETWEEN_3_AND_7_YEARS);
             case Command.MORE_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_7_YEARS);
@@ -105,17 +93,18 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processEngineType(final String command, final String chatID) throws UtilsborException {
+    public String processEngineType(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!tree.validateNode(userProgress.getCurrentNode(), command, userProgress.getNodes())) {
-            throw new StepsQueueException(chatID, command);
+        if (!treeCommand.validateCommand(requestingCommand, userProgress)) {
+            throw new StepsQueueException(chatID, requestingCommand);
         }
-        userProgress.setNode(nodeStorage.updateUserNode(command));
-        System.out.println(userProgress.getCurrentNode().getKey());
+
+        userProgress.setCommand(requestingCommand);
+
         String message;
-        switch (command) {
+        switch (requestingCommand) {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
         }
@@ -124,17 +113,18 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processEngineVolume(final String command, final String chatID) throws UtilsborException {
+    public String processEngineVolume(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!tree.validateNode(userProgress.getCurrentNode(), Command.VOLUME, userProgress.getNodes())) {
-            throw new StepsQueueException(chatID, command);
+        if (!treeCommand.validateCommand(Command.VOLUME, userProgress)) {
+            throw new StepsQueueException(chatID, requestingCommand);
         }
-        userProgress.setNode(nodeStorage.updateUserNode(Command.VOLUME));
+
+        userProgress.setCommand(Command.VOLUME);
 
         String message;
-        switch (command) {
+        switch (requestingCommand) {
             case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
             case Command.VOLUME_BETWEEN_1000_2000_CM ->
                     userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);

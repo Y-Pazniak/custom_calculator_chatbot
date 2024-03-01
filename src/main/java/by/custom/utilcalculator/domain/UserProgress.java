@@ -19,35 +19,82 @@ public class UserProgress implements Serializable {
     private VolumeOfEngine volumeOfEngine = null;
     private final String chatID;
     private Step currentQuestion;
-    private Node node;
-    private final List<Node> nodes;
+    private String currentCommand;
+    private final List<String> commands;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
-        nodes = new ArrayList<>();
+        commands = new ArrayList<>();
     }
 
-    public void setNode(final Node node) {
-        this.node = node;
-        nodes.add(node);
+    public void setCommand(final String command) {
+        this.currentCommand = command;
+        commands.add(command);
     }
 
-    public List<Node> getNodes() {
-        return nodes;
+    public List<String> getCommands() {
+        return commands;
     }
 
     public void resetNodes() {
-        nodes.clear();
-        node = NodeStorage.getInstance().updateUserNode(Command.START);
-        nodes.add(node);
+        commands.clear();
+        currentCommand = Command.START;
+        commands.add(currentCommand);
     }
 
     public CountryOrigin getCountryOrigin() {
         return countryOrigin;
     }
 
-    public Node getCurrentNode() {
-        return nodes.getLast();
+    public String getCurrentCommand() {
+        return commands.getLast();
+    }
+
+    public String[] getUserPath() {
+        String[] userPath = new String[5];
+
+        if (getCountryOrigin() != null) {
+            if (getCountryOrigin().equals(CountryOrigin.EAES)) {
+                userPath[0] = Command.EAES;
+            } else {
+                userPath[0] = Command.OTHER_COUNTRIES;
+            }
+        } else {
+            userPath[0] = null;
+        }
+
+        if (getOwnersType() != null) {
+            if (getOwnersType().equals(OwnersType.PHYSICAL)) {
+                userPath[1] = Command.PHYSICAL_PERSON;
+            } else {
+                userPath[1] = Command.JURIDICAL_PERSON;
+            }
+        } else {
+            userPath[1] = null;
+        }
+
+        if (getCarAge() != null) {
+            userPath[2] = Command.AGE;
+        } else {
+            userPath[2] = null;
+        }
+
+        if (getTypeOfEngine() != null) {
+            if (getTypeOfEngine().equals(TypeOfEngine.ELECTRIC)) {
+                userPath[3] = Command.ELECTRIC_TYPE_ENGINE;
+            } else {
+                userPath[3] = Command.GASOLINE_TYPE_ENGINE;
+            }
+        } else {
+            userPath[3] = null;
+        }
+
+        if (getVolumeOfEngine() != null) {
+            userPath[4] = Command.VOLUME;
+        } else {
+            userPath[4] = null;
+        }
+        return userPath;
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
@@ -61,7 +108,7 @@ public class UserProgress implements Serializable {
         return ownersType;
     }
 
-    public void setOwnersType(final OwnersType ownersType) throws StepsQueueException {
+    public void setOwnersType(final OwnersType ownersType) {
         int stepID = 1;
         cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.OWNERS_TYPE;

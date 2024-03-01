@@ -1,11 +1,6 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.FileUserProgressStorage;
-import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.tree.Node;
-import by.custom.utilcalculator.domain.tree.NodeStorage;
-import by.custom.utilcalculator.domain.tree.Tree;
 import by.custom.utilcalculator.exception.UtilsborException;
 import by.custom.utilcalculator.service.BundleResourcesServant;
 import by.custom.utilcalculator.service.UserProgressManager;

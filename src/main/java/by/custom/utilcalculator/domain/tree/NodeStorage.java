@@ -41,10 +41,11 @@ public class NodeStorage {
         start.addChildren(new ArrayList<>(Arrays.asList(eaes, other)));
         Node otherPhysical = new Node(other, Command.PHYSICAL_PERSON);
         Node otherPhysicalEnd = new Node(otherPhysical, Command.AGE);
+        otherPhysical.addChildren(new ArrayList<>(List.of(otherPhysicalEnd)));
         Collections.addAll(nodes, other, otherPhysical, otherPhysicalEnd);
 
         //other juridical electric nodes queue
-        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON + "_other");
+        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON);
         other.addChildren(new ArrayList<>(Arrays.asList(otherPhysical, otherJuridical)));
         Node otherElectricEngine = new Node(otherJuridical, Command.ELECTRIC_TYPE_ENGINE);
         Node otherElectricEnd = new Node(otherElectricEngine, Command.AGE);
@@ -59,15 +60,6 @@ public class NodeStorage {
         Node otherGasolineEnd = new Node(otherGasolineVolume, Command.AGE);
         otherGasolineVolume.addChildren(new ArrayList<>(List.of(otherGasolineEnd)));
         Collections.addAll(nodes, otherGasolineEngine, otherGasolineVolume, otherGasolineEnd);
-    }
-
-    public Node updateUserNode(final String key) {
-        for (Node node : nodes) {
-            if (node.getKey().equals(key)) {
-                return node;
-            }
-        }
-        return nodes.getFirst();
     }
 
     private static class NodeStorageHolder {
