@@ -19,18 +19,9 @@ public class UserProgress implements Serializable {
     private VolumeOfEngine volumeOfEngine = null;
     private final String chatID;
     private Step currentQuestion;
-    private String currentCommand;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
-    }
-
-    public void setCommand(final String command) {
-        this.currentCommand = command;
-    }
-
-    public void resetNodes() {
-        currentCommand = Command.START;
     }
 
     public CountryOrigin getCountryOrigin() {
