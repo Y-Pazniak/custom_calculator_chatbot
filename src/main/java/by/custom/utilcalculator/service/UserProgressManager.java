@@ -5,19 +5,19 @@ import by.custom.utilcalculator.domain.IUserProgressStorage;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.domain.tree.TreeCommand;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 import by.custom.utilcalculator.exception.StepsQueueException;
 import by.custom.utilcalculator.exception.UtilsborException;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
     private final IUserProgressStorage userProgressStorage;
-    private final TreeCommand treeCommand;
+    private final CommandTree treeCommand;
 
     private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
         userProgressStorage = FileUserProgressStorage.getInstance();
-        treeCommand = TreeCommand.getInstance();
+        treeCommand = CommandTree.getInstance();
     }
 
     public static UserProgressManager getInstance() {
@@ -26,7 +26,6 @@ public class UserProgressManager {
 
     public void createNewUserProgress(final String chatID) throws UtilsborException {
         UserProgress userProgress = new UserProgress(chatID);
-        userProgress.resetNodes();
         userProgressStorage.save(userProgress);
 //        IUserProgressStorage localUserProgressStorage = PostgresUserProgressStorage.getInstance();
 //        UserProgress userProgress = new UserProgress(chatID);
@@ -38,7 +37,6 @@ public class UserProgressManager {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         treeCommand.validateCommand(requestingCommand, userProgress);
-        userProgress.setCommand(requestingCommand);
         String message;
         switch (requestingCommand) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
@@ -58,8 +56,6 @@ public class UserProgressManager {
             throw new StepsQueueException(chatID, requestingCommand);
         }
 
-        userProgress.setCommand(requestingCommand);
-
         String message;
         switch (requestingCommand) {
             case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
@@ -78,8 +74,6 @@ public class UserProgressManager {
         if (!treeCommand.validateCommand(Command.AGE, userProgress)) {
             throw new StepsQueueException(chatID, requestingCommand);
         }
-
-        userProgress.setCommand(Command.AGE);
 
         String message;
 
@@ -101,8 +95,6 @@ public class UserProgressManager {
             throw new StepsQueueException(chatID, requestingCommand);
         }
 
-        userProgress.setCommand(requestingCommand);
-
         String message;
         switch (requestingCommand) {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
@@ -120,8 +112,6 @@ public class UserProgressManager {
         if (!treeCommand.validateCommand(Command.VOLUME, userProgress)) {
             throw new StepsQueueException(chatID, requestingCommand);
         }
-
-        userProgress.setCommand(Command.VOLUME);
 
         String message;
         switch (requestingCommand) {

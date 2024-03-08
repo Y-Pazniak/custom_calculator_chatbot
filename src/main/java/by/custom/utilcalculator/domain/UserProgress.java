@@ -2,14 +2,10 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.domain.tree.Node;
-import by.custom.utilcalculator.domain.tree.NodeStorage;
+import by.custom.utilcalculator.domain.tree.HelperTree;
 import by.custom.utilcalculator.exception.StepsQueueException;
 
 import java.io.Serializable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
@@ -30,48 +26,11 @@ public class UserProgress implements Serializable {
 
     public String[] getUserPath() {
         String[] userPath = new String[5];
-
-        if (getCountryOrigin() != null) {
-            if (getCountryOrigin().equals(CountryOrigin.EAES)) {
-                userPath[0] = Command.EAES;
-            } else {
-                userPath[0] = Command.OTHER_COUNTRIES;
-            }
-        } else {
-            userPath[0] = null;
-        }
-
-        if (getOwnersType() != null) {
-            if (getOwnersType().equals(OwnersType.PHYSICAL)) {
-                userPath[1] = Command.PHYSICAL_PERSON;
-            } else {
-                userPath[1] = Command.JURIDICAL_PERSON;
-            }
-        } else {
-            userPath[1] = null;
-        }
-
-        if (getCarAge() != null) {
-            userPath[2] = Command.AGE;
-        } else {
-            userPath[2] = null;
-        }
-
-        if (getTypeOfEngine() != null) {
-            if (getTypeOfEngine().equals(TypeOfEngine.ELECTRIC)) {
-                userPath[3] = Command.ELECTRIC_TYPE_ENGINE;
-            } else {
-                userPath[3] = Command.GASOLINE_TYPE_ENGINE;
-            }
-        } else {
-            userPath[3] = null;
-        }
-
-        if (getVolumeOfEngine() != null) {
-            userPath[4] = Command.VOLUME;
-        } else {
-            userPath[4] = null;
-        }
+        userPath[0] = getCountryOrigin() == null ? null : HelperTree.fieldsToCommands.get(getCountryOrigin());
+        userPath[1] = getOwnersType() == null ? null : HelperTree.fieldsToCommands.get(getOwnersType());
+        userPath[2] = getCarAge() == null ? null : HelperTree.fieldsToCommands.get(CarAge.ANY_AGE);
+        userPath[3] = getTypeOfEngine() == null ? null : HelperTree.fieldsToCommands.get(typeOfEngine);
+        userPath[4] = getVolumeOfEngine() == null ? null : volumeOfEngine == null ? null : HelperTree.fieldsToCommands.get(VolumeOfEngine.ANY_VOLUME);
         return userPath;
     }
 

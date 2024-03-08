@@ -5,14 +5,14 @@ import by.custom.utilcalculator.domain.UserProgress;
 import java.util.List;
 import java.util.Objects;
 
-public class TreeCommand {
+public class CommandTree {
     private final List<Node> nodes;
 
-    private TreeCommand() {
+    private CommandTree() {
         nodes = NodeStorage.getInstance().getNodes();
     }
 
-    public static TreeCommand getInstance() {
+    public static CommandTree getInstance() {
         return TreeHolder.TREE_HOLDER;
     }
 
@@ -56,6 +56,7 @@ public class TreeCommand {
     private Node currentNodeCreation(final UserProgress userProgress) { //method for creating current user's step node
         Node currentNode = nodes.getFirst();
         String[] userPath = userProgress.getUserPath();
+
         for (String userPassedStep : userPath) {
             for (Node node : nodes) { //to recreate path we need to check every node
                 if (node.getKey().equals(userPassedStep)) { //if we find node with key equals user's command
@@ -80,6 +81,6 @@ public class TreeCommand {
     }
 
     private static class TreeHolder {
-        private static final TreeCommand TREE_HOLDER = new TreeCommand();
+        private static final CommandTree TREE_HOLDER = new CommandTree();
     }
 }

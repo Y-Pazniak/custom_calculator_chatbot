@@ -115,6 +115,8 @@ public class MessagesCreator {
             case LESS_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
             case BETWEEN_3_AND_7_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
             case MORE_7_YEARS -> sb.append(bundle.getString("answers.summary.older.7"));
+            case ANY_AGE -> {
+            }
         }
 
         switch (userProgress.getTypeOfEngine()) {
@@ -146,6 +148,8 @@ public class MessagesCreator {
             case MORE_3500 -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.more.3500")));
+            }
+            case ANY_VOLUME -> {
             }
         }
         return sb.toString();
