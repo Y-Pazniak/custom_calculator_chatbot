@@ -2,47 +2,41 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 
-import java.util.List;
 import java.util.Objects;
 
 public class CommandTree {
-    private final List<Node> nodes;
 
     private CommandTree() {
-        nodes = NodeStorage.getInstance().getNodes();
     }
 
     public static CommandTree getInstance() {
         return TreeHolder.TREE_HOLDER;
     }
 
+
     public boolean validateCommand(final String requestingCommand, final UserProgress userProgress) {
-        return isRequestingCommandAcceptable(requestingCommand, currentNodeCreation(userProgress));
+        return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
-    private boolean isRequestingCommandAcceptable(String requestingCommand, Node node) {
-        if (isRequestingCommandInCurrentNodeKids(requestingCommand, node)) {
-            return true;
-        } else {
-            if (isRequestingCommandInCurrentNodeParents(requestingCommand, node)){
-                return true;
-            } else {
-                return isRequestingCommandEqualsCurrentNode(requestingCommand, node);
-            }
-        }
+    public boolean isRequestingCommandAcceptable(String requestingCommand, Node node) {
+        boolean isRequestingCommandInParent = existsCommandInNodeParent(requestingCommand, node);
+        boolean isRequestingCommandInKids = existCommandInNodeChildren(requestingCommand, node);
+        boolean isRequestingCommandEqualsNode = isRequestingCommandEqualsCurrentNode(requestingCommand, node);
+
+        return isRequestingCommandInParent || isRequestingCommandInKids || isRequestingCommandEqualsNode;
     }
 
     private boolean isRequestingCommandEqualsCurrentNode(String requestingCommand, Node node) {
         return node.getKey().equals(requestingCommand);
     }
 
-    private boolean isRequestingCommandInCurrentNodeParents(String requestingCommand, Node node) {
+    private boolean existsCommandInNodeParent(String requestingCommand, Node node) {
         Node parent = node.getParent();
         while (!Objects.isNull(parent)) {
             if (requestingCommand.equals(parent.getKey())) {
                 return true;
             } else {
-                if (isRequestingCommandInCurrentNodeKids(requestingCommand, parent)) {
+                if (existCommandInNodeChildren(requestingCommand, parent)) {
                     return true;
                 } else {
                     parent = parent.getParent();
@@ -53,15 +47,15 @@ public class CommandTree {
     }
 
     //hello! even I can hardly understand what is going on, so there are comments
-    private Node currentNodeCreation(final UserProgress userProgress) { //method for creating current user's step node
-        Node currentNode = nodes.getFirst();
+    public Node getNode(final UserProgress userProgress) { //method for extracting user's step node
+        Node currentNode = NodeStorage.getInstance().getNodes().getFirst();
         String[] userPath = userProgress.getUserPath();
 
-        for (String userPassedStep : userPath) {
-            for (Node node : nodes) { //to recreate path we need to check every node
-                if (node.getKey().equals(userPassedStep)) { //if we find node with key equals user's command
-                    if (currentNode.equals(node.getParent())) { //we check parent of this node - if next node parent equals current node
-                        currentNode = node; //we update current node to the new node
+        for (String userStep : userPath) {
+            if (!Objects.isNull(userStep)) {
+                for (Node kid : currentNode.getChildren()) {
+                    if (kid.getKey().equals(userStep)) {
+                        currentNode = kid;
                     }
                 }
             }
@@ -69,7 +63,7 @@ public class CommandTree {
         return currentNode;
     }
 
-    private boolean isRequestingCommandInCurrentNodeKids(final String requestingCommand, final Node currentNode) { //method to check is it permissible to get next node
+    private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) { //method to check is it permissible to get next node
         boolean requestingCommandOk = false;
         for (Node kidNode : currentNode.getChildren()) { //taking node's kids
             if (kidNode.getKey().equals(requestingCommand)) { //if node's kid contains requesting command

@@ -1,9 +1,8 @@
 package by.custom.utilcalculator.domain;
 
-import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.HelperTree;
-import by.custom.utilcalculator.exception.StepsQueueException;
+import by.custom.utilcalculator.exception.CarAgeException;
 
 import java.io.Serializable;
 
@@ -26,11 +25,11 @@ public class UserProgress implements Serializable {
 
     public String[] getUserPath() {
         String[] userPath = new String[5];
-        userPath[0] = getCountryOrigin() == null ? null : HelperTree.fieldsToCommands.get(getCountryOrigin());
-        userPath[1] = getOwnersType() == null ? null : HelperTree.fieldsToCommands.get(getOwnersType());
-        userPath[2] = getCarAge() == null ? null : HelperTree.fieldsToCommands.get(CarAge.ANY_AGE);
-        userPath[3] = getTypeOfEngine() == null ? null : HelperTree.fieldsToCommands.get(typeOfEngine);
-        userPath[4] = getVolumeOfEngine() == null ? null : volumeOfEngine == null ? null : HelperTree.fieldsToCommands.get(VolumeOfEngine.ANY_VOLUME);
+        userPath[0] = HelperTree.fieldsToCommands.get(getCountryOrigin());
+        userPath[1] = HelperTree.fieldsToCommands.get(getOwnersType());
+        userPath[2] = HelperTree.fieldsToCommands.get(getCarAge());
+        userPath[3] = HelperTree.fieldsToCommands.get(getTypeOfEngine());
+        userPath[4] = HelperTree.fieldsToCommands.get(getVolumeOfEngine());
         return userPath;
     }
 
@@ -56,7 +55,7 @@ public class UserProgress implements Serializable {
         return carAge;
     }
 
-    public void setCarAge(final CarAge carAge) throws StepsQueueException {
+    public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrent(4);
         currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
@@ -66,7 +65,7 @@ public class UserProgress implements Serializable {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) throws StepsQueueException {
+    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrent(2);
         currentQuestion = Step.TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
@@ -76,7 +75,7 @@ public class UserProgress implements Serializable {
         return volumeOfEngine;
     }
 
-    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) throws StepsQueueException {
+    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
         int stepID = 3;
         cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.VOLUME_OF_ENGINE;

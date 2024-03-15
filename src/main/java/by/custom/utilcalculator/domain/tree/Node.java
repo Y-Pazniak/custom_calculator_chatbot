@@ -16,7 +16,6 @@ public class Node implements Serializable {
     }
 
     public Node getParent() {
-        //return parent == null ? new Node(null, "zeroNode") : parent;
         return parent;
     }
 

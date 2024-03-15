@@ -3,21 +3,20 @@ package by.custom.utilcalculator.service;
 import by.custom.utilcalculator.domain.FileUserProgressStorage;
 import by.custom.utilcalculator.domain.IUserProgressStorage;
 import by.custom.utilcalculator.domain.UserProgress;
+import by.custom.utilcalculator.domain.UserProgressValidator;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.domain.tree.CommandTree;
-import by.custom.utilcalculator.exception.StepsQueueException;
-import by.custom.utilcalculator.exception.UtilsborException;
+import by.custom.utilcalculator.exception.*;
 
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
     private final IUserProgressStorage userProgressStorage;
-    private final CommandTree treeCommand;
+    //private final CommandTree treeCommand;
 
     private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
         userProgressStorage = FileUserProgressStorage.getInstance();
-        treeCommand = CommandTree.getInstance();
+        //userProgressValidator = CommandTree.getInstance();
     }
 
     public static UserProgressManager getInstance() {
@@ -36,7 +35,6 @@ public class UserProgressManager {
     public String processCarOrigin(final String requestingCommand, final String chatID) throws UtilsborException {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-        treeCommand.validateCommand(requestingCommand, userProgress);
         String message;
         switch (requestingCommand) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
@@ -52,8 +50,8 @@ public class UserProgressManager {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!treeCommand.validateCommand(requestingCommand, userProgress)) {
-            throw new StepsQueueException(chatID, requestingCommand);
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new OwnerTypeException(chatID, requestingCommand);
         }
 
         String message;
@@ -71,8 +69,8 @@ public class UserProgressManager {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!treeCommand.validateCommand(Command.AGE, userProgress)) {
-            throw new StepsQueueException(chatID, requestingCommand);
+        if (!UserProgressValidator.validateCommand(Command.AGE, userProgress)) {
+            throw new CarAgeException(chatID, requestingCommand);
         }
 
         String message;
@@ -91,8 +89,8 @@ public class UserProgressManager {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!treeCommand.validateCommand(requestingCommand, userProgress)) {
-            throw new StepsQueueException(chatID, requestingCommand);
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new TypeEngineException(chatID, requestingCommand);
         }
 
         String message;
@@ -109,8 +107,8 @@ public class UserProgressManager {
         UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!treeCommand.validateCommand(Command.VOLUME, userProgress)) {
-            throw new StepsQueueException(chatID, requestingCommand);
+        if (!UserProgressValidator.validateCommand(Command.VOLUME, userProgress)) {
+            throw new VolumeEngineException(chatID, requestingCommand);
         }
 
         String message;

@@ -5,7 +5,7 @@ import by.custom.utilcalculator.domain.constants.Command;
 import java.util.*;
 
 public class NodeStorage {
-    private List<Node> nodes;
+    private final List<Node> nodes;
 
     private NodeStorage() {
         nodes = new ArrayList<>();
@@ -29,37 +29,37 @@ public class NodeStorage {
         Node eaes = new Node(start, Command.EAES);
         Node eaesPhysical = new Node(eaes, Command.PHYSICAL_PERSON);
         Node eaesJuridical = new Node(eaes, Command.JURIDICAL_PERSON);
-        eaes.addChildren(new ArrayList<>(Arrays.asList(eaesPhysical, eaesJuridical)));
-        Node eaesPhysicalEnd = new Node(eaesPhysical, Command.AGE);
-        eaesPhysical.addChildren(new ArrayList<>(List.of(eaesPhysicalEnd)));
-        Node eaesJuridicalEnd = new Node(eaesJuridical, Command.AGE);
-        eaesJuridical.addChildren(new ArrayList<>(List.of(eaesJuridicalEnd)));
-        Collections.addAll(nodes, eaes, eaesPhysical, eaesJuridical, eaesPhysicalEnd, eaesJuridicalEnd);
+        eaes.addChildren(Arrays.asList(eaesPhysical, eaesJuridical));
+        Node eaesPhysicalAge = new Node(eaesPhysical, Command.AGE);
+        eaesPhysical.addChildren(List.of(eaesPhysicalAge));
+        Node eaesJuridicalAge = new Node(eaesJuridical, Command.AGE);
+        eaesJuridical.addChildren(List.of(eaesJuridicalAge));
+        Collections.addAll(nodes, eaes, eaesPhysical, eaesJuridical, eaesPhysicalAge, eaesJuridicalAge);
 
         //other physical nodes queue
         Node other = new Node(start, Command.OTHER_COUNTRIES);
-        start.addChildren(new ArrayList<>(Arrays.asList(eaes, other)));
+        start.addChildren(Arrays.asList(eaes, other));
         Node otherPhysical = new Node(other, Command.PHYSICAL_PERSON);
-        Node otherPhysicalEnd = new Node(otherPhysical, Command.AGE);
-        otherPhysical.addChildren(new ArrayList<>(List.of(otherPhysicalEnd)));
-        Collections.addAll(nodes, other, otherPhysical, otherPhysicalEnd);
+        Node otherPhysicalAge = new Node(otherPhysical, Command.AGE);
+        otherPhysical.addChildren(List.of(otherPhysicalAge));
+        Collections.addAll(nodes, other, otherPhysical, otherPhysicalAge);
 
         //other juridical electric nodes queue
         Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON);
-        other.addChildren(new ArrayList<>(Arrays.asList(otherPhysical, otherJuridical)));
+        other.addChildren(Arrays.asList(otherPhysical, otherJuridical));
         Node otherElectricEngine = new Node(otherJuridical, Command.ELECTRIC_TYPE_ENGINE);
-        Node otherElectricEnd = new Node(otherElectricEngine, Command.AGE);
-        otherElectricEngine.addChildren(new ArrayList<>(List.of(otherElectricEnd)));
-        Collections.addAll(nodes, otherJuridical, otherElectricEngine, otherElectricEnd);
+        Node otherElectricAge = new Node(otherElectricEngine, Command.AGE);
+        otherElectricEngine.addChildren(List.of(otherElectricAge));
+        Collections.addAll(nodes, otherJuridical, otherElectricEngine, otherElectricAge);
 
         //other juridical gasoline nodes queue
         Node otherGasolineEngine = new Node(otherJuridical, Command.GASOLINE_TYPE_ENGINE);
-        otherJuridical.addChildren(new ArrayList<>(List.of(otherGasolineEngine, otherElectricEngine)));
+        otherJuridical.addChildren(List.of(otherGasolineEngine, otherElectricEngine));
         Node otherGasolineVolume = new Node(otherGasolineEngine, Command.VOLUME);
-        otherGasolineEngine.addChildren(new ArrayList<>(List.of(otherGasolineVolume)));
-        Node otherGasolineEnd = new Node(otherGasolineVolume, Command.AGE);
-        otherGasolineVolume.addChildren(new ArrayList<>(List.of(otherGasolineEnd)));
-        Collections.addAll(nodes, otherGasolineEngine, otherGasolineVolume, otherGasolineEnd);
+        otherGasolineEngine.addChildren(List.of(otherGasolineVolume));
+        Node otherGasolineAge = new Node(otherGasolineVolume, Command.AGE);
+        otherGasolineVolume.addChildren(List.of(otherGasolineAge));
+        Collections.addAll(nodes, otherGasolineEngine, otherGasolineVolume, otherGasolineAge);
     }
 
     private static class NodeStorageHolder {
