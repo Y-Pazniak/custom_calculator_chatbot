@@ -3,6 +3,8 @@ package by.custom.utilcalculator.domain.tree;
 import by.custom.utilcalculator.domain.UserProgress;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CommandTree {
 
@@ -30,7 +32,7 @@ public class CommandTree {
         return node.getKey().equals(requestingCommand);
     }
 
-    private boolean existsCommandInNodeParent(String requestingCommand, Node node) {
+    private boolean existsCommandInNodeParent(String requestingCommand, Node node) { //checking is there such command in node parents
         Node parent = node.getParent();
         while (!Objects.isNull(parent)) {
             if (requestingCommand.equals(parent.getKey())) {
@@ -46,8 +48,7 @@ public class CommandTree {
         return false;
     }
 
-    //hello! even I can hardly understand what is going on, so there are comments
-    public Node getNode(final UserProgress userProgress) { //method for extracting user's step node
+    public Node getNode(final UserProgress userProgress) {
         Node currentNode = NodeStorage.getInstance().getNodes().getFirst();
         String[] userPath = userProgress.getUserPath();
 
@@ -63,15 +64,9 @@ public class CommandTree {
         return currentNode;
     }
 
-    private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) { //method to check is it permissible to get next node
-        boolean requestingCommandOk = false;
-        for (Node kidNode : currentNode.getChildren()) { //taking node's kids
-            if (kidNode.getKey().equals(requestingCommand)) { //if node's kid contains requesting command
-                requestingCommandOk = true; //we can approve requesting command, add it to the list and show to a user next question
-                break;
-            }
-        }
-        return requestingCommandOk;
+    private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) {
+        Set<String> childrenKeys = currentNode.getChildren().stream().map(Node::getKey).collect(Collectors.toSet()); //I literally have no idea what is it and how it works O_O
+        return childrenKeys.contains(requestingCommand);
     }
 
     private static class TreeHolder {
