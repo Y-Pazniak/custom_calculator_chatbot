@@ -2,14 +2,12 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import org.checkerframework.checker.units.qual.C;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class HelperTree {
     public static final Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
+    public static final Node treeRoot = new Node(null, Command.START);
 
     static {
         //country step
@@ -31,5 +29,39 @@ public class HelperTree {
         fieldsToCommands.put(VolumeOfEngine.BETWEEN_2000_AND_3000, Command.VOLUME);
         fieldsToCommands.put(VolumeOfEngine.BETWEEN_3000_AND_3500, Command.VOLUME);
         fieldsToCommands.put(VolumeOfEngine.MORE_3500, Command.VOLUME);
+    }
+
+    static {
+        //eaes nodes queue
+        Node eaes = new Node(treeRoot, Command.EAES);
+        Node eaesPhysical = new Node(eaes, Command.PHYSICAL_PERSON);
+        Node eaesJuridical = new Node(eaes, Command.JURIDICAL_PERSON);
+        eaes.addChildren(Arrays.asList(eaesPhysical, eaesJuridical));
+        Node eaesPhysicalAge = new Node(eaesPhysical, Command.AGE);
+        eaesPhysical.addChildren(List.of(eaesPhysicalAge));
+        Node eaesJuridicalAge = new Node(eaesJuridical, Command.AGE);
+        eaesJuridical.addChildren(List.of(eaesJuridicalAge));
+
+        //other physical nodes queue
+        Node other = new Node(treeRoot, Command.OTHER_COUNTRIES);
+        treeRoot.addChildren(Arrays.asList(eaes, other));
+        Node otherPhysical = new Node(other, Command.PHYSICAL_PERSON);
+        Node otherPhysicalAge = new Node(otherPhysical, Command.AGE);
+        otherPhysical.addChildren(List.of(otherPhysicalAge));
+
+        //other juridical electric nodes queue
+        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON);
+        other.addChildren(Arrays.asList(otherPhysical, otherJuridical));
+        Node otherElectricEngine = new Node(otherJuridical, Command.ELECTRIC_TYPE_ENGINE);
+        Node otherElectricAge = new Node(otherElectricEngine, Command.AGE);
+        otherElectricEngine.addChildren(List.of(otherElectricAge));
+
+        //other juridical gasoline nodes queue
+        Node otherGasolineEngine = new Node(otherJuridical, Command.GASOLINE_TYPE_ENGINE);
+        otherJuridical.addChildren(List.of(otherGasolineEngine, otherElectricEngine));
+        Node otherGasolineVolume = new Node(otherGasolineEngine, Command.VOLUME);
+        otherGasolineEngine.addChildren(List.of(otherGasolineVolume));
+        Node otherGasolineAge = new Node(otherGasolineVolume, Command.AGE);
+        otherGasolineVolume.addChildren(List.of(otherGasolineAge));
     }
 }

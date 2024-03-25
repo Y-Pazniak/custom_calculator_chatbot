@@ -51,7 +51,7 @@ public class UserProgressManager {
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
-            throw new OwnerTypeException(chatID, requestingCommand);
+            throw new InvalidOrderAnswerException(chatID, requestingCommand);
         }
 
         String message;
@@ -70,7 +70,7 @@ public class UserProgressManager {
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(Command.AGE, userProgress)) {
-            throw new CarAgeException(chatID, requestingCommand);
+            throw new InvalidOrderAnswerException(chatID, requestingCommand);
         }
 
         String message;
@@ -90,7 +90,7 @@ public class UserProgressManager {
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
-            throw new TypeEngineException(chatID, requestingCommand);
+            throw new InvalidOrderAnswerException(chatID, requestingCommand);
         }
 
         String message;
@@ -108,7 +108,7 @@ public class UserProgressManager {
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(Command.VOLUME, userProgress)) {
-            throw new VolumeEngineException(chatID, requestingCommand);
+            throw new InvalidOrderAnswerException(chatID, requestingCommand);
         }
 
         String message;

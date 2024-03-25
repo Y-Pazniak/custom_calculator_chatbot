@@ -1,10 +1,9 @@
 package by.custom.utilcalculator.domain.tree;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node implements Serializable {
+public class Node {
     private final Node parent;
     private final List<Node> children;
     private final String key;

@@ -3,13 +3,13 @@ package by.custom.utilcalculator.exception;
 import by.custom.utilcalculator.exception.constants.UtilsborErrorCode;
 import by.custom.utilcalculator.exception.constants.UtilsborErrorDescription;
 
-public class VolumeEngineException extends UtilsborException {
+public class InvalidOrderAnswerException extends UtilsborException {
     private final String chatID;
     private final String wrongStep;
 
-    public VolumeEngineException(final String chatID, String wrongStep) {
-        super(UtilsborErrorCode.INVALID_ENGINE_VOLUME.getTitle(),
-                createStringForStackTrace(UtilsborErrorDescription.INVALID_VOLUME_ENGINE_DESCRIPTION.getTitle(), chatID, wrongStep));
+    public InvalidOrderAnswerException(final String chatID, String wrongStep) {
+        super(UtilsborErrorCode.INVALID_ORDER_EXCEPTION.getTitle(),
+                createStringForStackTrace(UtilsborErrorDescription.INVALID_ORDER_EXCEPTION.getTitle(), chatID, wrongStep));
         this.chatID = chatID;
         this.wrongStep = wrongStep;
     }

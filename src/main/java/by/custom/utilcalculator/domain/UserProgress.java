@@ -2,7 +2,6 @@ package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.HelperTree;
-import by.custom.utilcalculator.exception.CarAgeException;
 
 import java.io.Serializable;
 

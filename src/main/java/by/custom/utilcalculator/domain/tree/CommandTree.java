@@ -49,7 +49,7 @@ public class CommandTree {
     }
 
     public Node getNode(final UserProgress userProgress) {
-        Node currentNode = NodeStorage.getInstance().getNodes().getFirst();
+        Node currentNode = HelperTree.treeRoot;
         String[] userPath = userProgress.getUserPath();
 
         for (String userStep : userPath) {
