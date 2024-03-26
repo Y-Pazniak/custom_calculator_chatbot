@@ -35,8 +35,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                //System.getenv("custom_by_utilsbor_bot");
-                "6490861114:AAHVFOpQANIn_EQr1A1PcLrCMNzVlGkJIig";
+                System.getenv("custom_by_utilsbor_bot");
     }
 
     //method describes what to do after receiving message
