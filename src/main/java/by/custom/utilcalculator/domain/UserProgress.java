@@ -1,9 +1,10 @@
 package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.domain.tree.HelperTree;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
@@ -24,11 +25,12 @@ public class UserProgress implements Serializable {
 
     public String[] getUserPath() {
         String[] userPath = new String[5];
-        userPath[0] = HelperTree.fieldsToCommands.get(getCountryOrigin());
-        userPath[1] = HelperTree.fieldsToCommands.get(getOwnersType());
-        userPath[2] = HelperTree.fieldsToCommands.get(getCarAge());
-        userPath[3] = HelperTree.fieldsToCommands.get(getTypeOfEngine());
-        userPath[4] = HelperTree.fieldsToCommands.get(getVolumeOfEngine());
+        Map<StepsIndicator, String> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        userPath[0] = fieldsToCommands.get(getCountryOrigin());
+        userPath[1] = fieldsToCommands.get(getOwnersType());
+        userPath[2] = fieldsToCommands.get(getCarAge());
+        userPath[3] = fieldsToCommands.get(getTypeOfEngine());
+        userPath[4] = fieldsToCommands.get(getVolumeOfEngine());
         return userPath;
     }
 

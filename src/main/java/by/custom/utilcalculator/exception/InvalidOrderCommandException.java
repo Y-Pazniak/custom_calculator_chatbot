@@ -3,11 +3,11 @@ package by.custom.utilcalculator.exception;
 import by.custom.utilcalculator.exception.constants.UtilsborErrorCode;
 import by.custom.utilcalculator.exception.constants.UtilsborErrorDescription;
 
-public class InvalidOrderAnswerException extends UtilsborException {
+public class InvalidOrderCommandException extends UtilsborException {
     private final String chatID;
     private final String wrongStep;
 
-    public InvalidOrderAnswerException(final String chatID, String wrongStep) {
+    public InvalidOrderCommandException(final String chatID, String wrongStep) {
         super(UtilsborErrorCode.INVALID_ORDER_EXCEPTION.getTitle(),
                 createStringForStackTrace(UtilsborErrorDescription.INVALID_ORDER_EXCEPTION.getTitle(), chatID, wrongStep));
         this.chatID = chatID;

@@ -6,10 +6,8 @@ import by.custom.utilcalculator.domain.constants.steps.*;
 import java.util.*;
 
 public class HelperTree {
-    public static final Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
-    public static final Node treeRoot = new Node(null, Command.START);
-
-    static {
+    public static Map<StepsIndicator, String> fillMap() {
+        Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
         //country step
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
@@ -29,9 +27,12 @@ public class HelperTree {
         fieldsToCommands.put(VolumeOfEngine.BETWEEN_2000_AND_3000, Command.VOLUME);
         fieldsToCommands.put(VolumeOfEngine.BETWEEN_3000_AND_3500, Command.VOLUME);
         fieldsToCommands.put(VolumeOfEngine.MORE_3500, Command.VOLUME);
+
+        return fieldsToCommands;
     }
 
-    static {
+    public static Node buildTree() {
+        Node treeRoot = new Node(null, Command.START);
         //eaes nodes queue
         Node eaes = new Node(treeRoot, Command.EAES);
         Node eaesPhysical = new Node(eaes, Command.PHYSICAL_PERSON);
@@ -63,5 +64,7 @@ public class HelperTree {
         otherGasolineEngine.addChildren(List.of(otherGasolineVolume));
         Node otherGasolineAge = new Node(otherGasolineVolume, Command.AGE);
         otherGasolineVolume.addChildren(List.of(otherGasolineAge));
+
+        return treeRoot;
     }
 }

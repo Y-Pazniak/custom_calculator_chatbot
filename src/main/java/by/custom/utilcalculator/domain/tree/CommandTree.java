@@ -1,20 +1,28 @@
 package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
-
+import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CommandTree {
+    private final Map<StepsIndicator, String> fieldsToCommands;
+    private final Node treeRoot;
 
     private CommandTree() {
+        fieldsToCommands = HelperTree.fillMap();
+        treeRoot = HelperTree.buildTree();
     }
 
     public static CommandTree getInstance() {
         return TreeHolder.TREE_HOLDER;
     }
 
+    public Map<StepsIndicator, String> getFieldsToCommands() {
+        return fieldsToCommands;
+    }
 
     public boolean validateCommand(final String requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
@@ -49,19 +57,19 @@ public class CommandTree {
     }
 
     public Node getNode(final UserProgress userProgress) {
-        Node currentNode = HelperTree.treeRoot;
+        Node node = treeRoot;
         String[] userPath = userProgress.getUserPath();
 
         for (String userStep : userPath) {
             if (!Objects.isNull(userStep)) {
-                for (Node kid : currentNode.getChildren()) {
+                for (Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {
-                        currentNode = kid;
+                        node = kid;
                     }
                 }
             }
         }
-        return currentNode;
+        return node;
     }
 
     private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) {
