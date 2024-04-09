@@ -13,9 +13,8 @@ public class Command {
     public static final String JURIDICAL_PERSON = "/juridical";
 
     //the last step command
-    public static final String LESS_3_YEARS_AGE = "/less_3_years";
-    public static final String BETWEEN_3_AND_7_YEARS_AGE = "/3_7_years";
-    public static final String MORE_7_YEARS_AGE = "/more_7_years";
+    public static final String LESS_3_YEARS_AGE = "/3_or_less_years";
+    public static final String BETWEEN_3_AND_7_YEARS_AGE = "/more_3_years";
 
     //juridical other third step command
     public static final String GASOLINE_TYPE_ENGINE = "/gasoline";

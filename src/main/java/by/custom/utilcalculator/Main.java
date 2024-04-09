@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         Bot localBot = Bot.getBot();
         try {
-            //this is the bot's registration - i don't know what is going here, i have just copied this from manual
             TelegramBotsApi telegramBot = new TelegramBotsApi(DefaultBotSession.class);
             telegramBot.registerBot(localBot);
         } catch (TelegramApiException e) {

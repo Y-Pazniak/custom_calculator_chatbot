@@ -15,9 +15,8 @@ public class HelperTree {
         fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON);
         fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON);
         //age step
-        fieldsToCommands.put(CarAge.LESS_3_YEARS, Command.AGE);
-        fieldsToCommands.put(CarAge.BETWEEN_3_AND_7_YEARS, Command.AGE);
-        fieldsToCommands.put(CarAge.MORE_7_YEARS, Command.AGE);
+        fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE);
+        fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE);
         //type of engine step
         fieldsToCommands.put(TypeOfEngine.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE);
         fieldsToCommands.put(TypeOfEngine.GASOLINE, Command.GASOLINE_TYPE_ENGINE);

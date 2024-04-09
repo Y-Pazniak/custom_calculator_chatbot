@@ -76,9 +76,8 @@ public class UserProgressManager {
         String message;
 
         switch (requestingCommand) {
-            case Command.LESS_3_YEARS_AGE -> userProgress.setCarAge(CarAge.LESS_3_YEARS);
-            case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.BETWEEN_3_AND_7_YEARS);
-            case Command.MORE_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_7_YEARS);
+            case Command.LESS_3_YEARS_AGE -> userProgress.setCarAge(CarAge.LESS_OR_3_YEARS);
+            case Command.BETWEEN_3_AND_7_YEARS_AGE -> userProgress.setCarAge(CarAge.MORE_3_YEARS);
         }
         userProgressStorage.save(userProgress);
         message = messagesCreator.getSummaryAnswer(userProgress);
