@@ -12,7 +12,7 @@ public class CommandTree {
     private final Node treeRoot;
 
     private CommandTree() {
-        fieldsToCommands = HelperTree.fillMap();
+        fieldsToCommands = HelperTree.fillFieldsToCommandsMap();
         treeRoot = HelperTree.buildTree();
     }
 
@@ -28,19 +28,19 @@ public class CommandTree {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
-    public boolean isRequestingCommandAcceptable(String requestingCommand, Node node) {
+    public boolean isRequestingCommandAcceptable(final String requestingCommand, final Node node) {
         boolean isRequestingCommandInParent = existsCommandInNodeParent(requestingCommand, node);
         boolean isRequestingCommandInKids = existCommandInNodeChildren(requestingCommand, node);
-        boolean isRequestingCommandEqualsNode = isRequestingCommandEqualsCurrentNode(requestingCommand, node);
+        boolean isRequestingCommandEqualsNode = doesRequestingCommandEqualsCurrentNode(requestingCommand, node);
 
         return isRequestingCommandInParent || isRequestingCommandInKids || isRequestingCommandEqualsNode;
     }
 
-    private boolean isRequestingCommandEqualsCurrentNode(String requestingCommand, Node node) {
+    private boolean doesRequestingCommandEqualsCurrentNode(final String requestingCommand, final Node node) {
         return node.getKey().equals(requestingCommand);
     }
 
-    private boolean existsCommandInNodeParent(String requestingCommand, Node node) { //checking is there such command in node parents
+    private boolean existsCommandInNodeParent(final String requestingCommand, final Node node) { //checking is there such command in node parents
         Node parent = node.getParent();
         while (!Objects.isNull(parent)) {
             if (requestingCommand.equals(parent.getKey())) {
@@ -60,7 +60,7 @@ public class CommandTree {
         Node node = treeRoot;
         String[] userPath = userProgress.getUserPath();
 
-        for (String userStep : userPath) {
+        for (final String userStep : userPath) {
             if (!Objects.isNull(userStep)) {
                 for (Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {

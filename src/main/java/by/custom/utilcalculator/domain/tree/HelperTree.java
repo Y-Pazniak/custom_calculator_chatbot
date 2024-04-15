@@ -6,7 +6,7 @@ import by.custom.utilcalculator.domain.constants.steps.*;
 import java.util.*;
 
 public class HelperTree {
-    public static Map<StepsIndicator, String> fillMap() {
+    public static Map<StepsIndicator, String> fillFieldsToCommandsMap() {
         Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
         //country step
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
