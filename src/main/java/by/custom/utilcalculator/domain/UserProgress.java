@@ -1,8 +1,10 @@
 package by.custom.utilcalculator.domain;
 
 import by.custom.utilcalculator.domain.constants.steps.*;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
@@ -21,8 +23,20 @@ public class UserProgress implements Serializable {
         return countryOrigin;
     }
 
+    public String[] getUserPath() {
+        String[] userPath = new String[5];
+        Map<StepsIndicator, String> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        userPath[0] = fieldsToCommands.get(getCountryOrigin());
+        userPath[1] = fieldsToCommands.get(getOwnersType());
+        userPath[2] = fieldsToCommands.get(getCarAge());
+        userPath[3] = fieldsToCommands.get(getTypeOfEngine());
+        userPath[4] = fieldsToCommands.get(getVolumeOfEngine());
+        return userPath;
+    }
+
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
-        cleanStepsAfterCurrent(1);
+        int stepID = 0;
+        cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
     }
@@ -32,7 +46,8 @@ public class UserProgress implements Serializable {
     }
 
     public void setOwnersType(final OwnersType ownersType) {
-        cleanStepsAfterCurrent(2);
+        int stepID = 1;
+        cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
     }
@@ -42,7 +57,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setCarAge(final CarAge carAge) {
-        cleanStepsAfterCurrent(5);
+        cleanStepsAfterCurrent(4);
         currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
     }
@@ -52,7 +67,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
-        cleanStepsAfterCurrent(3);
+        cleanStepsAfterCurrent(2);
         currentQuestion = Step.TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
@@ -62,7 +77,8 @@ public class UserProgress implements Serializable {
     }
 
     public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
-        cleanStepsAfterCurrent(4);
+        int stepID = 3;
+        cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
     }
@@ -104,19 +120,19 @@ public class UserProgress implements Serializable {
     }
 
     private void cleanStepsAfterCurrent(final int stepCleaner) {
-        if (stepCleaner <= 1) {
+        if (stepCleaner <= 0) {
             this.countryOrigin = null;
         }
-        if (stepCleaner <= 2) {
+        if (stepCleaner <= 1) {
             this.ownersType = null;
         }
-        if (stepCleaner <= 3) {
+        if (stepCleaner <= 2) {
             this.typeOfEngine = null;
         }
-        if (stepCleaner <= 4) {
+        if (stepCleaner <= 3) {
             this.volumeOfEngine = null;
         }
-        if (stepCleaner <= 5) {
+        if (stepCleaner <= 4) {
             this.carAge = null;
         }
     }

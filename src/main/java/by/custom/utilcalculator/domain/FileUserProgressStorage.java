@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileUserProgressStorage implements IUserProgressStorage {
-    private final String databaseEnvVariable = System.getenv("CHATBOT_FILE_STORAGE");
+    private final String databaseEnvVariable = System.getenv("chatbot_file_storage");
     private final String path = databaseEnvVariable + "%s.dat";
 
     private static class FileUserProgressStorageHolder {

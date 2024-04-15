@@ -1,5 +1,5 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum CarAge {
-    LESS_3_YEARS, BETWEEN_3_AND_7_YEARS, MORE_7_YEARS
+public enum CarAge implements StepsIndicator {
+    LESS_OR_3_YEARS, MORE_3_YEARS
 }

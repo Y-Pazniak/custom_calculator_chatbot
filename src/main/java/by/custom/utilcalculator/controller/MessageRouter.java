@@ -58,7 +58,7 @@ public class MessageRouter {
                     answer = userProgressManager.processCarOrigin(usersMessage, chatID);
             case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
                     answer = userProgressManager.processOwnerType(usersMessage, chatID);
-            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE, Command.MORE_7_YEARS_AGE ->
+            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE ->
                     answer = userProgressManager.processCarAge(usersMessage, chatID);
             case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
                     answer = userProgressManager.processEngineType(usersMessage, chatID);

@@ -68,8 +68,7 @@ public class MessagesCreator {
     public String getAgeAuto() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.age.auto"), "\n",
                 Command.LESS_3_YEARS_AGE, " ", bundle.getString("answers.details.before.3"), "\n",
-                Command.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"), "\n",
-                Command.MORE_7_YEARS_AGE, " ", bundle.getString("answers.details.more.7"));
+                Command.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"), "\n");
     }
 
     public String getResultAndFarewell(UserProgress userProgress) {
@@ -112,9 +111,8 @@ public class MessagesCreator {
         switch (userProgress.getCarAge()) {
             case null -> {
             }
-            case LESS_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
-            case BETWEEN_3_AND_7_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
-            case MORE_7_YEARS -> sb.append(bundle.getString("answers.summary.older.7"));
+            case LESS_OR_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
+            case MORE_3_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
         }
 
         switch (userProgress.getTypeOfEngine()) {
