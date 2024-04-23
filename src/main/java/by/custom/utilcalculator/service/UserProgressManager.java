@@ -24,7 +24,7 @@ public class UserProgressManager {
     }
 
     public void createNewUserProgress(final String chatID) throws UtilsborException {
-        UserProgress userProgress = new UserProgress(chatID);
+        final UserProgress userProgress = new UserProgress(chatID);
         userProgressStorage.save(userProgress);
 //        IUserProgressStorage localUserProgressStorage = PostgresUserProgressStorage.getInstance();
 //        UserProgress userProgress = new UserProgress(chatID);
@@ -33,9 +33,9 @@ public class UserProgressManager {
     }
 
     public String processCarOrigin(final String requestingCommand, final String chatID) throws UtilsborException {
-        UserProgress userProgress;
+        final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-        String message;
+        final String message;
         switch (requestingCommand) {
             case Command.EAES -> userProgress.setCountryOrigin(CountryOrigin.EAES);
             case Command.OTHER_COUNTRIES -> userProgress.setCountryOrigin(CountryOrigin.OTHER);
@@ -47,14 +47,14 @@ public class UserProgressManager {
     }
 
     public String processOwnerType(final String requestingCommand, final String chatID) throws UtilsborException {
-        UserProgress userProgress;
+        final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
-        String message;
+        final String message;
         switch (requestingCommand) {
             case Command.JURIDICAL_PERSON -> userProgress.setOwnersType(OwnersType.JURIDICAL);
             case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
@@ -66,14 +66,14 @@ public class UserProgressManager {
     }
 
     public String processCarAge(final String requestingCommand, final String chatID) throws UtilsborException {
-        UserProgress userProgress;
+        final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(Command.AGE, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
-        String message;
+        final String message;
 
         switch (requestingCommand) {
             case Command.LESS_3_YEARS_AGE -> userProgress.setCarAge(CarAge.LESS_OR_3_YEARS);
@@ -85,14 +85,14 @@ public class UserProgressManager {
     }
 
     public String processEngineType(final String requestingCommand, final String chatID) throws UtilsborException {
-        UserProgress userProgress;
+        final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
-        String message;
+        final String message;
         switch (requestingCommand) {
             case Command.GASOLINE_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
             case Command.ELECTRIC_TYPE_ENGINE -> userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
@@ -103,14 +103,14 @@ public class UserProgressManager {
     }
 
     public String processEngineVolume(final String requestingCommand, final String chatID) throws UtilsborException {
-        UserProgress userProgress;
+        final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
         if (!UserProgressValidator.validateCommand(Command.VOLUME, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
-        String message;
+        final String message;
         switch (requestingCommand) {
             case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
             case Command.VOLUME_BETWEEN_1000_2000_CM ->

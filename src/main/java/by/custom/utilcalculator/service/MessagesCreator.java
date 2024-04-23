@@ -20,7 +20,7 @@ public class MessagesCreator {
 
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) {
-        Step step = userProgress.getNextStep();
+        final Step step = userProgress.getNextStep();
         switch (step) {
             case COUNTRY_ORIGIN -> {
                 return getGreeting();
@@ -71,7 +71,7 @@ public class MessagesCreator {
                 Command.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"), "\n");
     }
 
-    public String getResultAndFarewell(UserProgress userProgress) {
+    public String getResultAndFarewell(final UserProgress userProgress) {
         return stringBuilderAppender("." +
                         "\n" +
                         bundle.getString("answers.summary.price") + " " + calculator.calculate(userProgress) + " " +
@@ -91,7 +91,7 @@ public class MessagesCreator {
 
     //this method builds summary string with user choices (just to show the user's path)
     public String getUserChoiceSequence(final UserProgress userProgress) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
 
         switch (userProgress.getCountryOrigin()) {
@@ -150,8 +150,8 @@ public class MessagesCreator {
     }
 
     private String stringBuilderAppender(final String... strings) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String string : strings) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (final String string : strings) {
             stringBuilder.append(string);
         }
         return stringBuilder.toString();

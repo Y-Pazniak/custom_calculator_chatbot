@@ -8,7 +8,7 @@ public enum UtilsborErrorCode {
     ;
 
     private final String errorCode;
-    UtilsborErrorCode(String errorCode) {
+    UtilsborErrorCode(final String errorCode) {
         this.errorCode = errorCode;
     }
 

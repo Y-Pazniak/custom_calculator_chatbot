@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -29,9 +30,9 @@ public class CommandTree {
     }
 
     public boolean isRequestingCommandAcceptable(final String requestingCommand, final Node node) {
-        boolean isRequestingCommandInParent = existsCommandInNodeParent(requestingCommand, node);
-        boolean isRequestingCommandInKids = existCommandInNodeChildren(requestingCommand, node);
-        boolean isRequestingCommandEqualsNode = doesRequestingCommandEqualsCurrentNode(requestingCommand, node);
+        final boolean isRequestingCommandInParent = existsCommandInNodeParent(requestingCommand, node);
+        final boolean isRequestingCommandInKids = existCommandInNodeChildren(requestingCommand, node);
+        final boolean isRequestingCommandEqualsNode = doesRequestingCommandEqualsCurrentNode(requestingCommand, node);
 
         return isRequestingCommandInParent || isRequestingCommandInKids || isRequestingCommandEqualsNode;
     }
@@ -58,11 +59,11 @@ public class CommandTree {
 
     public Node getNode(final UserProgress userProgress) {
         Node node = treeRoot;
-        String[] userPath = userProgress.getUserPath();
+        final String[] userPath = userProgress.getUserPath();
 
         for (final String userStep : userPath) {
             if (!Objects.isNull(userStep)) {
-                for (Node kid : node.getChildren()) {
+                for (final Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {
                         node = kid;
                     }
@@ -73,7 +74,7 @@ public class CommandTree {
     }
 
     private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) {
-        Set<String> childrenKeys = currentNode.getChildren().stream().map(Node::getKey).collect(Collectors.toSet()); //I literally have no idea what is it and how it works O_O
+        final Set<String> childrenKeys = currentNode.getChildren().stream().map(Node::getKey).collect(Collectors.toSet()); //I literally have no idea what is it and how it works O_O
         return childrenKeys.contains(requestingCommand);
     }
 

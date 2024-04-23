@@ -18,7 +18,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     //bot's name "Бесплатный калькулятор утильсбора РБ"
-    private static final String BOT_NAME = "Бесплатный калькулятор утильсбора РБ";
+    private static final String BOT_NAME = "ТЕСТОВЫЙ Бесплатный калькулятор утильсбора РБ";
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
@@ -35,7 +35,8 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                System.getenv("custom_by_utilsbor_bot");
+                "6490861114:AAHVFOpQANIn_EQr1A1PcLrCMNzVlGkJIig";
+                //System.getProperty("custom_by_utilsbor_bot");
     }
 
     //method describes what to do after receiving message
@@ -44,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
         //if user send us smth
         try {
             execute(messageRouter.route(update));
-        } catch (TelegramApiException e) {
+        } catch (final TelegramApiException e) {
             System.out.println("Fail to process user's request.");
             e.printStackTrace();
         }

@@ -8,7 +8,7 @@ public enum UtilsborErrorDescription {
     ;
 
     private final String errorDescription;
-    UtilsborErrorDescription(String errorDescription) {
+    UtilsborErrorDescription(final String errorDescription) {
         this.errorDescription = errorDescription;
     }
 

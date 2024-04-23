@@ -12,7 +12,7 @@ public abstract class UtilsborException extends Exception {
         this.errorCode = errorCode;
     }
 
-    public UtilsborException(String errorCode, String detailsAboutError, Throwable cause) {
+    public UtilsborException(final String errorCode, final String detailsAboutError, final Throwable cause) {
         super(detailsAboutError, cause);
         this.errorCode = errorCode;
     }
