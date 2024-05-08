@@ -1,28 +1,22 @@
 {
-  "parent": null,
   "key": "/start",
   "children": [
     {
-      "parent": null,
       "key": "/eaes",
       "children": [
         {
-          "parent": null,
           "key": "/physical",
           "children": [
             {
-              "parent": null,
               "key": "age",
               "children": []
             }
           ]
         },
         {
-          "parent": null,
           "key": "/juridical",
           "children": [
             {
-              "parent": null,
               "key": "age",
               "children": []
             }
@@ -31,34 +25,27 @@
       ]
     },
     {
-      "parent": null,
       "key": "/other",
       "children": [
         {
-          "parent": null,
           "key": "/physical",
           "children": [
             {
-              "parent": null,
               "key": "age",
               "children": []
             }
           ]
         },
         {
-          "parent": null,
           "key": "/juridical",
           "children": [
             {
-              "parent": null,
               "key": "/gasoline",
               "children": [
                 {
-                  "parent": null,
                   "key": "volume",
                   "children": [
                     {
-                      "parent": null,
                       "key": "age",
                       "children": []
                     }
@@ -67,11 +54,9 @@
               ]
             },
             {
-              "parent": null,
               "key": "/electric",
               "children": [
                 {
-                  "parent": null,
                   "key": "age",
                   "children": []
                 }

@@ -1,5 +1,8 @@
 package by.custom.utilcalculator.domain.constants;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Command {
     //main command - start the calculator
     public static final String START = "/start";

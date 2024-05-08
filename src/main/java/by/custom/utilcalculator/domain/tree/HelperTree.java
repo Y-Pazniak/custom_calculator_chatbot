@@ -2,12 +2,12 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class HelperTree {
@@ -36,49 +36,26 @@ public class HelperTree {
     }
 
     public static Node buildTree() {
-//        Node treeRoot = new Node(null, Command.START);
-//        //eaes nodes queue
-//        Node eaes = new Node(treeRoot, Command.EAES);
-//        Node eaesPhysical = new Node(eaes, Command.PHYSICAL_PERSON);
-//        Node eaesJuridical = new Node(eaes, Command.JURIDICAL_PERSON);
-//        eaes.addChildren(Arrays.asList(eaesPhysical, eaesJuridical));
-//        Node eaesPhysicalAge = new Node(eaesPhysical, Command.AGE);
-//        eaesPhysical.addChildren(List.of(eaesPhysicalAge));
-//        Node eaesJuridicalAge = new Node(eaesJuridical, Command.AGE);
-//        eaesJuridical.addChildren(List.of(eaesJuridicalAge));
-//
-//        //other physical nodes queue
-//        Node other = new Node(treeRoot, Command.OTHER_COUNTRIES);
-//        treeRoot.addChildren(Arrays.asList(eaes, other));
-//        Node otherPhysical = new Node(other, Command.PHYSICAL_PERSON);
-//        Node otherPhysicalAge = new Node(otherPhysical, Command.AGE);
-//        otherPhysical.addChildren(List.of(otherPhysicalAge));
-//
-//        //other juridical electric nodes queue
-//        Node otherJuridical = new Node(other, Command.JURIDICAL_PERSON);
-//        other.addChildren(Arrays.asList(otherPhysical, otherJuridical));
-//        Node otherElectricEngine = new Node(otherJuridical, Command.ELECTRIC_TYPE_ENGINE);
-//        Node otherElectricAge = new Node(otherElectricEngine, Command.AGE);
-//        otherElectricEngine.addChildren(List.of(otherElectricAge));
-//
-//        //other juridical gasoline nodes queue
-//        Node otherGasolineEngine = new Node(otherJuridical, Command.GASOLINE_TYPE_ENGINE);
-//        otherJuridical.addChildren(List.of(otherGasolineEngine, otherElectricEngine));
-//        Node otherGasolineVolume = new Node(otherGasolineEngine, Command.VOLUME);
-//        otherGasolineEngine.addChildren(List.of(otherGasolineVolume));
-//        Node otherGasolineAge = new Node(otherGasolineVolume, Command.AGE);
-//        otherGasolineVolume.addChildren(List.of(otherGasolineAge));
-
-        BufferedReader bufferedReader = null;
+        URL res = HelperTree.class.getClassLoader().getResource("tree.json");
+        File file = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader("/home/eugene/IdeaProjects/custom_calculator_chatbot/src/main/resources/tree.json"));
-        } catch (final FileNotFoundException e) {
-            throw new RuntimeException(e);
+            file = Paths.get(res.toURI()).toFile();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
-        final Gson gson = new GsonBuilder().create();
 
-        Node treeRootJson = gson.fromJson(bufferedReader, Node.class);
-        fillParents(treeRootJson);
+        final ObjectMapper objectMapper = new ObjectMapper();
+
+        Node treeRootJson = null;
+        try {
+            treeRootJson = objectMapper.readValue(file, Node.class);
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+
+        if (treeRootJson != null) {
+            fillParents(treeRootJson);
+        }
         return treeRootJson;
     }
 

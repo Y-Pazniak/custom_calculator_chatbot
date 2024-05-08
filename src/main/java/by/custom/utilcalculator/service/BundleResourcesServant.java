@@ -2,9 +2,12 @@ package by.custom.utilcalculator.service;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class BundleResourcesServant {
@@ -27,13 +30,7 @@ public class BundleResourcesServant {
     }
 
     private void createBundleResources() {
-        try {
-            final File fileResources = new File("D:\\IdeaProjects\\custom_calculator_bot\\src\\main\\resources");
-            final URL[] resourcesFileUrls = {fileResources.toURI().toURL()};
-            final ClassLoader loader = new URLClassLoader(resourcesFileUrls);
-            bundle = ResourceBundle.getBundle("words", new Locale("ru"), loader);
-        } catch (final MalformedURLException e) {
-            e.printStackTrace();
-        }
+        ClassLoader classLoader = getClass().getClassLoader();
+        bundle = ResourceBundle.getBundle("words", new Locale("ru"), classLoader);
     }
 }
