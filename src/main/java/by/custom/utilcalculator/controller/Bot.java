@@ -1,6 +1,7 @@
 package by.custom.utilcalculator.controller;
 
 import by.custom.utilcalculator.domain.PostgresUserProgressStorage;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -18,12 +19,13 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     //bot's name "Бесплатный калькулятор утильсбора РБ"
-    private static final String BOT_NAME = "ТЕСТОВЫЙ Бесплатный калькулятор утильсбора РБ";
+    private static final String BOT_NAME = "Бесплатный калькулятор утильсбора РБ";
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
         //initDB();
         messageRouter = MessageRouter.getInstance();
+        CommandTree.getInstance();
     }
 
     @Override

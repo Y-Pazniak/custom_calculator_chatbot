@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.domain.tree;
 
+import by.custom.utilcalculator.domain.constants.Command;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ public class Node {
     private final List<Node> children;
     private final String key;
 
-    public Node(@JsonProperty("parent") final Node parent, @JsonProperty("key") final String key) {
+
+    public Node(@JsonProperty("parent") final Node parent, @JsonProperty("key") final String key, @JsonProperty("description") final String description) {
         this.parent = parent;
         this.key = key;
         children = new ArrayList<>();

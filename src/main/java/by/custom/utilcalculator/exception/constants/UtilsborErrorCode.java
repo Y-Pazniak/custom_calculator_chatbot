@@ -5,6 +5,7 @@ public enum UtilsborErrorCode {
     READING_FROM_FILE_EXCEPTION ("file_reading_error"),
     SAVING_INTO_FILE_EXCEPTION ("file_saving_error"),
     INVALID_ORDER_EXCEPTION("invalid_order_exception"),
+    TREE_READING_ERROR("invalid_order_exception"),
     ;
 
     private final String errorCode;

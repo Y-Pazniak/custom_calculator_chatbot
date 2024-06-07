@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+import by.custom.utilcalculator.exception.TreeReadingException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -12,7 +13,7 @@ public class CommandTree {
     private final Map<StepsIndicator, String> fieldsToCommands;
     private final Node treeRoot;
 
-    private CommandTree() {
+    private CommandTree() throws TreeReadingException {
         fieldsToCommands = HelperTree.fillFieldsToCommandsMap();
         treeRoot = HelperTree.buildTree();
     }
@@ -79,6 +80,15 @@ public class CommandTree {
     }
 
     private static class TreeHolder {
-        private static final CommandTree TREE_HOLDER = new CommandTree();
+        private static final CommandTree TREE_HOLDER;
+
+        static {
+            try {
+                TREE_HOLDER = new CommandTree();
+            } catch (TreeReadingException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

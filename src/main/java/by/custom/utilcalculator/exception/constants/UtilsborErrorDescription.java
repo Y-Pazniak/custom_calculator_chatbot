@@ -5,6 +5,7 @@ public enum UtilsborErrorDescription {
     FILE_NOT_FOUND_ERROR_DESCRIPTION ("find the file"),
     WRITING_INTO_FILE_ERROR_DESCRIPTION ("save into the file"),
     INVALID_ORDER_EXCEPTION("wrong order - impossible to set this answer"),
+    TREE_READING_ERROR_DESCRIPTION("impossible to read the tree")
     ;
 
     private final String errorDescription;

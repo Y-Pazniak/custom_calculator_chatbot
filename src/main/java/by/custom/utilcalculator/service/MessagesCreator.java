@@ -46,29 +46,29 @@ public class MessagesCreator {
 
     public String getGreeting() {
         return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
-                Command.EAES, " ", bundle.getString("answers.details.eaes"), "\n",
-                Command.OTHER_COUNTRIES, " ", bundle.getString("answers.details.other"));
+                Command.EAES.getCommand(), " ", bundle.getString("answers.details.eaes"), "\n",
+                Command.OTHER_COUNTRIES.getCommand(), " ", bundle.getString("answers.details.other"));
     }
 
     public String getTypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE, " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE, " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getEngineVolume() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
-                Command.VOLUME_LESS_1000_CM, " ", bundle.getString("answers.details.less.1000"), "\n",
-                Command.VOLUME_BETWEEN_1000_2000_CM, " ", bundle.getString("answers.details.between.1000.2000"), "\n",
-                Command.VOLUME_BETWEEN_2000_3000_CM, " ", bundle.getString("answers.details.between.2000.3000"), "\n",
-                Command.VOLUME_BETWEEN_3000_3500_CM, " ", bundle.getString("answers.details.between.3000.3500"), "\n",
-                Command.VOLUME_MORE_3500_CM, " ", bundle.getString("answers.details.more.3500"));
+                Command.VOLUME_LESS_1000_CM.getCommand(), " ", bundle.getString("answers.details.less.1000"), "\n",
+                Command.VOLUME_BETWEEN_1000_2000_CM.getCommand(), " ", bundle.getString("answers.details.between.1000.2000"), "\n",
+                Command.VOLUME_BETWEEN_2000_3000_CM.getCommand(), " ", bundle.getString("answers.details.between.2000.3000"), "\n",
+                Command.VOLUME_BETWEEN_3000_3500_CM.getCommand(), " ", bundle.getString("answers.details.between.3000.3500"), "\n",
+                Command.VOLUME_MORE_3500_CM.getCommand(), " ", bundle.getString("answers.details.more.3500"));
     }
 
     public String getAgeAuto() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.age.auto"), "\n",
-                Command.LESS_3_YEARS_AGE, " ", bundle.getString("answers.details.before.3"), "\n",
-                Command.BETWEEN_3_AND_7_YEARS_AGE, " ", bundle.getString("answers.details.between.3.and.7"), "\n");
+                Command.LESS_3_YEARS_AGE.getCommand(), " ", bundle.getString("answers.details.before.3"), "\n",
+                Command.MORE_THAN_3_YEARS_AGE.getCommand(), " ", bundle.getString("answers.details.between.3.and.7"), "\n");
     }
 
     public String getResultAndFarewell(final UserProgress userProgress) {
@@ -81,8 +81,8 @@ public class MessagesCreator {
 
     public String getTypeOfOwner() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
-                Command.PHYSICAL_PERSON, " ", bundle.getString("answers.details.physical"), "\n",
-                Command.JURIDICAL_PERSON, " ", bundle.getString("answers.details.juridical"));
+                Command.PHYSICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.physical"), "\n",
+                Command.JURIDICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.juridical"));
     }
 
     public String getSorry() {
