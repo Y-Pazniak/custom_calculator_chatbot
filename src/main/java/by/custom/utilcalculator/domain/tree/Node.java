@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.constants.Command;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Node {
     }
 
     public String getKey() {
-        return key;
+        Command myEnumValue = Command.valueOf(key);
+        return myEnumValue.getCommand();
     }
 }

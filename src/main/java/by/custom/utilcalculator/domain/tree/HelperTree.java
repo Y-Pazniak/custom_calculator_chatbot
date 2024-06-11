@@ -4,6 +4,7 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.exception.TreeReadingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class HelperTree {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static Map<StepsIndicator, String> fillFieldsToCommandsMap() {
         final Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
@@ -48,10 +49,10 @@ public class HelperTree {
             e.printStackTrace();
         }
 
-        Node treeRootJson = null;
+        Node treeRootJson;
 
         try {
-            treeRootJson = objectMapper.readValue(file, Node.class);
+            treeRootJson = mapper.readValue(file, Node.class);
         } catch (IOException e) {
             throw new TreeReadingException("Error reading tree ", e);
         }

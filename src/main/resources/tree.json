@@ -1,24 +1,24 @@
 {
-  "key": "/start",
+  "key": "START",
   "children": [
     {
-      "key": "/eaes",
+      "key": "EAES",
       "children": [
         {
-          "key": "/physical",
+          "key": "PHYSICAL_PERSON",
           "children": [
             {
-              "key": "age",
+              "key": "AGE",
               "description": "no slash because this command unites several another commands with slash",
               "children": []
             }
           ]
         },
         {
-          "key": "/juridical",
+          "key": "JURIDICAL_PERSON",
           "children": [
             {
-              "key": "age",
+              "key": "AGE",
               "description": "no slash because this command unites several another commands with slash",
               "children": []
             }
@@ -27,29 +27,29 @@
       ]
     },
     {
-      "key": "/other",
+      "key": "OTHER_COUNTRIES",
       "children": [
         {
-          "key": "/physical",
+          "key": "PHYSICAL_PERSON",
           "children": [
             {
-              "key": "age",
+              "key": "AGE",
               "description": "no slash because this command unites several another commands with slash",
               "children": []
             }
           ]
         },
         {
-          "key": "/juridical",
+          "key": "JURIDICAL_PERSON",
           "children": [
             {
-              "key": "/gasoline",
+              "key": "GASOLINE_TYPE_ENGINE",
               "children": [
                 {
-                  "key": "volume",
+                  "key": "VOLUME",
                   "children": [
                     {
-                      "key": "age",
+                      "key": "AGE",
                       "description": "no slash because this command unites several another commands with slash",
                       "children": []
                     }
@@ -58,10 +58,10 @@
               ]
             },
             {
-              "key": "/electric",
+              "key": "ELECTRIC_TYPE_ENGINE",
               "children": [
                 {
-                  "key": "age",
+                  "key": "AGE",
                   "description": "no slash because this command unites several another commands with slash",
                   "children": []
                 }
