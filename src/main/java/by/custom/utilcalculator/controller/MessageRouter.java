@@ -9,6 +9,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.Objects;
+
 public class MessageRouter {
     private final MessagesCreator messagesCreator;
     private final UserProgressManager userProgressManager;
@@ -23,9 +25,9 @@ public class MessageRouter {
     }
 
     public SendMessage route(final Update update) {
-        Message message = update.getMessage();
+        final Message message = update.getMessage();
         if (!message.hasText()) {
-            SendMessage sorrySendMessage = new SendMessage();
+            final SendMessage sorrySendMessage = new SendMessage();
             sorrySendMessage.setChatId(update.getMessage().getChatId().toString());
             sorrySendMessage.setText(getSorryMessage());
             return sorrySendMessage;
@@ -35,12 +37,12 @@ public class MessageRouter {
 
     //we receive message from user, check it and handle it if it is ok here
     private SendMessage getCheckInputMessageAndGetAnswer(final Message message) {
-        String usersMessage = message.getText();
-        String chatID = message.getChatId().toString();
-        String answer;
+        final String usersMessage = message.getText();
+        final String chatID = message.getChatId().toString();
+        final String answer;
         try {
             answer = route(usersMessage, chatID);
-        } catch (UtilsborException e) {
+        } catch (final UtilsborException e) {
             e.printStackTrace();
             return new SendMessage(chatID, getExceptionText(e));
         }
@@ -48,25 +50,47 @@ public class MessageRouter {
     }
 
     private String route(final String usersMessage, final String chatID) throws UtilsborException {
-        String answer;
-        switch (usersMessage) {
-            case Command.START -> {
+        final String answer;
+
+        while (true) {
+            if (Objects.equals(usersMessage, Command.START.getCommand())) {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
+                break;
             }
-            case Command.EAES, Command.OTHER_COUNTRIES ->
-                    answer = userProgressManager.processCarOrigin(usersMessage, chatID);
-            case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    answer = userProgressManager.processOwnerType(usersMessage, chatID);
-            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE ->
-                    answer = userProgressManager.processCarAge(usersMessage, chatID);
-            case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    answer = userProgressManager.processEngineType(usersMessage, chatID);
-            case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
-                    Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    answer = userProgressManager.processEngineVolume(usersMessage, chatID);
-            default -> answer = getSorryMessage();
+
+            if (Objects.equals(usersMessage, Command.EAES.getCommand()) || Objects.equals(usersMessage, Command.OTHER_COUNTRIES.getCommand())) {
+                answer = userProgressManager.processCarOrigin(usersMessage, chatID);
+                break;
+            }
+
+            if (Objects.equals(usersMessage, Command.PHYSICAL_PERSON.getCommand()) || Objects.equals(usersMessage, Command.JURIDICAL_PERSON.getCommand())) {
+                answer = userProgressManager.processOwnerType(usersMessage, chatID);
+                break;
+            }
+
+            if (Objects.equals(usersMessage, Command.LESS_3_YEARS_AGE.getCommand()) || Objects.equals(usersMessage, Command.MORE_THAN_3_YEARS_AGE.getCommand())) {
+                answer = userProgressManager.processCarAge(usersMessage, chatID);
+                break;
+            }
+
+            if (Objects.equals(usersMessage, Command.GASOLINE_TYPE_ENGINE.getCommand()) || Objects.equals(usersMessage, Command.ELECTRIC_TYPE_ENGINE.getCommand())) {
+                answer = userProgressManager.processEngineType(usersMessage, chatID);
+                break;
+            }
+
+            if (Objects.equals(usersMessage, Command.VOLUME_LESS_1000_CM.getCommand()) ||
+                    Objects.equals(usersMessage, Command.VOLUME_BETWEEN_1000_2000_CM.getCommand()) ||
+                    Objects.equals(usersMessage, Command.VOLUME_BETWEEN_2000_3000_CM.getCommand()) ||
+                    Objects.equals(usersMessage, Command.VOLUME_BETWEEN_3000_3500_CM.getCommand()) ||
+                    Objects.equals(usersMessage, Command.VOLUME_MORE_3500_CM.getCommand())) {
+                answer = userProgressManager.processEngineVolume(usersMessage, chatID);
+                break;
+            }
+            answer = getSorryMessage();
+            break;
         }
+
         return answer;
     }
 
@@ -78,7 +102,7 @@ public class MessageRouter {
         return messagesCreator.getSorry();
     }
 
-    private String getExceptionText(UtilsborException e) {
+    private String getExceptionText(final UtilsborException e) {
         return BundleResourcesServant.getInstance().getString("answers." + e.getErrorCode());
     }
 

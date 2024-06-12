@@ -24,8 +24,8 @@ public class UserProgress implements Serializable {
     }
 
     public String[] getUserPath() {
-        String[] userPath = new String[5];
-        Map<StepsIndicator, String> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        final String[] userPath = new String[5];
+        final Map<StepsIndicator, String> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getCountryOrigin());
         userPath[1] = fieldsToCommands.get(getOwnersType());
         userPath[2] = fieldsToCommands.get(getCarAge());
@@ -35,7 +35,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
-        int stepID = 0;
+        final int stepID = 0;
         cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
@@ -46,7 +46,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setOwnersType(final OwnersType ownersType) {
-        int stepID = 1;
+        final int stepID = 1;
         cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
@@ -77,7 +77,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
-        int stepID = 3;
+        final int stepID = 3;
         cleanStepsAfterCurrent(stepID);
         currentQuestion = Step.VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
