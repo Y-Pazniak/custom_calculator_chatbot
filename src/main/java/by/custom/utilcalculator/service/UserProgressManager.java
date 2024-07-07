@@ -13,12 +13,10 @@ import java.util.Objects;
 public class UserProgressManager {
     private final MessagesCreator messagesCreator;
     private final IUserProgressStorage userProgressStorage;
-    //private final CommandTree treeCommand;
 
     private UserProgressManager() {
         messagesCreator = MessagesCreator.getInstance();
         userProgressStorage = FileUserProgressStorage.getInstance();
-        //userProgressValidator = CommandTree.getInstance();
     }
 
     public static UserProgressManager getInstance() {
@@ -139,30 +137,6 @@ public class UserProgressManager {
                     userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
             case VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
         }
-
-//        while (true) {
-//            if (Objects.equals(requestingCommand, Command.VOLUME_LESS_1000_CM)) {
-//                userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
-//                break;
-//            }
-//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_1000_2000_CM)) {
-//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);
-//                break;
-//            }
-//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_2000_3000_CM)) {
-//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_2000_AND_3000);
-//                break;
-//            }
-//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_3000_3500_CM)) {
-//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
-//                break;
-//            }
-//            if (Objects.equals(requestingCommand, Command.VOLUME_MORE_3500_CM)) {
-//                userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
-//                break;
-//            }
-//            break;
-//        }
         userProgressStorage.save(userProgress);
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;
