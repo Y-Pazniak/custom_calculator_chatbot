@@ -34,25 +34,24 @@ public class UserProgressManager {
 //        userProgressStorage.save(userProgress);
     }
 
-    public String processCarOrigin(final String requestingCommand, final String chatID) throws UtilsborException {
+    public String processCarOrigin(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         final String message;
 
-        if (Objects.equals(requestingCommand, Command.EAES.getCommand())) {
+        if (Objects.equals(requestingCommand, Command.EAES)) {
             userProgress.setCountryOrigin(CountryOrigin.EAES);
-        } else {
-            if (Objects.equals(requestingCommand, Command.OTHER_COUNTRIES.getCommand())) {
-                userProgress.setCountryOrigin(CountryOrigin.OTHER);
-            }
+        } else if (Objects.equals(requestingCommand, Command.OTHER_COUNTRIES)) {
+            userProgress.setCountryOrigin(CountryOrigin.OTHER);
         }
+
 
         userProgressStorage.save(userProgress);
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;
     }
 
-    public String processOwnerType(final String requestingCommand, final String chatID) throws UtilsborException {
+    public String processOwnerType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
@@ -62,10 +61,10 @@ public class UserProgressManager {
 
         final String message;
 
-        if (Objects.equals(requestingCommand, Command.JURIDICAL_PERSON.getCommand())) {
+        if (Objects.equals(requestingCommand, Command.JURIDICAL_PERSON)) {
             userProgress.setOwnersType(OwnersType.JURIDICAL);
         } else {
-            if (Objects.equals(requestingCommand, Command.PHYSICAL_PERSON.getCommand())) {
+            if (Objects.equals(requestingCommand, Command.PHYSICAL_PERSON)) {
                 userProgress.setOwnersType(OwnersType.PHYSICAL);
             }
         }
@@ -76,20 +75,20 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processCarAge(final String requestingCommand, final String chatID) throws UtilsborException {
+    public String processCarAge(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!UserProgressValidator.validateCommand(Command.AGE.getCommand(), userProgress)) {
+        if (!UserProgressValidator.validateCommand(Command.AGE, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
         final String message;
 
-        if (Objects.equals(requestingCommand, Command.LESS_3_YEARS_AGE.getCommand())) {
+        if (Objects.equals(requestingCommand, Command.LESS_3_YEARS_AGE)) {
             userProgress.setCarAge(CarAge.LESS_OR_3_YEARS);
         } else {
-            if (Objects.equals(requestingCommand, Command.MORE_THAN_3_YEARS_AGE.getCommand())) {
+            if (Objects.equals(requestingCommand, Command.MORE_THAN_3_YEARS_AGE)) {
                 userProgress.setCarAge(CarAge.MORE_3_YEARS);
             }
         }
@@ -99,7 +98,7 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processEngineType(final String requestingCommand, final String chatID) throws UtilsborException {
+    public String processEngineType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
@@ -107,10 +106,10 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
-        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE.getCommand())) {
+        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE)) {
             userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
         } else {
-            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE.getCommand())) {
+            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE)) {
                 userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
             }
         }
@@ -120,39 +119,50 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processEngineVolume(final String requestingCommand, final String chatID) throws UtilsborException {
+    public String processEngineVolume(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!UserProgressValidator.validateCommand(Command.VOLUME.getCommand(), userProgress)) {
+        if (!UserProgressValidator.validateCommand(Command.VOLUME, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
         final String message;
 
-        while (true) {
-            if (Objects.equals(requestingCommand, Command.VOLUME_LESS_1000_CM.getCommand())) {
-                userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
-                break;
-            }
-            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_1000_2000_CM.getCommand())) {
-                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);
-                break;
-            }
-            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_2000_3000_CM.getCommand())) {
-                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_2000_AND_3000);
-                break;
-            }
-            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_3000_3500_CM.getCommand())) {
-                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
-                break;
-            }
-            if (Objects.equals(requestingCommand, Command.VOLUME_MORE_3500_CM.getCommand())) {
-                userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
-                break;
-            }
-            break;
+        switch (requestingCommand) {
+            case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
+            case Command.VOLUME_BETWEEN_1000_2000_CM ->
+                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);
+            case Command.VOLUME_BETWEEN_2000_3000_CM ->
+                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_2000_AND_3000);
+            case Command.VOLUME_BETWEEN_3000_3500_CM ->
+                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
+            case VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
         }
+
+//        while (true) {
+//            if (Objects.equals(requestingCommand, Command.VOLUME_LESS_1000_CM)) {
+//                userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
+//                break;
+//            }
+//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_1000_2000_CM)) {
+//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);
+//                break;
+//            }
+//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_2000_3000_CM)) {
+//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_2000_AND_3000);
+//                break;
+//            }
+//            if (Objects.equals(requestingCommand, Command.VOLUME_BETWEEN_3000_3500_CM)) {
+//                userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
+//                break;
+//            }
+//            if (Objects.equals(requestingCommand, Command.VOLUME_MORE_3500_CM)) {
+//                userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
+//                break;
+//            }
+//            break;
+//        }
         userProgressStorage.save(userProgress);
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;

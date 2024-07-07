@@ -2,9 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
-import by.custom.utilcalculator.exception.TreeReadingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
+import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -16,31 +14,31 @@ import java.util.*;
 public class HelperTree {
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static Map<StepsIndicator, String> fillFieldsToCommandsMap() {
-        final Map<StepsIndicator, String> fieldsToCommands = new HashMap<>(14);
+    public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {
+        final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>(14);
         //country step
-        fieldsToCommands.put(CountryOrigin.EAES, Command.EAES.getCommand());
-        fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES.getCommand());
+        fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
+        fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
         //type of person step
-        fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON.getCommand());
-        fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON.getCommand());
+        fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON);
+        fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON);
         //age step
-        fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE.getCommand());
-        fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE.getCommand());
+        fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE);
+        fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE);
         //type of engine step
-        fieldsToCommands.put(TypeOfEngine.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE.getCommand());
-        fieldsToCommands.put(TypeOfEngine.GASOLINE, Command.GASOLINE_TYPE_ENGINE.getCommand());
+        fieldsToCommands.put(TypeOfEngine.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE);
+        fieldsToCommands.put(TypeOfEngine.GASOLINE, Command.GASOLINE_TYPE_ENGINE);
         //engine's volume step
-        fieldsToCommands.put(VolumeOfEngine.LESS_1000, Command.VOLUME.getCommand());
-        fieldsToCommands.put(VolumeOfEngine.BETWEEN_1000_AND_2000, Command.VOLUME.getCommand());
-        fieldsToCommands.put(VolumeOfEngine.BETWEEN_2000_AND_3000, Command.VOLUME.getCommand());
-        fieldsToCommands.put(VolumeOfEngine.BETWEEN_3000_AND_3500, Command.VOLUME.getCommand());
-        fieldsToCommands.put(VolumeOfEngine.MORE_3500, Command.VOLUME.getCommand());
+        fieldsToCommands.put(VolumeOfEngine.LESS_1000, Command.VOLUME);
+        fieldsToCommands.put(VolumeOfEngine.BETWEEN_1000_AND_2000, Command.VOLUME);
+        fieldsToCommands.put(VolumeOfEngine.BETWEEN_2000_AND_3000, Command.VOLUME);
+        fieldsToCommands.put(VolumeOfEngine.BETWEEN_3000_AND_3500, Command.VOLUME);
+        fieldsToCommands.put(VolumeOfEngine.MORE_3500, Command.VOLUME);
 
         return fieldsToCommands;
     }
 
-    public static Node buildTree() throws TreeReadingException {
+    public static Node buildTree() throws UtilsborCommandTreeReadingException {
         URL res = HelperTree.class.getClassLoader().getResource("tree.json");
         File file = null;
         try {
@@ -54,7 +52,7 @@ public class HelperTree {
         try {
             treeRootJson = mapper.readValue(file, Node.class);
         } catch (IOException e) {
-            throw new TreeReadingException("Error reading tree ", e);
+            throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
         }
 
         if (treeRootJson != null) {

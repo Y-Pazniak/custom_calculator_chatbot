@@ -1,8 +1,9 @@
 package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
+import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
-import by.custom.utilcalculator.exception.TreeReadingException;
+import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -10,10 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CommandTree {
-    private final Map<StepsIndicator, String> fieldsToCommands;
+    private final Map<StepsIndicator, Command> fieldsToCommands;
     private final Node treeRoot;
 
-    private CommandTree() throws TreeReadingException {
+    private CommandTree() throws UtilsborCommandTreeReadingException {
         fieldsToCommands = HelperTree.fillFieldsToCommandsMap();
         treeRoot = HelperTree.buildTree();
     }
@@ -22,15 +23,15 @@ public class CommandTree {
         return TreeHolder.TREE_HOLDER;
     }
 
-    public Map<StepsIndicator, String> getFieldsToCommands() {
+    public Map<StepsIndicator, Command> getFieldsToCommands() {
         return fieldsToCommands;
     }
 
-    public boolean validateCommand(final String requestingCommand, final UserProgress userProgress) {
+    public boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
-    public boolean isRequestingCommandAcceptable(final String requestingCommand, final Node node) {
+    public boolean isRequestingCommandAcceptable(final Command requestingCommand, final Node node) {
         final boolean isRequestingCommandInParent = existsCommandInNodeParent(requestingCommand, node);
         final boolean isRequestingCommandInKids = existCommandInNodeChildren(requestingCommand, node);
         final boolean isRequestingCommandEqualsNode = doesRequestingCommandEqualsCurrentNode(requestingCommand, node);
@@ -38,11 +39,11 @@ public class CommandTree {
         return isRequestingCommandInParent || isRequestingCommandInKids || isRequestingCommandEqualsNode;
     }
 
-    private boolean doesRequestingCommandEqualsCurrentNode(final String requestingCommand, final Node node) {
+    private boolean doesRequestingCommandEqualsCurrentNode(final Command requestingCommand, final Node node) {
         return node.getKey().equals(requestingCommand);
     }
 
-    private boolean existsCommandInNodeParent(final String requestingCommand, final Node node) { //checking is there such command in node parents
+    private boolean existsCommandInNodeParent(final Command requestingCommand, final Node node) { //checking is there such command in node parents
         Node parent = node.getParent();
         while (!Objects.isNull(parent)) {
             if (requestingCommand.equals(parent.getKey())) {
@@ -60,11 +61,11 @@ public class CommandTree {
 
     public Node getNode(final UserProgress userProgress) {
         Node node = treeRoot;
-        final String[] userPath = userProgress.getUserPath();
+        final Command[] userPath = userProgress.getUserPath();
 
-        for (final String userStep : userPath) {
+        for (Command userStep : userPath) {
             if (!Objects.isNull(userStep)) {
-                for (final Node kid : node.getChildren()) {
+                for (Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {
                         node = kid;
                     }
@@ -74,8 +75,8 @@ public class CommandTree {
         return node;
     }
 
-    private boolean existCommandInNodeChildren(final String requestingCommand, final Node currentNode) {
-        final Set<String> childrenKeys = currentNode.getChildren().stream().map(Node::getKey).collect(Collectors.toSet()); //I literally have no idea what is it and how it works O_O
+    private boolean existCommandInNodeChildren(final Command requestingCommand, final Node currentNode) {
+        final Set<Command> childrenKeys = currentNode.getChildren().stream().map(Node::getKey).collect(Collectors.toSet()); //I literally have no idea what is it and how it works O_O
         return childrenKeys.contains(requestingCommand);
     }
 
@@ -85,7 +86,7 @@ public class CommandTree {
         static {
             try {
                 TREE_HOLDER = new CommandTree();
-            } catch (TreeReadingException e) {
+            } catch (UtilsborCommandTreeReadingException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }

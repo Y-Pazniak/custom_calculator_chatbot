@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.domain;
 
+import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.CommandTree;
 
@@ -23,9 +24,9 @@ public class UserProgress implements Serializable {
         return countryOrigin;
     }
 
-    public String[] getUserPath() {
-        final String[] userPath = new String[5];
-        final Map<StepsIndicator, String> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+    public Command[] getUserPath() {
+        final Command[] userPath = new Command[5];
+        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getCountryOrigin());
         userPath[1] = fieldsToCommands.get(getOwnersType());
         userPath[2] = fieldsToCommands.get(getCarAge());

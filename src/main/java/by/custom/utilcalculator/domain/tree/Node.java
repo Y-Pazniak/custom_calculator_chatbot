@@ -10,10 +10,10 @@ import java.util.List;
 public class Node {
     private Node parent;
     private final List<Node> children;
-    private final String key;
+    private final Command key;
 
 
-    public Node(@JsonProperty("parent") final Node parent, @JsonProperty("key") final String key, @JsonProperty("description") final String description) {
+    public Node(@JsonProperty("parent") final Node parent, @JsonProperty("key") final Command key, @JsonProperty("description") final String description) {
         this.parent = parent;
         this.key = key;
         children = new ArrayList<>();
@@ -31,8 +31,9 @@ public class Node {
         return children;
     }
 
-    public String getKey() {
-        Command myEnumValue = Command.valueOf(key);
-        return myEnumValue.getCommand();
+    public Command getKey() {
+//        Command myEnumValue = Command.valueOf(key);
+//        return myEnumValue.getCommand();
+        return key;
     }
 }
