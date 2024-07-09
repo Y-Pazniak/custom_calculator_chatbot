@@ -40,11 +40,12 @@ public class HelperTree {
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
         URL res = HelperTree.class.getClassLoader().getResource("tree.json");
-        File file = null;
+        File file;
         try {
             file = Paths.get(res.toURI()).toFile();
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            throw new UtilsborCommandTreeReadingException("Tree reading has failed", e);
         }
 
         Node treeRootJson;

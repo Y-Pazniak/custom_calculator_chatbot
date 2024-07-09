@@ -1,8 +1,5 @@
 package by.custom.utilcalculator.domain.constants;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum Command {
     //main command - start the calculator
     //public static final String START = "/start";
@@ -61,9 +58,9 @@ public enum Command {
     }
 
     public static Command getCommandByKey(final String key){
-        for (Command command1 : Command.values()) {
-            if (command1.getCommand().equals(key)){
-                return command1;
+        for (Command command : Command.values()) {
+            if (command.getCommand().equals(key)){
+                return command;
             }
         }
         throw new IllegalArgumentException("No such key in Command: " + key);

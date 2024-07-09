@@ -8,6 +8,7 @@ import by.custom.utilcalculator.controller.Bot;
 public class Main {
     public static void main(final String[] args) {
         final Bot localBot = Bot.getBot();
+
         try {
             final TelegramBotsApi telegramBot = new TelegramBotsApi(DefaultBotSession.class);
             telegramBot.registerBot(localBot);

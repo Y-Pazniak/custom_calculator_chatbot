@@ -1,6 +1,5 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.PostgresUserProgressStorage;
 import by.custom.utilcalculator.domain.tree.CommandTree;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -37,8 +36,8 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                "6490861114:AAHVFOpQANIn_EQr1A1PcLrCMNzVlGkJIig";
-                //System.getProperty("BOT");
+                System.getProperty("custom_chatbot_token");
+
     }
 
     //method describes what to do after receiving message
