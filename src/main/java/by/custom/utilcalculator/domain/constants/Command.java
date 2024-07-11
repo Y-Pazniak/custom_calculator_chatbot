@@ -2,12 +2,14 @@ package by.custom.utilcalculator.domain.constants;
 
 public enum Command {
     //main command - start the calculator
-    //public static final String START = "/start";
     START("/start"),
 
-    //first step command
-//    public static final String EAES = "/eaes";
-//    public static final String OTHER_COUNTRIES = "/other";
+    //type of vehicle
+    M1("/m1"),
+    EXCEPT_M1("/except_m1"),
+    TRAILERS("/trailers"),
+
+
     EAES("/eaes"),
     OTHER_COUNTRIES("/other"),
 

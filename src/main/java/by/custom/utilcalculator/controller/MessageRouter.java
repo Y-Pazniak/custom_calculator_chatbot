@@ -56,6 +56,8 @@ public class MessageRouter {
                 answer = getGreetingMessage();
             }
 
+            case M1 -> answer = userProgressManager.processTransportType(requestingCommand, chatID);
+
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
 
 

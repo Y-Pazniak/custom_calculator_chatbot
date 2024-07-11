@@ -2,63 +2,23 @@
   "key": "START",
   "children": [
     {
-      "key": "EAES",
+      "key": "M1",
       "children": [
         {
-          "key": "PHYSICAL_PERSON",
+          "key": "EAES",
           "children": [
             {
-              "key": "AGE",
-              "description": "no slash because this command unites several another commands with slash",
-              "children": []
-            }
-          ]
-        },
-        {
-          "key": "JURIDICAL_PERSON",
-          "children": [
-            {
-              "key": "AGE",
-              "description": "no slash because this command unites several another commands with slash",
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "key": "OTHER_COUNTRIES",
-      "children": [
-        {
-          "key": "PHYSICAL_PERSON",
-          "children": [
-            {
-              "key": "AGE",
-              "description": "no slash because this command unites several another commands with slash",
-              "children": []
-            }
-          ]
-        },
-        {
-          "key": "JURIDICAL_PERSON",
-          "children": [
-            {
-              "key": "GASOLINE_TYPE_ENGINE",
+              "key": "PHYSICAL_PERSON",
               "children": [
                 {
-                  "key": "VOLUME",
-                  "children": [
-                    {
-                      "key": "AGE",
-                      "description": "no slash because this command unites several another commands with slash",
-                      "children": []
-                    }
-                  ]
+                  "key": "AGE",
+                  "description": "no slash because this command unites several another commands with slash",
+                  "children": []
                 }
               ]
             },
             {
-              "key": "ELECTRIC_TYPE_ENGINE",
+              "key": "JURIDICAL_PERSON",
               "children": [
                 {
                   "key": "AGE",
@@ -68,8 +28,59 @@
               ]
             }
           ]
+        },
+        {
+          "key": "OTHER_COUNTRIES",
+          "children": [
+            {
+              "key": "PHYSICAL_PERSON",
+              "children": [
+                {
+                  "key": "AGE",
+                  "description": "no slash because this command unites several another commands with slash",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "JURIDICAL_PERSON",
+              "children": [
+                {
+                  "key": "GASOLINE_TYPE_ENGINE",
+                  "children": [
+                    {
+                      "key": "VOLUME",
+                      "children": [
+                        {
+                          "key": "AGE",
+                          "description": "no slash because this command unites several another commands with slash",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "ELECTRIC_TYPE_ENGINE",
+                  "children": [
+                    {
+                      "key": "AGE",
+                      "description": "no slash because this command unites several another commands with slash",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
-    }
+    },
+    {
+      "key": "EXCEPT_M1",
+      "children": []
+    },
+    {"key": "TRAILERS",
+      "children": []}
   ]
 }

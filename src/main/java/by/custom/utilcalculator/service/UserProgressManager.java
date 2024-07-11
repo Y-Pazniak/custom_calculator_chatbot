@@ -32,6 +32,20 @@ public class UserProgressManager {
 //        userProgressStorage.save(userProgress);
     }
 
+    public String processTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress;
+        userProgress = userProgressStorage.get(chatID);
+        final String message;
+
+        if (Objects.equals(requestingCommand, Command.M1)) {
+            userProgress.setTransportType(TransportType.M1);
+        }
+
+        userProgressStorage.save(userProgress);
+        message = messagesCreator.getSummaryAnswer(userProgress);
+        return message;
+    }
+
     public String processCarOrigin(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
