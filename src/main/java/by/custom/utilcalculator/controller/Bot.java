@@ -22,8 +22,9 @@ public class Bot extends TelegramLongPollingBot {
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
-        //initDB();
+        //need MessageRouter object to work with it after - to proceed user's messages
         messageRouter = MessageRouter.getInstance();
+        //don't need commandTree object in future - only to load tree.json file to build correct branches of calculator
         CommandTree.getInstance();
     }
 
