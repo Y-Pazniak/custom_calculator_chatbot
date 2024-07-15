@@ -55,29 +55,17 @@ public class MessageRouter {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-
             case M1 -> answer = userProgressManager.processTransportType(requestingCommand, chatID);
-
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
-
-
             case PHYSICAL_PERSON, JURIDICAL_PERSON ->
                     answer = userProgressManager.processOwnerType(requestingCommand, chatID);
-
-
             case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
                     answer = userProgressManager.processCarAge(requestingCommand, chatID);
-
-
             case GASOLINE_TYPE_ENGINE, ELECTRIC_TYPE_ENGINE ->
                     answer = userProgressManager.processEngineType(requestingCommand, chatID);
-
-
             case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
                  VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM ->
                     answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
-
-
             default -> answer = getSorryMessage();
         }
         return answer;
