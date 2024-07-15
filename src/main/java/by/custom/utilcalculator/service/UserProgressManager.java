@@ -32,18 +32,32 @@ public class UserProgressManager {
 //        userProgressStorage.save(userProgress);
     }
 
-    public String processTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
+    public String processGeneralTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-        final String message;
 
-        if (Objects.equals(requestingCommand, Command.M1)) {
-            userProgress.setTransportType(TransportType.M1);
+        switch (requestingCommand) {
+            case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
+            case EXCEPT_M1 -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
         }
 
         userProgressStorage.save(userProgress);
-        message = messagesCreator.getSummaryAnswer(userProgress);
-        return message;
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processN1_N3TransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress;
+        userProgress = userProgressStorage.get(chatID);
+
+        switch (requestingCommand) {
+            case N1_N3 -> userProgress.setN1_n3TransportType(N1_N3TransportType.N1_N3);
+            case M2_M3 -> userProgress.setN1_n3TransportType(N1_N3TransportType.M2_M3);
+            case TRUCK_UNITS -> userProgress.setN1_n3TransportType(N1_N3TransportType.TRUCK_UNITS);
+            case TRAILERS -> userProgress.setN1_n3TransportType(N1_N3TransportType.TRAILERS_O4);
+        }
+
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
     }
 
     public String processCarOrigin(final Command requestingCommand, final String chatID) throws UtilsborException {

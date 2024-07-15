@@ -4,64 +4,56 @@ public enum Command {
     //main command - start the calculator
     START("/start"),
 
-    //type of vehicle
+    //general type of vehicle
     M1("/m1"),
     EXCEPT_M1("/except_m1"),
     TRAILERS("/trailers"),
 
+    //type of M1-M3 vehicle
+    N1_N3("/n1_n3"),
+    M2_M3("/m2_m3"),
+    TRUCK_UNITS("/truck_units"),
+    TRAILERS_O4("/trailers"),
 
+    //country command
     EAES("/eaes"),
     OTHER_COUNTRIES("/other"),
 
-    //second step command
-//    public static final String PHYSICAL_PERSON = "/physical";
-//    public static final String JURIDICAL_PERSON = "/juridical";
     PHYSICAL_PERSON("/physical"),
     JURIDICAL_PERSON("/juridical"),
 
-    //the last step command
-//    public static final String LESS_3_YEARS_AGE = "/3_or_less_years";
-//    public static final String BETWEEN_3_AND_7_YEARS_AGE = "/more_3_years";
+    //age command
     LESS_3_YEARS_AGE("/3_or_less_years"),
     MORE_THAN_3_YEARS_AGE("/more_3_years"),
 
-    //juridical other third step command
-//    public static final String GASOLINE_TYPE_ENGINE = "/gasoline";
-//    public static final String ELECTRIC_TYPE_ENGINE = "/electric";
+    //type of engine command
     GASOLINE_TYPE_ENGINE("/gasoline"),
     ELECTRIC_TYPE_ENGINE("/electric"),
 
-    //juridical other gasoline fourth step command
-//    public static final String VOLUME_LESS_1000_CM = "/less_1000";
-//    public static final String VOLUME_BETWEEN_1000_2000_CM = "/1000_2000";
-//    public static final String VOLUME_BETWEEN_2000_3000_CM = "/2000_3000";
-//    public static final String VOLUME_BETWEEN_3000_3500_CM = "/3000_3500";
-//    public static final String VOLUME_MORE_3500_CM = "/more_3500";
+    //engine volume command
     VOLUME_LESS_1000_CM("/less_1000"),
     VOLUME_BETWEEN_1000_2000_CM("/1000_2000"),
     VOLUME_BETWEEN_2000_3000_CM("/2000_3000"),
     VOLUME_BETWEEN_3000_3500_CM("/3000_3500"),
     VOLUME_MORE_3500_CM("/more_3500"),
 
-    //command not for user - just for path checking
-//    public static final String AGE = "age";
-//    public static final String VOLUME = "volume";
+    //command not for user - just for path checking (not command actually, just a marker to make code shorter)
     AGE("age"),
     VOLUME("volume");
 
     private final String command;
 
-    Command (final String command) {
+    Command(final String command) {
         this.command = command;
     }
 
-    public String getCommand(){
+    public String getCommand() {
         return command;
     }
 
-    public static Command getCommandByKey(final String key){
+    public static Command getCommandByKey(final String key) {
         for (Command command : Command.values()) {
-            if (command.getCommand().equals(key)){
+            if (command.getCommand().equals(key)) {
                 return command;
             }
         }

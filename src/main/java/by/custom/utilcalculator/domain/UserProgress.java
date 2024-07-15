@@ -8,12 +8,13 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class UserProgress implements Serializable {
-    private TransportType transportType = null;
+    private GeneralTransportType generalTransportType = null;
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
+    private N1_N3TransportType n1_n3TransportType = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -21,8 +22,8 @@ public class UserProgress implements Serializable {
         this.chatID = chatID;
     }
 
-    public TransportType getTransportType(){
-        return transportType;
+    public GeneralTransportType getGeneralTransportType(){
+        return generalTransportType;
     }
 
     public CountryOrigin getCountryOrigin() {
@@ -30,27 +31,37 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[6];
+        final Command[] userPath = new Command[7];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
-        userPath[0] = fieldsToCommands.get(getTransportType()); //0 cell contains type of transport
+        userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
         userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
         userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
         userPath[4] = fieldsToCommands.get(getTypeOfEngine()); //4 cell contains type of engine
         userPath[5] = fieldsToCommands.get(getVolumeOfEngine()); //5 cell contains engine volume
+        userPath[6] = fieldsToCommands.get(getN1_n3TransportType()); //6 cell contains transport type for except M1 branch
         return userPath;
     }
 
-    public void setTransportType(final TransportType transportType) {
-        final int stepID = 0;
-        cleanStepsAfterCurrent(stepID);
-        currentQuestion = Step.TRANSPORT_TYPE;
-        this.transportType = transportType;
+    public void setGeneralTransportType(final GeneralTransportType transportType) {
+        cleanStepsAfterCurrentM1Branch(0);
+        currentQuestion = Step.GENERAL_TRANSPORT_TYPE;
+        this.generalTransportType = transportType;
+    }
+
+    public N1_N3TransportType getN1_n3TransportType() {
+        return n1_n3TransportType;
+    }
+
+    public void setN1_n3TransportType(final N1_N3TransportType n1_n3TransportType) {
+        cleanStepsAfterCurrentN1_N3Branch(0);
+        currentQuestion = Step.M1_M3_TRANSPORT_TYPE;
+        this.n1_n3TransportType = n1_n3TransportType;
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
         final int stepID = 1;
-        cleanStepsAfterCurrent(stepID);
+        cleanStepsAfterCurrentM1Branch(stepID);
         currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
     }
@@ -60,8 +71,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setOwnersType(final OwnersType ownersType) {
-        final int stepID = 2;
-        cleanStepsAfterCurrent(stepID);
+        cleanStepsAfterCurrentM1Branch(2);
         currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
     }
@@ -71,7 +81,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setCarAge(final CarAge carAge) {
-        cleanStepsAfterCurrent(4);
+        cleanStepsAfterCurrentM1Branch(4);
         currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
     }
@@ -81,7 +91,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
-        cleanStepsAfterCurrent(3);
+        cleanStepsAfterCurrentM1Branch(3);
         currentQuestion = Step.TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
@@ -91,8 +101,7 @@ public class UserProgress implements Serializable {
     }
 
     public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
-        final int stepID = 4;
-        cleanStepsAfterCurrent(stepID);
+        cleanStepsAfterCurrentM1Branch(4);
         currentQuestion = Step.VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
     }
@@ -104,9 +113,13 @@ public class UserProgress implements Serializable {
     //method checks for last answered question and sends next step, which depends on current user's answers
     public Step getNextStep() {
         switch (currentQuestion) {
-            case TRANSPORT_TYPE -> {
-                if (transportType == TransportType.M1) {
+            case GENERAL_TRANSPORT_TYPE -> {
+                if (generalTransportType == GeneralTransportType.M1) {
                     return Step.COUNTRY_ORIGIN;
+                } else {
+                    if (generalTransportType == GeneralTransportType.EXCEPT_M1) {
+                        return Step.M1_M3_TRANSPORT_TYPE;
+                    }
                 }
             }
             case COUNTRY_ORIGIN -> {
@@ -133,13 +146,13 @@ public class UserProgress implements Serializable {
                 return Step.FAREWELL;
             }
             case null, default -> {
-                return Step.TRANSPORT_TYPE;
+                return Step.GENERAL_TRANSPORT_TYPE;
             }
         }
-        return Step.TRANSPORT_TYPE;
+        return Step.GENERAL_TRANSPORT_TYPE;
     }
 
-    private void cleanStepsAfterCurrent(final int stepCleaner) {
+    private void cleanStepsAfterCurrentM1Branch(final int stepCleaner) {
         if (stepCleaner <= 0) {
             this.countryOrigin = null;
         }
@@ -154,6 +167,12 @@ public class UserProgress implements Serializable {
         }
         if (stepCleaner <= 4) {
             this.carAge = null;
+        }
+    }
+
+    private void cleanStepsAfterCurrentN1_N3Branch(final int stepCleaner) {
+        if (stepCleaner <= 0) {
+            this.n1_n3TransportType = null;
         }
     }
 }

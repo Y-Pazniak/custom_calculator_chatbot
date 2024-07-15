@@ -15,12 +15,16 @@ public class HelperTree {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {
-        final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>(17);
+        final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>(21);
         //vehicle type step
-        fieldsToCommands.put(TransportType.M1, Command.M1);
-        fieldsToCommands.put(TransportType.EXCEPT_M1, Command.EXCEPT_M1);
-        fieldsToCommands.put(TransportType.TRAILERS, Command.TRAILERS);
-
+        fieldsToCommands.put(GeneralTransportType.M1, Command.M1);
+        fieldsToCommands.put(GeneralTransportType.EXCEPT_M1, Command.EXCEPT_M1);
+        fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.TRAILERS);
+        //vehicle type m1-m3
+        fieldsToCommands.put(N1_N3TransportType.N1_N3, Command.N1_N3);
+        fieldsToCommands.put(N1_N3TransportType.M2_M3, Command.M2_M3);
+        fieldsToCommands.put(N1_N3TransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
+        fieldsToCommands.put(N1_N3TransportType.TRAILERS_O4, Command.TRAILERS_O4);
         //country step
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);

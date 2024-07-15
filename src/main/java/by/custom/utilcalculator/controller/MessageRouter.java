@@ -55,7 +55,7 @@ public class MessageRouter {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-            case M1 -> answer = userProgressManager.processTransportType(requestingCommand, chatID);
+            case M1, EXCEPT_M1 -> answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
             case PHYSICAL_PERSON, JURIDICAL_PERSON ->
                     answer = userProgressManager.processOwnerType(requestingCommand, chatID);
@@ -66,6 +66,7 @@ public class MessageRouter {
             case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
                  VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM ->
                     answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
+            case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
             default -> answer = getSorryMessage();
         }
         return answer;

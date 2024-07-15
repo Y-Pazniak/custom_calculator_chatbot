@@ -12,7 +12,6 @@
               "children": [
                 {
                   "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
                   "children": []
                 }
               ]
@@ -22,7 +21,6 @@
               "children": [
                 {
                   "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
                   "children": []
                 }
               ]
@@ -37,7 +35,6 @@
               "children": [
                 {
                   "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
                   "children": []
                 }
               ]
@@ -53,7 +50,6 @@
                       "children": [
                         {
                           "key": "AGE",
-                          "description": "no slash because this command unites several another commands with slash",
                           "children": []
                         }
                       ]
@@ -65,7 +61,6 @@
                   "children": [
                     {
                       "key": "AGE",
-                      "description": "no slash because this command unites several another commands with slash",
                       "children": []
                     }
                   ]
@@ -78,9 +73,28 @@
     },
     {
       "key": "EXCEPT_M1",
-      "children": []
+      "children": [
+        {
+          "key": "N1_N3",
+          "children": []
+        },
+        {
+          "key": "M2_M3",
+          "children": []
+        },
+        {
+          "key": "TRUCK_UNITS",
+          "children": []
+        },
+        {
+          "key": "TRAILERS_O4",
+          "children": []
+        }
+      ]
     },
-    {"key": "TRAILERS",
-      "children": []}
+    {
+      "key": "TRAILERS",
+      "children": []
+    }
   ]
 }

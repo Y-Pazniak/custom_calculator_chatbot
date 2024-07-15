@@ -22,8 +22,11 @@ public class MessagesCreator {
     public String buildNextStepQuestion(final UserProgress userProgress) {
         final Step step = userProgress.getNextStep();
         switch (step) {
-            case TRANSPORT_TYPE -> {
+            case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
+            }
+            case M1_M3_TRANSPORT_TYPE -> {
+                return getExceptM1TransportType();
             }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
@@ -54,10 +57,18 @@ public class MessagesCreator {
                 Command.TRAILERS.getCommand(), " ", bundle.getString("answers.details.trailers"));
     }
 
-    public String getCountryOrigin(){
+    public String getCountryOrigin() {
         return stringBuilderAppender("\n", bundle.getString("questions.users.country"), "\n",
                 Command.EAES.getCommand(), " ", bundle.getString("answers.details.eaes"), "\n",
                 Command.OTHER_COUNTRIES.getCommand(), " ", bundle.getString("answers.details.other"));
+    }
+
+    public String getExceptM1TransportType() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.exceptM1"), "\n",
+                Command.N1_N3.getCommand(), " ", bundle.getString("answers.details.n1_n3"), "\n",
+                Command.M2_M3.getCommand(), " ", bundle.getString("answers.details.m2_m3"), "\n",
+                Command.TRUCK_UNITS.getCommand(), " ", bundle.getString("answers.details.truck_units"), "\n",
+                Command.TRAILERS_O4.getCommand(), " ", bundle.getString("answers.details.trailers04"));
     }
 
     public String getTypeOfEngine() {
@@ -104,15 +115,16 @@ public class MessagesCreator {
         final StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
 
-        switch (userProgress.getTransportType()) {
+        switch (userProgress.getGeneralTransportType()) {
             case null -> {
             }
             case M1 -> {
                 sb.append(bundle.getString("answers.summary.m1"));
             }
-            case EXCEPT_M1 -> { //TODO
+            case EXCEPT_M1 -> {
+                sb.append(bundle.getString("answers.summary.except_m1"));
             }
-            case TRAILERS -> { //TODO
+            case SELF_PROPELLED_VEHICLES -> { //TODO
             }
         }
 
