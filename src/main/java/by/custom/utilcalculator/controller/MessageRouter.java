@@ -23,9 +23,9 @@ public class MessageRouter {
     }
 
     public SendMessage route(final Update update) {
-        Message message = update.getMessage();
+        final Message message = update.getMessage();
         if (!message.hasText()) {
-            SendMessage sorrySendMessage = new SendMessage();
+            final SendMessage sorrySendMessage = new SendMessage();
             sorrySendMessage.setChatId(update.getMessage().getChatId().toString());
             sorrySendMessage.setText(getSorryMessage());
             return sorrySendMessage;
@@ -35,12 +35,12 @@ public class MessageRouter {
 
     //we receive message from user, check it and handle it if it is ok here
     private SendMessage getCheckInputMessageAndGetAnswer(final Message message) {
-        String usersMessage = message.getText();
-        String chatID = message.getChatId().toString();
-        String answer;
+        final String usersMessage = message.getText();
+        final String chatID = message.getChatId().toString();
+        final String answer;
         try {
             answer = route(usersMessage, chatID);
-        } catch (UtilsborException e) {
+        } catch (final UtilsborException e) {
             e.printStackTrace();
             return new SendMessage(chatID, getExceptionText(e));
         }
@@ -48,23 +48,36 @@ public class MessageRouter {
     }
 
     private String route(final String usersMessage, final String chatID) throws UtilsborException {
-        String answer;
-        switch (usersMessage) {
-            case Command.START -> {
+        final String answer;
+        Command requestingCommand = Command.getCommandByKey(usersMessage);
+        switch (requestingCommand) {
+            case START -> {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-            case Command.EAES, Command.OTHER_COUNTRIES ->
-                    answer = userProgressManager.processCarOrigin(usersMessage, chatID);
-            case Command.PHYSICAL_PERSON, Command.JURIDICAL_PERSON ->
-                    answer = userProgressManager.processOwnerType(usersMessage, chatID);
-            case Command.LESS_3_YEARS_AGE, Command.BETWEEN_3_AND_7_YEARS_AGE ->
-                    answer = userProgressManager.processCarAge(usersMessage, chatID);
-            case Command.GASOLINE_TYPE_ENGINE, Command.ELECTRIC_TYPE_ENGINE ->
-                    answer = userProgressManager.processEngineType(usersMessage, chatID);
-            case Command.VOLUME_LESS_1000_CM, Command.VOLUME_BETWEEN_1000_2000_CM, Command.VOLUME_BETWEEN_2000_3000_CM,
-                    Command.VOLUME_BETWEEN_3000_3500_CM, Command.VOLUME_MORE_3500_CM ->
-                    answer = userProgressManager.processEngineVolume(usersMessage, chatID);
+
+            case M1 -> answer = userProgressManager.processTransportType(requestingCommand, chatID);
+
+            case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
+
+
+            case PHYSICAL_PERSON, JURIDICAL_PERSON ->
+                    answer = userProgressManager.processOwnerType(requestingCommand, chatID);
+
+
+            case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
+                    answer = userProgressManager.processCarAge(requestingCommand, chatID);
+
+
+            case GASOLINE_TYPE_ENGINE, ELECTRIC_TYPE_ENGINE ->
+                    answer = userProgressManager.processEngineType(requestingCommand, chatID);
+
+
+            case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
+                 VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM ->
+                    answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
+
+
             default -> answer = getSorryMessage();
         }
         return answer;
@@ -78,7 +91,7 @@ public class MessageRouter {
         return messagesCreator.getSorry();
     }
 
-    private String getExceptionText(UtilsborException e) {
+    private String getExceptionText(final UtilsborException e) {
         return BundleResourcesServant.getInstance().getString("answers." + e.getErrorCode());
     }
 

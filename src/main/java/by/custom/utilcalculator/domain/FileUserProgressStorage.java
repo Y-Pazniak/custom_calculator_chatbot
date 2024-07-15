@@ -10,7 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileUserProgressStorage implements IUserProgressStorage {
-    private final String databaseEnvVariable = System.getenv("chatbot_file_storage");
+    //private final String databaseEnvVariable = System.getenv("chatbot_file_storage");
+    private final String databaseEnvVariable = "chatbot_database/";
     private final String path = databaseEnvVariable + "%s.dat";
 
     private static class FileUserProgressStorageHolder {
@@ -18,7 +19,7 @@ public class FileUserProgressStorage implements IUserProgressStorage {
     }
 
     private FileUserProgressStorage() {
-        File databaseDirectory = new File(databaseEnvVariable);
+        final File databaseDirectory = new File(databaseEnvVariable);
         if (!databaseDirectory.exists()) {
             databaseDirectory.mkdirs();
         }
@@ -30,24 +31,24 @@ public class FileUserProgressStorage implements IUserProgressStorage {
 
     @Override
     public void save(final UserProgress userProgress) throws WritingUserProgressIntoFileException {
-        String chatID = userProgress.getChatID();
-        String filePath = buildFilePath(chatID);
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
+        final String chatID = userProgress.getChatID();
+        final String filePath = buildFilePath(chatID);
+        try (final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
             oos.writeObject(userProgress);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new WritingUserProgressIntoFileException(chatID, filePath, e);
         }
     }
 
     @Override
     public UserProgress get(final String chatID) throws UtilsborException {
-        String filePath = buildFilePath(chatID);
+        final String filePath = buildFilePath(chatID);
         if (!isUserFileExists(chatID)) {
             throw new UserFileNotFoundException(chatID, filePath);
         }
-        try (ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(filePath))){
+        try (final ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(filePath))){
             return (UserProgress) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (final IOException | ClassNotFoundException e) {
             throw new ReadingUserProgressFromFileException(chatID, filePath, e);
         }
     }

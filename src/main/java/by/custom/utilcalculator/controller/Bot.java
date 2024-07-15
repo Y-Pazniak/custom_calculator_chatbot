@@ -1,6 +1,6 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.PostgresUserProgressStorage;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -24,6 +24,7 @@ public class Bot extends TelegramLongPollingBot {
     private Bot() {
         //initDB();
         messageRouter = MessageRouter.getInstance();
+        CommandTree.getInstance();
     }
 
     @Override
@@ -35,7 +36,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                System.getenv("custom_by_utilsbor_bot");
+                System.getProperty("custom_chatbot_token");
     }
 
     //method describes what to do after receiving message
@@ -44,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
         //if user send us smth
         try {
             execute(messageRouter.route(update));
-        } catch (TelegramApiException e) {
+        } catch (final TelegramApiException e) {
             System.out.println("Fail to process user's request.");
             e.printStackTrace();
         }

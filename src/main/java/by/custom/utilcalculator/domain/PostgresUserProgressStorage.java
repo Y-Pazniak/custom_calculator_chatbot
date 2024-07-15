@@ -18,11 +18,11 @@ public class PostgresUserProgressStorage implements IUserProgressStorage{
     }
 
     private void databaseConnect() {
-        DataSource dataSource = createDataSource();
+        final DataSource dataSource = createDataSource();
         try {
             conn = dataSource.getConnection();
             System.out.println("Connection to DB has been successful");
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -67,27 +67,27 @@ public class PostgresUserProgressStorage implements IUserProgressStorage{
     public void save(final UserProgress userProgress) throws UtilsborException {
         try {
             isUserExists(userProgress);
-            PreparedStatement insertUser =
+            final PreparedStatement insertUser =
                     conn.prepareStatement("INSERT INTO users(chat_id) VALUES (?)");
             insertUser.setString(1, userProgress.getChatID());
             insertUser.executeUpdate();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
-    private void isUserExists(UserProgress userProgress) throws SQLException {
+    private void isUserExists(final UserProgress userProgress) throws SQLException {
         //String sqlRequest = "SELECT EXISTS(SELECT chat_id FROM users WHERE id = " + userProgress.getChatID() + ")";
 
-        String sql_res= "SELECT * FROM users WHERE chat_id = A123";
-        Statement checkUser = conn.createStatement();
-        ResultSet resultSet = checkUser.executeQuery(sql_res);
+        final String sql_res= "SELECT * FROM users WHERE chat_id = A123";
+        final Statement checkUser = conn.createStatement();
+        final ResultSet resultSet = checkUser.executeQuery(sql_res);
         System.out.println(resultSet.next());
     }
 
     @Override
-    public UserProgress get(String chatID) throws UtilsborException {
+    public UserProgress get(final String chatID) throws UtilsborException {
         return null;
     }
 

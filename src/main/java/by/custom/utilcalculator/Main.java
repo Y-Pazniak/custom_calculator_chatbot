@@ -7,11 +7,12 @@ import by.custom.utilcalculator.controller.Bot;
 
 public class Main {
     public static void main(final String[] args) {
-        Bot localBot = Bot.getBot();
+        final Bot localBot = Bot.getBot();
+
         try {
-            TelegramBotsApi telegramBot = new TelegramBotsApi(DefaultBotSession.class);
+            final TelegramBotsApi telegramBot = new TelegramBotsApi(DefaultBotSession.class);
             telegramBot.registerBot(localBot);
-        } catch (TelegramApiException e) {
+        } catch (final TelegramApiException e) {
             e.printStackTrace();
         }
     }
