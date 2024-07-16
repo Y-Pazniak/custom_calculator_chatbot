@@ -66,7 +66,12 @@ public class MessageRouter {
             case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
                  VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM ->
                     answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
-            case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
+            case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
+                    answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
+            case LESS_2_TONS, BETWEEN_2_5_AND_3_5_TONS, BETWEEN_3_5_AND_5_TONS, BETWEEN_5_AND_8_TONS,
+                 BETWEEN_8_AND_12_TONS,
+                 BETWEEN_12_AND_20_TONS, BETWEEN_20_AND_50_TONS ->
+                    answer = userProgressManager.processN1_N3TransportWeight(requestingCommand, chatID);
             default -> answer = getSorryMessage();
         }
         return answer;

@@ -9,11 +9,20 @@ public enum Command {
     EXCEPT_M1("/except_m1"),
     TRAILERS("/trailers"),
 
-    //type of M1-M3 vehicle
+    //type of except m1 vehicle
     N1_N3("/n1_n3"),
     M2_M3("/m2_m3"),
     TRUCK_UNITS("/truck_units"),
-    TRAILERS_O4("/trailers"),
+    TRAILERS_O4("/trailers_o4"),
+
+    //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
+    LESS_2_TONS("/less_2"),
+    BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5"),
+    BETWEEN_3_5_AND_5_TONS("/3p5_5"),
+    BETWEEN_5_AND_8_TONS("/5_8"),
+    BETWEEN_8_AND_12_TONS("/8_12"),
+    BETWEEN_12_AND_20_TONS("/12_20"),
+    BETWEEN_20_AND_50_TONS("/20_50"),
 
     //country command
     EAES("/eaes"),

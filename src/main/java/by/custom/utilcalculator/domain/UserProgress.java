@@ -14,7 +14,8 @@ public class UserProgress implements Serializable {
     private CarAge carAge = null;
     private TypeOfEngine typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
-    private N1_N3TransportType n1_n3TransportType = null;
+    private ExceptM1TransportType exceptM1TransportType = null;
+    private TransportWeightN1N2N3 transportWeightN1N2N3 = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -22,7 +23,7 @@ public class UserProgress implements Serializable {
         this.chatID = chatID;
     }
 
-    public GeneralTransportType getGeneralTransportType(){
+    public GeneralTransportType getGeneralTransportType() {
         return generalTransportType;
     }
 
@@ -31,7 +32,7 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[7];
+        final Command[] userPath = new Command[8];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
@@ -39,7 +40,8 @@ public class UserProgress implements Serializable {
         userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
         userPath[4] = fieldsToCommands.get(getTypeOfEngine()); //4 cell contains type of engine
         userPath[5] = fieldsToCommands.get(getVolumeOfEngine()); //5 cell contains engine volume
-        userPath[6] = fieldsToCommands.get(getN1_n3TransportType()); //6 cell contains transport type for except M1 branch
+        userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
+        userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
         return userPath;
     }
 
@@ -49,14 +51,24 @@ public class UserProgress implements Serializable {
         this.generalTransportType = transportType;
     }
 
-    public N1_N3TransportType getN1_n3TransportType() {
-        return n1_n3TransportType;
+    public ExceptM1TransportType getExceptM1TransportType() {
+        return exceptM1TransportType;
     }
 
-    public void setN1_n3TransportType(final N1_N3TransportType n1_n3TransportType) {
-        cleanStepsAfterCurrentN1_N3Branch(0);
-        currentQuestion = Step.M1_M3_TRANSPORT_TYPE;
-        this.n1_n3TransportType = n1_n3TransportType;
+    public void setExceptM1TransportType(final ExceptM1TransportType exceptM1TransportType) {
+        cleanStepsAfterCurrentExceptM1Branch(0);
+        currentQuestion = Step.EXCEPT_M1_TRANSPORT_TYPE;
+        this.exceptM1TransportType = exceptM1TransportType;
+    }
+
+    public void setTransportWeightN1N2N3(final TransportWeightN1N2N3 transportWeightN1N2N3) {
+        cleanStepsAfterCurrentExceptM1Branch(1);
+        currentQuestion = Step.N1_N3_WEIGHT;
+        this.transportWeightN1N2N3 = transportWeightN1N2N3;
+    }
+
+    public TransportWeightN1N2N3 getTransportWeightN1N2N3() {
+        return transportWeightN1N2N3;
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
@@ -118,10 +130,17 @@ public class UserProgress implements Serializable {
                     return Step.COUNTRY_ORIGIN;
                 } else {
                     if (generalTransportType == GeneralTransportType.EXCEPT_M1) {
-                        return Step.M1_M3_TRANSPORT_TYPE;
+                        return Step.EXCEPT_M1_TRANSPORT_TYPE;
                     }
                 }
             }
+
+            case EXCEPT_M1_TRANSPORT_TYPE -> {
+                if (exceptM1TransportType == ExceptM1TransportType.N1_N3) {
+                    return Step.N1_N3_WEIGHT;
+                }
+            }
+
             case COUNTRY_ORIGIN -> {
                 return Step.OWNERS_TYPE;
             }
@@ -170,9 +189,12 @@ public class UserProgress implements Serializable {
         }
     }
 
-    private void cleanStepsAfterCurrentN1_N3Branch(final int stepCleaner) {
+    private void cleanStepsAfterCurrentExceptM1Branch(final int stepCleaner) {
         if (stepCleaner <= 0) {
-            this.n1_n3TransportType = null;
+            this.exceptM1TransportType = null;
+        }
+        if (stepCleaner <= 1) {
+            this.transportWeightN1N2N3 = null;
         }
     }
 }

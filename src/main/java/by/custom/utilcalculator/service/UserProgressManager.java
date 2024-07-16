@@ -50,12 +50,27 @@ public class UserProgressManager {
         userProgress = userProgressStorage.get(chatID);
 
         switch (requestingCommand) {
-            case N1_N3 -> userProgress.setN1_n3TransportType(N1_N3TransportType.N1_N3);
-            case M2_M3 -> userProgress.setN1_n3TransportType(N1_N3TransportType.M2_M3);
-            case TRUCK_UNITS -> userProgress.setN1_n3TransportType(N1_N3TransportType.TRUCK_UNITS);
-            case TRAILERS -> userProgress.setN1_n3TransportType(N1_N3TransportType.TRAILERS_O4);
+            case N1_N3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.N1_N3);
+            case M2_M3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.M2_M3);
+            case TRUCK_UNITS -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRUCK_UNITS);
+            case TRAILERS -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRAILERS_O4);
         }
 
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processN1_N3TransportWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        switch (requestingCommand){
+            case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.LESS_2_TONS);
+            case BETWEEN_2_5_AND_3_5_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_2_5_AND_3_5);
+            case BETWEEN_3_5_AND_5_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_3_5_AND_5);
+            case BETWEEN_5_AND_8_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_5_AND_8);
+            case BETWEEN_8_AND_12_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_8_AND_12);
+            case BETWEEN_12_AND_20_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_12_AND_20);
+            case BETWEEN_20_AND_50_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_20_AND_50);
+        }
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);
     }

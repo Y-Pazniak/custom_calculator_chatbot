@@ -25,8 +25,11 @@ public class MessagesCreator {
             case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
             }
-            case M1_M3_TRANSPORT_TYPE -> {
+            case EXCEPT_M1_TRANSPORT_TYPE -> {
                 return getExceptM1TransportType();
+            }
+            case N1_N3_WEIGHT -> {
+                return getN1_N3TransportWeight();
             }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
@@ -69,6 +72,17 @@ public class MessagesCreator {
                 Command.M2_M3.getCommand(), " ", bundle.getString("answers.details.m2_m3"), "\n",
                 Command.TRUCK_UNITS.getCommand(), " ", bundle.getString("answers.details.truck_units"), "\n",
                 Command.TRAILERS_O4.getCommand(), " ", bundle.getString("answers.details.trailers04"));
+    }
+
+    public String getN1_N3TransportWeight() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
+                Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
+                Command.BETWEEN_3_5_AND_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_3d5_and_5_tons"), "\n",
+                Command.BETWEEN_5_AND_8_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_5_and_8_tons"), "\n",
+                Command.BETWEEN_8_AND_12_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_8_and_12_tons"), "\n",
+                Command.BETWEEN_12_AND_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
+                Command.BETWEEN_20_AND_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
     }
 
     public String getTypeOfEngine() {
@@ -118,13 +132,22 @@ public class MessagesCreator {
         switch (userProgress.getGeneralTransportType()) {
             case null -> {
             }
-            case M1 -> {
-                sb.append(bundle.getString("answers.summary.m1"));
+            case M1 -> sb.append(bundle.getString("answers.summary.m1"));
+            case EXCEPT_M1 -> sb.append(bundle.getString("answers.summary.except_m1"));
+            case SELF_PROPELLED_VEHICLES -> {
             }
-            case EXCEPT_M1 -> {
-                sb.append(bundle.getString("answers.summary.except_m1"));
+        }
+
+        switch (userProgress.getExceptM1TransportType()) {
+            case null -> {
             }
-            case SELF_PROPELLED_VEHICLES -> { //TODO
+            case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
+
+            case M2_M3 -> {
+            }
+            case TRUCK_UNITS -> {
+            }
+            case TRAILERS_O4 -> {
             }
         }
 

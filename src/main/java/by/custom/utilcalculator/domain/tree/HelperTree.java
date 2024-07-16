@@ -15,16 +15,24 @@ public class HelperTree {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {
-        final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>(21);
+        final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>();
         //vehicle type step
         fieldsToCommands.put(GeneralTransportType.M1, Command.M1);
         fieldsToCommands.put(GeneralTransportType.EXCEPT_M1, Command.EXCEPT_M1);
         fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.TRAILERS);
         //vehicle type m1-m3
-        fieldsToCommands.put(N1_N3TransportType.N1_N3, Command.N1_N3);
-        fieldsToCommands.put(N1_N3TransportType.M2_M3, Command.M2_M3);
-        fieldsToCommands.put(N1_N3TransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
-        fieldsToCommands.put(N1_N3TransportType.TRAILERS_O4, Command.TRAILERS_O4);
+        fieldsToCommands.put(ExceptM1TransportType.N1_N3, Command.N1_N3);
+        fieldsToCommands.put(ExceptM1TransportType.M2_M3, Command.M2_M3);
+        fieldsToCommands.put(ExceptM1TransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
+        fieldsToCommands.put(ExceptM1TransportType.TRAILERS_O4, Command.TRAILERS_O4);
+        //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
+        fieldsToCommands.put(TransportWeightN1N2N3.LESS_2_TONS, Command.LESS_2_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_2_5_AND_3_5, Command.BETWEEN_2_5_AND_3_5_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_3_5_AND_5, Command.BETWEEN_3_5_AND_5_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_5_AND_8, Command.BETWEEN_5_AND_8_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_8_AND_12, Command.BETWEEN_8_AND_12_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_12_AND_20, Command.BETWEEN_12_AND_20_TONS);
+        fieldsToCommands.put(TransportWeightN1N2N3.BETWEEN_20_AND_50, Command.BETWEEN_20_AND_50_TONS);
         //country step
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
@@ -51,6 +59,7 @@ public class HelperTree {
         URL res = HelperTree.class.getClassLoader().getResource("tree.json");
         File file;
         try {
+            assert res != null;
             file = Paths.get(res.toURI()).toFile();
         } catch (URISyntaxException e) {
             e.printStackTrace();
