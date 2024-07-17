@@ -37,7 +37,7 @@ public class CalculatorExceptM1 {
     }
 
     private String countForN1N3price(final UserProgress userProgress) {
-        switch (userProgress.getTransportWeightN1N2N3()){
+        switch (userProgress.getTransportWeightN1N2N3()) {
             case LESS_2_TONS -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_MORE_3_YEARS;
             }
@@ -45,13 +45,23 @@ public class CalculatorExceptM1 {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_2P5_3P5_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_2P5_3P5_MORE_3_YEARS;
             }
             case BETWEEN_3_5_AND_5 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_MORE_3_YEARS;
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_3P5_5_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_3P5_5_MORE_3_YEARS;
             }
             case BETWEEN_5_AND_8 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_MORE_3_YEARS;
             }
+            case BETWEEN_8_AND_12 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_8_12_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_8_12_MORE_3_YEARS;
+            }
+            case BETWEEN_12_AND_20 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_12_20_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_12_20_MORE_3_YEARS;
+            }
+            case BETWEEN_20_AND_50 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown age";
+            }
         }
-
-        return "i don't know";
     }
 }

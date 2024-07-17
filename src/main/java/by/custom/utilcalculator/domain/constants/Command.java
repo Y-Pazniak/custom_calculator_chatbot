@@ -61,11 +61,16 @@ public enum Command {
     }
 
     public static Command getCommandByKey(final String key) {
-        for (Command command : Command.values()) {
-            if (command.getCommand().equals(key)) {
-                return command;
+        try {
+            for (Command command : Command.values()) {
+                if (command.getCommand().equals(key)) {
+                    return command;
+                }
             }
+            throw new IllegalArgumentException("No such key in Command: " + key);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
-        throw new IllegalArgumentException("No such key in Command: " + key);
+        return null;
     }
 }
