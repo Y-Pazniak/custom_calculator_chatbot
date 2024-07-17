@@ -6,12 +6,9 @@ import by.custom.utilcalculator.domain.constants.steps.Step;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
-    private final CalculatorPassenger calculator;
-    //private final UserProgress userProgress;
 
     private MessagesCreator() {
         bundle = BundleResourcesServant.getInstance();
-        calculator = CalculatorPassenger.getInstance();
     }
 
     public static MessagesCreator getInstance() {
@@ -109,7 +106,7 @@ public class MessagesCreator {
     public String getResultAndFarewell(final UserProgress userProgress) {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + calculator.calculate(userProgress) + " " +
+                        bundle.getString("answers.summary.price") + " " + CalculatorRouter.calculate(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
@@ -149,6 +146,22 @@ public class MessagesCreator {
             }
             case TRAILERS_O4 -> {
             }
+        }
+
+        switch (userProgress.getTransportWeightN1N2N3()) {
+            case null -> {
+            }
+            case LESS_2_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
+            case BETWEEN_2_5_AND_3_5 ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_2d5_and_3d5_tons"));
+            case BETWEEN_3_5_AND_5 ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_3d5_and_5_tons"));
+            case BETWEEN_5_AND_8 -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_5_and_8_tons"));
+            case BETWEEN_8_AND_12 -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_8_and_12_tons"));
+            case BETWEEN_12_AND_20 ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
+            case BETWEEN_20_AND_50 ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
         }
 
         switch (userProgress.getCountryOrigin()) {

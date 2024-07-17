@@ -158,9 +158,11 @@ public class UserProgress implements Serializable {
                     return Step.CAR_AGE;
                 }
             }
-            case VOLUME_OF_ENGINE -> {
+
+            case N1_N3_WEIGHT, VOLUME_OF_ENGINE -> {
                 return Step.CAR_AGE;
             }
+
             case CAR_AGE, FAREWELL -> {
                 return Step.FAREWELL;
             }

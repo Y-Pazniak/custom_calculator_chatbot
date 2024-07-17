@@ -79,31 +79,66 @@
           "children": [
             {
               "key": "LESS_2_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_2_5_AND_3_5_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_3_5_AND_5_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_5_AND_8_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_8_AND_12_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_12_AND_20_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             },
             {
               "key": "BETWEEN_20_AND_50_TONS",
-              "children": []
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
             }
           ]
         },

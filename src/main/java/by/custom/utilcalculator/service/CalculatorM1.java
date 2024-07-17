@@ -4,15 +4,15 @@ import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.*;
 
-public class CalculatorPassenger {
+public class CalculatorM1 {
     private static class CalculatorHolder {
-        private static final CalculatorPassenger CALCULATOR_INSTANCE = new CalculatorPassenger();
+        private static final CalculatorM1 CALCULATOR_INSTANCE = new CalculatorM1();
     }
 
-    private CalculatorPassenger() {
+    private CalculatorM1() {
     }
 
-    public static CalculatorPassenger getInstance() {
+    public static CalculatorM1 getInstance() {
         return CalculatorHolder.CALCULATOR_INSTANCE;
     }
 

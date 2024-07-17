@@ -16,7 +16,7 @@ public enum Command {
     TRAILERS_O4("/trailers_o4"),
 
     //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
-    LESS_2_TONS("/less_2"),
+    LESS_2_TONS("/less_2p5"),
     BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5"),
     BETWEEN_3_5_AND_5_TONS("/3p5_5"),
     BETWEEN_5_AND_8_TONS("/5_8"),
