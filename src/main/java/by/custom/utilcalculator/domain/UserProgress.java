@@ -7,15 +7,18 @@ import by.custom.utilcalculator.domain.tree.CommandTree;
 import java.io.Serializable;
 import java.util.Map;
 
+import static by.custom.utilcalculator.domain.constants.steps.Step.M2_M3_ENGINE_TYPE;
+
 public class UserProgress implements Serializable {
     private GeneralTransportType generalTransportType = null;
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
-    private TypeOfEngine typeOfEngine = null;
+    private TypeOfEngineM1 typeOfEngine = null;
     private VolumeOfEngine volumeOfEngine = null;
     private ExceptM1TransportType exceptM1TransportType = null;
     private TransportWeightN1N2N3 transportWeightN1N2N3 = null;
+    private EngineTypeM2M3 engineTypeM2M3 = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -32,16 +35,17 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[8];
+        final Command[] userPath = new Command[9];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
         userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
         userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
-        userPath[4] = fieldsToCommands.get(getTypeOfEngine()); //4 cell contains type of engine
+        userPath[4] = fieldsToCommands.get(getTypeOfM1Engine()); //4 cell contains type of engine
         userPath[5] = fieldsToCommands.get(getVolumeOfEngine()); //5 cell contains engine volume
         userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
         userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
+        userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
         return userPath;
     }
 
@@ -49,6 +53,16 @@ public class UserProgress implements Serializable {
         cleanStepsAfterCurrentM1Branch(0);
         currentQuestion = Step.GENERAL_TRANSPORT_TYPE;
         this.generalTransportType = transportType;
+    }
+
+    public EngineTypeM2M3 getEngineTypeM2M3() {
+        return engineTypeM2M3;
+    }
+
+    public void setEngineTypeM2M3(final EngineTypeM2M3 engineTypeM2M3) {
+        cleanStepsAfterCurrentExceptM1Branch(1);
+        currentQuestion = M2_M3_ENGINE_TYPE;
+        this.engineTypeM2M3 = engineTypeM2M3;
     }
 
     public ExceptM1TransportType getExceptM1TransportType() {
@@ -98,13 +112,13 @@ public class UserProgress implements Serializable {
         this.carAge = carAge;
     }
 
-    public TypeOfEngine getTypeOfEngine() {
+    public TypeOfEngineM1 getTypeOfM1Engine() {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
+    public void setTypeOfEngineM1(final TypeOfEngineM1 typeOfEngine) {
         cleanStepsAfterCurrentM1Branch(3);
-        currentQuestion = Step.TYPE_OF_ENGINE;
+        currentQuestion = Step.M1_TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
 
@@ -114,7 +128,7 @@ public class UserProgress implements Serializable {
 
     public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
         cleanStepsAfterCurrentM1Branch(4);
-        currentQuestion = Step.VOLUME_OF_ENGINE;
+        currentQuestion = Step.M1_VOLUME_OF_ENGINE;
         this.volumeOfEngine = volumeOfEngine;
     }
 
@@ -138,6 +152,16 @@ public class UserProgress implements Serializable {
             case EXCEPT_M1_TRANSPORT_TYPE -> {
                 if (exceptM1TransportType == ExceptM1TransportType.N1_N3) {
                     return Step.N1_N3_WEIGHT;
+                } else {
+                    if (exceptM1TransportType == ExceptM1TransportType.M2_M3) {
+                        return Step.M2_M3_ENGINE_TYPE;
+                    }
+                }
+            }
+
+            case M2_M3_ENGINE_TYPE -> {
+                if (engineTypeM2M3 == EngineTypeM2M3.ELECTRIC) {
+                    return Step.CAR_AGE;
                 }
             }
 
@@ -148,18 +172,18 @@ public class UserProgress implements Serializable {
                 if (ownersType == OwnersType.PHYSICAL || countryOrigin == CountryOrigin.EAES) {
                     return Step.CAR_AGE;
                 } else {
-                    return Step.TYPE_OF_ENGINE;
+                    return Step.M1_TYPE_OF_ENGINE;
                 }
             }
-            case TYPE_OF_ENGINE -> {
-                if (typeOfEngine == TypeOfEngine.GASOLINE) {
-                    return Step.VOLUME_OF_ENGINE;
+            case M1_TYPE_OF_ENGINE -> {
+                if (typeOfEngine == TypeOfEngineM1.GASOLINE) {
+                    return Step.M1_VOLUME_OF_ENGINE;
                 } else {
                     return Step.CAR_AGE;
                 }
             }
 
-            case N1_N3_WEIGHT, VOLUME_OF_ENGINE -> {
+            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE -> {
                 return Step.CAR_AGE;
             }
 
@@ -197,6 +221,7 @@ public class UserProgress implements Serializable {
         }
         if (stepCleaner <= 1) {
             this.transportWeightN1N2N3 = null;
+            this.engineTypeM2M3 = null;
         }
     }
 }

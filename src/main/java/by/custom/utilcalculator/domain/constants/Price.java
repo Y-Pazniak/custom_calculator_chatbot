@@ -53,4 +53,8 @@ public class Price {
     //prices for "except M1 -> n1-n3 -> between 20-50 tons"
     public static final String EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_LESS_OR_3_YEARS = "89082,63";
     public static final String EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_MORE_3_YEARS = "187695,3";
+
+    //prices for "except M1 -> m2-m3 -> electric engine"
+    public static final String EXCEPT_PASSENGER_M2_M3_ELECTRIC_LESS_OR_3_YEARS = "4900,5";
+    public static final String EXCEPT_PASSENGER_M2_M3_ELECTRIC_MORE_3_YEARS = "8167,5";
 }

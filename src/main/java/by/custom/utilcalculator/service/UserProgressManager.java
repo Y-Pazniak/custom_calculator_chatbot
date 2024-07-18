@@ -62,14 +62,18 @@ public class UserProgressManager {
 
     public String processN1_N3TransportWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
-        switch (requestingCommand){
+        switch (requestingCommand) {
             case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.LESS_2_TONS);
-            case BETWEEN_2_5_AND_3_5_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_2_5_AND_3_5);
-            case BETWEEN_3_5_AND_5_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_3_5_AND_5);
+            case BETWEEN_2_5_AND_3_5_TONS ->
+                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_2_5_AND_3_5);
+            case BETWEEN_3_5_AND_5_TONS ->
+                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_3_5_AND_5);
             case BETWEEN_5_AND_8_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_5_AND_8);
             case BETWEEN_8_AND_12_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_8_AND_12);
-            case BETWEEN_12_AND_20_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_12_AND_20);
-            case BETWEEN_20_AND_50_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_20_AND_50);
+            case BETWEEN_12_AND_20_TONS ->
+                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_12_AND_20);
+            case BETWEEN_20_AND_50_TONS ->
+                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_20_AND_50);
         }
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);
@@ -148,10 +152,16 @@ public class UserProgressManager {
         }
 
         if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE)) {
-            userProgress.setTypeOfEngine(TypeOfEngine.GASOLINE);
+            switch (userProgress.getGeneralTransportType()) {
+                case M1 -> userProgress.setTypeOfEngineM1(TypeOfEngineM1.GASOLINE);
+                case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(EngineTypeM2M3.GASOLINE);
+            }
         } else {
             if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE)) {
-                userProgress.setTypeOfEngine(TypeOfEngine.ELECTRIC);
+                switch (userProgress.getGeneralTransportType()) {
+                    case M1 -> userProgress.setTypeOfEngineM1(TypeOfEngineM1.ELECTRIC);
+                    case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(EngineTypeM2M3.ELECTRIC);
+                }
             }
         }
         final String message;

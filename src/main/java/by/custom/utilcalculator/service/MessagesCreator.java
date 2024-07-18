@@ -2,7 +2,11 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.EngineTypeM2M3;
 import by.custom.utilcalculator.domain.constants.steps.Step;
+
+import static by.custom.utilcalculator.domain.constants.steps.TypeOfEngineM1.ELECTRIC;
+import static by.custom.utilcalculator.domain.constants.steps.TypeOfEngineM1.GASOLINE;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -28,16 +32,19 @@ public class MessagesCreator {
             case N1_N3_WEIGHT -> {
                 return getN1_N3TransportWeight();
             }
+            case M2_M3_ENGINE_TYPE -> {
+                return getM2_M3EngineType();
+            }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
             }
             case OWNERS_TYPE -> {
                 return getTypeOfOwner();
             }
-            case TYPE_OF_ENGINE -> {
-                return getTypeOfEngine();
+            case M1_TYPE_OF_ENGINE -> {
+                return getM1TypeOfEngine();
             }
-            case VOLUME_OF_ENGINE -> {
+            case M1_VOLUME_OF_ENGINE -> {
                 return getEngineVolume();
             }
             case CAR_AGE -> {
@@ -48,6 +55,12 @@ public class MessagesCreator {
             }
         }
         return bundle.getString("answers.sorry");
+    }
+
+    private String getM2_M3EngineType() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
+                Command.GASOLINE_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getGreeting() {
@@ -82,7 +95,7 @@ public class MessagesCreator {
                 Command.BETWEEN_20_AND_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
     }
 
-    public String getTypeOfEngine() {
+    public String getM1TypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
                 Command.GASOLINE_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
                 Command.ELECTRIC_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
@@ -139,9 +152,7 @@ public class MessagesCreator {
             case null -> {
             }
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
-
-            case M2_M3 -> {
-            }
+            case M2_M3 -> sb.append(bundle.getString("answers.summary.m2_m3"));
             case TRUCK_UNITS -> {
             }
             case TRAILERS_O4 -> {
@@ -185,11 +196,12 @@ public class MessagesCreator {
             case MORE_3_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
         }
 
-        switch (userProgress.getTypeOfEngine()) {
-            case null -> {
+        if (userProgress.getTypeOfM1Engine() == ELECTRIC || userProgress.getEngineTypeM2M3() == EngineTypeM2M3.ELECTRIC) {
+            sb.append(bundle.getString("answers.summary.electro"));
+        } else {
+            if (userProgress.getTypeOfM1Engine() == GASOLINE || userProgress.getEngineTypeM2M3() == EngineTypeM2M3.GASOLINE) {
+                sb.append(bundle.getString("answers.summary.gas"));
             }
-            case GASOLINE -> sb.append(bundle.getString("answers.summary.gas"));
-            case ELECTRIC -> sb.append(bundle.getString("answers.summary.electro"));
         }
 
         switch (userProgress.getVolumeOfEngine()) {

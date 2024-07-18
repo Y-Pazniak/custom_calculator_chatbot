@@ -51,7 +51,7 @@ public class CalculatorM1 {
     }
 
     private String countForJuridicalPrice(final UserProgress userProgress) {
-        switch (userProgress.getTypeOfEngine()) {
+        switch (userProgress.getTypeOfM1Engine()) {
             case ELECTRIC -> {
                 return countForElectricAutoPrice(userProgress);
             }

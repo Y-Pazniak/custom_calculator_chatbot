@@ -3,6 +3,7 @@ package by.custom.utilcalculator.service;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
+import by.custom.utilcalculator.domain.constants.steps.EngineTypeM2M3;
 
 public class CalculatorExceptM1 {
     private CalculatorExceptM1() {
@@ -22,7 +23,7 @@ public class CalculatorExceptM1 {
                 return countForN1N3price(userProgress);
             }
             case M2_M3 -> {
-                return "M2";
+                return countForM2M3Price(userProgress);
             }
             case TRAILERS_O4 -> {
                 return "trailers";
@@ -34,6 +35,14 @@ public class CalculatorExceptM1 {
                 return "unknown type of vehicle cat. M1-M3";
             }
         }
+    }
+
+    private String countForM2M3Price(final UserProgress userProgress) {
+        return userProgress.getEngineTypeM2M3() == EngineTypeM2M3.ELECTRIC ? countPriceForM2M3Electric(userProgress) : "fill calculator for gasoline";
+    }
+
+    private String countPriceForM2M3Electric(final UserProgress userProgress) {
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_M2_M3_ELECTRIC_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_M2_M3_ELECTRIC_MORE_3_YEARS;
     }
 
     private String countForN1N3price(final UserProgress userProgress) {

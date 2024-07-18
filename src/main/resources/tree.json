@@ -144,7 +144,21 @@
         },
         {
           "key": "M2_M3",
-          "children": []
+          "children": [
+            {
+              "key": "ELECTRIC_TYPE_ENGINE",
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "GASOLINE_TYPE_ENGINE",
+              "children": []
+            }
+          ]
         },
         {
           "key": "TRUCK_UNITS",
