@@ -150,7 +150,6 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
         if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE)) {
             switch (userProgress.getGeneralTransportType()) {
                 case M1 -> userProgress.setTypeOfEngineM1(TypeOfEngineM1.GASOLINE);

@@ -46,9 +46,10 @@ public enum Command {
     VOLUME_BETWEEN_3000_3500_CM("/3000_3500"),
     VOLUME_MORE_3500_CM("/more_3500"),
 
-    //command not for user - just for path checking (not command actually, just a marker to make code shorter)
+    //command not for user - just for path checking (not command actually, just a marker to make code in tree shorter)
     AGE("age"),
-    VOLUME("volume");
+    VOLUME("volume"),
+    N1_N3_WEIGHT("n1_n3_weight");
 
     private final String command;
 

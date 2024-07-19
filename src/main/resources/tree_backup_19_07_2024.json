@@ -78,21 +78,7 @@
           "key": "N1_N3",
           "children": [
             {
-              "key": "N1_N3_WEIGHT",
-              "children": [
-                {
-                  "key": "AGE",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "key": "M2_M3",
-          "children": [
-            {
-              "key": "ELECTRIC_TYPE_ENGINE",
+              "key": "LESS_2_TONS",
               "children": [
                 {
                   "key": "AGE",
@@ -101,25 +87,50 @@
               ]
             },
             {
-              "key": "GASOLINE_TYPE_ENGINE",
+              "key": "N1_N3_WEIGHT",
               "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
               ]
+            },
+            {
+              "key": "M2_M3",
+              "children": [
+                {
+                  "key": "ELECTRIC_TYPE_ENGINE",
+                  "children": [
+                    {
+                      "key": "AGE",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "key": "GASOLINE_TYPE_ENGINE",
+                  "children": [
+                    {                   },
+                    {},
+                    {},
+                    {}
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "TRUCK_UNITS",
+              "children": []
+            },
+            {
+              "key": "TRAILERS_O4",
+              "children": []
             }
           ]
         },
         {
-          "key": "TRUCK_UNITS",
-          "children": []
-        },
-        {
-          "key": "TRAILERS_O4",
+          "key": "TRAILERS",
           "children": []
         }
       ]
-    },
-    {
-      "key": "TRAILERS",
-      "children": []
     }
-  ]
-}
