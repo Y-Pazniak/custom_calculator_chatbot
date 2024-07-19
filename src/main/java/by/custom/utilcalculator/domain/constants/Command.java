@@ -39,17 +39,24 @@ public enum Command {
     GASOLINE_TYPE_ENGINE("/gasoline"),
     ELECTRIC_TYPE_ENGINE("/electric"),
 
-    //engine volume command
-    VOLUME_LESS_1000_CM("/less_1000"),
-    VOLUME_BETWEEN_1000_2000_CM("/1000_2000"),
-    VOLUME_BETWEEN_2000_3000_CM("/2000_3000"),
-    VOLUME_BETWEEN_3000_3500_CM("/3000_3500"),
-    VOLUME_MORE_3500_CM("/more_3500"),
+    //m1 engine volume command
+    M1_VOLUME_LESS_1000_CM("/less_1000"),
+    M1_VOLUME_BETWEEN_1000_2000_CM("/1000_2000"),
+    M1_VOLUME_BETWEEN_2000_3000_CM("/2000_3000"),
+    M1_VOLUME_BETWEEN_3000_3500_CM("/3000_3500"),
+    M1_VOLUME_MORE_3500_CM("/more_3500"),
+
+    //m2 engine volume command
+    M2_VOLUME_LESS_2500_CM("/less_2500"),
+    M2_VOLUME_BETWEEN_2500_5000_CM("/2500_5000"),
+    M2_VOLUME_BETWEEN_5000_10000_CM("/5000_10000"),
+    M2_VOLUME_MORE_10000_CM("/more_10000"),
 
     //command not for user - just for path checking (not command actually, just a marker to make code in tree shorter)
     AGE("age"),
-    VOLUME("volume"),
-    N1_N3_WEIGHT("n1_n3_weight");
+    M1_GASOLINE_ENGINE_VOLUME("volume"),
+    N1_N3_WEIGHT("n1_n3_weight"),
+    M2_M3_GASOLINE_ENGINE_VOLUME("m2_m3_volume");
 
     private final String command;
 

@@ -7,6 +7,7 @@ public enum Step {
     OWNERS_TYPE,
     N1_N3_WEIGHT,
     M2_M3_ENGINE_TYPE,
+    M2_M3_ENGINE_VOLUME,
     M1_TYPE_OF_ENGINE,
     M1_VOLUME_OF_ENGINE,
     CAR_AGE,

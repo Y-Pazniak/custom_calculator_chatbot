@@ -3,7 +3,7 @@ package by.custom.utilcalculator.service;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
-import by.custom.utilcalculator.domain.constants.steps.EngineTypeM2M3;
+import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
 
 public class CalculatorExceptM1 {
     private CalculatorExceptM1() {
@@ -38,7 +38,7 @@ public class CalculatorExceptM1 {
     }
 
     private String countForM2M3Price(final UserProgress userProgress) {
-        return userProgress.getEngineTypeM2M3() == EngineTypeM2M3.ELECTRIC ? countPriceForM2M3Electric(userProgress) : "fill calculator for gasoline";
+        return userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC ? countPriceForM2M3Electric(userProgress) : "fill calculator for gasoline";
     }
 
     private String countPriceForM2M3Electric(final UserProgress userProgress) {

@@ -14,11 +14,12 @@ public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
-    private TypeOfEngineM1 typeOfEngine = null;
-    private VolumeOfEngine volumeOfEngine = null;
+    private M1TypeOfEngine typeOfEngine = null;
+    private M1EngineVolume m1EngineVolume = null;
     private ExceptM1TransportType exceptM1TransportType = null;
-    private TransportWeightN1N2N3 transportWeightN1N2N3 = null;
-    private EngineTypeM2M3 engineTypeM2M3 = null;
+    private N1N3TransportWeight transportWeightN1N2N3 = null;
+    private M2M3EngineType engineTypeM2M3 = null;
+    private M2EngineVolume m2EngineVolume = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -35,17 +36,18 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[9];
+        final Command[] userPath = new Command[10];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
         userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
         userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
         userPath[4] = fieldsToCommands.get(getTypeOfM1Engine()); //4 cell contains type of engine
-        userPath[5] = fieldsToCommands.get(getVolumeOfEngine()); //5 cell contains engine volume
+        userPath[5] = fieldsToCommands.get(getM1EngineVolume()); //5 cell contains engine volume
         userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
         userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
         userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
+        userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
         return userPath;
     }
 
@@ -55,11 +57,15 @@ public class UserProgress implements Serializable {
         this.generalTransportType = transportType;
     }
 
-    public EngineTypeM2M3 getEngineTypeM2M3() {
+    public M2M3EngineType getEngineTypeM2M3() {
         return engineTypeM2M3;
     }
 
-    public void setEngineTypeM2M3(final EngineTypeM2M3 engineTypeM2M3) {
+    public M2EngineVolume getM2EngineVolume() {
+        return m2EngineVolume;
+    }
+
+    public void setEngineTypeM2M3(final M2M3EngineType engineTypeM2M3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
         currentQuestion = M2_M3_ENGINE_TYPE;
         this.engineTypeM2M3 = engineTypeM2M3;
@@ -75,13 +81,13 @@ public class UserProgress implements Serializable {
         this.exceptM1TransportType = exceptM1TransportType;
     }
 
-    public void setTransportWeightN1N2N3(final TransportWeightN1N2N3 transportWeightN1N2N3) {
+    public void setTransportWeightN1N2N3(final N1N3TransportWeight transportWeightN1N2N3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
         currentQuestion = Step.N1_N3_WEIGHT;
         this.transportWeightN1N2N3 = transportWeightN1N2N3;
     }
 
-    public TransportWeightN1N2N3 getTransportWeightN1N2N3() {
+    public N1N3TransportWeight getTransportWeightN1N2N3() {
         return transportWeightN1N2N3;
     }
 
@@ -112,24 +118,30 @@ public class UserProgress implements Serializable {
         this.carAge = carAge;
     }
 
-    public TypeOfEngineM1 getTypeOfM1Engine() {
+    public M1TypeOfEngine getTypeOfM1Engine() {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngineM1(final TypeOfEngineM1 typeOfEngine) {
+    public void setTypeOfEngineM1(final M1TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrentM1Branch(3);
         currentQuestion = Step.M1_TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
 
-    public VolumeOfEngine getVolumeOfEngine() {
-        return volumeOfEngine;
+    public M1EngineVolume getM1EngineVolume() {
+        return m1EngineVolume;
     }
 
-    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
+    public void setM1Volume(final M1EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentM1Branch(4);
         currentQuestion = Step.M1_VOLUME_OF_ENGINE;
-        this.volumeOfEngine = volumeOfEngine;
+        this.m1EngineVolume = volumeOfEngine;
+    }
+
+    public void setM2Volume(final M2EngineVolume volumeOfEngine) {
+        cleanStepsAfterCurrentExceptM1Branch(2);
+        currentQuestion = Step.M2_M3_ENGINE_VOLUME;
+        this.m2EngineVolume = volumeOfEngine;
     }
 
     public String getChatID() {
@@ -160,8 +172,12 @@ public class UserProgress implements Serializable {
             }
 
             case M2_M3_ENGINE_TYPE -> {
-                if (engineTypeM2M3 == EngineTypeM2M3.ELECTRIC) {
+                if (engineTypeM2M3 == M2M3EngineType.ELECTRIC) {
                     return Step.CAR_AGE;
+                } else {
+                    if (engineTypeM2M3 == M2M3EngineType.GASOLINE) {
+                        return Step.M2_M3_ENGINE_VOLUME;
+                    }
                 }
             }
 
@@ -176,7 +192,7 @@ public class UserProgress implements Serializable {
                 }
             }
             case M1_TYPE_OF_ENGINE -> {
-                if (typeOfEngine == TypeOfEngineM1.GASOLINE) {
+                if (typeOfEngine == M1TypeOfEngine.GASOLINE) {
                     return Step.M1_VOLUME_OF_ENGINE;
                 } else {
                     return Step.CAR_AGE;
@@ -208,7 +224,7 @@ public class UserProgress implements Serializable {
             this.typeOfEngine = null;
         }
         if (stepCleaner <= 3) {
-            this.volumeOfEngine = null;
+            this.m1EngineVolume = null;
         }
         if (stepCleaner <= 4) {
             this.carAge = null;
@@ -222,6 +238,9 @@ public class UserProgress implements Serializable {
         if (stepCleaner <= 1) {
             this.transportWeightN1N2N3 = null;
             this.engineTypeM2M3 = null;
+        }
+        if (stepCleaner <= 2) {
+            this.m2EngineVolume = null;
         }
     }
 }

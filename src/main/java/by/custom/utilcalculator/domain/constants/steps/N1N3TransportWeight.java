@@ -1,6 +1,6 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum TransportWeightN1N2N3 implements StepsIndicator {
+public enum N1N3TransportWeight implements StepsIndicator {
     LESS_2_TONS,
     BETWEEN_2_5_AND_3_5,
     BETWEEN_3_5_AND_5,

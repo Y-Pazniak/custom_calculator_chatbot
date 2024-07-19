@@ -63,17 +63,14 @@ public class UserProgressManager {
     public String processN1_N3TransportWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
         switch (requestingCommand) {
-            case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.LESS_2_TONS);
+            case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.LESS_2_TONS);
             case BETWEEN_2_5_AND_3_5_TONS ->
-                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_2_5_AND_3_5);
-            case BETWEEN_3_5_AND_5_TONS ->
-                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_3_5_AND_5);
-            case BETWEEN_5_AND_8_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_5_AND_8);
-            case BETWEEN_8_AND_12_TONS -> userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_8_AND_12);
-            case BETWEEN_12_AND_20_TONS ->
-                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_12_AND_20);
-            case BETWEEN_20_AND_50_TONS ->
-                    userProgress.setTransportWeightN1N2N3(TransportWeightN1N2N3.BETWEEN_20_AND_50);
+                    userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_2_5_AND_3_5);
+            case BETWEEN_3_5_AND_5_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_3_5_AND_5);
+            case BETWEEN_5_AND_8_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_5_AND_8);
+            case BETWEEN_8_AND_12_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_8_AND_12);
+            case BETWEEN_12_AND_20_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_12_AND_20);
+            case BETWEEN_20_AND_50_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_20_AND_50);
         }
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);
@@ -152,14 +149,14 @@ public class UserProgressManager {
         }
         if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE)) {
             switch (userProgress.getGeneralTransportType()) {
-                case M1 -> userProgress.setTypeOfEngineM1(TypeOfEngineM1.GASOLINE);
-                case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(EngineTypeM2M3.GASOLINE);
+                case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.GASOLINE);
+                case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.GASOLINE);
             }
         } else {
             if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE)) {
                 switch (userProgress.getGeneralTransportType()) {
-                    case M1 -> userProgress.setTypeOfEngineM1(TypeOfEngineM1.ELECTRIC);
-                    case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(EngineTypeM2M3.ELECTRIC);
+                    case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.ELECTRIC);
+                    case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.ELECTRIC);
                 }
             }
         }
@@ -172,26 +169,45 @@ public class UserProgressManager {
     public String processEngineVolume(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
-
-        if (!UserProgressValidator.validateCommand(Command.VOLUME, userProgress)) {
-            throw new InvalidOrderCommandException(chatID, requestingCommand);
-        }
-
         final String message;
-
-        switch (requestingCommand) {
-            case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.LESS_1000);
-            case Command.VOLUME_BETWEEN_1000_2000_CM ->
-                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_1000_AND_2000);
-            case Command.VOLUME_BETWEEN_2000_3000_CM ->
-                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_2000_AND_3000);
-            case Command.VOLUME_BETWEEN_3000_3500_CM ->
-                    userProgress.setVolumeOfEngine(VolumeOfEngine.BETWEEN_3000_AND_3500);
-            case VOLUME_MORE_3500_CM -> userProgress.setVolumeOfEngine(VolumeOfEngine.MORE_3500);
+        switch (userProgress.getGeneralTransportType()) {
+            case M1 -> processM1EngineVolume(userProgress, requestingCommand, chatID);
+            case EXCEPT_M1 -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
         }
-        userProgressStorage.save(userProgress);
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;
+    }
+
+    private void processExceptM1EngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
+        if (!UserProgressValidator.validateCommand(Command.M2_M3_GASOLINE_ENGINE_VOLUME, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+        switch (requestingCommand) {
+            case Command.M2_VOLUME_LESS_2500_CM -> userProgress.setM2Volume(M2EngineVolume.LESS_2500);
+            case Command.M2_VOLUME_BETWEEN_2500_5000_CM ->
+                    userProgress.setM2Volume(M2EngineVolume.BETWEEN_2500_AND_5000);
+            case Command.M2_VOLUME_BETWEEN_5000_10000_CM ->
+                    userProgress.setM2Volume(M2EngineVolume.BETWEEN_5000_AND_10000);
+            case Command.M2_VOLUME_MORE_10000_CM -> userProgress.setM2Volume(M2EngineVolume.MORE_10000);
+        }
+        userProgressStorage.save(userProgress);
+    }
+
+    private void processM1EngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
+        if (!UserProgressValidator.validateCommand(Command.M1_GASOLINE_ENGINE_VOLUME, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+        switch (requestingCommand) {
+            case Command.M1_VOLUME_LESS_1000_CM -> userProgress.setM1Volume(M1EngineVolume.LESS_1000);
+            case Command.M1_VOLUME_BETWEEN_1000_2000_CM ->
+                    userProgress.setM1Volume(M1EngineVolume.BETWEEN_1000_AND_2000);
+            case Command.M1_VOLUME_BETWEEN_2000_3000_CM ->
+                    userProgress.setM1Volume(M1EngineVolume.BETWEEN_2000_AND_3000);
+            case Command.M1_VOLUME_BETWEEN_3000_3500_CM ->
+                    userProgress.setM1Volume(M1EngineVolume.BETWEEN_3000_AND_3500);
+            case M1_VOLUME_MORE_3500_CM -> userProgress.setM1Volume(M1EngineVolume.MORE_3500);
+        }
+        userProgressStorage.save(userProgress);
     }
 
     private static class BotFieldsManagerHolder {
