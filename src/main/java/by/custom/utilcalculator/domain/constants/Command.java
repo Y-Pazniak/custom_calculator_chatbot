@@ -52,6 +52,10 @@ public enum Command {
     M2_VOLUME_BETWEEN_5000_10000_CM("/5000_10000"),
     M2_VOLUME_MORE_10000_CM("/more_10000"),
 
+    //truck units class
+    TRUCK_UNITS_6_CLASS("/6_class"),
+    TRUCK_UNITS_EXCEPT_6_CLASS("/except_6_class"),
+
     //command not for user - just for path checking (not command actually, just a marker to make code in tree shorter)
     AGE("age"),
     M1_GASOLINE_ENGINE_VOLUME("volume"),

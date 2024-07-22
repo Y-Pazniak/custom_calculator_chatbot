@@ -73,6 +73,7 @@ public class MessageRouter {
                  BETWEEN_8_AND_12_TONS,
                  BETWEEN_12_AND_20_TONS, BETWEEN_20_AND_50_TONS ->
                     answer = userProgressManager.processN1_N3TransportWeight(requestingCommand, chatID);
+            case TRUCK_UNITS_6_CLASS, TRUCK_UNITS_EXCEPT_6_CLASS -> answer = userProgressManager.processTruckUnitClass(requestingCommand, chatID);
             case null, default -> answer = getSorryMessage();
         }
         return answer;

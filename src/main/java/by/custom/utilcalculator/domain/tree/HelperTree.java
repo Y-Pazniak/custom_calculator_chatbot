@@ -59,6 +59,9 @@ public class HelperTree {
         fieldsToCommands.put(M1EngineVolume.BETWEEN_2000_AND_3000, Command.M1_GASOLINE_ENGINE_VOLUME);
         fieldsToCommands.put(M1EngineVolume.BETWEEN_3000_AND_3500, Command.M1_GASOLINE_ENGINE_VOLUME);
         fieldsToCommands.put(M1EngineVolume.MORE_3500, Command.M1_GASOLINE_ENGINE_VOLUME);
+        //truck units step
+        fieldsToCommands.put(TruckUnit.TRUCK_UNITS_6_CLASS, Command.TRUCK_UNITS_6_CLASS);
+        fieldsToCommands.put(TruckUnit.TRUCK_UNITS_EXCEPT_6_CLASS, Command.TRUCK_UNITS_EXCEPT_6_CLASS);
 
         return fieldsToCommands;
     }

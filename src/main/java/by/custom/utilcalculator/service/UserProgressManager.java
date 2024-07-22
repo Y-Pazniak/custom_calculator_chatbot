@@ -210,6 +210,22 @@ public class UserProgressManager {
         userProgressStorage.save(userProgress);
     }
 
+    public String processTruckUnitClass(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
+        switch (requestingCommand) {
+            case TRUCK_UNITS_6_CLASS -> userProgress.setTruckUnitType(TruckUnit.TRUCK_UNITS_6_CLASS);
+            case TRUCK_UNITS_EXCEPT_6_CLASS -> userProgress.setTruckUnitType(TruckUnit.TRUCK_UNITS_EXCEPT_6_CLASS);
+        }
+        userProgressStorage.save(userProgress);
+        System.out.println("truck units");
+        return "Truck unit";
+    }
+
     private static class BotFieldsManagerHolder {
         private static final UserProgressManager USER_PROGRESS_MANAGER = new UserProgressManager();
     }

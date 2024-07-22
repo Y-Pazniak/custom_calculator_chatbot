@@ -20,6 +20,7 @@ public class UserProgress implements Serializable {
     private N1N3TransportWeight transportWeightN1N2N3 = null;
     private M2M3EngineType engineTypeM2M3 = null;
     private M2EngineVolume m2EngineVolume = null;
+    private TruckUnit truckUnit = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -36,7 +37,7 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[10];
+        final Command[] userPath = new Command[11];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
@@ -48,6 +49,7 @@ public class UserProgress implements Serializable {
         userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
         userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
         userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
+        userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
         return userPath;
     }
 
@@ -144,6 +146,16 @@ public class UserProgress implements Serializable {
         this.m2EngineVolume = volumeOfEngine;
     }
 
+    public void setTruckUnitType(final TruckUnit truckUnit) {
+        cleanStepsAfterCurrentExceptM1Branch(2);
+        currentQuestion = Step.TRUCK_UNIT;
+        this.truckUnit = truckUnit;
+    }
+
+    public TruckUnit getTruckUnitType() {
+        return this.truckUnit;
+    }
+
     public String getChatID() {
         return chatID;
     }
@@ -167,6 +179,10 @@ public class UserProgress implements Serializable {
                 } else {
                     if (exceptM1TransportType == ExceptM1TransportType.M2_M3) {
                         return Step.M2_M3_ENGINE_TYPE;
+                    } else {
+                        if (exceptM1TransportType == ExceptM1TransportType.TRUCK_UNITS) {
+                            return Step.TRUCK_UNIT;
+                        }
                     }
                 }
             }
@@ -199,8 +215,12 @@ public class UserProgress implements Serializable {
                 }
             }
 
-            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE -> {
+            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE, M2_M3_ENGINE_VOLUME -> {
                 return Step.CAR_AGE;
+            }
+
+            case TRUCK_UNIT -> {
+                return Step.FAREWELL;
             }
 
             case CAR_AGE, FAREWELL -> {

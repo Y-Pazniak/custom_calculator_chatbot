@@ -118,7 +118,16 @@
         },
         {
           "key": "TRUCK_UNITS",
-          "children": []
+          "children": [
+            {
+              "key": "TRUCK_UNITS_EXCEPT_6_CLASS",
+              "children": []
+            },
+            {
+              "key": "TRUCK_UNITS_6_CLASS",
+              "children": []
+            }
+          ]
         },
         {
           "key": "TRAILERS_O4",

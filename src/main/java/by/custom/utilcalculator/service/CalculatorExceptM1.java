@@ -3,6 +3,7 @@ package by.custom.utilcalculator.service;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
+import by.custom.utilcalculator.domain.constants.steps.M2EngineVolume;
 import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
 
 public class CalculatorExceptM1 {
@@ -38,7 +39,51 @@ public class CalculatorExceptM1 {
     }
 
     private String countForM2M3Price(final UserProgress userProgress) {
-        return userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC ? countPriceForM2M3Electric(userProgress) : "fill calculator for gasoline";
+        return userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC ? countPriceForM2M3Electric(userProgress) : countPriceForM2M3Gasoline(userProgress);
+    }
+
+    private String countPriceForM2M3Gasoline(final UserProgress userProgress) {
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? countM2M3GasolineLess3Years(userProgress.getM2EngineVolume()) : countM2M3GasolineMore3Years(userProgress.getM2EngineVolume());
+    }
+
+    private String countM2M3GasolineMore3Years(final M2EngineVolume m2EngineVolume) {
+        switch (m2EngineVolume) {
+            case LESS_2500 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_MORE_3_YEARS;
+            }
+            case BETWEEN_2500_AND_5000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_MORE_3_YEARS;
+            }
+            case BETWEEN_5000_AND_10000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_MORE_3_YEARS;
+            }
+            case MORE_10000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown engine volume";
+            }
+        }
+    }
+
+    private String countM2M3GasolineLess3Years(final M2EngineVolume m2EngineVolume) {
+        switch (m2EngineVolume) {
+            case LESS_2500 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_LESS_OR_3_YEARS;
+            }
+            case BETWEEN_2500_AND_5000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_LESS_OR_3_YEARS;
+            }
+            case BETWEEN_5000_AND_10000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_LESS_OR_3_YEARS;
+            }
+            case MORE_10000 -> {
+                return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_LESS_OR_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown engine volume";
+            }
+        }
     }
 
     private String countPriceForM2M3Electric(final UserProgress userProgress) {

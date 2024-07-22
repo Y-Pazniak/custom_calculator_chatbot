@@ -57,4 +57,15 @@ public class Price {
     //prices for "except M1 -> m2-m3 -> electric engine"
     public static final String EXCEPT_PASSENGER_M2_M3_ELECTRIC_LESS_OR_3_YEARS = "4900,5";
     public static final String EXCEPT_PASSENGER_M2_M3_ELECTRIC_MORE_3_YEARS = "8167,5";
+
+    //prices for "except M1 -> m2-m2 -> gasoline engine"
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_LESS_OR_3_YEARS = "18246,54";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_LESS_OR_3_YEARS = "64211,55";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_LESS_OR_3_YEARS = "71707,74";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_LESS_OR_3_YEARS = "82922,97";
+
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_MORE_3_YEARS = "18478,98";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_MORE_3_YEARS = "97218,03";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_MORE_3_YEARS = "92046,24";
+    public static final String EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_MORE_3_YEARS = "130515,06";
 }

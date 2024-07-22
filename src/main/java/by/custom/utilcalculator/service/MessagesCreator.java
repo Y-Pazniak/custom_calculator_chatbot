@@ -50,6 +50,9 @@ public class MessagesCreator {
             case M1_VOLUME_OF_ENGINE -> {
                 return getM1EngineVolume();
             }
+            case TRUCK_UNIT -> {
+                return getTruckUnit();
+            }
             case CAR_AGE -> {
                 return getAgeAuto();
             }
@@ -58,6 +61,12 @@ public class MessagesCreator {
             }
         }
         return bundle.getString("answers.sorry");
+    }
+
+    private String getTruckUnit() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.truck.type"), "\n",
+                Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"), "\n",
+                Command.TRUCK_UNITS_EXCEPT_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
     }
 
     private String getM2EngineVolume() {
@@ -164,8 +173,8 @@ public class MessagesCreator {
             }
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
             case M2_M3 -> sb.append(bundle.getString("answers.summary.m2_m3"));
-            case TRUCK_UNITS -> {
-            }
+            case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
+
             case TRAILERS_O4 -> {
             }
         }
