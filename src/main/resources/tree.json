@@ -151,7 +151,17 @@
         },
         {
           "key": "TRAILERS_O4",
-          "children": []
+          "children": [
+            {
+              "key": "TRAILERS_O4_TYPE",
+              "children": [
+                {
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },

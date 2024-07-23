@@ -12,6 +12,7 @@ public enum Step {
     M1_VOLUME_OF_ENGINE,
     TRUCK_UNIT_CLASS,
     TRUCK_UNIT_WEIGHT,
+    TRAILERS_O4_TYPE,
     CAR_AGE,
     FAREWELL
 }

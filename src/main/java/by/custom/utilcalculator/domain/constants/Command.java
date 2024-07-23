@@ -60,12 +60,17 @@ public enum Command {
     TRUCK_UNITS_12_20_TONS("/12_20_tons"),
     TRUCK_UNITS_20_50_TONS("/20_50_tons"),
 
+    //trailers O4 types
+    TRAILERS_04_TYPE("/trailers_o4_type"),
+    HALF_TRAILERS_04_TYPE("/half_trailers_o4_type"),
+
     //command not for user - just for path checking (not command actually, just a marker to make code in tree shorter)
     AGE("age"),
     M1_GASOLINE_ENGINE_VOLUME("volume"),
     N1_N3_WEIGHT("n1_n3_weight"),
     M2_M3_GASOLINE_ENGINE_VOLUME("m2_m3_volume"),
-    TRUCK_UNIT_WEIGHT("truck_unit_weight");
+    TRUCK_UNIT_WEIGHT("truck_unit_weight"),
+    TRAILERS_O4_TYPE("trailers_o4_weight");
 
     private final String command;
 

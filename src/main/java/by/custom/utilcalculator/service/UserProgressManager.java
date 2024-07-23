@@ -53,7 +53,7 @@ public class UserProgressManager {
             case N1_N3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.N1_N3);
             case M2_M3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.M2_M3);
             case TRUCK_UNITS -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRUCK_UNITS);
-            case TRAILERS -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRAILERS_O4);
+            case TRAILERS_O4 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRAILERS_O4);
         }
 
         userProgressStorage.save(userProgress);
@@ -234,6 +234,21 @@ public class UserProgressManager {
         switch (requestingCommand) {
             case TRUCK_UNITS_12_20_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_12_TILL_20_TONS);
             case TRUCK_UNITS_20_50_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_20_TILL_50_TONS);
+        }
+
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processTrailersO4Type(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (!UserProgressValidator.validateCommand(Command.TRAILERS_O4_TYPE, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
+        switch (requestingCommand) {
+            case TRAILERS_04_TYPE -> userProgress.setTrailerO4Type(TrailerO4Type.TRAILERS);
+            case HALF_TRAILERS_04_TYPE -> userProgress.setTrailerO4Type(TrailerO4Type.HALF_TRAILERS);
         }
 
         userProgressStorage.save(userProgress);

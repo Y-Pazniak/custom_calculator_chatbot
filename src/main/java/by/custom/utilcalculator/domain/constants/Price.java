@@ -81,4 +81,8 @@ public class Price {
     public static final String EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS = "134408,43";
     public static final String EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_LESS_OR_3_YEARS = "38817,48";
     public static final String EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_MORE_3_YEARS = "78855,27";
+
+    //price for "except m1 -> trailers -> trailers and half-trailers"
+    public static final String EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_LESS_OR_3_YEARS = "23244,0";
+    public static final String EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_MORE_3_YEARS = "78448,5";
 }

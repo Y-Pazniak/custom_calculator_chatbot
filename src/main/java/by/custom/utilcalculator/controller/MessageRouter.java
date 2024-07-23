@@ -75,6 +75,7 @@ public class MessageRouter {
                     answer = userProgressManager.processN1_N3TransportWeight(requestingCommand, chatID);
             case TRUCK_UNITS_6_CLASS, TRUCK_UNITS_EXCEPT_6_CLASS -> answer = userProgressManager.processTruckUnitClass(requestingCommand, chatID);
             case TRUCK_UNITS_12_20_TONS, TRUCK_UNITS_20_50_TONS -> answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
+            case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE -> answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
             case null, default -> answer = getSorryMessage();
         }
         return answer;

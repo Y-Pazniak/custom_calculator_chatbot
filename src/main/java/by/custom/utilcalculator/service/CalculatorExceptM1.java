@@ -31,12 +31,16 @@ public class CalculatorExceptM1 {
                 return countForTruckUnits(userProgress);
             }
             case TRAILERS_O4 -> {
-                return "trailers";
+                return countForTrailers(userProgress);
             }
             case null, default -> {
                 return "unknown type of vehicle cat. M1-M3";
             }
         }
+    }
+
+    private String countForTrailers(final UserProgress userProgress) {
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_MORE_3_YEARS;
     }
 
     private String countForTruckUnits(final UserProgress userProgress) {

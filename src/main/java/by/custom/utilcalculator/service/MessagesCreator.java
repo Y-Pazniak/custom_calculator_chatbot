@@ -56,6 +56,9 @@ public class MessagesCreator {
             case TRUCK_UNIT_WEIGHT -> {
                 return getTruckUnitWeight();
             }
+            case TRAILERS_O4_TYPE -> {
+                return getO4TrailersTypes();
+            }
             case CAR_AGE -> {
                 return getAgeAuto();
             }
@@ -64,6 +67,12 @@ public class MessagesCreator {
             }
         }
         return bundle.getString("answers.sorry");
+    }
+
+    private String getO4TrailersTypes() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                Command.TRAILERS_04_TYPE.getCommand(), " ", bundle.getString("answers.details.trailersO4"), "\n",
+                Command.HALF_TRAILERS_04_TYPE.getCommand(), " ", bundle.getString("answers.details.halftrailersO4"));
     }
 
     private String getTruckUnitClass() {
@@ -183,8 +192,7 @@ public class MessagesCreator {
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
             case M2_M3 -> sb.append(bundle.getString("answers.summary.m2_m3"));
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
-            case TRAILERS_O4 -> {
-            }
+            case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
         }
 
         switch (userProgress.getTransportWeightN1N2N3()) {
@@ -234,8 +242,17 @@ public class MessagesCreator {
         switch (userProgress.getTruckUnitWeight()) {
             case null -> {
             }
-            case FROM_12_TILL_20_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
-            case FROM_20_TILL_50_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
+            case FROM_12_TILL_20_TONS ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
+            case FROM_20_TILL_50_TONS ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
+        }
+
+        switch (userProgress.getTrailerO4Type()) {
+            case null -> {
+            }
+            case TRAILERS -> sb.append(bundle.getString("answers.summary.trailersO4details"));
+            case HALF_TRAILERS -> sb.append(bundle.getString("answers.summary.halftrailersO4details"));
         }
 
         if (userProgress.getTypeOfM1Engine() == ELECTRIC || userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC) {
