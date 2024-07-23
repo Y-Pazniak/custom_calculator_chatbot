@@ -20,7 +20,8 @@ public class UserProgress implements Serializable {
     private N1N3TransportWeight transportWeightN1N2N3 = null;
     private M2M3EngineType engineTypeM2M3 = null;
     private M2EngineVolume m2EngineVolume = null;
-    private TruckUnit truckUnit = null;
+    private TruckUnitClass truckUnitClass = null;
+    private TruckUnitWeight truckUnitWeight = null;
     private final String chatID;
     private Step currentQuestion;
 
@@ -37,7 +38,7 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[11];
+        final Command[] userPath = new Command[12];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
@@ -50,7 +51,18 @@ public class UserProgress implements Serializable {
         userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
         userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
         userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
+        userPath[11] = fieldsToCommands.get(getTruckUnitWeight()); //11 cell contains "except  M1 -> truck units -> truck unit weight" truck unit weight
         return userPath;
+    }
+
+    public TruckUnitWeight getTruckUnitWeight() {
+        return truckUnitWeight;
+    }
+
+    public void setTruckUnitWeight(final TruckUnitWeight truckUnitWeight) {
+        cleanStepsAfterCurrentM1Branch(4);
+        currentQuestion = Step.TRUCK_UNIT_WEIGHT;
+        this.truckUnitWeight = truckUnitWeight;
     }
 
     public void setGeneralTransportType(final GeneralTransportType transportType) {
@@ -146,14 +158,14 @@ public class UserProgress implements Serializable {
         this.m2EngineVolume = volumeOfEngine;
     }
 
-    public void setTruckUnitType(final TruckUnit truckUnit) {
-        cleanStepsAfterCurrentExceptM1Branch(2);
-        currentQuestion = Step.TRUCK_UNIT;
-        this.truckUnit = truckUnit;
+    public void setTruckUnitType(final TruckUnitClass truckUnit) {
+        cleanStepsAfterCurrentExceptM1Branch(3);
+        currentQuestion = Step.TRUCK_UNIT_CLASS;
+        this.truckUnitClass = truckUnit;
     }
 
-    public TruckUnit getTruckUnitType() {
-        return this.truckUnit;
+    public TruckUnitClass getTruckUnitType() {
+        return this.truckUnitClass;
     }
 
     public String getChatID() {
@@ -181,7 +193,7 @@ public class UserProgress implements Serializable {
                         return Step.M2_M3_ENGINE_TYPE;
                     } else {
                         if (exceptM1TransportType == ExceptM1TransportType.TRUCK_UNITS) {
-                            return Step.TRUCK_UNIT;
+                            return Step.TRUCK_UNIT_CLASS;
                         }
                     }
                 }
@@ -215,12 +227,12 @@ public class UserProgress implements Serializable {
                 }
             }
 
-            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE, M2_M3_ENGINE_VOLUME -> {
+            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE, M2_M3_ENGINE_VOLUME, TRUCK_UNIT_WEIGHT -> {
                 return Step.CAR_AGE;
             }
 
-            case TRUCK_UNIT -> {
-                return Step.FAREWELL;
+            case TRUCK_UNIT_CLASS -> {
+                return Step.TRUCK_UNIT_WEIGHT;
             }
 
             case CAR_AGE, FAREWELL -> {
@@ -261,6 +273,12 @@ public class UserProgress implements Serializable {
         }
         if (stepCleaner <= 2) {
             this.m2EngineVolume = null;
+        }
+        if (stepCleaner <= 3) {
+            this.truckUnitClass = null;
+        }
+        if (stepCleaner <= 4) {
+            this.truckUnitWeight = null;
         }
     }
 }

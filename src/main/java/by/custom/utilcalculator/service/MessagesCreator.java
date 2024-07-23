@@ -50,8 +50,11 @@ public class MessagesCreator {
             case M1_VOLUME_OF_ENGINE -> {
                 return getM1EngineVolume();
             }
-            case TRUCK_UNIT -> {
-                return getTruckUnit();
+            case TRUCK_UNIT_CLASS -> {
+                return getTruckUnitClass();
+            }
+            case TRUCK_UNIT_WEIGHT -> {
+                return getTruckUnitWeight();
             }
             case CAR_AGE -> {
                 return getAgeAuto();
@@ -63,10 +66,16 @@ public class MessagesCreator {
         return bundle.getString("answers.sorry");
     }
 
-    private String getTruckUnit() {
+    private String getTruckUnitClass() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.truck.type"), "\n",
                 Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"), "\n",
                 Command.TRUCK_UNITS_EXCEPT_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
+    }
+
+    private String getTruckUnitWeight() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                Command.TRUCK_UNITS_12_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
+                Command.TRUCK_UNITS_20_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
     }
 
     private String getM2EngineVolume() {
@@ -174,7 +183,6 @@ public class MessagesCreator {
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
             case M2_M3 -> sb.append(bundle.getString("answers.summary.m2_m3"));
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
-
             case TRAILERS_O4 -> {
             }
         }
@@ -214,6 +222,20 @@ public class MessagesCreator {
             }
             case LESS_OR_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
             case MORE_3_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
+        }
+
+        switch (userProgress.getTruckUnitType()) {
+            case null -> {
+            }
+            case TRUCK_UNITS_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.6_class"));
+            case TRUCK_UNITS_EXCEPT_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.except_6"));
+        }
+
+        switch (userProgress.getTruckUnitWeight()) {
+            case null -> {
+            }
+            case FROM_12_TILL_20_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
+            case FROM_20_TILL_50_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
         }
 
         if (userProgress.getTypeOfM1Engine() == ELECTRIC || userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC) {

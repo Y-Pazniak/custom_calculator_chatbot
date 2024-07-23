@@ -218,12 +218,26 @@ public class UserProgressManager {
         }
 
         switch (requestingCommand) {
-            case TRUCK_UNITS_6_CLASS -> userProgress.setTruckUnitType(TruckUnit.TRUCK_UNITS_6_CLASS);
-            case TRUCK_UNITS_EXCEPT_6_CLASS -> userProgress.setTruckUnitType(TruckUnit.TRUCK_UNITS_EXCEPT_6_CLASS);
+            case TRUCK_UNITS_6_CLASS -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_6_CLASS);
+            case TRUCK_UNITS_EXCEPT_6_CLASS -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS);
         }
         userProgressStorage.save(userProgress);
-        System.out.println("truck units");
-        return "Truck unit";
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processTruckUnitWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (!UserProgressValidator.validateCommand(Command.TRUCK_UNIT_WEIGHT, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
+        switch (requestingCommand) {
+            case TRUCK_UNITS_12_20_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_12_TILL_20_TONS);
+            case TRUCK_UNITS_20_50_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_20_TILL_50_TONS);
+        }
+
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
     }
 
     private static class BotFieldsManagerHolder {

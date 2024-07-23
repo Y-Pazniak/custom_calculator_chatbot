@@ -5,6 +5,7 @@ import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
 import by.custom.utilcalculator.domain.constants.steps.M2EngineVolume;
 import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
+import by.custom.utilcalculator.domain.constants.steps.TruckUnitClass;
 
 public class CalculatorExceptM1 {
     private CalculatorExceptM1() {
@@ -26,14 +27,46 @@ public class CalculatorExceptM1 {
             case M2_M3 -> {
                 return countForM2M3Price(userProgress);
             }
+            case TRUCK_UNITS -> {
+                return countForTruckUnits(userProgress);
+            }
             case TRAILERS_O4 -> {
                 return "trailers";
             }
-            case TRUCK_UNITS -> {
-                return "track units";
-            }
             case null, default -> {
                 return "unknown type of vehicle cat. M1-M3";
+            }
+        }
+    }
+
+    private String countForTruckUnits(final UserProgress userProgress) {
+        return userProgress.getTruckUnitType() == TruckUnitClass.TRUCK_UNITS_6_CLASS ? countForTruckUnits6Class(userProgress) : countForExcept6ClassUnits(userProgress);
+    }
+
+    private String countForExcept6ClassUnits(final UserProgress userProgress) {
+        switch (userProgress.getTruckUnitWeight()) {
+            case FROM_12_TILL_20_TONS -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_MORE_3_YEARS;
+            }
+            case FROM_20_TILL_50_TONS -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_20_50_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_20_50_TONS_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown except 6 class type";
+            }
+        }
+    }
+
+    private String countForTruckUnits6Class(final UserProgress userProgress) {
+        switch (userProgress.getTruckUnitWeight()) {
+            case FROM_12_TILL_20_TONS -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS;
+            }
+            case FROM_20_TILL_50_TONS -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown except 6 class type";
             }
         }
     }

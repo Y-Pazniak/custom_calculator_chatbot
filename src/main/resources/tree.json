@@ -121,11 +121,31 @@
           "children": [
             {
               "key": "TRUCK_UNITS_EXCEPT_6_CLASS",
-              "children": []
+              "children": [
+                {
+                  "key": "TRUCK_UNIT_WEIGHT",
+                  "children": [
+                    {
+                      "key": "AGE",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
             },
             {
               "key": "TRUCK_UNITS_6_CLASS",
-              "children": []
+              "children": [
+                {
+                  "key": "TRUCK_UNIT_WEIGHT",
+                  "children": [
+                    {
+                      "key": "AGE",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
