@@ -27,7 +27,7 @@ public class CommandTree {
         return fieldsToCommands;
     }
 
-    public boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+    public boolean validateCommandFromNode(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 

@@ -36,6 +36,10 @@ public class UserProgressManager {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
             case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
@@ -48,6 +52,10 @@ public class UserProgressManager {
     public String processN1_N3TransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
+
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
 
         switch (requestingCommand) {
             case N1_N3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.N1_N3);
@@ -62,6 +70,11 @@ public class UserProgressManager {
 
     public String processN1_N3TransportWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
+
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
         switch (requestingCommand) {
             case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.LESS_2_TONS);
             case BETWEEN_2_5_AND_3_5_TONS ->
@@ -80,6 +93,10 @@ public class UserProgressManager {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         final String message;
+
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
 
         if (Objects.equals(requestingCommand, Command.EAES)) {
             userProgress.setCountryOrigin(CountryOrigin.EAES);
@@ -121,7 +138,7 @@ public class UserProgressManager {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
-        if (!UserProgressValidator.validateCommand(Command.AGE, userProgress)) {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
@@ -170,6 +187,11 @@ public class UserProgressManager {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         final String message;
+
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
         switch (userProgress.getGeneralTransportType()) {
             case M1 -> processM1EngineVolume(userProgress, requestingCommand, chatID);
             case EXCEPT_M1 -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
@@ -179,7 +201,7 @@ public class UserProgressManager {
     }
 
     private void processExceptM1EngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
-        if (!UserProgressValidator.validateCommand(Command.M2_M3_GASOLINE_ENGINE_VOLUME, userProgress)) {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
@@ -194,7 +216,7 @@ public class UserProgressManager {
     }
 
     private void processM1EngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
-        if (!UserProgressValidator.validateCommand(Command.M1_GASOLINE_ENGINE_VOLUME, userProgress)) {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
@@ -227,7 +249,7 @@ public class UserProgressManager {
 
     public String processTruckUnitWeight(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
-        if (!UserProgressValidator.validateCommand(Command.TRUCK_UNIT_WEIGHT, userProgress)) {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
@@ -242,7 +264,7 @@ public class UserProgressManager {
 
     public String processTrailersO4Type(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
-        if (!UserProgressValidator.validateCommand(Command.TRAILERS_O4_TYPE, userProgress)) {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
