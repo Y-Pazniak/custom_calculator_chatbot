@@ -1,6 +1,5 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.tree.CommandTree;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -24,8 +23,6 @@ public class Bot extends TelegramLongPollingBot {
     private Bot() {
         //need MessageRouter object to work with it after - to proceed user's messages
         messageRouter = MessageRouter.getInstance();
-        //don't need commandTree object in future - only to load tree.json file to build correct branches of calculator
-        CommandTree.getInstance();
     }
 
     @Override
