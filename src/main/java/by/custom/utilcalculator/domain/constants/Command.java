@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.domain.constants;
 
 public enum Command {
-    //command not for user - just for path checking (not command actually, just a marker to make code in tree shorter)
+    //command families - not commands actually, just markers
     AGE("age", null),
     M1_GASOLINE_ENGINE_VOLUME("volume", null),
     N1_N3_WEIGHT("n1_n3_weight", null),
