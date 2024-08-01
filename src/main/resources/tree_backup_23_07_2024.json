@@ -46,7 +46,7 @@
                   "key": "GASOLINE_TYPE_ENGINE",
                   "children": [
                     {
-                      "key": "VOLUME",
+                      "key": "M1_GASOLINE_ENGINE_VOLUME",
                       "children": [
                         {
                           "key": "AGE",
@@ -78,15 +78,6 @@
           "key": "N1_N3",
           "children": [
             {
-              "key": "LESS_2_TONS",
-              "children": [
-                {
-                  "key": "AGE",
-                  "children": []
-                }
-              ]
-            },
-            {
               "key": "N1_N3_WEIGHT",
               "children": [
                 {
@@ -94,24 +85,48 @@
                   "children": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "key": "M2_M3",
+          "children": [
             {
-              "key": "M2_M3",
+              "key": "ELECTRIC_TYPE_ENGINE",
               "children": [
                 {
-                  "key": "ELECTRIC_TYPE_ENGINE",
+                  "key": "AGE",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "GASOLINE_TYPE_ENGINE",
+              "children": [
+                {
+                  "key": "M2_M3_GASOLINE_ENGINE_VOLUME",
                   "children": [
                     {
                       "key": "AGE",
                       "children": []
                     }
                   ]
-                },
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "TRUCK_UNITS",
+          "children": [
+            {
+              "key": "TRUCK_UNITS_EXCEPT_6_CLASS",
+              "children": [
                 {
-                  "key": "GASOLINE_TYPE_ENGINE",
+                  "key": "TRUCK_UNIT_WEIGHT",
                   "children": [
                     {
-                      "key": "M2_M3_GASOLINE_ENGINE_VOLUME",
+                      "key": "AGE",
                       "children": []
                     }
                   ]
@@ -119,20 +134,30 @@
               ]
             },
             {
-              "key": "TRUCK_UNITS",
-              "children": []
-            },
-            {
-              "key": "TRAILERS_O4",
-              "children": []
+              "key": "TRUCK_UNITS_6_CLASS",
+              "children": [
+                {
+                  "key": "TRUCK_UNIT_WEIGHT",
+                  "children": [
+                    {
+                      "key": "AGE",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
         {
-          "key": "TRAILERS",
+          "key": "TRAILERS_O4",
           "children": []
         }
       ]
+    },
+    {
+      "key": "TRAILERS",
+      "children": []
     }
   ]
 }

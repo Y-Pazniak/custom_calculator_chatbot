@@ -18,8 +18,8 @@ public class HelperTree {
         final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>();
         //vehicle type step
         fieldsToCommands.put(GeneralTransportType.M1, Command.M1);
-        fieldsToCommands.put(GeneralTransportType.EXCEPT_M1, Command.EXCEPT_M1);
-        fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.TRAILERS);
+        fieldsToCommands.put(GeneralTransportType.EXCEPT_M1, Command.BUSES_AND_TRUCKS);
+        fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.SELF_PROPELLED_VEHICLES);
         //vehicle type m1-m3
         fieldsToCommands.put(ExceptM1TransportType.N1_N3, Command.N1_N3);
         fieldsToCommands.put(ExceptM1TransportType.M2_M3, Command.M2_M3);
@@ -61,7 +61,7 @@ public class HelperTree {
         fieldsToCommands.put(M1EngineVolume.MORE_3500, Command.M1_GASOLINE_ENGINE_VOLUME);
         //truck units step
         fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_6_CLASS, Command.TRUCK_UNITS_6_CLASS);
-        fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS, Command.TRUCK_UNITS_EXCEPT_6_CLASS);
+        fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS, Command.TRUCK_UNITS_OTHER);
         //truck units weight step
         fieldsToCommands.put(TruckUnitWeight.FROM_12_TILL_20_TONS, Command.TRUCK_UNIT_WEIGHT);
         fieldsToCommands.put(TruckUnitWeight.FROM_20_TILL_50_TONS, Command.TRUCK_UNIT_WEIGHT);

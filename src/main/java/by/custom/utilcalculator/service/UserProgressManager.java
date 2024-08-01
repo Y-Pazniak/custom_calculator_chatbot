@@ -38,7 +38,7 @@ public class UserProgressManager {
 
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
-            case EXCEPT_M1 -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
+            case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
         }
 
         userProgressStorage.save(userProgress);
@@ -219,7 +219,7 @@ public class UserProgressManager {
 
         switch (requestingCommand) {
             case TRUCK_UNITS_6_CLASS -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_6_CLASS);
-            case TRUCK_UNITS_EXCEPT_6_CLASS -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS);
+            case TRUCK_UNITS_OTHER -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS);
         }
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);

@@ -1,26 +1,33 @@
 {
   "key": "START",
+  "description": "base node to start - runs automatically",
   "children": [
     {
       "key": "M1",
+      "description": "M1 - passenger's vehicles: this node starts passenger branch, details about M1: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
       "children": [
         {
           "key": "EAES",
+          "description": "branch for M1 vehicles from EAES (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia)",
           "children": [
             {
               "key": "PHYSICAL_PERSON",
+              "description": "common person, who does not represent any company",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
             },
             {
               "key": "JURIDICAL_PERSON",
+              "description": "branch for companies who want to purchase a passenger M1 car from EAES",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
@@ -29,27 +36,34 @@
         },
         {
           "key": "OTHER_COUNTRIES",
+          "description": "it means any country except EAES countries",
           "children": [
             {
               "key": "PHYSICAL_PERSON",
+              "description": "common person, who does not represent any company",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
             },
             {
               "key": "JURIDICAL_PERSON",
+              "description": "branch for companies who want to purchase a passenger M1 car from countries except EAES",
               "children": [
                 {
                   "key": "GASOLINE_TYPE_ENGINE",
+                  "description": "if car has gasoline or hybrid engine, it will be different branch",
                   "children": [
                     {
                       "key": "M1_GASOLINE_ENGINE_VOLUME",
+                      "description": "we unite GASOLINE branches into one node to make code shorter",
                       "children": [
                         {
                           "key": "AGE",
+                          "description": "we unite AGE branches into one node to make code shorter",
                           "children": []
                         }
                       ]
@@ -58,9 +72,11 @@
                 },
                 {
                   "key": "ELECTRIC_TYPE_ENGINE",
+                  "description": "if car has pure electric engine, it will be different branch",
                   "children": [
                     {
                       "key": "AGE",
+                      "description": "we unite AGE branches into one node to make code shorter",
                       "children": []
                     }
                   ]
@@ -72,16 +88,20 @@
       ]
     },
     {
-      "key": "EXCEPT_M1",
+      "key": "BUSES_AND_TRUCKS",
+      "description": "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks): https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
       "children": [
         {
           "key": "N1_N3",
+          "description": "trucks: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
           "children": [
             {
               "key": "N1_N3_WEIGHT",
+              "description": "we unite WEIGHT branches into one node to make code shorter",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
@@ -90,24 +110,30 @@
         },
         {
           "key": "M2_M3",
+          "description": "buses: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
           "children": [
             {
               "key": "ELECTRIC_TYPE_ENGINE",
+              "description": "if bus has an electric type of engine",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
             },
             {
               "key": "GASOLINE_TYPE_ENGINE",
+              "description": "if bus has a gasoline or hybrid type of engine",
               "children": [
                 {
                   "key": "M2_M3_GASOLINE_ENGINE_VOLUME",
+                  "description": "we unite GASOLINE branches into one node to make code shorter",
                   "children": [
                     {
                       "key": "AGE",
+                      "description": "we unite AGE branches into one node to make code shorter",
                       "children": []
                     }
                   ]
@@ -118,15 +144,19 @@
         },
         {
           "key": "TRUCK_UNITS",
+          "description": "truck units - do not confuse with trucks: https://en.wikipedia.org/wiki/Tractor_unit",
           "children": [
             {
-              "key": "TRUCK_UNITS_EXCEPT_6_CLASS",
+              "key": "TRUCK_UNITS_OTHER",
+              "description": "truck units except eco class 6: https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D1%80%D0%BE-6",
               "children": [
                 {
                   "key": "TRUCK_UNIT_WEIGHT",
+                  "description": "we unite WEIGHT branches into one node to make code shorter",
                   "children": [
                     {
                       "key": "AGE",
+                      "description": "we unite AGE branches into one node to make code shorter",
                       "children": []
                     }
                   ]
@@ -135,12 +165,15 @@
             },
             {
               "key": "TRUCK_UNITS_6_CLASS",
+              "description": "truck units with eco class 6: https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D1%80%D0%BE-6",
               "children": [
                 {
                   "key": "TRUCK_UNIT_WEIGHT",
+                  "description": "we unite WEIGHT branches into one node to make code shorter",
                   "children": [
                     {
                       "key": "AGE",
+                      "description": "we unite AGE branches into one node to make code shorter",
                       "children": []
                     }
                   ]
@@ -151,12 +184,15 @@
         },
         {
           "key": "TRAILERS_O4",
+          "description": "trailers O4 class: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
           "children": [
             {
               "key": "TRAILERS_O4_TYPE",
+              "description": "there are two types of O4 trailers: trailers and semitrailers: https://en.wikipedia.org/wiki/Semi-trailer",
               "children": [
                 {
                   "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
                   "children": []
                 }
               ]
@@ -166,7 +202,7 @@
       ]
     },
     {
-      "key": "TRAILERS",
+      "key": "SELF_PROPELLED_VEHICLES",
       "children": []
     }
   ]

@@ -5,9 +5,9 @@ public enum Command {
     START("/start"),
 
     //general type of vehicle
-    M1("/m1"),
-    EXCEPT_M1("/except_m1"),
-    TRAILERS("/trailers"),
+    M1("/cars"),
+    BUSES_AND_TRUCKS("/buses_and_trucks"),
+    SELF_PROPELLED_VEHICLES("/self_propelled_vehicles"),
 
     //type of except m1 vehicle
     N1_N3("/n1_n3"),
@@ -54,7 +54,7 @@ public enum Command {
 
     //truck units class
     TRUCK_UNITS_6_CLASS("/6_class"),
-    TRUCK_UNITS_EXCEPT_6_CLASS("/except_6_class"),
+    TRUCK_UNITS_OTHER("/except_6_class"),
 
     //truck units weight
     TRUCK_UNITS_12_20_TONS("/12_20_tons"),

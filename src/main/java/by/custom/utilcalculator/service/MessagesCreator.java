@@ -78,7 +78,7 @@ public class MessagesCreator {
     private String getTruckUnitClass() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.truck.type"), "\n",
                 Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"), "\n",
-                Command.TRUCK_UNITS_EXCEPT_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
+                Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
     }
 
     private String getTruckUnitWeight() {
@@ -104,8 +104,8 @@ public class MessagesCreator {
     public String getGreeting() {
         return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
                 Command.M1.getCommand(), " ", bundle.getString("answers.details.m1"), "\n",
-                Command.EXCEPT_M1.getCommand(), " ", bundle.getString("answers.details.except_m1"), "\n",
-                Command.TRAILERS.getCommand(), " ", bundle.getString("answers.details.trailers"));
+                Command.BUSES_AND_TRUCKS.getCommand(), " ", bundle.getString("answers.details.except_m1"), "\n",
+                Command.SELF_PROPELLED_VEHICLES.getCommand(), " ", bundle.getString("answers.details.trailers"));
     }
 
     public String getCountryOrigin() {
