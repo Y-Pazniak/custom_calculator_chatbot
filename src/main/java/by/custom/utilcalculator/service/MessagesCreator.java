@@ -2,6 +2,7 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.CountryOrigin;
 import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 
@@ -42,7 +43,7 @@ public class MessagesCreator {
                 return getCountryOrigin();
             }
             case OWNERS_TYPE -> {
-                return getTypeOfOwner();
+                return userProgress.getCountryOrigin() == CountryOrigin.EAES ? getTypeOfOwnerEAES() : getTypeOfOwnerOther();
             }
             case M1_TYPE_OF_ENGINE -> {
                 return getM1TypeOfEngine();
@@ -97,8 +98,8 @@ public class MessagesCreator {
 
     private String getM2EngineType() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE_TYPE_ENGINE_BUSES.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE_BUSES.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getGreeting() {
@@ -162,10 +163,16 @@ public class MessagesCreator {
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
 
-    public String getTypeOfOwner() {
+    public String getTypeOfOwnerEAES() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
                 Command.PHYSICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.physical"), "\n",
                 Command.JURIDICAL_PERSON_EAES.getCommand(), " ", bundle.getString("answers.details.juridical"));
+    }
+
+    public String getTypeOfOwnerOther() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
+                Command.PHYSICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.physical"), "\n",
+                Command.JURIDICAL_PERSON_OTHER.getCommand(), " ", bundle.getString("answers.details.juridical"));
     }
 
     public String getSorry() {
@@ -222,7 +229,7 @@ public class MessagesCreator {
             case null -> {
             }
             case PHYSICAL -> sb.append(bundle.getString("answers.summary.physical"));
-            case JURIDICAL -> sb.append(bundle.getString("answers.summary.juridical"));
+            case JURIDICAL_EAES, JURIDICAL_OTHER -> sb.append(bundle.getString("answers.summary.juridical"));
         }
 
         switch (userProgress.getCarAge()) {

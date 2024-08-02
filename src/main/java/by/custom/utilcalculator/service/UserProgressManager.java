@@ -40,6 +40,8 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
 
+        userProgress.setNextStep(requestingCommand.getNextStep());
+
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
             case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
@@ -56,7 +58,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case N1_N3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.N1_N3);
             case M2_M3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.M2_M3);
@@ -74,7 +76,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.LESS_2_TONS);
             case BETWEEN_2_5_AND_3_5_TONS ->
@@ -97,7 +99,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         if (Objects.equals(requestingCommand, Command.EAES)) {
             userProgress.setCountryOrigin(CountryOrigin.EAES);
         } else if (Objects.equals(requestingCommand, Command.OTHER_COUNTRIES)) {
@@ -117,15 +119,13 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         final String message;
 
-        if (Objects.equals(requestingCommand, Command.JURIDICAL_PERSON_EAES)) {
-            userProgress.setOwnersType(OwnersType.JURIDICAL);
-        } else {
-            if (Objects.equals(requestingCommand, Command.PHYSICAL_PERSON)) {
-                userProgress.setOwnersType(OwnersType.PHYSICAL);
-            }
+        switch (requestingCommand) {
+            case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
+            case Command.JURIDICAL_PERSON_EAES -> userProgress.setOwnersType(OwnersType.JURIDICAL_EAES);
+            case Command.JURIDICAL_PERSON_OTHER -> userProgress.setOwnersType(OwnersType.JURIDICAL_OTHER);
         }
 
         userProgressStorage.save(userProgress);
@@ -141,7 +141,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         final String message;
 
         if (Objects.equals(requestingCommand, Command.LESS_3_YEARS_AGE)) {
@@ -164,13 +164,16 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_M1)) {
+
+        userProgress.setNextStep(requestingCommand.getNextStep());
+
+        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_M1) || Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_BUSES)) {
             switch (userProgress.getGeneralTransportType()) {
                 case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.GASOLINE);
                 case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.GASOLINE);
             }
         } else {
-            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_M1)) {
+            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_M1) || Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_BUSES)) {
                 switch (userProgress.getGeneralTransportType()) {
                     case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.ELECTRIC);
                     case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.ELECTRIC);
@@ -191,7 +194,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (userProgress.getGeneralTransportType()) {
             case M1 -> processM1EngineVolume(userProgress, requestingCommand, chatID);
             case EXCEPT_M1 -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
@@ -204,6 +207,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case Command.M2_VOLUME_LESS_2500_CM -> userProgress.setM2Volume(M2EngineVolume.LESS_2500);
             case Command.M2_VOLUME_BETWEEN_2500_5000_CM ->
@@ -219,6 +223,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case Command.M1_VOLUME_LESS_1000_CM -> userProgress.setM1Volume(M1EngineVolume.LESS_1000);
             case Command.M1_VOLUME_BETWEEN_1000_2000_CM ->
@@ -238,7 +243,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case TRUCK_UNITS_6_CLASS -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_6_CLASS);
             case TRUCK_UNITS_OTHER -> userProgress.setTruckUnitType(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS);
@@ -252,7 +257,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case TRUCK_UNITS_12_20_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_12_TILL_20_TONS);
             case TRUCK_UNITS_20_50_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_20_TILL_50_TONS);
@@ -267,7 +272,7 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-
+        userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
             case TRAILERS_04_TYPE -> userProgress.setTrailerO4Type(TrailerO4Type.TRAILERS);
             case HALF_TRAILERS_04_TYPE -> userProgress.setTrailerO4Type(TrailerO4Type.HALF_TRAILERS);

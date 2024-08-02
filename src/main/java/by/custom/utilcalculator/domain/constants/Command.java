@@ -15,7 +15,7 @@ public enum Command {
     START("/start", null, Step.GENERAL_TRANSPORT_TYPE),
 
     //general type of vehicle
-    M1("/cars", null, Step.OWNERS_TYPE),
+    M1("/cars", null, Step.COUNTRY_ORIGIN),
     BUSES_AND_TRUCKS("/buses_and_trucks", null, Step.BUSES_AND_TRUCKS_TYPES),
     SELF_PROPELLED_VEHICLES("/self_propelled_vehicles", null, Step.FAREWELL),
 
@@ -40,8 +40,7 @@ public enum Command {
 
     PHYSICAL_PERSON("/physical", null, Step.CAR_AGE),
     JURIDICAL_PERSON_EAES("/juridical_eaes", null, Step.CAR_AGE),
-    //TODO add this command to router and add processing of this command
-    JURIDICAL_PERSON_OTHER("/juridical_other", null, Step.M1_VOLUME_OF_ENGINE),
+    JURIDICAL_PERSON_OTHER("/juridical_other", null, Step.M1_TYPE_OF_ENGINE),
 
     //age command
     LESS_3_YEARS_AGE("/3_or_less_years", Command.AGE, Step.FAREWELL),
@@ -51,10 +50,9 @@ public enum Command {
     GASOLINE_TYPE_ENGINE_M1("/gasoline_m1", null, Step.M1_VOLUME_OF_ENGINE),
     ELECTRIC_TYPE_ENGINE_M1("/electric_m1", null, Step.CAR_AGE),
 
-    //TODO add this command to router and add processing of this commands
     //type of engine command for buses and trucks
-    GASOLINE_TYPE_ENGINE_BUSES_AND_TRUCKS("/gasoline_buses_and_trucks", null, Step.M1_TYPE_OF_ENGINE),
-    ELECTRIC_TYPE_ENGINE_BUSES_AND_TRUCKS("/electric_buses_and_trucks", null, Step.M1_TYPE_OF_ENGINE),
+    GASOLINE_TYPE_ENGINE_BUSES("/gasoline_buses", null, Step.M2_M3_ENGINE_VOLUME),
+    ELECTRIC_TYPE_ENGINE_BUSES("/electric_buses", null, Step.CAR_AGE),
 
     //m1 engine volume command
     M1_VOLUME_LESS_1000_CM("/less_1000", M1_GASOLINE_ENGINE_VOLUME, Step.CAR_AGE),

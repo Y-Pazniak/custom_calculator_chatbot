@@ -22,7 +22,7 @@
               ]
             },
             {
-              "key": "JURIDICAL_PERSON",
+              "key": "JURIDICAL_PERSON_EAES",
               "description": "branch for companies who want to purchase a passenger M1 car from EAES",
               "children": [
                 {
@@ -50,11 +50,11 @@
               ]
             },
             {
-              "key": "JURIDICAL_PERSON",
+              "key": "JURIDICAL_PERSON_OTHER",
               "description": "branch for companies who want to purchase a passenger M1 car from countries except EAES",
               "children": [
                 {
-                  "key": "GASOLINE_TYPE_ENGINE",
+                  "key": "GASOLINE_TYPE_ENGINE_M1",
                   "description": "if car has gasoline or hybrid engine, it will be different branch",
                   "children": [
                     {
@@ -71,7 +71,7 @@
                   ]
                 },
                 {
-                  "key": "ELECTRIC_TYPE_ENGINE",
+                  "key": "ELECTRIC_TYPE_ENGINE_M1",
                   "description": "if car has pure electric engine, it will be different branch",
                   "children": [
                     {
@@ -113,7 +113,7 @@
           "description": "buses: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
           "children": [
             {
-              "key": "ELECTRIC_TYPE_ENGINE",
+              "key": "ELECTRIC_TYPE_ENGINE_BUSES",
               "description": "if bus has an electric type of engine",
               "children": [
                 {
@@ -124,7 +124,7 @@
               ]
             },
             {
-              "key": "GASOLINE_TYPE_ENGINE",
+              "key": "GASOLINE_TYPE_ENGINE_BUSES",
               "description": "if bus has a gasoline or hybrid type of engine",
               "children": [
                 {

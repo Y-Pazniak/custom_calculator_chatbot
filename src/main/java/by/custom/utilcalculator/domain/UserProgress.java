@@ -7,8 +7,6 @@ import by.custom.utilcalculator.domain.tree.CommandTree;
 import java.io.Serializable;
 import java.util.Map;
 
-import static by.custom.utilcalculator.domain.constants.steps.Step.M2_M3_ENGINE_TYPE;
-
 public class UserProgress implements Serializable {
     private GeneralTransportType generalTransportType = null;
     private CountryOrigin countryOrigin = null;
@@ -24,10 +22,18 @@ public class UserProgress implements Serializable {
     private TruckUnitWeight truckUnitWeight = null;
     private TrailerO4Type trailersO4Type = null;
     private final String chatID;
-    private Step currentQuestion;
+    private Step nextStep;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
+    }
+
+    public void setNextStep(final Step nextStep) {
+        this.nextStep = nextStep;
+    }
+
+    public Step getNextStep(){
+        return nextStep;
     }
 
     public GeneralTransportType getGeneralTransportType() {
@@ -67,19 +73,16 @@ public class UserProgress implements Serializable {
 
     public void setTrailerO4Type(final TrailerO4Type trailersO4Type) {
         cleanStepsAfterCurrentM1Branch(3);
-        currentQuestion = Step.TRAILERS_O4_TYPE;
         this.trailersO4Type = trailersO4Type;
     }
 
     public void setTruckUnitWeight(final TruckUnitWeight truckUnitWeight) {
         cleanStepsAfterCurrentM1Branch(4);
-        currentQuestion = Step.TRUCK_UNIT_WEIGHT;
         this.truckUnitWeight = truckUnitWeight;
     }
 
     public void setGeneralTransportType(final GeneralTransportType transportType) {
         cleanStepsAfterCurrentM1Branch(0);
-        currentQuestion = Step.GENERAL_TRANSPORT_TYPE;
         this.generalTransportType = transportType;
     }
 
@@ -93,7 +96,6 @@ public class UserProgress implements Serializable {
 
     public void setEngineTypeM2M3(final M2M3EngineType engineTypeM2M3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
-        currentQuestion = M2_M3_ENGINE_TYPE;
         this.engineTypeM2M3 = engineTypeM2M3;
     }
 
@@ -103,13 +105,11 @@ public class UserProgress implements Serializable {
 
     public void setExceptM1TransportType(final ExceptM1TransportType exceptM1TransportType) {
         cleanStepsAfterCurrentExceptM1Branch(0);
-        currentQuestion = Step.BUSES_AND_TRUCKS_TYPES;
         this.exceptM1TransportType = exceptM1TransportType;
     }
 
     public void setTransportWeightN1N2N3(final N1N3TransportWeight transportWeightN1N2N3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
-        currentQuestion = Step.N1_N3_WEIGHT;
         this.transportWeightN1N2N3 = transportWeightN1N2N3;
     }
 
@@ -120,7 +120,6 @@ public class UserProgress implements Serializable {
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
         final int stepID = 1;
         cleanStepsAfterCurrentM1Branch(stepID);
-        currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
     }
 
@@ -130,7 +129,6 @@ public class UserProgress implements Serializable {
 
     public void setOwnersType(final OwnersType ownersType) {
         cleanStepsAfterCurrentM1Branch(2);
-        currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
     }
 
@@ -140,7 +138,6 @@ public class UserProgress implements Serializable {
 
     public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrentM1Branch(4);
-        currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
     }
 
@@ -150,7 +147,6 @@ public class UserProgress implements Serializable {
 
     public void setTypeOfEngineM1(final M1TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrentM1Branch(3);
-        currentQuestion = Step.M1_TYPE_OF_ENGINE;
         this.typeOfEngine = typeOfEngine;
     }
 
@@ -160,19 +156,16 @@ public class UserProgress implements Serializable {
 
     public void setM1Volume(final M1EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentM1Branch(4);
-        currentQuestion = Step.M1_VOLUME_OF_ENGINE;
         this.m1EngineVolume = volumeOfEngine;
     }
 
     public void setM2Volume(final M2EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentExceptM1Branch(2);
-        currentQuestion = Step.M2_M3_ENGINE_VOLUME;
         this.m2EngineVolume = volumeOfEngine;
     }
 
     public void setTruckUnitType(final TruckUnitClass truckUnit) {
         cleanStepsAfterCurrentExceptM1Branch(3);
-        currentQuestion = Step.TRUCK_UNIT_CLASS;
         this.truckUnitClass = truckUnit;
     }
 
@@ -182,83 +175,6 @@ public class UserProgress implements Serializable {
 
     public String getChatID() {
         return chatID;
-    }
-
-    //method checks for last answered question and sends next step, which depends on current user's answers
-    public Step getNextStep() {
-        switch (currentQuestion) {
-            case GENERAL_TRANSPORT_TYPE -> {
-                if (generalTransportType == GeneralTransportType.M1) {
-                    return Step.COUNTRY_ORIGIN;
-                } else {
-                    if (generalTransportType == GeneralTransportType.EXCEPT_M1) {
-                        return Step.BUSES_AND_TRUCKS_TYPES;
-                    }
-                }
-            }
-
-            case BUSES_AND_TRUCKS_TYPES -> {
-                if (exceptM1TransportType == ExceptM1TransportType.N1_N3) {
-                    return Step.N1_N3_WEIGHT;
-                } else {
-                    if (exceptM1TransportType == ExceptM1TransportType.M2_M3) {
-                        return Step.M2_M3_ENGINE_TYPE;
-                    } else {
-                        if (exceptM1TransportType == ExceptM1TransportType.TRUCK_UNITS) {
-                            return Step.TRUCK_UNIT_CLASS;
-                        } else {
-                            if (exceptM1TransportType == ExceptM1TransportType.TRAILERS_O4) {
-                                return Step.TRAILERS_O4_TYPE;
-                            }
-                        }
-                    }
-                }
-            }
-
-            case M2_M3_ENGINE_TYPE -> {
-                if (engineTypeM2M3 == M2M3EngineType.ELECTRIC) {
-                    return Step.CAR_AGE;
-                } else {
-                    if (engineTypeM2M3 == M2M3EngineType.GASOLINE) {
-                        return Step.M2_M3_ENGINE_VOLUME;
-                    }
-                }
-            }
-
-            case COUNTRY_ORIGIN -> {
-                return Step.OWNERS_TYPE;
-            }
-            case OWNERS_TYPE -> {
-                if (ownersType == OwnersType.PHYSICAL || countryOrigin == CountryOrigin.EAES) {
-                    return Step.CAR_AGE;
-                } else {
-                    return Step.M1_TYPE_OF_ENGINE;
-                }
-            }
-            case M1_TYPE_OF_ENGINE -> {
-                if (typeOfEngine == M1TypeOfEngine.GASOLINE) {
-                    return Step.M1_VOLUME_OF_ENGINE;
-                } else {
-                    return Step.CAR_AGE;
-                }
-            }
-
-            case N1_N3_WEIGHT, M1_VOLUME_OF_ENGINE, M2_M3_ENGINE_VOLUME, TRUCK_UNIT_WEIGHT, TRAILERS_O4_TYPE -> {
-                return Step.CAR_AGE;
-            }
-
-            case TRUCK_UNIT_CLASS -> {
-                return Step.TRUCK_UNIT_WEIGHT;
-            }
-
-            case CAR_AGE, FAREWELL -> {
-                return Step.FAREWELL;
-            }
-            case null, default -> {
-                return Step.GENERAL_TRANSPORT_TYPE;
-            }
-        }
-        return Step.GENERAL_TRANSPORT_TYPE;
     }
 
     private void cleanStepsAfterCurrentM1Branch(final int stepCleaner) {
