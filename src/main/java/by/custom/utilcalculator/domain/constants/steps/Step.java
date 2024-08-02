@@ -3,7 +3,7 @@ package by.custom.utilcalculator.domain.constants.steps;
 public enum Step {
     GENERAL_TRANSPORT_TYPE,
     COUNTRY_ORIGIN,
-    EXCEPT_M1_TRANSPORT_TYPE,
+    BUSES_AND_TRUCKS_TYPES,
     OWNERS_TYPE,
     N1_N3_WEIGHT,
     M2_M3_ENGINE_TYPE,

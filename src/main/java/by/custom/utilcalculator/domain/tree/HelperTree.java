@@ -34,8 +34,8 @@ public class HelperTree {
         fieldsToCommands.put(N1N3TransportWeight.BETWEEN_12_AND_20, Command.N1_N3_WEIGHT);
         fieldsToCommands.put(N1N3TransportWeight.BETWEEN_20_AND_50, Command.N1_N3_WEIGHT);
         //m2-m3 engine types
-        fieldsToCommands.put(M2M3EngineType.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE);
-        fieldsToCommands.put(M2M3EngineType.GASOLINE, Command.GASOLINE_TYPE_ENGINE);
+        fieldsToCommands.put(M2M3EngineType.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE_M1);
+        fieldsToCommands.put(M2M3EngineType.GASOLINE, Command.GASOLINE_TYPE_ENGINE_M1);
         //m2-m3 gasoline volume
         fieldsToCommands.put(M2EngineVolume.LESS_2500, Command.M2_M3_GASOLINE_ENGINE_VOLUME);
         fieldsToCommands.put(M2EngineVolume.BETWEEN_2500_AND_5000, Command.M2_M3_GASOLINE_ENGINE_VOLUME);
@@ -46,13 +46,13 @@ public class HelperTree {
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
         //type of person step
         fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON);
-        fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON);
+        fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON_EAES);
         //age step
         fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE);
         fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE);
         //type of engine step
-        fieldsToCommands.put(M1TypeOfEngine.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE);
-        fieldsToCommands.put(M1TypeOfEngine.GASOLINE, Command.GASOLINE_TYPE_ENGINE);
+        fieldsToCommands.put(M1TypeOfEngine.ELECTRIC, Command.ELECTRIC_TYPE_ENGINE_M1);
+        fieldsToCommands.put(M1TypeOfEngine.GASOLINE, Command.GASOLINE_TYPE_ENGINE_M1);
         //engine's volume step
         fieldsToCommands.put(M1EngineVolume.LESS_1000, Command.M1_GASOLINE_ENGINE_VOLUME);
         fieldsToCommands.put(M1EngineVolume.BETWEEN_1000_AND_2000, Command.M1_GASOLINE_ENGINE_VOLUME);

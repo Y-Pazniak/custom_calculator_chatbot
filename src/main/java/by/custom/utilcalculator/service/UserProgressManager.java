@@ -120,7 +120,7 @@ public class UserProgressManager {
 
         final String message;
 
-        if (Objects.equals(requestingCommand, Command.JURIDICAL_PERSON)) {
+        if (Objects.equals(requestingCommand, Command.JURIDICAL_PERSON_EAES)) {
             userProgress.setOwnersType(OwnersType.JURIDICAL);
         } else {
             if (Objects.equals(requestingCommand, Command.PHYSICAL_PERSON)) {
@@ -164,13 +164,13 @@ public class UserProgressManager {
         if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE)) {
+        if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_M1)) {
             switch (userProgress.getGeneralTransportType()) {
                 case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.GASOLINE);
                 case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.GASOLINE);
             }
         } else {
-            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE)) {
+            if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_M1)) {
                 switch (userProgress.getGeneralTransportType()) {
                     case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.ELECTRIC);
                     case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.ELECTRIC);

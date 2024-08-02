@@ -26,7 +26,7 @@ public class MessagesCreator {
             case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
             }
-            case EXCEPT_M1_TRANSPORT_TYPE -> {
+            case BUSES_AND_TRUCKS_TYPES -> {
                 return getExceptM1TransportType();
             }
             case N1_N3_WEIGHT -> {
@@ -97,8 +97,8 @@ public class MessagesCreator {
 
     private String getM2EngineType() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getGreeting() {
@@ -135,8 +135,8 @@ public class MessagesCreator {
 
     public String getM1TypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
     public String getM1EngineVolume() {
@@ -165,7 +165,7 @@ public class MessagesCreator {
     public String getTypeOfOwner() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
                 Command.PHYSICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.physical"), "\n",
-                Command.JURIDICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.juridical"));
+                Command.JURIDICAL_PERSON_EAES.getCommand(), " ", bundle.getString("answers.details.juridical"));
     }
 
     public String getSorry() {

@@ -103,7 +103,7 @@ public class UserProgress implements Serializable {
 
     public void setExceptM1TransportType(final ExceptM1TransportType exceptM1TransportType) {
         cleanStepsAfterCurrentExceptM1Branch(0);
-        currentQuestion = Step.EXCEPT_M1_TRANSPORT_TYPE;
+        currentQuestion = Step.BUSES_AND_TRUCKS_TYPES;
         this.exceptM1TransportType = exceptM1TransportType;
     }
 
@@ -192,12 +192,12 @@ public class UserProgress implements Serializable {
                     return Step.COUNTRY_ORIGIN;
                 } else {
                     if (generalTransportType == GeneralTransportType.EXCEPT_M1) {
-                        return Step.EXCEPT_M1_TRANSPORT_TYPE;
+                        return Step.BUSES_AND_TRUCKS_TYPES;
                     }
                 }
             }
 
-            case EXCEPT_M1_TRANSPORT_TYPE -> {
+            case BUSES_AND_TRUCKS_TYPES -> {
                 if (exceptM1TransportType == ExceptM1TransportType.N1_N3) {
                     return Step.N1_N3_WEIGHT;
                 } else {
