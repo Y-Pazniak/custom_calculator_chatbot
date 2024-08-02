@@ -1,6 +1,5 @@
 package by.custom.utilcalculator.controller;
 
-import by.custom.utilcalculator.domain.tree.CommandTree;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -22,9 +21,8 @@ public class Bot extends TelegramLongPollingBot {
 
     //private constructor to avoid wrong bot's creation
     private Bot() {
-        //initDB();
+        //need MessageRouter object to work with it after - to proceed user's messages
         messageRouter = MessageRouter.getInstance();
-        CommandTree.getInstance();
     }
 
     @Override
