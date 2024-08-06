@@ -85,4 +85,14 @@ public class Price {
     //price for "except m1 -> trailers -> trailers and half-trailers"
     public static final String EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_LESS_OR_3_YEARS = "23244,0";
     public static final String EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_MORE_3_YEARS = "78448,5";
+
+    //price for "self-propelled -> graders"
+    public static final String SELF_PROPELLED_GRADERS_LESS_100HP_LESS_OR_3_YEARS =  "21384.48";
+    public static final String SELF_PROPELLED_GRADERS_LESS_100HP_MORE_3_YEARS = "56802.53";
+    public static final String SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_LESS_OR_3_YEARS = "78454.31 ";
+    public static final String SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_MORE_3_YEARS = "205491.49";
+    public static final String SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_LESS_OR_3_YEARS = "82664.38";
+    public static final String SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_MORE_3_YEARS = "223133.68";
+    public static final String SELF_PROPELLED_GRADERS_MORE_200HP_LESS_OR_3_YEARS = "112335.35";
+    public static final String SELF_PROPELLED_GRADERS_MORE_200HP_MORE_3_YEARS = "332795.97";
 }

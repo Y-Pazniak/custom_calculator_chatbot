@@ -45,7 +45,8 @@ public class UserProgressManager {
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
             case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.BUSES_AND_TRUCKS);
-            case SELF_PROPELLED_VEHICLES -> userProgress.setGeneralTransportType(GeneralTransportType.SELF_PROPELLED_VEHICLES);
+            case SELF_PROPELLED_VEHICLES ->
+                    userProgress.setGeneralTransportType(GeneralTransportType.SELF_PROPELLED_VEHICLES);
         }
 
         userProgressStorage.save(userProgress);
@@ -187,7 +188,7 @@ public class UserProgressManager {
         return message;
     }
 
-    public String processEngineVolume(final Command requestingCommand, final String chatID) throws UtilsborException {
+    public String processEngineVolumeOrPower(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         final String message;
@@ -199,9 +200,24 @@ public class UserProgressManager {
         switch (userProgress.getGeneralTransportType()) {
             case M1 -> processM1EngineVolume(userProgress, requestingCommand, chatID);
             case BUSES_AND_TRUCKS -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
+            case SELF_PROPELLED_VEHICLES -> processSelfPropelledPower(userProgress, requestingCommand, chatID);
         }
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;
+    }
+
+    private void processSelfPropelledPower(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+        userProgress.setNextStep(requestingCommand.getNextStep());
+        switch (requestingCommand) {
+            case Command.GRADERS_LESS_100 -> userProgress.setSelfPropelledPower(SelfPropelledPower.LESS_100);
+            case Command.GRADERS_100_140 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_100_140);
+            case Command.GRADERS_140_200 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_140_200);
+            case Command.GRADERS_MORE_200 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_200);
+        }
+        userProgressStorage.save(userProgress);
     }
 
     private void processExceptM1EngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
@@ -281,6 +297,31 @@ public class UserProgressManager {
 
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processSelfPropelledType(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (!UserProgressValidator.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+        userProgress.setNextStep(requestingCommand.getNextStep());
+        switch (requestingCommand) {
+            case GRADERS -> userProgress.setSelfPropelledType(SelfPropelledType.GRADER);
+        }
+
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
+    public String processHelpRequest(final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (userProgress.getNextStep() == Step.SELF_PROPELLED_POWER) {
+            return messagesCreator.getSelfPropelledPowerHelp();
+        }
+        if (userProgress.getGeneralTransportType() == GeneralTransportType.SELF_PROPELLED_VEHICLES) {
+            return messagesCreator.getSelfPropelledHelp();
+        }
+        return "help request denied";
     }
 
     private static class BotFieldsManagerHolder {

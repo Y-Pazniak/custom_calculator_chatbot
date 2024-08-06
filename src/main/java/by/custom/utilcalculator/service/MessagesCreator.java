@@ -60,8 +60,11 @@ public class MessagesCreator {
             case TRAILERS_O4_TYPE -> {
                 return getO4TrailersTypes();
             }
-            case SELF_PROPELLED_VEHICLES_TYPES -> {
+            case SELF_PROPELLED_TYPES -> {
                 return getSelfPropelledVehiclesTypes();
+            }
+            case SELF_PROPELLED_POWER -> {
+                return getSelfPropelledVehicleVolume(userProgress);
             }
             case CAR_AGE -> {
                 return getAgeAuto();
@@ -71,6 +74,21 @@ public class MessagesCreator {
             }
         }
         return bundle.getString("answers.sorry");
+    }
+
+    private String getSelfPropelledVehicleVolume(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledType()) {
+            case GRADER -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        Command.HELP.getCommand(), " ", bundle.getString("answers.details.self_propelled_power"), "\n",
+
+                        Command.GRADERS_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                        Command.GRADERS_100_140.getCommand(), " ", bundle.getString("answers.details.graders.140"), "\n",
+                        Command.GRADERS_140_200.getCommand(), " ", bundle.getString("answers.details.graders.200"), "\n",
+                        Command.GRADERS_MORE_200.getCommand(), " ", bundle.getString("answers.details.graders.more_200"));
+            }
+        }
+        return bundle.getString("self-propelled volume error");
     }
 
     private String getSelfPropelledVehiclesTypes() {
@@ -142,7 +160,12 @@ public class MessagesCreator {
 
     public String getSelfPropelledHelp() {
         return stringBuilderAppender(bundle.getString("answers.help.self_propelled"), "\n", "\n",
-                bundle.getString("answers.help.trailers_for_self_propelled"),"\n", "\n",
+                bundle.getString("answers.help.trailers_for_self_propelled"), "\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
+    }
+
+    public String getSelfPropelledPowerHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.self_propelled_power"), "\n", "\n",
                 bundle.getString("answers.help.friendly_advice"));
     }
 
@@ -349,6 +372,15 @@ public class MessagesCreator {
             case MORE_3500 -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.more.3500")));
+            }
+        }
+
+        switch (userProgress.getSelfPropelledType()) {
+            case null -> {
+            }
+            case GRADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.grader")));
             }
         }
         return sb.toString();

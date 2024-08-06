@@ -10,6 +10,8 @@ public enum Command {
     M2_M3_GASOLINE_ENGINE_VOLUME("m2_m3_volume", null, Step.CAR_AGE),
     TRUCK_UNIT_WEIGHT("truck_unit_weight", null, Step.CAR_AGE),
     TRAILERS_O4_TYPE("trailers_o4_type", null, Step.CAR_AGE),
+    SELF_PROPELLED_TYPE("self_propelled_type", null, Step.SELF_PROPELLED_POWER),
+    SELF_PROPELLED_POWER("self_propelled_power", null, Step.CAR_AGE),
 
     //main command - start the calculator
     START("/start", null, Step.GENERAL_TRANSPORT_TYPE),
@@ -17,7 +19,7 @@ public enum Command {
     //general type of vehicle
     M1("/cars", null, Step.COUNTRY_ORIGIN),
     BUSES_AND_TRUCKS("/buses_and_trucks", null, Step.BUSES_AND_TRUCKS_TYPES),
-    SELF_PROPELLED_VEHICLES("/self_propelled_vehicles", null, Step.SELF_PROPELLED_VEHICLES_TYPES),
+    SELF_PROPELLED_VEHICLES("/self_propelled_vehicles", null, Step.SELF_PROPELLED_TYPES),
 
     //type of except m1 vehicle - buses and trucks
     N1_N3("/n1_n3", null, Step.N1_N3_WEIGHT),
@@ -81,25 +83,31 @@ public enum Command {
 
     //other vehicles
     HELP("/help", null, null),
-    GRADERS("/graders", null, Step.CAR_AGE),
-    BULLDOZERS("/bulldozers", null,Step.CAR_AGE),
-    EXCAVATORS("/excavators", null,Step.CAR_AGE),
-    WHEEL_LOADERS("/wheel_loaders", null,Step.CAR_AGE),
-    TAMPING_MACHINES("/tamping_machines", null,Step.CAR_AGE),
-    FRONT_LOADERS("/front_loaders", null,Step.CAR_AGE),
-    WHEELED_CRANES("/wheeled_cranes", null,Step.CAR_AGE),
-    PIPELAYERS("/pipelayers", null,Step.CAR_AGE),
-    TRAILERS_OTHER("/trailers_other", null,Step.CAR_AGE),
-    ROAD_MAINTENANCE_VEHICLES("/road_maintenance", null,Step.CAR_AGE),
-    FORESTRY_VEHICLES("/forestry_vehicles", null,Step.CAR_AGE),
-    FORWADERS("/forwaders", null,Step.CAR_AGE),
-    TIMBER_LOADERS("/timber_loaders", null,Step.CAR_AGE),
-    WHEELED_TRACTORS("/wheeled_tractors", null,Step.CAR_AGE),
-    CRAWLER_TRACTORS("/crawler_tractors", null,Step.CAR_AGE),
-    COMBINE_HARVESTERS("/combine_harvesters", null,Step.CAR_AGE),
-    FORAGE_HARVESTERS("/forage_harvesters", null,Step.CAR_AGE),
-    AGRICULTURAL_VEHICLES("/agricultural_vehicles", null,Step.CAR_AGE),
-    OFF_ROAD_DUMP_TRUCKS("/dump_trucks", null,Step.CAR_AGE);
+    GRADERS("/graders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    BULLDOZERS("/bulldozers", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    EXCAVATORS("/excavators", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    WHEEL_LOADERS("/wheel_loaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    TAMPING_MACHINES("/tamping_machines", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    FRONT_LOADERS("/front_loaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    WHEELED_CRANES("/wheeled_cranes", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    PIPELAYERS("/pipelayers", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    TRAILERS_OTHER("/trailers_other", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    ROAD_MAINTENANCE_VEHICLES("/road_maintenance", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    FORESTRY_VEHICLES("/forestry_vehicles", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    FORWADERS("/forwaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    TIMBER_LOADERS("/timber_loaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    WHEELED_TRACTORS("/wheeled_tractors", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    CRAWLER_TRACTORS("/crawler_tractors", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    COMBINE_HARVESTERS("/combine_harvesters", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    FORAGE_HARVESTERS("/forage_harvesters", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    AGRICULTURAL_VEHICLES("/agricultural_vehicles", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    OFF_ROAD_DUMP_TRUCKS("/dump_trucks", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+
+    //power of graders
+    GRADERS_LESS_100("/less_100", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    GRADERS_100_140("/between_100_140", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    GRADERS_140_200("/between_140_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    GRADERS_MORE_200("/more_200", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;

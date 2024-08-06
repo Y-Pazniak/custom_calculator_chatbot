@@ -7,15 +7,15 @@ import by.custom.utilcalculator.domain.constants.steps.M2EngineVolume;
 import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
 import by.custom.utilcalculator.domain.constants.steps.TruckUnitClass;
 
-public class CalculatorExceptM1 {
-    private CalculatorExceptM1() {
+public class CalculatorBusesAndTrucks {
+    private CalculatorBusesAndTrucks() {
     }
 
     private static class CalculatorExceptM1Holder {
-        private static final CalculatorExceptM1 CALCULATOR_INSTANCE = new CalculatorExceptM1();
+        private static final CalculatorBusesAndTrucks CALCULATOR_INSTANCE = new CalculatorBusesAndTrucks();
     }
 
-    public static CalculatorExceptM1 getInstance() {
+    public static CalculatorBusesAndTrucks getInstance() {
         return CalculatorExceptM1Holder.CALCULATOR_INSTANCE;
     }
 

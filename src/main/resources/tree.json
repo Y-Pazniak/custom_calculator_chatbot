@@ -206,9 +206,21 @@
       "description": "node for the request of the list of other vehicles, except m1, buses and trucks",
       "children": [
         {
-          "key": "GRADERS",
+          "key": "SELF_PROPELLED_TYPE",
           "description": "Graders and levelers with power plant power",
-          "children": []
+          "children": [
+            {
+              "key": "SELF_PROPELLED_POWER",
+              "description": "we unite volumes of graders into one node",
+              "children": [
+                {
+                  "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
+                  "children": []
+                }
+              ]
+            }
+          ]
         },
         {
           "key": "BULLDOZERS",

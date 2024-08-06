@@ -21,6 +21,8 @@ public class UserProgress implements Serializable {
     private TruckUnitClass truckUnitClass = null;
     private TruckUnitWeight truckUnitWeight = null;
     private TrailerO4Type trailersO4Type = null;
+    private SelfPropelledType selfPropelledType = null;
+    private SelfPropelledPower selfPropelledPower = null;
     private final String chatID;
     private Step nextStep;
 
@@ -32,7 +34,7 @@ public class UserProgress implements Serializable {
         this.nextStep = nextStep;
     }
 
-    public Step getNextStep(){
+    public Step getNextStep() {
         return nextStep;
     }
 
@@ -45,7 +47,7 @@ public class UserProgress implements Serializable {
     }
 
     public Command[] getUserPath() {
-        final Command[] userPath = new Command[13];
+        final Command[] userPath = new Command[15];
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
         userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
@@ -60,6 +62,8 @@ public class UserProgress implements Serializable {
         userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
         userPath[11] = fieldsToCommands.get(getTruckUnitWeight()); //11 cell contains "except  M1 -> truck units -> truck unit weight" truck unit weight
         userPath[12] = fieldsToCommands.get(getTrailerO4Type()); //12 cell contains "except  M1 -> trailers O4 -> trailer type" type of trailer
+        userPath[13] = fieldsToCommands.get(getSelfPropelledType()); //13 cell contains "self-propelled vehicles -> type of vehicle"
+        userPath[14] = fieldsToCommands.get(getSelfPropelledPower()); //14 cell contains "self-propelled vehicles -> type of vehicle -> power of vehicle"
         return userPath;
     }
 
@@ -138,6 +142,8 @@ public class UserProgress implements Serializable {
 
     public void setCarAge(final CarAge carAge) {
         cleanStepsAfterCurrentM1Branch(4);
+        cleanStepsAfterCurrentExceptM1Branch(5);
+        cleanStepsAfterCurrentSelfPropelledVehicles(2);
         this.carAge = carAge;
     }
 
@@ -167,6 +173,24 @@ public class UserProgress implements Serializable {
     public void setTruckUnitType(final TruckUnitClass truckUnit) {
         cleanStepsAfterCurrentExceptM1Branch(3);
         this.truckUnitClass = truckUnit;
+    }
+
+    public void setSelfPropelledType(final SelfPropelledType selfPropelledType) {
+        cleanStepsAfterCurrentSelfPropelledVehicles(0);
+        this.selfPropelledType = selfPropelledType;
+    }
+
+    public SelfPropelledType getSelfPropelledType() {
+        return selfPropelledType;
+    }
+
+    public SelfPropelledPower getSelfPropelledPower() {
+        return selfPropelledPower;
+    }
+
+    public void setSelfPropelledPower(final SelfPropelledPower selfPropelledPower) {
+        cleanStepsAfterCurrentSelfPropelledVehicles(1);
+        this.selfPropelledPower = selfPropelledPower;
     }
 
     public TruckUnitClass getTruckUnitType() {
@@ -211,6 +235,21 @@ public class UserProgress implements Serializable {
         }
         if (stepCleaner <= 4) {
             this.truckUnitWeight = null;
+        }
+        if (stepCleaner <= 5) {
+            this.carAge = null;
+        }
+    }
+
+    private void cleanStepsAfterCurrentSelfPropelledVehicles(final int stepCleaner) {
+        if (stepCleaner <= 0) {
+            this.selfPropelledType = null;
+        }
+        if (stepCleaner <= 1) {
+            this.selfPropelledPower = null;
+        }
+        if (stepCleaner <= 2) {
+            this.carAge = null;
         }
     }
 }
