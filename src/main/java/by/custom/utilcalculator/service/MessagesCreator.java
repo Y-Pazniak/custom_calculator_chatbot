@@ -60,6 +60,9 @@ public class MessagesCreator {
             case TRAILERS_O4_TYPE -> {
                 return getO4TrailersTypes();
             }
+            case SELF_PROPELLED_VEHICLES_TYPES -> {
+                return getSelfPropelledVehiclesTypes();
+            }
             case CAR_AGE -> {
                 return getAgeAuto();
             }
@@ -68,6 +71,34 @@ public class MessagesCreator {
             }
         }
         return bundle.getString("answers.sorry");
+    }
+
+    private String getSelfPropelledVehiclesTypes() {
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type_of_vehicle"), "\n",
+                Command.HELP.getCommand(), " ", bundle.getString("answers.details.self_propelled_help"), "\n",
+
+                Command.GRADERS.getCommand(), " ", bundle.getString("answers.details.graders"), "\n",
+                Command.BULLDOZERS.getCommand(), " ", bundle.getString("answers.details.bulldozers"), "\n",
+                Command.EXCAVATORS.getCommand(), " ", bundle.getString("answers.details.excavators"), "\n",
+                Command.WHEEL_LOADERS.getCommand(), " ", bundle.getString("answers.details.wheel_loaders"), "\n",
+                Command.TAMPING_MACHINES.getCommand(), " ", bundle.getString("answers.details.tamping_machines"), "\n",
+
+                Command.FRONT_LOADERS.getCommand(), " ", bundle.getString("answers.details.front_loaders"), "\n",
+                Command.WHEELED_CRANES.getCommand(), " ", bundle.getString("answers.details.wheeled_cranes"), "\n",
+                Command.PIPELAYERS.getCommand(), " ", bundle.getString("answers.details.pipelayers"), "\n",
+                Command.TRAILERS_OTHER.getCommand(), " ", bundle.getString("answers.details.trailers_other"), "\n",
+                Command.ROAD_MAINTENANCE_VEHICLES.getCommand(), " ", bundle.getString("answers.details.road_maintenance_vehicles"), "\n",
+
+                Command.FORESTRY_VEHICLES.getCommand(), " ", bundle.getString("answers.details.forestry_vehicles"), "\n",
+                Command.FORWADERS.getCommand(), " ", bundle.getString("answers.details.forwaders"), "\n",
+                Command.TIMBER_LOADERS.getCommand(), " ", bundle.getString("answers.details.timber_loaders"), "\n",
+                Command.WHEELED_TRACTORS.getCommand(), " ", bundle.getString("answers.details.wheeled_tractors"), "\n",
+                Command.CRAWLER_TRACTORS.getCommand(), " ", bundle.getString("answers.details.crawler_tractors"), "\n",
+
+                Command.COMBINE_HARVESTERS.getCommand(), " ", bundle.getString("answers.details.combine_harvesters"), "\n",
+                Command.FORAGE_HARVESTERS.getCommand(), " ", bundle.getString("answers.details.forage_harvesters"), "\n",
+                Command.AGRICULTURAL_VEHICLES.getCommand(), " ", bundle.getString("answers.details.agricultural_vehicles"), "\n",
+                Command.OFF_ROAD_DUMP_TRUCKS.getCommand(), " ", bundle.getString("answers.details.off_road_dump_trucks"));
     }
 
     private String getO4TrailersTypes() {
@@ -109,6 +140,12 @@ public class MessagesCreator {
                 Command.SELF_PROPELLED_VEHICLES.getCommand(), " ", bundle.getString("answers.details.trailers"));
     }
 
+    public String getSelfPropelledHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.self_propelled"), "\n", "\n",
+                bundle.getString("answers.help.trailers_for_self_propelled"),"\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
+    }
+
     public String getCountryOrigin() {
         return stringBuilderAppender("\n", bundle.getString("questions.users.country"), "\n",
                 Command.EAES.getCommand(), " ", bundle.getString("answers.details.eaes"), "\n",
@@ -116,7 +153,7 @@ public class MessagesCreator {
     }
 
     public String getExceptM1TransportType() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.exceptM1"), "\n",
+        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type_of_vehicle"), "\n",
                 Command.N1_N3.getCommand(), " ", bundle.getString("answers.details.n1_n3"), "\n",
                 Command.M2_M3.getCommand(), " ", bundle.getString("answers.details.m2_m3"), "\n",
                 Command.TRUCK_UNITS.getCommand(), " ", bundle.getString("answers.details.truck_units"), "\n",
@@ -188,9 +225,8 @@ public class MessagesCreator {
             case null -> {
             }
             case M1 -> sb.append(bundle.getString("answers.summary.m1"));
-            case EXCEPT_M1 -> sb.append(bundle.getString("answers.summary.except_m1"));
-            case SELF_PROPELLED_VEHICLES -> {
-            }
+            case BUSES_AND_TRUCKS -> sb.append(bundle.getString("answers.summary.buses_and_trucks"));
+            case SELF_PROPELLED_VEHICLES -> sb.append(bundle.getString("answers.summary.self_propelled_vehicles"));
         }
 
         switch (userProgress.getExceptM1TransportType()) {

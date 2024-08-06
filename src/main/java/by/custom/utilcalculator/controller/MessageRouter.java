@@ -55,7 +55,7 @@ public class MessageRouter {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-            case M1, BUSES_AND_TRUCKS -> answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
+            case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES -> answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
             case PHYSICAL_PERSON, JURIDICAL_PERSON_EAES, JURIDICAL_PERSON_OTHER ->
                     answer = userProgressManager.processOwnerType(requestingCommand, chatID);
@@ -76,9 +76,14 @@ public class MessageRouter {
             case TRUCK_UNITS_6_CLASS, TRUCK_UNITS_OTHER -> answer = userProgressManager.processTruckUnitClass(requestingCommand, chatID);
             case TRUCK_UNITS_12_20_TONS, TRUCK_UNITS_20_50_TONS -> answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
             case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE -> answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
+            case HELP -> answer = helpRequest();
             case null, default -> answer = getSorryMessage();
         }
         return answer;
+    }
+
+    private String helpRequest() {
+        return messagesCreator.getSelfPropelledHelp();
     }
 
     public String getGreetingMessage() {

@@ -203,7 +203,104 @@
     },
     {
       "key": "SELF_PROPELLED_VEHICLES",
-      "children": []
+      "description": "node for the request of the list of other vehicles, except m1, buses and trucks",
+      "children": [
+        {
+          "key": "GRADERS",
+          "description": "Graders and levelers with power plant power",
+          "children": []
+        },
+        {
+          "key": "BULLDOZERS",
+          "description": "Bulldozers with power plant",
+          "children": []
+        },
+        {
+          "key": "EXCAVATORS",
+          "description": "Excavators, backhoe loaders, backhoe bulldozers with power plant power",
+          "children": []
+        },
+        {
+          "key": "WHEEL_LOADERS",
+          "description": "Wheel loaders with power plant power",
+          "children": []
+        },
+        {
+          "key": "TAMPING_MACHINES",
+          "description": "Tamping machines and road rollers with power plant power",
+          "children": []
+        },
+        {
+          "key": "FRONT_LOADERS",
+          "description": "Single-bucket front loaders, forklifts with power plant capacity",
+          "children": []
+        },
+        {
+          "key": "WHEELED_CRANES",
+          "description": "Wheeled cranes, with the exception of cranes mounted on automobile chassis or trucks, with the power of a power plant",
+          "children": []
+        },
+        {
+          "key": "PIPELAYERS",
+          "description": "Pipelayers, crawler cranes with power plant power",
+          "children": []
+        },
+        {
+          "key": "TRAILERS_OTHER",
+          "description": "Trailers, with the exception of car trailers of category O4",
+          "children": []
+        },
+        {
+          "key": "ROAD_MAINTENANCE_VEHICLES",
+          "description": "Road maintenance machines, with the exception of machines mounted on automobile chassis or trucks, with a power plant",
+          "children": []
+        },
+        {
+          "key": "FORESTRY_VEHICLES",
+          "description": "Machinery and equipment for forestry, with the exception of those installed on automobile chassis or trucks, with a power plant",
+          "children": []
+        },
+        {
+          "key": "FORWADERS",
+          "description": "Forwarders, with the exception of those mounted on automobile chassis or trucks, with a power plant",
+          "children": []
+        },
+        {
+          "key": "TIMBER_LOADERS",
+          "description": "Timber front-end loaders and skidders (skidders) for forestry, with the exception of those mounted on automobile chassis or trucks, with power plant power",
+          "children": []
+        },
+        {
+          "key": "WHEELED_TRACTORS",
+          "description": "Wheeled tractors with power plant power",
+          "children": []
+        },
+        {
+          "key": "CRAWLER_TRACTORS",
+          "description": "Crawler tractors with power plant power",
+          "children": []
+        },
+        {
+          "key": "COMBINE_HARVESTERS",
+          "description": "Combine harvesters with power plant power",
+          "children": []
+        },
+        {
+          "key": "FORAGE_HARVESTERS",
+          "description": "Forage harvesters with power plant power",
+          "children": []
+        },
+        {
+          "key": "AGRICULTURAL_VEHICLES",
+          "description": "Agricultural machines: self-propelled mowers, self-propelled crop protection sprayers with the power of a power plant",
+          "children": []
+        },
+        {
+          "key": "OFF_ROAD_DUMP_TRUCKS",
+          "description": "Dump trucks intended for operation in off-road conditions, power plant power",
+          "children": []
+        }
+      ]
     }
   ]
 }

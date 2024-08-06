@@ -17,7 +17,7 @@ public enum Command {
     //general type of vehicle
     M1("/cars", null, Step.COUNTRY_ORIGIN),
     BUSES_AND_TRUCKS("/buses_and_trucks", null, Step.BUSES_AND_TRUCKS_TYPES),
-    SELF_PROPELLED_VEHICLES("/self_propelled_vehicles", null, Step.FAREWELL),
+    SELF_PROPELLED_VEHICLES("/self_propelled_vehicles", null, Step.SELF_PROPELLED_VEHICLES_TYPES),
 
     //type of except m1 vehicle - buses and trucks
     N1_N3("/n1_n3", null, Step.N1_N3_WEIGHT),
@@ -77,7 +77,29 @@ public enum Command {
 
     //trailers O4 types
     TRAILERS_04_TYPE("/trailers_o4_type", TRAILERS_O4_TYPE, Step.CAR_AGE),
-    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", TRAILERS_O4_TYPE, Step.CAR_AGE);
+    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", TRAILERS_O4_TYPE, Step.CAR_AGE),
+
+    //other vehicles
+    HELP("/help", null, null),
+    GRADERS("/graders", null, Step.CAR_AGE),
+    BULLDOZERS("/bulldozers", null,Step.CAR_AGE),
+    EXCAVATORS("/excavators", null,Step.CAR_AGE),
+    WHEEL_LOADERS("/wheel_loaders", null,Step.CAR_AGE),
+    TAMPING_MACHINES("/tamping_machines", null,Step.CAR_AGE),
+    FRONT_LOADERS("/front_loaders", null,Step.CAR_AGE),
+    WHEELED_CRANES("/wheeled_cranes", null,Step.CAR_AGE),
+    PIPELAYERS("/pipelayers", null,Step.CAR_AGE),
+    TRAILERS_OTHER("/trailers_other", null,Step.CAR_AGE),
+    ROAD_MAINTENANCE_VEHICLES("/road_maintenance", null,Step.CAR_AGE),
+    FORESTRY_VEHICLES("/forestry_vehicles", null,Step.CAR_AGE),
+    FORWADERS("/forwaders", null,Step.CAR_AGE),
+    TIMBER_LOADERS("/timber_loaders", null,Step.CAR_AGE),
+    WHEELED_TRACTORS("/wheeled_tractors", null,Step.CAR_AGE),
+    CRAWLER_TRACTORS("/crawler_tractors", null,Step.CAR_AGE),
+    COMBINE_HARVESTERS("/combine_harvesters", null,Step.CAR_AGE),
+    FORAGE_HARVESTERS("/forage_harvesters", null,Step.CAR_AGE),
+    AGRICULTURAL_VEHICLES("/agricultural_vehicles", null,Step.CAR_AGE),
+    OFF_ROAD_DUMP_TRUCKS("/dump_trucks", null,Step.CAR_AGE);
 
     private final String command;
     private final Command family;

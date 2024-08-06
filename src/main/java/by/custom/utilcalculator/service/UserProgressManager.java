@@ -44,7 +44,8 @@ public class UserProgressManager {
 
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
-            case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
+            case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.BUSES_AND_TRUCKS);
+            case SELF_PROPELLED_VEHICLES -> userProgress.setGeneralTransportType(GeneralTransportType.SELF_PROPELLED_VEHICLES);
         }
 
         userProgressStorage.save(userProgress);
@@ -170,13 +171,13 @@ public class UserProgressManager {
         if (Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_M1) || Objects.equals(requestingCommand, Command.GASOLINE_TYPE_ENGINE_BUSES)) {
             switch (userProgress.getGeneralTransportType()) {
                 case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.GASOLINE);
-                case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.GASOLINE);
+                case BUSES_AND_TRUCKS -> userProgress.setEngineTypeM2M3(M2M3EngineType.GASOLINE);
             }
         } else {
             if (Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_M1) || Objects.equals(requestingCommand, Command.ELECTRIC_TYPE_ENGINE_BUSES)) {
                 switch (userProgress.getGeneralTransportType()) {
                     case M1 -> userProgress.setTypeOfEngineM1(M1TypeOfEngine.ELECTRIC);
-                    case EXCEPT_M1 -> userProgress.setEngineTypeM2M3(M2M3EngineType.ELECTRIC);
+                    case BUSES_AND_TRUCKS -> userProgress.setEngineTypeM2M3(M2M3EngineType.ELECTRIC);
                 }
             }
         }
@@ -197,7 +198,7 @@ public class UserProgressManager {
         userProgress.setNextStep(requestingCommand.getNextStep());
         switch (userProgress.getGeneralTransportType()) {
             case M1 -> processM1EngineVolume(userProgress, requestingCommand, chatID);
-            case EXCEPT_M1 -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
+            case BUSES_AND_TRUCKS -> processExceptM1EngineVolume(userProgress, requestingCommand, chatID);
         }
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;

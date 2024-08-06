@@ -18,7 +18,7 @@ public class HelperTree {
         final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>();
         //vehicle type step
         fieldsToCommands.put(GeneralTransportType.M1, Command.M1);
-        fieldsToCommands.put(GeneralTransportType.EXCEPT_M1, Command.BUSES_AND_TRUCKS);
+        fieldsToCommands.put(GeneralTransportType.BUSES_AND_TRUCKS, Command.BUSES_AND_TRUCKS);
         fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.SELF_PROPELLED_VEHICLES);
         //vehicle type m1-m3
         fieldsToCommands.put(ExceptM1TransportType.N1_N3, Command.N1_N3);
@@ -69,6 +69,7 @@ public class HelperTree {
         //trailers O4 type
         fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_O4_TYPE);
         fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.TRAILERS_O4_TYPE);
+        //other vehicles
 
         return fieldsToCommands;
     }
