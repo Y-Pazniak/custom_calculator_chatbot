@@ -107,4 +107,13 @@ public class Price {
     public static final String SELF_PROPELLED_BULLDOZERS_BETWEEN_300_AND_400HP_MORE_3_YEARS = "467785.50";
     public static final String SELF_PROPELLED_BULLDOZERS_MORE_400HP_LESS_OR_3_YEARS = "100239.75";
     public static final String SELF_PROPELLED_BULLDOZERS_MORE_400HP_MORE_3_YEARS = "668265.00";
+
+    //price for "self-propelled -> excavators"
+    public static final String SELF_PROPELLED_EXCAVATORS_LESS_170HP_LESS_OR_3_YEARS = "26730.60";
+    public static final String SELF_PROPELLED_EXCAVATORS_LESS_170HP_MORE_3_YEARS = "113605.05";
+    public static final String SELF_PROPELLED_EXCAVATORS_BETWEEN_170_AND_250HP_LESS_OR_3_YEARS = "40095.90";
+    public static final String SELF_PROPELLED_EXCAVATORS_BETWEEN_170_AND_250HP_MORE_3_YEARS = "167066.25";
+    public static final String SELF_PROPELLED_EXCAVATORS_MORE_250HP_LESS_OR_3_YEARS = "53461.20";
+    public static final String SELF_PROPELLED_EXCAVATORS_MORE_250HP_MORE_3_YEARS = "270647.33 ";
+
 }

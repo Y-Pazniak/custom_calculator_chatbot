@@ -95,6 +95,13 @@ public class MessagesCreator {
                         Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
                         Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
             }
+            case EXCAVATOR -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_170.getCommand(), " ", bundle.getString("answers.details.excavators.170"), "\n",
+                        Command.POWER_170_250.getCommand(), " ", bundle.getString("answers.details.excavators.250"), "\n",
+                        Command.POWER_MORE_250.getCommand(), " ", bundle.getString("answers.details.excavators.more_250"));
+            }
         }
         return "self-propelled volume error";
     }
@@ -397,6 +404,10 @@ public class MessagesCreator {
             case BULLDOZER -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.bulldozer")));
+            }
+            case EXCAVATOR -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.excavator")));
             }
         }
         return sb.toString();

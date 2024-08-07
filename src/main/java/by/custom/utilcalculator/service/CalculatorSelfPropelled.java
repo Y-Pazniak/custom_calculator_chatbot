@@ -24,8 +24,28 @@ public class CalculatorSelfPropelled {
             case BULLDOZER -> {
                 return countPriceForBulldozers(userProgress);
             }
+            case EXCAVATOR -> {
+                return countPriceForExcavators(userProgress);
+            }
             case null, default -> {
                 return "unknown self-propelled error";
+            }
+        }
+    }
+
+    private String countPriceForExcavators(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_170 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_EXCAVATORS_LESS_170HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_EXCAVATORS_LESS_170HP_MORE_3_YEARS;
+            }
+            case BETWEEN_170_250 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_EXCAVATORS_BETWEEN_170_AND_250HP_LESS_OR_3_YEARS  : Price.SELF_PROPELLED_EXCAVATORS_BETWEEN_170_AND_250HP_MORE_3_YEARS ;
+            }
+            case MORE_250 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_EXCAVATORS_MORE_250HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_EXCAVATORS_MORE_250HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown excavator error";
             }
         }
     }

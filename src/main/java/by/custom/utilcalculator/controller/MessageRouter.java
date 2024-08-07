@@ -69,7 +69,7 @@ public class MessageRouter {
                  M1_VOLUME_BETWEEN_3000_3500_CM, M1_VOLUME_MORE_3500_CM, M2_VOLUME_LESS_2500_CM,
                  M2_VOLUME_BETWEEN_2500_5000_CM, M2_VOLUME_BETWEEN_5000_10000_CM, M2_VOLUME_MORE_10000_CM,
                  POWER_LESS_100, POWER_100_140, POWER_140_200, POWER_MORE_200, POWER_100_200, POWER_200_300,
-                 POWER_300_400, POWER_MORE_400 ->
+                 POWER_300_400, POWER_MORE_400, POWER_LESS_170, POWER_170_250, POWER_MORE_250 ->
                     answer = userProgressManager.processEngineVolumeOrPower(requestingCommand, chatID);
             case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
                     answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
@@ -83,7 +83,7 @@ public class MessageRouter {
                     answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
             case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE ->
                     answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
-            case GRADERS, BULLDOZERS ->
+            case GRADERS, BULLDOZERS, EXCAVATORS ->
                     answer = userProgressManager.processSelfPropelledType(requestingCommand, chatID);
             case HELP -> answer = userProgressManager.processHelpRequest(chatID);
             case null, default -> answer = getSorryMessage();
