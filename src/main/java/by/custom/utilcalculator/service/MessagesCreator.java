@@ -89,7 +89,7 @@ public class MessagesCreator {
             case BULLDOZER -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
                         getHelpSelfpropelledPowerString(), "\n",
-                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.bulldozers.100"), "\n",
+                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
                         Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
                         Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
                         Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
@@ -101,6 +101,14 @@ public class MessagesCreator {
                         Command.POWER_LESS_170.getCommand(), " ", bundle.getString("answers.details.excavators.170"), "\n",
                         Command.POWER_170_250.getCommand(), " ", bundle.getString("answers.details.excavators.250"), "\n",
                         Command.POWER_MORE_250.getCommand(), " ", bundle.getString("answers.details.excavators.more_250"));
+            }
+            case WHEEL_LOADER -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                        Command.POWER_100_125.getCommand(), " ", bundle.getString("answers.details.wheel_loaders.100_125"), "\n",
+                        Command.POWER_125_150.getCommand(), " ", bundle.getString("answers.details.wheel_loaders.125_150"), "\n",
+                        Command.POWER_MORE_150.getCommand(), " ", bundle.getString("answers.details.excavators.more_150"));
             }
         }
         return "self-propelled volume error";
@@ -394,6 +402,66 @@ public class MessagesCreator {
             }
         }
 
+        switch (userProgress.getSelfPropelledPower()) {
+            case null -> {}
+            case LESS_100 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.100")));
+            }
+            case BETWEEN_100_125 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheel_loaders.100_125")));
+            }
+            case BETWEEN_100_140 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.140")));
+            }
+            case BETWEEN_125_150 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheel_loaders.125_150")));
+            }
+            case MORE_150 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.more_150")));
+            }
+            case BETWEEN_140_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.200")));
+            }
+            case LESS_170 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.170")));
+            }
+            case MORE_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.more_200")));
+            }
+            case BETWEEN_170_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.250")));
+            }
+            case MORE_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.more_250")));
+            }
+            case BETWEEN_100_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.200")));
+            }
+            case BETWEEN_200_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.300")));
+            }
+            case BETWEEN_300_400 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.400")));
+            }
+            case MORE_400 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.more_400")));
+            }
+        }
+
         switch (userProgress.getSelfPropelledType()) {
             case null -> {
             }
@@ -408,6 +476,10 @@ public class MessagesCreator {
             case EXCAVATOR -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.excavator")));
+            }
+            case WHEEL_LOADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.wheel_loader")));
             }
         }
         return sb.toString();

@@ -120,7 +120,12 @@ public enum Command {
     //power of excavators
     POWER_LESS_170("/less_170", SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_170_250("/between_170_250", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_MORE_250("/more_250", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_MORE_250("/more_250", SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of wheel loaders
+    POWER_100_125("/between_100_125", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_125_150("/between_125_150", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_150("/more_150", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;
