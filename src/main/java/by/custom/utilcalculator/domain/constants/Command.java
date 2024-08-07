@@ -2,6 +2,8 @@ package by.custom.utilcalculator.domain.constants;
 
 import by.custom.utilcalculator.domain.constants.steps.Step;
 
+import javax.annotation.Nullable;
+
 public enum Command {
     //command families - not commands actually, just markers
     AGE("age", null, Step.FAREWELL),
@@ -113,7 +115,7 @@ public enum Command {
     private final Command family;
     private final Step nextStep;
 
-    Command(final String command, final Command family, final Step step) {
+    Command(final String command, final @Nullable Command family, final Step step) {
         this.command = command;
         this.family = family;
         this.nextStep = step;

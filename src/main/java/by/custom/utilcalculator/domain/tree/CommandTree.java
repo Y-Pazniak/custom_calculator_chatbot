@@ -23,6 +23,10 @@ public class CommandTree {
         return TreeHolder.TREE_HOLDER;
     }
 
+    public static void init() {
+        CommandTree commandTree = TreeHolder.TREE_HOLDER;
+    }
+
     public Map<StepsIndicator, Command> getFieldsToCommands() {
         return fieldsToCommands;
     }
@@ -68,6 +72,7 @@ public class CommandTree {
                 for (Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {
                         node = kid;
+                        break;
                     }
                 }
             }

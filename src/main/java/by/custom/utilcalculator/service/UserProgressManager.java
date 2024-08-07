@@ -79,6 +79,7 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         userProgress.setNextStep(requestingCommand.getNextStep());
+
         switch (requestingCommand) {
             case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.LESS_2_TONS);
             case BETWEEN_2_5_AND_3_5_TONS ->

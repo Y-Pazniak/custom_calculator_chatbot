@@ -18,11 +18,11 @@ public class BundleResourcesServant {
         private static final BundleResourcesServant BUNDLE_INSTANCE = new BundleResourcesServant();
     }
 
-    public String getString(final String stringToGetFromBundle) {
-        if (bundle.containsKey(stringToGetFromBundle)) {
-            return bundle.getString(stringToGetFromBundle);
+    public String getString(final String localizationKey) {
+        if (bundle.containsKey(localizationKey)) {
+            return bundle.getString(localizationKey);
         } else {
-            System.out.println("no such string in bundle, check the path");
+            System.out.printf("no such string in bundle, check the path: %s", localizationKey);
             return "";
         }
     }
