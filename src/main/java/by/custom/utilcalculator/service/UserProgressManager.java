@@ -62,10 +62,10 @@ public class UserProgressManager {
         }
         userProgress.setNextStep(requestingCommand.getNextStep());
         switch (requestingCommand) {
-            case N1_N3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.N1_N3);
-            case M2_M3 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.M2_M3);
-            case TRUCK_UNITS -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRUCK_UNITS);
-            case TRAILERS_O4 -> userProgress.setExceptM1TransportType(ExceptM1TransportType.TRAILERS_O4);
+            case N1_N3 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.N1_N3);
+            case M2_M3 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.M2_M3);
+            case TRUCK_UNITS -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.TRUCK_UNITS);
+            case TRAILERS_O4 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.TRAILERS_O4);
         }
 
         userProgressStorage.save(userProgress);

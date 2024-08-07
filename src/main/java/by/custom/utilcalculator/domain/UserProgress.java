@@ -14,7 +14,7 @@ public class UserProgress implements Serializable {
     private CarAge carAge = null;
     private M1TypeOfEngine typeOfEngine = null;
     private M1EngineVolume m1EngineVolume = null;
-    private ExceptM1TransportType exceptM1TransportType = null;
+    private BusesAndTrucksTransportType exceptM1TransportType = null;
     private N1N3TransportWeight transportWeightN1N2N3 = null;
     private M2M3EngineType engineTypeM2M3 = null;
     private M2EngineVolume m2EngineVolume = null;
@@ -103,11 +103,11 @@ public class UserProgress implements Serializable {
         this.engineTypeM2M3 = engineTypeM2M3;
     }
 
-    public ExceptM1TransportType getExceptM1TransportType() {
+    public BusesAndTrucksTransportType getExceptM1TransportType() {
         return exceptM1TransportType;
     }
 
-    public void setExceptM1TransportType(final ExceptM1TransportType exceptM1TransportType) {
+    public void setExceptM1TransportType(final BusesAndTrucksTransportType exceptM1TransportType) {
         cleanStepsAfterCurrentExceptM1Branch(0);
         this.exceptM1TransportType = exceptM1TransportType;
     }
