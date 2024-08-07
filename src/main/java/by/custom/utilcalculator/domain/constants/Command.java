@@ -106,10 +106,16 @@ public enum Command {
     OFF_ROAD_DUMP_TRUCKS("/dump_trucks", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
 
     //power of graders
-    GRADERS_LESS_100("/less_100", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    GRADERS_100_140("/between_100_140", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    GRADERS_140_200("/between_140_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    GRADERS_MORE_200("/more_200", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_LESS_100("/less_100", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_100_140("/between_100_140", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_140_200("/between_140_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_200("/more_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of bulldozers
+    POWER_100_200("/between_100_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_200_300("/between_200_300", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_300_400("/between_300_400", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_400("/more_400", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;

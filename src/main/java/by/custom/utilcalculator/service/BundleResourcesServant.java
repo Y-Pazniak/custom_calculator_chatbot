@@ -22,7 +22,7 @@ public class BundleResourcesServant {
         if (bundle.containsKey(localizationKey)) {
             return bundle.getString(localizationKey);
         } else {
-            System.out.printf("no such string in bundle, check the path: %s", localizationKey);
+            System.out.printf("no such string in bundle, check the path: %s \n", localizationKey);
             return "";
         }
     }

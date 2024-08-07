@@ -69,12 +69,15 @@ public class HelperTree {
         //trailers O4 type
         fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_O4_TYPE);
         fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.TRAILERS_O4_TYPE);
-        //other vehicles
+        //other vehicles -> graders
         fieldsToCommands.put(SelfPropelledType.GRADER, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(SelfPropelledPower.LESS_100, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_100_140, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_140_200, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.MORE_200, Command.SELF_PROPELLED_POWER);
+        //other vehicles -> bulldozers
+        fieldsToCommands.put(SelfPropelledType.BULLDOZER, Command.SELF_PROPELLED_TYPE);
+
 
         return fieldsToCommands;
     }

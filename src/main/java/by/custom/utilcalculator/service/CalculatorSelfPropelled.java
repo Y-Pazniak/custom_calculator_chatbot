@@ -21,8 +21,34 @@ public class CalculatorSelfPropelled {
             case GRADER -> {
                 return countPriceForGraders(userProgress);
             }
+            case BULLDOZER -> {
+                return countPriceForBulldozers(userProgress);
+            }
             case null, default -> {
                 return "unknown self-propelled error";
+            }
+        }
+    }
+
+    private String countPriceForBulldozers(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_100 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+            }
+            case BETWEEN_100_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+            }
+            case BETWEEN_200_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+            }
+            case BETWEEN_300_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+            }
+            case MORE_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+            }
+            case null, default -> {
+                return "unknown bulldozer error";
             }
         }
     }

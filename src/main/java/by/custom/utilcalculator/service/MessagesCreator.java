@@ -80,15 +80,27 @@ public class MessagesCreator {
         switch (userProgress.getSelfPropelledType()) {
             case GRADER -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
-                        Command.HELP.getCommand(), " ", bundle.getString("answers.details.self_propelled_power"), "\n",
-
-                        Command.GRADERS_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
-                        Command.GRADERS_100_140.getCommand(), " ", bundle.getString("answers.details.graders.140"), "\n",
-                        Command.GRADERS_140_200.getCommand(), " ", bundle.getString("answers.details.graders.200"), "\n",
-                        Command.GRADERS_MORE_200.getCommand(), " ", bundle.getString("answers.details.graders.more_200"));
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                        Command.POWER_100_140.getCommand(), " ", bundle.getString("answers.details.graders.140"), "\n",
+                        Command.POWER_140_200.getCommand(), " ", bundle.getString("answers.details.graders.200"), "\n",
+                        Command.POWER_MORE_200.getCommand(), " ", bundle.getString("answers.details.graders.more_200"));
+            }
+            case BULLDOZER -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.bulldozers.100"), "\n",
+                        Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
+                        Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
+                        Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
+                        Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
             }
         }
-        return bundle.getString("self-propelled volume error");
+        return "self-propelled volume error";
+    }
+
+    private String getHelpSelfpropelledPowerString() {
+        return String.format("%s %s", Command.HELP.getCommand(), bundle.getString("answers.details.self_propelled_power"));
     }
 
     private String getSelfPropelledVehiclesTypes() {
@@ -381,6 +393,10 @@ public class MessagesCreator {
             case GRADER -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.grader")));
+            }
+            case BULLDOZER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.bulldozer")));
             }
         }
         return sb.toString();
