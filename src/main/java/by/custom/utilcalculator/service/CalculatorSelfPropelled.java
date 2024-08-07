@@ -33,19 +33,19 @@ public class CalculatorSelfPropelled {
     private String countPriceForBulldozers(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case LESS_100 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_BULLDOZERS_LESS_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_BULLDOZERS_LESS_100HP_MORE_3_YEARS;
             }
             case BETWEEN_100_200 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_100_AND_200HP_LESS_OR_3_YEARS  : Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_100_AND_200HP_MORE_3_YEARS ;
             }
             case BETWEEN_200_300 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_200_AND_300HP_LESS_OR_3_YEARS  : Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_200_AND_300HP_MORE_3_YEARS ;
             }
             case BETWEEN_300_400 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_300_AND_400HP_LESS_OR_3_YEARS  : Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_300_AND_400HP_MORE_3_YEARS ;
             }
             case MORE_400 -> {
-                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? "111" : "222";
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_BULLDOZERS_MORE_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_BULLDOZERS_MORE_400HP_MORE_3_YEARS;
             }
             case null, default -> {
                 return "unknown bulldozer error";
