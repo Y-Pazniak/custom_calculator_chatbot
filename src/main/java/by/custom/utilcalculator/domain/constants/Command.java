@@ -47,8 +47,8 @@ public enum Command {
     JURIDICAL_PERSON_OTHER("/juridical_other", null, Step.M1_TYPE_OF_ENGINE),
 
     //age command
-    LESS_3_YEARS_AGE("/3_or_less_years", Command.AGE, Step.FAREWELL),
-    MORE_THAN_3_YEARS_AGE("/more_3_years", Command.AGE, Step.FAREWELL),
+    LESS_3_YEARS_AGE("/less_3_years", Command.AGE, Step.FAREWELL),
+    MORE_THAN_3_YEARS_AGE("/3_and_more_years", Command.AGE, Step.FAREWELL),
 
     //type of engine command for m1
     GASOLINE_TYPE_ENGINE_M1("/gasoline_m1", null, Step.M1_VOLUME_OF_ENGINE),
@@ -125,7 +125,12 @@ public enum Command {
     //power of wheel loaders
     POWER_100_125("/between_100_125", SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_125_150("/between_125_150", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_MORE_150("/more_150", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_MORE_150("/more_150", SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of tamping machines
+    POWER_LESS_40("/less_40", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_40_80("/between_40_80", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_80("/more_80", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;
