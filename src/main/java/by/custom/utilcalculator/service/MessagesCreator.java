@@ -117,6 +117,17 @@ public class MessagesCreator {
                         Command.POWER_40_80.getCommand(), " ", bundle.getString("answers.details.power.40_80"), "\n",
                         Command.POWER_MORE_80.getCommand(), " ", bundle.getString("answers.details.power.more_80"));
             }
+            case FRONT_LOADER -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_5_50.getCommand(), " ", bundle.getString("answers.details.power.5p5_50"), "\n",
+                        Command.POWER_50_100.getCommand(), " ", bundle.getString("answers.details.power.50_100"), "\n",
+                        Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
+                        Command.POWER_200_250.getCommand(), " ", bundle.getString("answers.details.power.200_250"), "\n",
+                        Command.POWER_250_300.getCommand(), " ", bundle.getString("answers.details.power.250_300"), "\n",
+                        Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
+                        Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
+            }
         }
         System.out.println("self-propelled volume error during next step message building");
         return "self-propelled volume error during next step message building";
@@ -481,6 +492,22 @@ public class MessagesCreator {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.more_400")));
             }
+            case BETWEEN_5_50 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.5p5_50")));
+            }
+            case BETWEEN_50_100 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.50_100")));
+            }
+            case BETWEEN_200_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.200_250")));
+            }
+            case BETWEEN_250_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.250_300")));
+            }
         }
 
         switch (userProgress.getSelfPropelledType()) {
@@ -505,6 +532,10 @@ public class MessagesCreator {
             case TAMPING_MACHINE -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.tamping_machines")));
+            }
+            case FRONT_LOADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.front_loaders")));
             }
         }
         return sb.toString();

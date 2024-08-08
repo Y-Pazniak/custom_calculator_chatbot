@@ -4,12 +4,18 @@ import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class CalculatorSelfPropelled {
+    private DateTimeFormatter formatter;
+
     private static class CalculatorSelfPropelledHolder {
         private static final CalculatorSelfPropelled CALCULATOR_SELF_PROPELLED = new CalculatorSelfPropelled();
     }
 
     private CalculatorSelfPropelled() {
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH-mm-ss");
     }
 
     public static CalculatorSelfPropelled getInstance() {
@@ -33,9 +39,41 @@ public class CalculatorSelfPropelled {
             case TAMPING_MACHINE -> {
                 return countPriceForTampingMachines(userProgress);
             }
+            case FRONT_LOADER -> {
+                return countPriceForFrontLoaders(userProgress);
+            }
             case null, default -> {
-                System.out.println("unknown self-propelled type during calculation");
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForFrontLoaders(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case BETWEEN_5_50 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_5_AND_50HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_5_AND_50HP_MORE_3_YEARS;
+            }
+            case BETWEEN_50_100 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_50_AND_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_50_AND_100HP_MORE_3_YEARS;
+            }
+            case BETWEEN_100_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_100_AND_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_100_AND_200HP_MORE_3_YEARS;
+            }
+            case BETWEEN_200_250 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_200_AND_250HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_200_AND_250HP_MORE_3_YEARS;
+            }
+            case BETWEEN_250_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_250_AND_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_250_AND_300HP_MORE_3_YEARS;
+            }
+            case BETWEEN_300_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_300_AND_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_BETWEEN_300_AND_400HP_MORE_3_YEARS;
+            }
+            case MORE_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FRONT_LOADERS_MORE_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FRONT_LOADERS_MORE_400HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown tamping machine error during calculation";
             }
         }
     }

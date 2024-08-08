@@ -235,7 +235,10 @@ public class UserProgressManager {
             case Command.POWER_40_80 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_40_80);
             case Command.POWER_MORE_80 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_80);
 
-            //todo power of front loaders
+            case Command.POWER_5_50 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_5_50);
+            case Command.POWER_50_100 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_50_100);
+            case Command.POWER_200_250 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_200_250);
+            case Command.POWER_250_300 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_250_300);
         }
         userProgressStorage.save(userProgress);
     }
@@ -331,6 +334,7 @@ public class UserProgressManager {
             case EXCAVATORS -> userProgress.setSelfPropelledType(SelfPropelledType.EXCAVATOR);
             case WHEEL_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.WHEEL_LOADER);
             case TAMPING_MACHINES -> userProgress.setSelfPropelledType(SelfPropelledType.TAMPING_MACHINE);
+            case FRONT_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.FRONT_LOADER);
         }
 
         userProgressStorage.save(userProgress);
