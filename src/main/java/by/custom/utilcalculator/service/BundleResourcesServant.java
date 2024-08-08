@@ -1,13 +1,6 @@
 package by.custom.utilcalculator.service;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class BundleResourcesServant {
@@ -25,8 +18,13 @@ public class BundleResourcesServant {
         private static final BundleResourcesServant BUNDLE_INSTANCE = new BundleResourcesServant();
     }
 
-    public String getString(final String stringToGetFromBundle) {
-        return bundle.getString(stringToGetFromBundle);
+    public String getString(final String localizationKey) {
+        if (bundle.containsKey(localizationKey)) {
+            return bundle.getString(localizationKey);
+        } else {
+            System.out.printf("no such string in bundle, check the path: %s \n", localizationKey);
+            return "";
+        }
     }
 
     private void createBundleResources() {

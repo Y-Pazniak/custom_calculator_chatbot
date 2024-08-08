@@ -23,11 +23,15 @@ public class CommandTree {
         return TreeHolder.TREE_HOLDER;
     }
 
+    public static void init() {
+        CommandTree commandTree = TreeHolder.TREE_HOLDER;
+    }
+
     public Map<StepsIndicator, Command> getFieldsToCommands() {
         return fieldsToCommands;
     }
 
-    public boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+    public boolean validateCommandFromNode(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
@@ -68,6 +72,7 @@ public class CommandTree {
                 for (Node kid : node.getChildren()) {
                     if (kid.getKey().equals(userStep)) {
                         node = kid;
+                        break;
                     }
                 }
             }
