@@ -234,6 +234,8 @@ public class UserProgressManager {
             case Command.POWER_LESS_40 -> userProgress.setSelfPropelledPower(SelfPropelledPower.LESS_40);
             case Command.POWER_40_80 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_40_80);
             case Command.POWER_MORE_80 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_80);
+
+            //todo power of front loaders
         }
         userProgressStorage.save(userProgress);
     }

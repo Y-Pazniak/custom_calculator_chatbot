@@ -98,6 +98,13 @@ public class HelperTree {
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_40_80, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.MORE_80, Command.SELF_PROPELLED_POWER);
 
+        //other vehicles -> front loaders
+        fieldsToCommands.put(SelfPropelledType.FRONT_LOADER, Command.SELF_PROPELLED_TYPE);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_5_50, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_50_100, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_200_250, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_250_300, Command.SELF_PROPELLED_POWER);
+
         return fieldsToCommands;
     }
 

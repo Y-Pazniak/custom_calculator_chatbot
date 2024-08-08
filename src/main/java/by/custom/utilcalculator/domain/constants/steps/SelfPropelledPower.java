@@ -1,8 +1,10 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
 public enum SelfPropelledPower implements StepsIndicator {
+    BETWEEN_5_50,
     LESS_40,
     BETWEEN_40_80,
+    BETWEEN_50_100,
     MORE_80,
     LESS_100,
     BETWEEN_100_125,
@@ -15,6 +17,8 @@ public enum SelfPropelledPower implements StepsIndicator {
     BETWEEN_170_250,
     MORE_250,
     BETWEEN_100_200,
+    BETWEEN_200_250,
+    BETWEEN_250_300,
     BETWEEN_200_300,
     BETWEEN_300_400,
     MORE_400,
