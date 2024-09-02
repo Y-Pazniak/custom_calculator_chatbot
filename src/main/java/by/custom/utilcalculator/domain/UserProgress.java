@@ -5,6 +5,8 @@ import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.CommandTree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class UserProgress implements Serializable {
@@ -25,9 +27,22 @@ public class UserProgress implements Serializable {
     private SelfPropelledPower selfPropelledPower = null;
     private final String chatID;
     private Step nextStep;
+    private final List<Command> userPath;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
+        userPath = new ArrayList<>();
+    }
+
+    private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
+        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        Command command = fieldsToCommands.get(stepsIndicator);
+        if (userPath.contains(command)) {
+            int index = userPath.indexOf(command);
+            userPath.set(index, command);
+        } else {
+            userPath.add(command);
+        }
     }
 
     public void setNextStep(final Step nextStep) {
@@ -46,24 +61,23 @@ public class UserProgress implements Serializable {
         return countryOrigin;
     }
 
-    public Command[] getUserPath() {
-        final Command[] userPath = new Command[15];
-        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
-        userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
-        userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
-        userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
-        userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
-        userPath[4] = fieldsToCommands.get(getTypeOfM1Engine()); //4 cell contains type of engine
-        userPath[5] = fieldsToCommands.get(getM1EngineVolume()); //5 cell contains engine volume
-        userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
-        userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
-        userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
-        userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
-        userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
-        userPath[11] = fieldsToCommands.get(getTruckUnitWeight()); //11 cell contains "except  M1 -> truck units -> truck unit weight" truck unit weight
-        userPath[12] = fieldsToCommands.get(getTrailerO4Type()); //12 cell contains "except  M1 -> trailers O4 -> trailer type" type of trailer
-        userPath[13] = fieldsToCommands.get(getSelfPropelledType()); //13 cell contains "self-propelled vehicles -> type of vehicle"
-        userPath[14] = fieldsToCommands.get(getSelfPropelledPower()); //14 cell contains "self-propelled vehicles -> type of vehicle -> power of vehicle"
+    public List<Command> getUserPath() {
+//        final Command[] userPath = new Command[15];
+//        userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
+//        userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
+//        userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
+//        userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
+//        userPath[4] = fieldsToCommands.get(getTypeOfM1Engine()); //4 cell contains type of engine
+//        userPath[5] = fieldsToCommands.get(getM1EngineVolume()); //5 cell contains engine volume
+//        userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
+//        userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
+//        userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
+//        userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
+//        userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
+//        userPath[11] = fieldsToCommands.get(getTruckUnitWeight()); //11 cell contains "except  M1 -> truck units -> truck unit weight" truck unit weight
+//        userPath[12] = fieldsToCommands.get(getTrailerO4Type()); //12 cell contains "except  M1 -> trailers O4 -> trailer type" type of trailer
+//        userPath[13] = fieldsToCommands.get(getSelfPropelledType()); //13 cell contains "self-propelled vehicles -> type of vehicle"
+//        userPath[14] = fieldsToCommands.get(getSelfPropelledPower()); //14 cell contains "self-propelled vehicles -> type of vehicle -> power of vehicle"
         return userPath;
     }
 
@@ -78,16 +92,19 @@ public class UserProgress implements Serializable {
     public void setTrailerO4Type(final TrailerO4Type trailersO4Type) {
         cleanStepsAfterCurrentM1Branch(3);
         this.trailersO4Type = trailersO4Type;
+        addUserStatusToPath(trailersO4Type);
     }
 
     public void setTruckUnitWeight(final TruckUnitWeight truckUnitWeight) {
         cleanStepsAfterCurrentM1Branch(4);
         this.truckUnitWeight = truckUnitWeight;
+        addUserStatusToPath(truckUnitWeight);
     }
 
     public void setGeneralTransportType(final GeneralTransportType transportType) {
         cleanStepsAfterCurrentM1Branch(0);
         this.generalTransportType = transportType;
+        addUserStatusToPath(transportType);
     }
 
     public M2M3EngineType getEngineTypeM2M3() {
@@ -101,6 +118,7 @@ public class UserProgress implements Serializable {
     public void setEngineTypeM2M3(final M2M3EngineType engineTypeM2M3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
         this.engineTypeM2M3 = engineTypeM2M3;
+        addUserStatusToPath(engineTypeM2M3);
     }
 
     public BusesAndTrucksTransportType getExceptM1TransportType() {
@@ -110,11 +128,13 @@ public class UserProgress implements Serializable {
     public void setExceptM1TransportType(final BusesAndTrucksTransportType exceptM1TransportType) {
         cleanStepsAfterCurrentExceptM1Branch(0);
         this.exceptM1TransportType = exceptM1TransportType;
+        addUserStatusToPath(exceptM1TransportType);
     }
 
     public void setTransportWeightN1N2N3(final N1N3TransportWeight transportWeightN1N2N3) {
         cleanStepsAfterCurrentExceptM1Branch(1);
         this.transportWeightN1N2N3 = transportWeightN1N2N3;
+        addUserStatusToPath(transportWeightN1N2N3);
     }
 
     public N1N3TransportWeight getTransportWeightN1N2N3() {
@@ -125,6 +145,7 @@ public class UserProgress implements Serializable {
         final int stepID = 1;
         cleanStepsAfterCurrentM1Branch(stepID);
         this.countryOrigin = countryOrigin;
+        addUserStatusToPath(countryOrigin);
     }
 
     public OwnersType getOwnersType() {
@@ -134,6 +155,7 @@ public class UserProgress implements Serializable {
     public void setOwnersType(final OwnersType ownersType) {
         cleanStepsAfterCurrentM1Branch(2);
         this.ownersType = ownersType;
+        addUserStatusToPath(ownersType);
     }
 
     public CarAge getCarAge() {
@@ -145,6 +167,7 @@ public class UserProgress implements Serializable {
         cleanStepsAfterCurrentExceptM1Branch(5);
         cleanStepsAfterCurrentSelfPropelledVehicles(2);
         this.carAge = carAge;
+        addUserStatusToPath(carAge);
     }
 
     public M1TypeOfEngine getTypeOfM1Engine() {
@@ -154,6 +177,7 @@ public class UserProgress implements Serializable {
     public void setTypeOfEngineM1(final M1TypeOfEngine typeOfEngine) {
         cleanStepsAfterCurrentM1Branch(3);
         this.typeOfEngine = typeOfEngine;
+        addUserStatusToPath(typeOfEngine);
     }
 
     public M1EngineVolume getM1EngineVolume() {
@@ -163,21 +187,25 @@ public class UserProgress implements Serializable {
     public void setM1Volume(final M1EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentM1Branch(4);
         this.m1EngineVolume = volumeOfEngine;
+        addUserStatusToPath(volumeOfEngine);
     }
 
     public void setM2Volume(final M2EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentExceptM1Branch(2);
         this.m2EngineVolume = volumeOfEngine;
+        addUserStatusToPath(volumeOfEngine);
     }
 
     public void setTruckUnitType(final TruckUnitClass truckUnit) {
         cleanStepsAfterCurrentExceptM1Branch(3);
         this.truckUnitClass = truckUnit;
+        addUserStatusToPath(truckUnit);
     }
 
     public void setSelfPropelledType(final SelfPropelledType selfPropelledType) {
         cleanStepsAfterCurrentSelfPropelledVehicles(0);
         this.selfPropelledType = selfPropelledType;
+        addUserStatusToPath(selfPropelledType);
     }
 
     public SelfPropelledType getSelfPropelledType() {
@@ -191,6 +219,7 @@ public class UserProgress implements Serializable {
     public void setSelfPropelledPower(final SelfPropelledPower selfPropelledPower) {
         cleanStepsAfterCurrentSelfPropelledVehicles(1);
         this.selfPropelledPower = selfPropelledPower;
+        addUserStatusToPath(selfPropelledPower);
     }
 
     public TruckUnitClass getTruckUnitType() {

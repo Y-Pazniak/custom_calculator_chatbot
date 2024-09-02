@@ -5,6 +5,7 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -65,15 +66,13 @@ public class CommandTree {
 
     public Node getNode(final UserProgress userProgress) {
         Node node = treeRoot;
-        final Command[] userPath = userProgress.getUserPath();
+        final List<Command> userPath = userProgress.getUserPath();
 
         for (Command userStep : userPath) {
-            if (!Objects.isNull(userStep)) {
-                for (Node kid : node.getChildren()) {
-                    if (kid.getKey().equals(userStep)) {
-                        node = kid;
-                        break;
-                    }
+            for (Node kid : node.getChildren()) {
+                if (kid.getKey().equals(userStep)) {
+                    node = kid;
+                    break;
                 }
             }
         }
