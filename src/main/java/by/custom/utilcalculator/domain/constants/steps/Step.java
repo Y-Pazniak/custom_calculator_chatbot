@@ -3,16 +3,16 @@ package by.custom.utilcalculator.domain.constants.steps;
 public enum Step {
     GENERAL_TRANSPORT_TYPE,
     COUNTRY_ORIGIN,
-    BUSES_AND_TRUCKS_TYPES,
+    PARTICULAR_TRANSPORT_TYPE,
     OWNERS_TYPE,
-    N1_N3_WEIGHT,
+    WEIGHT,
     M2_M3_ENGINE_TYPE,
     M2_M3_ENGINE_VOLUME,
-    M1_TYPE_OF_ENGINE,
-    M1_VOLUME_OF_ENGINE,
+    ENGINE_TYPE,
+    ENGINE_VOLUME,
     TRUCK_UNIT_CLASS,
     TRUCK_UNIT_WEIGHT,
     TRAILERS_O4_TYPE,
-    CAR_AGE,
+    AGE,
     FAREWELL
 }

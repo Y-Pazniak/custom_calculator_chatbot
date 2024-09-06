@@ -2,12 +2,11 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.steps.CountryOrigin;
 import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 
-import static by.custom.utilcalculator.domain.constants.steps.M1TypeOfEngine.ELECTRIC;
-import static by.custom.utilcalculator.domain.constants.steps.M1TypeOfEngine.GASOLINE;
+import static by.custom.utilcalculator.domain.constants.steps.EngineType.ELECTRIC;
+import static by.custom.utilcalculator.domain.constants.steps.EngineType.GASOLINE;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -27,29 +26,26 @@ public class MessagesCreator {
             case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
             }
-            case BUSES_AND_TRUCKS_TYPES -> {
-                return getExceptM1TransportType();
+            case PARTICULAR_TRANSPORT_TYPE -> {
+                return getTransportType();
             }
-            case N1_N3_WEIGHT -> {
-                return getN1TransportWeight();
+            case WEIGHT -> {
+                return getTransportWeight();
+            }
+            case ENGINE_TYPE -> {
+                return getTypeOfEngine();
+            }
+            case ENGINE_VOLUME -> {
+                return getEngineVolume(userProgress);
             }
             case M2_M3_ENGINE_TYPE -> {
                 return getM2EngineType();
-            }
-            case M2_M3_ENGINE_VOLUME -> {
-                return getM2EngineVolume();
             }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
             }
             case OWNERS_TYPE -> {
                 return getTypeOfOwner();
-            }
-            case M1_TYPE_OF_ENGINE -> {
-                return getM1TypeOfEngine();
-            }
-            case M1_VOLUME_OF_ENGINE -> {
-                return getM1EngineVolume();
             }
             case TRUCK_UNIT_CLASS -> {
                 return getTruckUnitClass();
@@ -60,7 +56,7 @@ public class MessagesCreator {
             case TRAILERS_O4_TYPE -> {
                 return getO4TrailersTypes();
             }
-            case CAR_AGE -> {
+            case AGE -> {
                 return getAgeAuto();
             }
             case FAREWELL -> {
@@ -88,14 +84,6 @@ public class MessagesCreator {
                 Command.TRUCK_UNITS_20_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
     }
 
-    private String getM2EngineVolume() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
-                Command.M2_VOLUME_LESS_2500_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.less_2500"), "\n",
-                Command.M2_VOLUME_BETWEEN_2500_5000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_2500_5000"), "\n",
-                Command.M2_VOLUME_BETWEEN_5000_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_5000_10000"), "\n",
-                Command.M2_VOLUME_MORE_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.more_10000"));
-    }
-
     private String getM2EngineType() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
                 Command.GASOLINE_TYPE_ENGINE_BUSES.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
@@ -115,7 +103,7 @@ public class MessagesCreator {
                 Command.OTHER_COUNTRIES.getCommand(), " ", bundle.getString("answers.details.other"));
     }
 
-    public String getExceptM1TransportType() {
+    public String getTransportType() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.exceptM1"), "\n",
                 Command.N1_N3.getCommand(), " ", bundle.getString("answers.details.n1_n3"), "\n",
                 Command.M2_M3.getCommand(), " ", bundle.getString("answers.details.m2_m3"), "\n",
@@ -123,7 +111,7 @@ public class MessagesCreator {
                 Command.TRAILERS_O4.getCommand(), " ", bundle.getString("answers.details.trailers04"));
     }
 
-    public String getN1TransportWeight() {
+    public String getTransportWeight() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
                 Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
                 Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
@@ -134,19 +122,33 @@ public class MessagesCreator {
                 Command.BETWEEN_20_AND_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
     }
 
-    public String getM1TypeOfEngine() {
+    public String getTypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE_M1.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
+                Command.GASOLINE.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
+                Command.ELECTRIC.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
-    public String getM1EngineVolume() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
-                Command.M1_VOLUME_LESS_1000_CM.getCommand(), " ", bundle.getString("answers.details.less.1000"), "\n",
-                Command.M1_VOLUME_BETWEEN_1000_2000_CM.getCommand(), " ", bundle.getString("answers.details.between.1000.2000"), "\n",
-                Command.M1_VOLUME_BETWEEN_2000_3000_CM.getCommand(), " ", bundle.getString("answers.details.between.2000.3000"), "\n",
-                Command.M1_VOLUME_BETWEEN_3000_3500_CM.getCommand(), " ", bundle.getString("answers.details.between.3000.3500"), "\n",
-                Command.M1_VOLUME_MORE_3500_CM.getCommand(), " ", bundle.getString("answers.details.more.3500"));
+    public String getEngineVolume(final UserProgress userProgress) {
+        switch (userProgress.getGeneralTransportType()) {
+            case M1 -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
+                        Command.VOLUME_LESS_1000_CM.getCommand(), " ", bundle.getString("answers.details.less.1000"), "\n",
+                        Command.VOLUME_BETWEEN_1000_2000_CM.getCommand(), " ", bundle.getString("answers.details.between.1000.2000"), "\n",
+                        Command.VOLUME_BETWEEN_2000_3000_CM.getCommand(), " ", bundle.getString("answers.details.between.2000.3000"), "\n",
+                        Command.VOLUME_BETWEEN_3000_3500_CM.getCommand(), " ", bundle.getString("answers.details.between.3000.3500"), "\n",
+                        Command.VOLUME_MORE_3500_CM.getCommand(), " ", bundle.getString("answers.details.more.3500"));
+            }
+            case EXCEPT_M1 -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
+                        Command.VOLUME_LESS_2500_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.less_2500"), "\n",
+                        Command.VOLUME_BETWEEN_2500_5000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_2500_5000"), "\n",
+                        Command.VOLUME_BETWEEN_5000_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_5000_10000"), "\n",
+                        Command.VOLUME_MORE_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.more_10000"));
+            }
+            case null, default -> {
+                return "unknown general transport type";
+            }
+        }
     }
 
     public String getAgeAuto() {
@@ -264,28 +266,7 @@ public class MessagesCreator {
             }
         }
 
-        switch (userProgress.getM2EngineVolume()) {
-            case null -> {
-            }
-            case LESS_2500 -> {
-                sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.less_2500")));
-            }
-            case BETWEEN_2500_AND_5000 -> {
-                sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.between_2500_5000")));
-            }
-            case BETWEEN_5000_AND_10000 -> {
-                sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.between_5000_10000")));
-            }
-            case MORE_10000 -> {
-                sb.append(",");
-                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.more_10000")));
-            }
-        }
-
-        switch (userProgress.getM1EngineVolume()) {
+        switch (userProgress.getEngineVolume()) {
             case null -> {
             }
             case LESS_1000 -> {
@@ -307,6 +288,22 @@ public class MessagesCreator {
             case MORE_3500 -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.more.3500")));
+            }
+            case LESS_2500 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.less_2500")));
+            }
+            case BETWEEN_2500_AND_5000 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.between_2500_5000")));
+            }
+            case BETWEEN_5000_AND_10000 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.between_5000_10000")));
+            }
+            case MORE_10000 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.more_10000")));
             }
         }
         return sb.toString();

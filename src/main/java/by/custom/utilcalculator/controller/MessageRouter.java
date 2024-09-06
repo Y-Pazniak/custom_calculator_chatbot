@@ -61,11 +61,11 @@ public class MessageRouter {
                     answer = userProgressManager.processOwnerType(requestingCommand, chatID);
             case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
                     answer = userProgressManager.processCarAge(requestingCommand, chatID);
-            case GASOLINE_TYPE_ENGINE_M1, ELECTRIC_TYPE_ENGINE_M1, ELECTRIC_TYPE_ENGINE_BUSES, GASOLINE_TYPE_ENGINE_BUSES ->
+            case GASOLINE, ELECTRIC, ELECTRIC_TYPE_ENGINE_BUSES, GASOLINE_TYPE_ENGINE_BUSES ->
                     answer = userProgressManager.processEngineType(requestingCommand, chatID);
-            case M1_VOLUME_LESS_1000_CM, M1_VOLUME_BETWEEN_1000_2000_CM, M1_VOLUME_BETWEEN_2000_3000_CM,
-                 M1_VOLUME_BETWEEN_3000_3500_CM, M1_VOLUME_MORE_3500_CM, M2_VOLUME_LESS_2500_CM,
-                 M2_VOLUME_BETWEEN_2500_5000_CM, M2_VOLUME_BETWEEN_5000_10000_CM, M2_VOLUME_MORE_10000_CM ->
+            case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
+                 VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM, VOLUME_LESS_2500_CM,
+                 VOLUME_BETWEEN_2500_5000_CM, VOLUME_BETWEEN_5000_10000_CM, VOLUME_MORE_10000_CM ->
                     answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
             case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
                     answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);

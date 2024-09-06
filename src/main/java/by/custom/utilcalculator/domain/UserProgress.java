@@ -14,9 +14,9 @@ public class UserProgress implements Serializable {
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
-    private M1TypeOfEngine typeOfEngine = null;
-    private M1EngineVolume m1EngineVolume = null;
-    private ExceptM1TransportType exceptM1TransportType = null;
+    private EngineType typeOfEngine = null;
+    private EngineVolume engineVolume = null;
+    private BusesAndTrucksTransportType exceptM1TransportType = null;
     private N1N3TransportWeight transportWeightN1N2N3 = null;
     private M2M3EngineType engineTypeM2M3 = null;
     private M2EngineVolume m2EngineVolume = null;
@@ -24,7 +24,6 @@ public class UserProgress implements Serializable {
     private TruckUnitWeight truckUnitWeight = null;
     private TrailerO4Type trailersO4Type = null;
     private final String chatID;
-    private Step nextStep;
     private final List<Command> userPath;
 
     public UserProgress(final String chatID) {
@@ -35,7 +34,7 @@ public class UserProgress implements Serializable {
     private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         Command command = fieldsToCommands.get(stepsIndicator);
-        Class stepsIndicatorClass = stepsIndicator.getClass();
+        Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
         boolean needAddCommand = true;
 
         for (int i = 0; i < userPath.size(); i++) {
@@ -56,13 +55,8 @@ public class UserProgress implements Serializable {
         }
     }
 
-
-    public void setNextStep(final Step nextStep) {
-        this.nextStep = nextStep;
-    }
-
-    public Step getNextStep(){
-        return UserProgressValidator.getNextStep(this);
+    public Step getNextStep() {
+        return TreeMediator.getNextStep(this);
     }
 
     public GeneralTransportType getGeneralTransportType() {
@@ -74,7 +68,7 @@ public class UserProgress implements Serializable {
     }
 
     public List<Command> getUserPath() {
-      return userPath;
+        return userPath;
     }
 
     public TruckUnitWeight getTruckUnitWeight() {
@@ -117,11 +111,11 @@ public class UserProgress implements Serializable {
         addUserStatusToPath(engineTypeM2M3);
     }
 
-    public ExceptM1TransportType getExceptM1TransportType() {
+    public BusesAndTrucksTransportType getExceptM1TransportType() {
         return exceptM1TransportType;
     }
 
-    public void setExceptM1TransportType(final ExceptM1TransportType exceptM1TransportType) {
+    public void setExceptM1TransportType(final BusesAndTrucksTransportType exceptM1TransportType) {
         cleanStepsAfterCurrentExceptM1Branch(0);
         this.exceptM1TransportType = exceptM1TransportType;
         addUserStatusToPath(exceptM1TransportType);
@@ -164,24 +158,28 @@ public class UserProgress implements Serializable {
         addUserStatusToPath(carAge);
     }
 
-    public M1TypeOfEngine getTypeOfM1Engine() {
+    public EngineType getTypeOfM1Engine() {
         return typeOfEngine;
     }
 
-    public void setTypeOfEngineM1(final M1TypeOfEngine typeOfEngine) {
+    public void setEngineType(final EngineType typeOfEngine) {
         cleanStepsAfterCurrentM1Branch(3);
         this.typeOfEngine = typeOfEngine;
         addUserStatusToPath(typeOfEngine);
     }
 
-    public M1EngineVolume getM1EngineVolume() {
-        return m1EngineVolume;
+    public EngineType getEngineType() {
+        return typeOfEngine;
     }
 
-    public void setM1Volume(final M1EngineVolume volumeOfEngine) {
+    public void setVolume(final EngineVolume volumeOfEngine) {
         cleanStepsAfterCurrentM1Branch(4);
-        this.m1EngineVolume = volumeOfEngine;
+        this.engineVolume = volumeOfEngine;
         addUserStatusToPath(volumeOfEngine);
+    }
+
+    public EngineVolume getEngineVolume(){
+        return engineVolume;
     }
 
     public void setM2Volume(final M2EngineVolume volumeOfEngine) {
@@ -215,7 +213,7 @@ public class UserProgress implements Serializable {
             this.typeOfEngine = null;
         }
         if (stepCleaner <= 3) {
-            this.m1EngineVolume = null;
+            this.engineVolume = null;
         }
         if (stepCleaner <= 4) {
             this.carAge = null;

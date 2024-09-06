@@ -15,7 +15,7 @@
             {
               "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
-              "nextStep": "CAR_AGE",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
@@ -28,7 +28,7 @@
             {
               "key": "JURIDICAL",
               "description": "branch for companies who want to purchase a passenger M1 car from EAES",
-              "nextStep": "CAR_AGE",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
@@ -48,7 +48,7 @@
             {
               "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
-              "nextStep": "CAR_AGE",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
@@ -61,18 +61,22 @@
             {
               "key": "JURIDICAL",
               "description": "branch for companies who want to purchase a passenger M1 car from countries except EAES",
+              "nextStep": "ENGINE_TYPE",
               "children": [
                 {
-                  "key": "GASOLINE_TYPE_ENGINE_M1",
+                  "key": "GASOLINE",
                   "description": "if car has gasoline or hybrid engine, it will be different branch",
+                  "nextStep": "ENGINE_VOLUME",
                   "children": [
                     {
-                      "key": "M1_GASOLINE_ENGINE_VOLUME",
+                      "key": "ENGINE_VOLUME",
                       "description": "we unite GASOLINE branches into one node to make code shorter",
+                      "nextStep": "AGE",
                       "children": [
                         {
                           "key": "AGE",
                           "description": "we unite AGE branches into one node to make code shorter",
+                          "nextStep": "FAREWELL",
                           "children": []
                         }
                       ]
@@ -80,12 +84,14 @@
                   ]
                 },
                 {
-                  "key": "ELECTRIC_TYPE_ENGINE_M1",
+                  "key": "ELECTRIC",
                   "description": "if car has pure electric engine, it will be different branch",
+                  "nextStep": "AGE",
                   "children": [
                     {
                       "key": "AGE",
                       "description": "we unite AGE branches into one node to make code shorter",
+                      "nextStep": "FAREWELL",
                       "children": []
                     }
                   ]
@@ -99,18 +105,22 @@
     {
       "key": "BUSES_AND_TRUCKS",
       "description": "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks): https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
+      "nextStep": "PARTICULAR_TRANSPORT_TYPE",
       "children": [
         {
           "key": "N1_N3",
           "description": "trucks: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
+          "nextStep": "WEIGHT",
           "children": [
             {
               "key": "N1_N3_WEIGHT",
               "description": "we unite WEIGHT branches into one node to make code shorter",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]
@@ -120,29 +130,35 @@
         {
           "key": "M2_M3",
           "description": "buses: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
+          "nextStep": "ENGINE_TYPE",
           "children": [
             {
-              "key": "ELECTRIC_TYPE_ENGINE_BUSES",
+              "key": "ELECTRIC",
               "description": "if bus has an electric type of engine",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]
             },
             {
-              "key": "GASOLINE_TYPE_ENGINE_BUSES",
+              "key": "GASOLINE",
               "description": "if bus has a gasoline or hybrid type of engine",
+              "nextStep": "ENGINE_VOLUME",
               "children": [
                 {
-                  "key": "M2_M3_GASOLINE_ENGINE_VOLUME",
+                  "key": "ENGINE_VOLUME",
                   "description": "we unite GASOLINE branches into one node to make code shorter",
+                  "nextStep": "AGE",
                   "children": [
                     {
                       "key": "AGE",
                       "description": "we unite AGE branches into one node to make code shorter",
+                      "nextStep": "FAREWELL",
                       "children": []
                     }
                   ]
