@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
@@ -30,6 +31,10 @@ public class CommandTree {
 
     public boolean validateCommandFromNode(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
+    }
+
+    public Step getNextStepFromNode(final UserProgress userProgress) {
+        return getNode(userProgress).getNextStep();
     }
 
     public boolean isRequestingCommandAcceptable(final Command requestingCommand, final Node node) {

@@ -62,7 +62,7 @@ public class UserProgress implements Serializable {
     }
 
     public Step getNextStep(){
-        return nextStep;
+        return UserProgressValidator.getNextStep(this);
     }
 
     public GeneralTransportType getGeneralTransportType() {

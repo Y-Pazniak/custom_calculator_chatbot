@@ -5,18 +5,22 @@
     {
       "key": "M1",
       "description": "M1 - passenger's vehicles: this node starts passenger branch, details about M1: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
+      "nextStep": "COUNTRY_ORIGIN",
       "children": [
         {
           "key": "EAES",
           "description": "branch for M1 vehicles from EAES (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia)",
+          "nextStep": "OWNERS_TYPE",
           "children": [
             {
               "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
+              "nextStep": "CAR_AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]
@@ -24,10 +28,12 @@
             {
               "key": "JURIDICAL",
               "description": "branch for companies who want to purchase a passenger M1 car from EAES",
+              "nextStep": "CAR_AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]
@@ -37,14 +43,17 @@
         {
           "key": "OTHER_COUNTRIES",
           "description": "it means any country except EAES countries",
+          "nextStep": "OWNERS_TYPE",
           "children": [
             {
               "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
+              "nextStep": "CAR_AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]
