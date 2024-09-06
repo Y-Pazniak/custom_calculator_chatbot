@@ -63,7 +63,6 @@ public class CommandTree {
     public Node getNode(final UserProgress userProgress) {
         Node node = treeRoot;
         final List<Command> userPath = userProgress.getUserPath();
-
         for (Command userStep : userPath) {
             for (Node kid : node.getChildren()) {
                 if (kid.getKey().equals(userStep)) {
@@ -72,6 +71,7 @@ public class CommandTree {
                 }
             }
         }
+
         return node;
     }
 

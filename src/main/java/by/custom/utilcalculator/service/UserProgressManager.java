@@ -26,10 +26,6 @@ public class UserProgressManager {
     public void createNewUserProgress(final String chatID) throws UtilsborException {
         final UserProgress userProgress = new UserProgress(chatID);
         userProgressStorage.save(userProgress);
-//        IUserProgressStorage localUserProgressStorage = PostgresUserProgressStorage.getInstance();
-//        UserProgress userProgress = new UserProgress(chatID);
-//        localUserProgressStorage.save(userProgress);
-//        userProgressStorage.save(userProgress);
     }
 
     public String processGeneralTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
@@ -123,9 +119,8 @@ public class UserProgressManager {
         final String message;
 
         switch (requestingCommand) {
-            case Command.PHYSICAL_PERSON -> userProgress.setOwnersType(OwnersType.PHYSICAL);
-            case Command.JURIDICAL_PERSON_EAES -> userProgress.setOwnersType(OwnersType.JURIDICAL_EAES);
-            case Command.JURIDICAL_PERSON_OTHER -> userProgress.setOwnersType(OwnersType.JURIDICAL_OTHER);
+            case Command.PHYSICAL -> userProgress.setOwnersType(OwnersType.PHYSICAL);
+            case Command.JURIDICAL -> userProgress.setOwnersType(OwnersType.JURIDICAL);
         }
 
         userProgressStorage.save(userProgress);

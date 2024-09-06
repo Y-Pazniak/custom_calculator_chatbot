@@ -57,7 +57,7 @@ public class MessageRouter {
             }
             case M1, BUSES_AND_TRUCKS -> answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
-            case PHYSICAL_PERSON, JURIDICAL_PERSON_EAES, JURIDICAL_PERSON_OTHER ->
+            case PHYSICAL, JURIDICAL ->
                     answer = userProgressManager.processOwnerType(requestingCommand, chatID);
             case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
                     answer = userProgressManager.processCarAge(requestingCommand, chatID);

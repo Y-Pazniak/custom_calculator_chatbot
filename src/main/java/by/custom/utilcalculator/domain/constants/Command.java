@@ -38,9 +38,8 @@ public enum Command {
     EAES("/eaes", null, Step.OWNERS_TYPE),
     OTHER_COUNTRIES("/other", null, Step.OWNERS_TYPE),
 
-    PHYSICAL_PERSON("/physical", null, Step.CAR_AGE),
-    JURIDICAL_PERSON_EAES("/juridical_eaes", null, Step.CAR_AGE),
-    JURIDICAL_PERSON_OTHER("/juridical_other", null, Step.M1_TYPE_OF_ENGINE),
+    PHYSICAL("/physical", null, Step.CAR_AGE),
+    JURIDICAL("/juridical", null, Step.CAR_AGE),
 
     //age command
     LESS_3_YEARS_AGE("/3_or_less_years", Command.AGE, Step.FAREWELL),

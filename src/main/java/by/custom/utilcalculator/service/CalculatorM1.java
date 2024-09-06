@@ -38,7 +38,7 @@ public class CalculatorM1 {
             case PHYSICAL -> {
                 return countMostCommonPrice(userProgress);
             }
-            case JURIDICAL_EAES, JURIDICAL_OTHER -> {
+            case JURIDICAL -> {
                 return countForJuridicalPrice(userProgress);
             }
             case null -> {

@@ -11,7 +11,7 @@
           "description": "branch for M1 vehicles from EAES (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia)",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
+              "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
               "children": [
                 {
@@ -22,7 +22,7 @@
               ]
             },
             {
-              "key": "JURIDICAL_PERSON_EAES",
+              "key": "JURIDICAL",
               "description": "branch for companies who want to purchase a passenger M1 car from EAES",
               "children": [
                 {
@@ -39,7 +39,7 @@
           "description": "it means any country except EAES countries",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
+              "key": "PHYSICAL",
               "description": "common person, who does not represent any company",
               "children": [
                 {
@@ -50,7 +50,7 @@
               ]
             },
             {
-              "key": "JURIDICAL_PERSON_OTHER",
+              "key": "JURIDICAL",
               "description": "branch for companies who want to purchase a passenger M1 car from countries except EAES",
               "children": [
                 {

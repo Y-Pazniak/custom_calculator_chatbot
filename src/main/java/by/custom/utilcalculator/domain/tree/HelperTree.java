@@ -45,9 +45,8 @@ public class HelperTree {
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
         //type of person step
-        fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON);
-        fieldsToCommands.put(OwnersType.JURIDICAL_EAES, Command.JURIDICAL_PERSON_EAES);
-        fieldsToCommands.put(OwnersType.JURIDICAL_OTHER, Command.JURIDICAL_PERSON_OTHER);
+        fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL);
+        fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL);
         //age step
         fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE);
         fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE);
