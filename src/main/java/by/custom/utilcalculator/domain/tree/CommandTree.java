@@ -6,6 +6,7 @@ import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -34,6 +35,8 @@ public class CommandTree {
     }
 
     public Step getNextStepFromNode(final UserProgress userProgress) {
+        System.out.println("current node: " + getNode(userProgress).getKey());
+        System.out.println("next step: " + getNode(userProgress).getNextStep());
         return getNode(userProgress).getNextStep();
     }
 

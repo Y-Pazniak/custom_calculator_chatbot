@@ -2,10 +2,7 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
-import by.custom.utilcalculator.domain.constants.steps.CarAge;
-import by.custom.utilcalculator.domain.constants.steps.M2EngineVolume;
-import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
-import by.custom.utilcalculator.domain.constants.steps.TruckUnitClass;
+import by.custom.utilcalculator.domain.constants.steps.*;
 
 public class CalculatorExceptM1 {
     private CalculatorExceptM1() {
@@ -76,15 +73,15 @@ public class CalculatorExceptM1 {
     }
 
     private String countForM2M3Price(final UserProgress userProgress) {
-        return userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC ? countPriceForM2M3Electric(userProgress) : countPriceForM2M3Gasoline(userProgress);
+        return userProgress.getEngineType() == EngineType.ELECTRIC ? countPriceForM2M3Electric(userProgress) : countPriceForM2M3Gasoline(userProgress);
     }
 
     private String countPriceForM2M3Gasoline(final UserProgress userProgress) {
-        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? countM2M3GasolineLess3Years(userProgress.getM2EngineVolume()) : countM2M3GasolineMore3Years(userProgress.getM2EngineVolume());
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? countM2M3GasolineLess3Years(userProgress.getEngineVolume()) : countM2M3GasolineMore3Years(userProgress.getEngineVolume());
     }
 
-    private String countM2M3GasolineMore3Years(final M2EngineVolume m2EngineVolume) {
-        switch (m2EngineVolume) {
+    private String countM2M3GasolineMore3Years(final EngineVolume engineVolume) {
+        switch (engineVolume) {
             case LESS_2500 -> {
                 return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_MORE_3_YEARS;
             }
@@ -103,8 +100,8 @@ public class CalculatorExceptM1 {
         }
     }
 
-    private String countM2M3GasolineLess3Years(final M2EngineVolume m2EngineVolume) {
-        switch (m2EngineVolume) {
+    private String countM2M3GasolineLess3Years(final EngineVolume engineVolume) {
+        switch (engineVolume) {
             case LESS_2500 -> {
                 return Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_LESS_OR_3_YEARS;
             }
