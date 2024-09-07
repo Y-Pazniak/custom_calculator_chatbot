@@ -1,5 +1,7 @@
 package by.custom.utilcalculator.domain.constants;
 
+import javax.annotation.Nullable;
+
 public enum Command {
     //command families - not commands actually, just markers
     AGE("age", null),
@@ -80,7 +82,7 @@ public enum Command {
     private final String command;
     private final Command family;
 
-    Command(final String command, final Command family) {
+    Command(final String command, @Nullable final Command family) {
         this.command = command;
         this.family = family;
     }

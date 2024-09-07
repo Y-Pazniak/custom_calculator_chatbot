@@ -29,7 +29,7 @@ public class UserProgress implements Serializable {
     }
 
     private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
-        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.init().getFieldsToCommands();
         Command command = fieldsToCommands.get(stepsIndicator);
         Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
         boolean needAddCommand = true;

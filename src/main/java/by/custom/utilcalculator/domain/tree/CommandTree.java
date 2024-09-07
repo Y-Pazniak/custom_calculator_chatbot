@@ -6,7 +6,6 @@ import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,7 +21,7 @@ public class CommandTree {
         treeRoot = HelperTree.buildTree();
     }
 
-    public static CommandTree getInstance() {
+    public static CommandTree init() {
         return TreeHolder.TREE_HOLDER;
     }
 
