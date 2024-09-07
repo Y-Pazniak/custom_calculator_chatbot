@@ -38,7 +38,7 @@ public class UserProgressManager {
 
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
-            case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.EXCEPT_M1);
+            case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.BUSES_AND_TRUCKS);
         }
 
         userProgressStorage.save(userProgress);
@@ -53,10 +53,10 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
-            case N1_N3 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.N1_N3);
-            case M2_M3 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.M2_M3);
-            case TRUCK_UNITS -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.TRUCK_UNITS);
-            case TRAILERS_O4 -> userProgress.setExceptM1TransportType(BusesAndTrucksTransportType.TRAILERS_O4);
+            case N1_N3 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.N1_N3);
+            case M2_M3 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.M2_M3);
+            case TRUCK_UNITS -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.TRUCK_UNITS);
+            case TRAILERS_O4 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.TRAILERS_O4);
         }
 
         userProgressStorage.save(userProgress);
@@ -71,14 +71,14 @@ public class UserProgressManager {
         }
 
         switch (requestingCommand) {
-            case LESS_2_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.LESS_2_TONS);
+            case LESS_2_TONS -> userProgress.setWeight(Weight.LESS_2_TONS);
             case BETWEEN_2_5_AND_3_5_TONS ->
-                    userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_2_5_AND_3_5);
-            case BETWEEN_3_5_AND_5_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_3_5_AND_5);
-            case BETWEEN_5_AND_8_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_5_AND_8);
-            case BETWEEN_8_AND_12_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_8_AND_12);
-            case BETWEEN_12_AND_20_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_12_AND_20);
-            case BETWEEN_20_AND_50_TONS -> userProgress.setTransportWeightN1N2N3(N1N3TransportWeight.BETWEEN_20_AND_50);
+                    userProgress.setWeight(Weight.BETWEEN_2_5_AND_3_5);
+            case BETWEEN_3_5_AND_5_TONS -> userProgress.setWeight(Weight.BETWEEN_3_5_AND_5);
+            case BETWEEN_5_AND_8_TONS -> userProgress.setWeight(Weight.BETWEEN_5_AND_8);
+            case BETWEEN_8_AND_12_TONS -> userProgress.setWeight(Weight.BETWEEN_8_AND_12);
+            case BETWEEN_12_AND_20_TONS -> userProgress.setWeight(Weight.BETWEEN_12_AND_20);
+            case BETWEEN_20_AND_50_TONS -> userProgress.setWeight(Weight.BETWEEN_20_AND_50);
         }
         userProgressStorage.save(userProgress);
         return messagesCreator.getSummaryAnswer(userProgress);
@@ -217,8 +217,8 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
-            case TRUCK_UNITS_12_20_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_12_TILL_20_TONS);
-            case TRUCK_UNITS_20_50_TONS -> userProgress.setTruckUnitWeight(TruckUnitWeight.FROM_20_TILL_50_TONS);
+            case TRUCK_UNITS_12_20_TONS -> userProgress.setWeight(Weight.FROM_12_TILL_20_TONS);
+            case TRUCK_UNITS_20_50_TONS -> userProgress.setWeight(Weight.FROM_20_TILL_50_TONS);
         }
 
         userProgressStorage.save(userProgress);

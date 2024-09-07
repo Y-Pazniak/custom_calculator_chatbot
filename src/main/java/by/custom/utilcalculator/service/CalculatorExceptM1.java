@@ -17,7 +17,7 @@ public class CalculatorExceptM1 {
     }
 
     public String calculate(final UserProgress userProgress) {
-        switch (userProgress.getExceptM1TransportType()) {
+        switch (userProgress.getBusesOrTrucksType()) {
             case N1_N3 -> {
                 return countForN1N3price(userProgress);
             }
@@ -41,11 +41,11 @@ public class CalculatorExceptM1 {
     }
 
     private String countForTruckUnits(final UserProgress userProgress) {
-        return userProgress.getTruckUnitType() == TruckUnitClass.TRUCK_UNITS_6_CLASS ? countForTruckUnits6Class(userProgress) : countForExcept6ClassUnits(userProgress);
+        return userProgress.getTruckUnitClass() == TruckUnitClass.TRUCK_UNITS_6_CLASS ? countForTruckUnits6Class(userProgress) : countForExcept6ClassUnits(userProgress);
     }
 
     private String countForExcept6ClassUnits(final UserProgress userProgress) {
-        switch (userProgress.getTruckUnitWeight()) {
+        switch (userProgress.getWeight()) {
             case FROM_12_TILL_20_TONS -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_MORE_3_YEARS;
             }
@@ -59,7 +59,7 @@ public class CalculatorExceptM1 {
     }
 
     private String countForTruckUnits6Class(final UserProgress userProgress) {
-        switch (userProgress.getTruckUnitWeight()) {
+        switch (userProgress.getWeight()) {
             case FROM_12_TILL_20_TONS -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS;
             }
@@ -77,7 +77,7 @@ public class CalculatorExceptM1 {
     }
 
     private String countPriceForM2M3Gasoline(final UserProgress userProgress) {
-        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? countM2M3GasolineLess3Years(userProgress.getEngineVolume()) : countM2M3GasolineMore3Years(userProgress.getEngineVolume());
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? countM2M3GasolineLess3Years(userProgress.getVolume()) : countM2M3GasolineMore3Years(userProgress.getVolume());
     }
 
     private String countM2M3GasolineMore3Years(final EngineVolume engineVolume) {
@@ -125,7 +125,7 @@ public class CalculatorExceptM1 {
     }
 
     private String countForN1N3price(final UserProgress userProgress) {
-        switch (userProgress.getTransportWeightN1N2N3()) {
+        switch (userProgress.getWeight()) {
             case LESS_2_TONS -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_LESS_OR_3_YEARS : Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_MORE_3_YEARS;
             }

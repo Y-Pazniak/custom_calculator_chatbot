@@ -2,7 +2,7 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.steps.M2M3EngineType;
+import by.custom.utilcalculator.domain.constants.steps.EngineType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 
 import static by.custom.utilcalculator.domain.constants.steps.EngineType.ELECTRIC;
@@ -30,16 +30,13 @@ public class MessagesCreator {
                 return getTransportType();
             }
             case WEIGHT -> {
-                return getTransportWeight();
+                return getTransportWeight(userProgress);
             }
             case ENGINE_TYPE -> {
                 return getTypeOfEngine();
             }
             case ENGINE_VOLUME -> {
                 return getEngineVolume(userProgress);
-            }
-            case M2_M3_ENGINE_TYPE -> {
-                return getM2EngineType();
             }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
@@ -50,9 +47,7 @@ public class MessagesCreator {
             case TRUCK_UNIT_CLASS -> {
                 return getTruckUnitClass();
             }
-            case TRUCK_UNIT_WEIGHT -> {
-                return getTruckUnitWeight();
-            }
+
             case TRAILERS_O4_TYPE -> {
                 return getO4TrailersTypes();
             }
@@ -78,18 +73,6 @@ public class MessagesCreator {
                 Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
     }
 
-    private String getTruckUnitWeight() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
-                Command.TRUCK_UNITS_12_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
-                Command.TRUCK_UNITS_20_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
-    }
-
-    private String getM2EngineType() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
-                Command.GASOLINE_TYPE_ENGINE_BUSES.getCommand(), " ", bundle.getString("answers.details.gas.engine"), "\n",
-                Command.ELECTRIC_TYPE_ENGINE_BUSES.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
-    }
-
     public String getGreeting() {
         return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
                 Command.M1.getCommand(), " ", bundle.getString("answers.details.m1"), "\n",
@@ -111,15 +94,27 @@ public class MessagesCreator {
                 Command.TRAILERS_O4.getCommand(), " ", bundle.getString("answers.details.trailers04"));
     }
 
-    public String getTransportWeight() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
-                Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
-                Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
-                Command.BETWEEN_3_5_AND_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_3d5_and_5_tons"), "\n",
-                Command.BETWEEN_5_AND_8_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_5_and_8_tons"), "\n",
-                Command.BETWEEN_8_AND_12_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_8_and_12_tons"), "\n",
-                Command.BETWEEN_12_AND_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
-                Command.BETWEEN_20_AND_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
+    public String getTransportWeight(final UserProgress userProgress) {
+        switch (userProgress.getBusesOrTrucksType()) {
+            case N1_N3 -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                        Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
+                        Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
+                        Command.BETWEEN_3_5_AND_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_3d5_and_5_tons"), "\n",
+                        Command.BETWEEN_5_AND_8_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_5_and_8_tons"), "\n",
+                        Command.BETWEEN_8_AND_12_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_8_and_12_tons"), "\n",
+                        Command.BETWEEN_12_AND_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
+                        Command.BETWEEN_20_AND_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
+            }
+            case TRUCK_UNITS -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                        Command.TRUCK_UNITS_12_20_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_12_and_20_tons"), "\n",
+                        Command.TRUCK_UNITS_20_50_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_20_and_50_tons"));
+            }
+            case null, default -> {
+            }
+        }
+        return "unknown weight or type";
     }
 
     public String getTypeOfEngine() {
@@ -138,7 +133,7 @@ public class MessagesCreator {
                         Command.VOLUME_BETWEEN_3000_3500_CM.getCommand(), " ", bundle.getString("answers.details.between.3000.3500"), "\n",
                         Command.VOLUME_MORE_3500_CM.getCommand(), " ", bundle.getString("answers.details.more.3500"));
             }
-            case EXCEPT_M1 -> {
+            case BUSES_AND_TRUCKS -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
                         Command.VOLUME_LESS_2500_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.less_2500"), "\n",
                         Command.VOLUME_BETWEEN_2500_5000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_2500_5000"), "\n",
@@ -184,12 +179,12 @@ public class MessagesCreator {
             case null -> {
             }
             case M1 -> sb.append(bundle.getString("answers.summary.m1"));
-            case EXCEPT_M1 -> sb.append(bundle.getString("answers.summary.except_m1"));
+            case BUSES_AND_TRUCKS -> sb.append(bundle.getString("answers.summary.except_m1"));
             case SELF_PROPELLED_VEHICLES -> {
             }
         }
 
-        switch (userProgress.getExceptM1TransportType()) {
+        switch (userProgress.getBusesOrTrucksType()) {
             case null -> {
             }
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
@@ -198,7 +193,7 @@ public class MessagesCreator {
             case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
         }
 
-        switch (userProgress.getTransportWeightN1N2N3()) {
+        switch (userProgress.getWeight()) {
             case null -> {
             }
             case LESS_2_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
@@ -211,6 +206,10 @@ public class MessagesCreator {
             case BETWEEN_12_AND_20 ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
             case BETWEEN_20_AND_50 ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
+            case FROM_12_TILL_20_TONS ->
+                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
+            case FROM_20_TILL_50_TONS ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
         }
 
@@ -235,20 +234,11 @@ public class MessagesCreator {
             case MORE_3_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
         }
 
-        switch (userProgress.getTruckUnitType()) {
+        switch (userProgress.getTruckUnitClass()) {
             case null -> {
             }
             case TRUCK_UNITS_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.6_class"));
             case TRUCK_UNITS_EXCEPT_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.except_6"));
-        }
-
-        switch (userProgress.getTruckUnitWeight()) {
-            case null -> {
-            }
-            case FROM_12_TILL_20_TONS ->
-                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
-            case FROM_20_TILL_50_TONS ->
-                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
         }
 
         switch (userProgress.getTrailerO4Type()) {
@@ -258,15 +248,15 @@ public class MessagesCreator {
             case HALF_TRAILERS -> sb.append(bundle.getString("answers.summary.halftrailersO4details"));
         }
 
-        if (userProgress.getTypeOfM1Engine() == ELECTRIC || userProgress.getEngineTypeM2M3() == M2M3EngineType.ELECTRIC) {
+        if (userProgress.getEngineType() == ELECTRIC) {
             sb.append(bundle.getString("answers.summary.electro"));
         } else {
-            if (userProgress.getTypeOfM1Engine() == GASOLINE || userProgress.getEngineTypeM2M3() == M2M3EngineType.GASOLINE) {
+            if (userProgress.getEngineType() == GASOLINE) {
                 sb.append(bundle.getString("answers.summary.gas"));
             }
         }
 
-        switch (userProgress.getEngineVolume()) {
+        switch (userProgress.getVolume()) {
             case null -> {
             }
             case LESS_1000 -> {

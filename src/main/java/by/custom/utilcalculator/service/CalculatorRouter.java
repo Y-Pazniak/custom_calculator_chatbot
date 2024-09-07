@@ -8,7 +8,7 @@ public class CalculatorRouter {
             case M1 -> {
                 return CalculatorM1.getInstance().calculate(userProgress);
             }
-            case EXCEPT_M1 -> {
+            case BUSES_AND_TRUCKS -> {
                 return CalculatorExceptM1.getInstance().calculate(userProgress);
             }
             case SELF_PROPELLED_VEHICLES -> {

@@ -170,18 +170,22 @@
         {
           "key": "TRUCK_UNITS",
           "description": "truck units - do not confuse with trucks: https://en.wikipedia.org/wiki/Tractor_unit",
+          "nextStep": "TRUCK_UNIT_CLASS",
           "children": [
             {
               "key": "TRUCK_UNITS_OTHER",
               "description": "truck units except eco class 6: https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D1%80%D0%BE-6",
+              "nextStep": "WEIGHT",
               "children": [
                 {
-                  "key": "TRUCK_UNIT_WEIGHT",
+                  "key": "WEIGHT",
                   "description": "we unite WEIGHT branches into one node to make code shorter",
+                  "nextStep": "AGE",
                   "children": [
                     {
                       "key": "AGE",
                       "description": "we unite AGE branches into one node to make code shorter",
+                      "nextStep": "FAREWELL",
                       "children": []
                     }
                   ]
@@ -191,14 +195,17 @@
             {
               "key": "TRUCK_UNITS_6_CLASS",
               "description": "truck units with eco class 6: https://ru.wikipedia.org/wiki/%D0%95%D0%B2%D1%80%D0%BE-6",
+              "nextStep": "WEIGHT",
               "children": [
                 {
-                  "key": "TRUCK_UNIT_WEIGHT",
+                  "key": "WEIGHT",
                   "description": "we unite WEIGHT branches into one node to make code shorter",
+                  "nextStep": "AGE",
                   "children": [
                     {
                       "key": "AGE",
                       "description": "we unite AGE branches into one node to make code shorter",
+                      "nextStep": "FAREWELL",
                       "children": []
                     }
                   ]
@@ -210,14 +217,17 @@
         {
           "key": "TRAILERS_O4",
           "description": "trailers O4 class: https://portal.eaeunion.org/sites/odata/_layouts/15/portal.eec.registry.ui/directoryform.aspx?viewid=f04655ab-f3a0-41e1-9f95-9c7e47d70c80&listid=0e3ead06-5475-466a-a340-6f69c01b5687&itemid=388#",
+          "nextStep": "TRAILERS_O4_TYPE",
           "children": [
             {
               "key": "TRAILERS_O4_TYPE",
               "description": "there are two types of O4 trailers: trailers and semitrailers: https://en.wikipedia.org/wiki/Semi-trailer",
+              "nextStep": "AGE",
               "children": [
                 {
                   "key": "AGE",
                   "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
                   "children": []
                 }
               ]

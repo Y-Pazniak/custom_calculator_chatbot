@@ -5,6 +5,7 @@ public enum Command {
     AGE("age", null),
     ENGINE_VOLUME("volume", null),
     N1_N3_WEIGHT("n1_n3_weight", null),
+    WEIGHT("weight", null),
     M2_M3_GASOLINE_ENGINE_VOLUME("m2_m3_volume", null),
     TRUCK_UNIT_WEIGHT("truck_unit_weight", null),
     TRAILERS_O4_TYPE("trailers_o4_type", null),
@@ -69,8 +70,8 @@ public enum Command {
     TRUCK_UNITS_OTHER("/except_6_class", null),
 
     //truck units weight
-    TRUCK_UNITS_12_20_TONS("/12_20_tons", TRUCK_UNIT_WEIGHT),
-    TRUCK_UNITS_20_50_TONS("/20_50_tons", TRUCK_UNIT_WEIGHT),
+    TRUCK_UNITS_12_20_TONS("/12_20_tons", WEIGHT),
+    TRUCK_UNITS_20_50_TONS("/20_50_tons", WEIGHT),
 
     //trailers O4 types
     TRAILERS_04_TYPE("/trailers_o4_type", TRAILERS_O4_TYPE),

@@ -51,7 +51,7 @@ public class CalculatorM1 {
     }
 
     private String countForJuridicalPrice(final UserProgress userProgress) {
-        switch (userProgress.getTypeOfM1Engine()) {
+        switch (userProgress.getEngineType()) {
             case ELECTRIC -> {
                 return countForElectricAutoPrice(userProgress);
             }
@@ -89,7 +89,7 @@ public class CalculatorM1 {
     }
 
     private String getPriceForJuridicalGasolineBetween3And7Years(final UserProgress userProgress) {
-        switch (userProgress.getEngineVolume()) {
+        switch (userProgress.getVolume()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_MORE_3_YEARS;
             }
@@ -115,7 +115,7 @@ public class CalculatorM1 {
     }
 
     private String getPriceForJuridicalGasolineLess3Years(final UserProgress userProgress) {
-        switch (userProgress.getEngineVolume()) {
+        switch (userProgress.getVolume()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_LESS_OR_3_YEARS;
             }
