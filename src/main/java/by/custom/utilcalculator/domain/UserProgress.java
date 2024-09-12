@@ -52,10 +52,8 @@ public class UserProgress implements Serializable {
         if (needAddCommand) {
             userPath.add(command);
         } else {
-            for (int i = lastNumber; i < userPath.size(); i++) {
-                if (lastNumber >= 1) {
-                    userPath.set(i, null);
-                }
+            for (int i = lastNumber + 1; i < userPath.size(); i++) {
+                userPath.set(i, null);
             }
         }
     }
