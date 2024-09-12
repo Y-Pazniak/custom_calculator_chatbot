@@ -1,6 +1,7 @@
 {
   "key": "START",
   "description": "base node to start - runs automatically",
+  "nextStep": "GENERAL_TRANSPORT_TYPE",
   "children": [
     {
       "key": "M1",
@@ -113,7 +114,7 @@
           "nextStep": "WEIGHT",
           "children": [
             {
-              "key": "N1_N3_WEIGHT",
+              "key": "WEIGHT",
               "description": "we unite WEIGHT branches into one node to make code shorter",
               "nextStep": "AGE",
               "children": [

@@ -26,13 +26,13 @@ public class HelperTree {
         fieldsToCommands.put(BusesAndTrucksTransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
         fieldsToCommands.put(BusesAndTrucksTransportType.TRAILERS_O4, Command.TRAILERS_O4);
         //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
-        fieldsToCommands.put(Weight.LESS_2_TONS, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_2_5_AND_3_5, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_3_5_AND_5, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_5_AND_8, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_8_AND_12, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_12_AND_20, Command.N1_N3_WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_20_AND_50, Command.N1_N3_WEIGHT);
+        fieldsToCommands.put(Weight.LESS_2_TONS, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_2_5_AND_3_5, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_3_5_AND_5, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_5_AND_8, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_8_AND_12, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_12_AND_20, Command.WEIGHT);
+        fieldsToCommands.put(Weight.BETWEEN_20_AND_50, Command.WEIGHT);
 
         //m2-m3 gasoline volume
         fieldsToCommands.put(EngineVolume.LESS_2500, Command.ENGINE_VOLUME);

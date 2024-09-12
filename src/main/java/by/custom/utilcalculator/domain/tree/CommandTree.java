@@ -21,7 +21,7 @@ public class CommandTree {
         treeRoot = HelperTree.buildTree();
     }
 
-    public static CommandTree init() {
+    public static CommandTree getInstance() {
         return TreeHolder.TREE_HOLDER;
     }
 

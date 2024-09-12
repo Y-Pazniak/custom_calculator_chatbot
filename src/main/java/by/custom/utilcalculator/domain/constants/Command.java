@@ -6,11 +6,9 @@ public enum Command {
     //command families - not commands actually, just markers
     AGE("age", null),
     ENGINE_VOLUME("volume", null),
-    N1_N3_WEIGHT("n1_n3_weight", null),
     WEIGHT("weight", null),
-    M2_M3_GASOLINE_ENGINE_VOLUME("m2_m3_volume", null),
-    TRUCK_UNIT_WEIGHT("truck_unit_weight", null),
     TRAILERS_O4_TYPE("trailers_o4_type", null),
+    //GENERAL_TRANSPORT_TYPE("general transport type", null),
 
     //main command - start the calculator
     START("/start", null),
@@ -27,13 +25,13 @@ public enum Command {
     TRAILERS_O4("/trailers_o4", null),
 
     //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
-    LESS_2_TONS("/less_2p5", N1_N3_WEIGHT),
-    BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5", N1_N3_WEIGHT),
-    BETWEEN_3_5_AND_5_TONS("/3p5_5", N1_N3_WEIGHT),
-    BETWEEN_5_AND_8_TONS("/5_8", N1_N3_WEIGHT),
-    BETWEEN_8_AND_12_TONS("/8_12", N1_N3_WEIGHT),
-    BETWEEN_12_AND_20_TONS("/12_20", N1_N3_WEIGHT),
-    BETWEEN_20_AND_50_TONS("/20_50", N1_N3_WEIGHT),
+    LESS_2_TONS("/less_2p5", WEIGHT),
+    BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5", WEIGHT),
+    BETWEEN_3_5_AND_5_TONS("/3p5_5", WEIGHT),
+    BETWEEN_5_AND_8_TONS("/5_8", WEIGHT),
+    BETWEEN_8_AND_12_TONS("/8_12", WEIGHT),
+    BETWEEN_12_AND_20_TONS("/12_20", WEIGHT),
+    BETWEEN_20_AND_50_TONS("/20_50", WEIGHT),
 
     //country command
     EAES("/eaes", null),

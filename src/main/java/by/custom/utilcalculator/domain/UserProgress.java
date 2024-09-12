@@ -29,10 +29,11 @@ public class UserProgress implements Serializable {
     }
 
     private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
-        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.init().getFieldsToCommands();
+        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         Command command = fieldsToCommands.get(stepsIndicator);
         Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
         boolean needAddCommand = true;
+        int lastNumber = 0;
 
         for (int i = 0; i < userPath.size(); i++) {
             Command localCommand = userPath.get(i);
@@ -41,6 +42,7 @@ public class UserProgress implements Serializable {
                     if (entry.getKey().getClass().equals(stepsIndicatorClass)) {
                         needAddCommand = false;
                         userPath.set(i, command);
+                        lastNumber = i;
                         break;
                     }
                 }
@@ -49,6 +51,12 @@ public class UserProgress implements Serializable {
 
         if (needAddCommand) {
             userPath.add(command);
+        } else {
+            for (int i = lastNumber; i < userPath.size(); i++) {
+                if (lastNumber >= 1) {
+                    userPath.set(i, null);
+                }
+            }
         }
     }
 
@@ -147,7 +155,7 @@ public class UserProgress implements Serializable {
         addUserStatusToPath(volumeOfEngine);
     }
 
-    public EngineVolume getVolume(){
+    public EngineVolume getVolume() {
         return engineVolume;
     }
 

@@ -24,7 +24,7 @@ public class Bot extends TelegramLongPollingBot {
     private Bot() {
         //need MessageRouter object to work with it after - to proceed user's messages
         messageRouter = MessageRouter.getInstance();
-        CommandTree.init();
+        CommandTree.getInstance();
     }
 
     @Override
