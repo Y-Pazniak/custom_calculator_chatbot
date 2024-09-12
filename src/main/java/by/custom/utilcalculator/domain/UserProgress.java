@@ -52,7 +52,7 @@ public class UserProgress implements Serializable {
         if (needAddCommand) {
             userPath.add(command);
         } else {
-            for (int i = lastNumber + 1; i < userPath.size(); i++) {
+            for (int i = lastNumber + 1; i < userPath.size(); i++) { //this code removes all cells in list after requested by user
                 userPath.set(i, null);
             }
         }
