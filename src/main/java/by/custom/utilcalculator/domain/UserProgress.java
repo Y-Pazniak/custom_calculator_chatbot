@@ -79,13 +79,11 @@ public class UserProgress implements Serializable {
     }
 
     public void setTrailerO4Type(final TrailerO4Type trailersO4Type) {
-        cleanStepsAfterCurrentM1Branch(3);
         this.trailersO4Type = trailersO4Type;
         addUserStatusToPath(trailersO4Type);
     }
 
     public void setGeneralTransportType(final GeneralTransportType transportType) {
-        cleanStepsAfterCurrentM1Branch(0);
         this.generalTransportType = transportType;
         addUserStatusToPath(transportType);
     }
@@ -95,13 +93,11 @@ public class UserProgress implements Serializable {
     }
 
     public void setBusesOrTrucksType(final BusesAndTrucksTransportType busesOrTrucksType) {
-        cleanStepsAfterCurrentExceptM1Branch(0);
         this.busesOrTrucksType = busesOrTrucksType;
         addUserStatusToPath(busesOrTrucksType);
     }
 
     public void setWeight(final Weight weight) {
-        cleanStepsAfterCurrentExceptM1Branch(1);
         this.weight = weight;
         addUserStatusToPath(weight);
     }
@@ -111,8 +107,6 @@ public class UserProgress implements Serializable {
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
-        final int stepID = 1;
-        cleanStepsAfterCurrentM1Branch(stepID);
         this.countryOrigin = countryOrigin;
         addUserStatusToPath(countryOrigin);
     }
@@ -122,7 +116,6 @@ public class UserProgress implements Serializable {
     }
 
     public void setOwnersType(final OwnersType ownersType) {
-        cleanStepsAfterCurrentM1Branch(2);
         this.ownersType = ownersType;
         addUserStatusToPath(ownersType);
     }
@@ -132,13 +125,11 @@ public class UserProgress implements Serializable {
     }
 
     public void setCarAge(final CarAge carAge) {
-        cleanStepsAfterCurrentM1Branch(4);
         this.carAge = carAge;
         addUserStatusToPath(carAge);
     }
 
     public void setEngineType(final EngineType typeOfEngine) {
-        cleanStepsAfterCurrentM1Branch(3);
         this.engineType = typeOfEngine;
         addUserStatusToPath(typeOfEngine);
     }
@@ -148,7 +139,6 @@ public class UserProgress implements Serializable {
     }
 
     public void setVolume(final EngineVolume volumeOfEngine) {
-        cleanStepsAfterCurrentM1Branch(4);
         this.engineVolume = volumeOfEngine;
         addUserStatusToPath(volumeOfEngine);
     }
@@ -158,7 +148,6 @@ public class UserProgress implements Serializable {
     }
 
     public void setTruckUnitType(final TruckUnitClass truckUnit) {
-        cleanStepsAfterCurrentExceptM1Branch(3);
         this.truckUnitClass = truckUnit;
         addUserStatusToPath(truckUnit);
     }
@@ -169,42 +158,5 @@ public class UserProgress implements Serializable {
 
     public String getChatID() {
         return chatID;
-    }
-
-    private void cleanStepsAfterCurrentM1Branch(final int stepCleaner) {
-        if (stepCleaner <= 0) {
-            this.countryOrigin = null;
-        }
-        if (stepCleaner <= 1) {
-            this.ownersType = null;
-        }
-        if (stepCleaner <= 2) {
-            this.engineType = null;
-        }
-        if (stepCleaner <= 3) {
-            this.engineVolume = null;
-        }
-        if (stepCleaner <= 4) {
-            this.carAge = null;
-        }
-    }
-
-    private void cleanStepsAfterCurrentExceptM1Branch(final int stepCleaner) {
-        if (stepCleaner <= 0) {
-            this.busesOrTrucksType = null;
-        }
-        if (stepCleaner <= 1) {
-            this.weight = null;
-            this.engineType = null;
-        }
-        if (stepCleaner <= 2) {
-            this.engineVolume = null;
-        }
-        if (stepCleaner <= 3) {
-            this.truckUnitClass = null;
-        }
-        if (stepCleaner <= 4) {
-            this.weight = null;
-        }
     }
 }
