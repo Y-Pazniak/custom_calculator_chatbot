@@ -54,7 +54,6 @@ public class UserProgress implements Serializable {
         } else {
             for (int i = lastNumber + 1; i < userPath.size(); i++) {
                 userPath.set(i, null);
-                System.out.println("te111st");
             }
         }
     }
