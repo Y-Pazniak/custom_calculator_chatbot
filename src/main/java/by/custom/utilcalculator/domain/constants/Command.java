@@ -1,6 +1,5 @@
 package by.custom.utilcalculator.domain.constants;
 
-import by.custom.utilcalculator.domain.constants.steps.SelfPropelledPower;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 
 import javax.annotation.Nullable;
@@ -142,7 +141,12 @@ public enum Command {
     //power of pipelayers
     POWER_LESS_130("/less_130", SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_130_200("/between_130_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_MORE_300("/more_300", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_MORE_300("/more_300", SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //type of trailers
+    TRAILERS_OTHER_FULL("/trailers", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    TRAILERS_OTHER_HALF("/half_trailers", SELF_PROPELLED_POWER, Step.CAR_AGE);
+
 
     private final String command;
     private final Command family;

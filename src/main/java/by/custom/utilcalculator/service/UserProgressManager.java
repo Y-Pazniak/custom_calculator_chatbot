@@ -239,6 +239,9 @@ public class UserProgressManager {
             case Command.POWER_LESS_130 -> userProgress.setSelfPropelledPower(SelfPropelledPower.LESS_130);
             case Command.POWER_130_200 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_130_200);
             case Command.POWER_MORE_300 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_300);
+
+            case TRAILERS_OTHER_FULL -> userProgress.setSelfPropelledPower(SelfPropelledPower.TRAILERS_OTHER_FULL);
+            case TRAILERS_OTHER_HALF -> userProgress.setSelfPropelledPower(SelfPropelledPower.TRAILERS_OTHER_HALF);
         }
         userProgressStorage.save(userProgress);
     }
@@ -337,6 +340,7 @@ public class UserProgressManager {
             case FRONT_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.FRONT_LOADER);
             case WHEELED_CRANES ->  userProgress.setSelfPropelledType(SelfPropelledType.WHEELED_CRANES);
             case PIPELAYERS ->  userProgress.setSelfPropelledType(SelfPropelledType.PIPELAYERS);
+            case TRAILERS_OTHER -> userProgress.setSelfPropelledType(SelfPropelledType.TRAILERS_OTHER);
         }
 
         userProgressStorage.save(userProgress);

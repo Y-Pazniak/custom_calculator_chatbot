@@ -48,11 +48,18 @@ public class CalculatorSelfPropelled {
             case PIPELAYERS -> {
                 return countPriceForPipelayers(userProgress);
             }
+            case TRAILERS_OTHER -> {
+                return countPriceForTrailers(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
             }
         }
+    }
+
+    private String countPriceForTrailers(UserProgress userProgress) {
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_TRAILERS_LESS_OR_3_YEARS : Price.SELF_PROPELLED_TRAILERS_MORE_3_YEARS;
     }
 
     private String countPriceForPipelayers(UserProgress userProgress) {

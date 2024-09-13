@@ -25,4 +25,6 @@ public enum SelfPropelledPower implements StepsIndicator {
     MORE_300,
     BETWEEN_300_400,
     MORE_400,
+    TRAILERS_OTHER_FULL,
+    TRAILERS_OTHER_HALF
 }

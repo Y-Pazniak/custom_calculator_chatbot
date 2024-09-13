@@ -168,4 +168,6 @@ public class Price {
     public static final String SELF_PROPELLED_PIPELAYERS_MORE_300HP_LESS_OR_3_YEARS = "167066.25";
     public static final String SELF_PROPELLED_PIPELAYERS_MORE_300HP_MORE_3_YEARS = "668265.00";
 
+    public static final String SELF_PROPELLED_TRAILERS_LESS_OR_3_YEARS = "66826.50";
+    public static final String SELF_PROPELLED_TRAILERS_MORE_3_YEARS = "46778.55 ";
 }

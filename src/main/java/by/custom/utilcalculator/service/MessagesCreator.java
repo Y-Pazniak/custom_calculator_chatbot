@@ -136,6 +136,12 @@ public class MessagesCreator {
                         Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
                         Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"));
             }
+            case TRAILERS_OTHER -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.TRAILERS_OTHER_FULL.getCommand(), " ", bundle.getString("answers.details.trailersOther"), "\n",
+                        Command.TRAILERS_OTHER_HALF.getCommand(), " ", bundle.getString("answers.details.halftrailersOther"), "\n");
+            }
         }
         System.out.println("self-propelled volume error during next step message building");
         return "self-propelled volume error during next step message building";
@@ -521,13 +527,22 @@ public class MessagesCreator {
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_130")));
             }
             case BETWEEN_130_200 -> {
+                sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.130_200")));
             }
             case MORE_300 -> {
+                sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_300")));
             }
+            case TRAILERS_OTHER_FULL -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.trailersOther")));
+            }
+            case TRAILERS_OTHER_HALF -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.halftrailersOther")));
+            }
         }
-
         switch (userProgress.getSelfPropelledType()) {
             case null -> {
             }
@@ -562,6 +577,10 @@ public class MessagesCreator {
             case PIPELAYERS -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.pipelayers")));
+            }
+            case TRAILERS_OTHER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.trailers_other")));
             }
         }
         return sb.toString();
