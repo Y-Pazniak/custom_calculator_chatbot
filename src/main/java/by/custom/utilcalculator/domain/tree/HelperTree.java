@@ -105,6 +105,8 @@ public class HelperTree {
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_200_250, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_250_300, Command.SELF_PROPELLED_POWER);
 
+        fieldsToCommands.put(SelfPropelledType.WHEELED_CRANES, Command.SELF_PROPELLED_TYPE);
+
         return fieldsToCommands;
     }
 

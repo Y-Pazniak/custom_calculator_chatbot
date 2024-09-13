@@ -150,4 +150,11 @@ public class Price {
     public static final String SELF_PROPELLED_FRONT_LOADERS_MORE_400HP_LESS_OR_3_YEARS = "174350.34";
     public static final String SELF_PROPELLED_FRONT_LOADERS_MORE_400HP_MORE_3_YEARS = "467785.50";
 
+    //price for "self-propelled -> wheeled cranes"
+    public static final String SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_LESS_OR_3_YEARS = "76850.48";
+    public static final String SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_MORE_3_YEARS = "296041.40";
+    public static final String SELF_PROPELLED_WHEELED_CRANES_BETWEEN_170_AND_250HP_LESS_OR_3_YEARS = "151696.16";
+    public static final String SELF_PROPELLED_WHEELED_CRANES_BETWEEN_170_AND_250HP_MORE_3_YEARS = "638193.08";
+    public static final String SELF_PROPELLED_WHEELED_CRANES_MORE_250HP_LESS_OR_3_YEARS = "202484.30";
+    public static final String SELF_PROPELLED_WHEELED_CRANES_MORE_250HP_MORE_3_YEARS = "1591138.97 ";
 }

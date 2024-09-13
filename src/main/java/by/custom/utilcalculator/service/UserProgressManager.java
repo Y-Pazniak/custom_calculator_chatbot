@@ -26,10 +26,6 @@ public class UserProgressManager {
     public void createNewUserProgress(final String chatID) throws UtilsborException {
         final UserProgress userProgress = new UserProgress(chatID);
         userProgressStorage.save(userProgress);
-//        IUserProgressStorage localUserProgressStorage = PostgresUserProgressStorage.getInstance();
-//        UserProgress userProgress = new UserProgress(chatID);
-//        localUserProgressStorage.save(userProgress);
-//        userProgressStorage.save(userProgress);
     }
 
     public String processGeneralTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
@@ -335,6 +331,7 @@ public class UserProgressManager {
             case WHEEL_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.WHEEL_LOADER);
             case TAMPING_MACHINES -> userProgress.setSelfPropelledType(SelfPropelledType.TAMPING_MACHINE);
             case FRONT_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.FRONT_LOADER);
+            case WHEELED_CRANES ->  userProgress.setSelfPropelledType(SelfPropelledType.WHEELED_CRANES);
         }
 
         userProgressStorage.save(userProgress);

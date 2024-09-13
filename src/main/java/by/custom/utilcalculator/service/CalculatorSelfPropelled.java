@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CalculatorSelfPropelled {
-    private DateTimeFormatter formatter;
+    private final DateTimeFormatter formatter;
 
     private static class CalculatorSelfPropelledHolder {
         private static final CalculatorSelfPropelled CALCULATOR_SELF_PROPELLED = new CalculatorSelfPropelled();
@@ -42,9 +42,29 @@ public class CalculatorSelfPropelled {
             case FRONT_LOADER -> {
                 return countPriceForFrontLoaders(userProgress);
             }
+            case WHEELED_CRANES -> {
+                return countPriceForWheelCranes(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForWheelCranes(UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_170 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_MORE_3_YEARS;
+            }
+            case BETWEEN_170_250 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_CRANES_BETWEEN_170_AND_250HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_CRANES_BETWEEN_170_AND_250HP_MORE_3_YEARS;
+            }
+            case MORE_250 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_CRANES_MORE_250HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_CRANES_MORE_250HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown wheel crane error during calculation";
             }
         }
     }

@@ -95,7 +95,7 @@ public class MessagesCreator {
                         Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
                         Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
             }
-            case EXCAVATOR -> {
+            case EXCAVATOR, WHEELED_CRANES -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
                         getHelpSelfpropelledPowerString(), "\n",
                         Command.POWER_LESS_170.getCommand(), " ", bundle.getString("answers.details.excavators.170"), "\n",
@@ -536,6 +536,10 @@ public class MessagesCreator {
             case FRONT_LOADER -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.front_loaders")));
+            }
+            case WHEELED_CRANES -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheeled_cranes")));
             }
         }
         return sb.toString();

@@ -37,7 +37,7 @@ public class UserProgress implements Serializable {
     private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
         final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
         Command command = fieldsToCommands.get(stepsIndicator);
-        Class stepsIndicatorClass = stepsIndicator.getClass();
+        Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
         boolean needAddCommand = true;
 
         for (int i = 0; i < userPath.size(); i++) {
@@ -75,22 +75,6 @@ public class UserProgress implements Serializable {
     }
 
     public List<Command> getUserPath() {
-//        final Command[] userPath = new Command[15];
-//        userPath[0] = fieldsToCommands.get(getGeneralTransportType()); //0 cell contains general type of transport
-//        userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
-//        userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
-//        userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
-//        userPath[4] = fieldsToCommands.get(getTypeOfM1Engine()); //4 cell contains type of engine
-//        userPath[5] = fieldsToCommands.get(getM1EngineVolume()); //5 cell contains engine volume
-//        userPath[6] = fieldsToCommands.get(getExceptM1TransportType()); //6 cell contains transport type for except M1 branch
-//        userPath[7] = fieldsToCommands.get(getTransportWeightN1N2N3()); //7 cell contains transport weight for "except M1 -> N1-N3 branch"
-//        userPath[8] = fieldsToCommands.get(getEngineTypeM2M3()); //8 cell contains "except M1 -> M2-M3" type of engine
-//        userPath[9] = fieldsToCommands.get(getM2EngineVolume()); //9 cell contains "except M1 -> M2-M3 -> gasoline" volume of engine
-//        userPath[10] = fieldsToCommands.get(getTruckUnitType()); //10 cell contains "except  M1 -> truck units" truck unit class
-//        userPath[11] = fieldsToCommands.get(getTruckUnitWeight()); //11 cell contains "except  M1 -> truck units -> truck unit weight" truck unit weight
-//        userPath[12] = fieldsToCommands.get(getTrailerO4Type()); //12 cell contains "except  M1 -> trailers O4 -> trailer type" type of trailer
-//        userPath[13] = fieldsToCommands.get(getSelfPropelledType()); //13 cell contains "self-propelled vehicles -> type of vehicle"
-//        userPath[14] = fieldsToCommands.get(getSelfPropelledPower()); //14 cell contains "self-propelled vehicles -> type of vehicle -> power of vehicle"
         return userPath;
     }
 
