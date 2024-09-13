@@ -137,7 +137,12 @@ public enum Command {
     POWER_5_50("/between_5p5_50", SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_50_100("/between_50_100", SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_200_250("/between_200_250", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_250_300("/between_250_300", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_250_300("/between_250_300", SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of pipelayers
+    POWER_LESS_130("/less_130", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_130_200("/between_130_200", SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_300("/more_300", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;

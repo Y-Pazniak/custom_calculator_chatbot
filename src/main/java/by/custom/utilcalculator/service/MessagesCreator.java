@@ -128,6 +128,14 @@ public class MessagesCreator {
                         Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
                         Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
             }
+            case PIPELAYERS -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_130.getCommand(), " ", bundle.getString("answers.details.power.less_130"), "\n",
+                        Command.POWER_130_200.getCommand(), " ", bundle.getString("answers.details.power.130_200"), "\n",
+                        Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
+                        Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"));
+            }
         }
         System.out.println("self-propelled volume error during next step message building");
         return "self-propelled volume error during next step message building";
@@ -508,6 +516,16 @@ public class MessagesCreator {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.250_300")));
             }
+            case LESS_130 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_130")));
+            }
+            case BETWEEN_130_200 -> {
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.130_200")));
+            }
+            case MORE_300 -> {
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_300")));
+            }
         }
 
         switch (userProgress.getSelfPropelledType()) {
@@ -540,6 +558,10 @@ public class MessagesCreator {
             case WHEELED_CRANES -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheeled_cranes")));
+            }
+            case PIPELAYERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.pipelayers")));
             }
         }
         return sb.toString();

@@ -45,9 +45,33 @@ public class CalculatorSelfPropelled {
             case WHEELED_CRANES -> {
                 return countPriceForWheelCranes(userProgress);
             }
+            case PIPELAYERS -> {
+                return countPriceForPipelayers(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForPipelayers(UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_130 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_LESS_130HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_LESS_130HP_MORE_3_YEARS;
+            }
+            case BETWEEN_130_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_BETWEEN_130_AND_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_BETWEEN_130_AND_200HP_MORE_3_YEARS;
+            }
+            case BETWEEN_200_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_BETWEEN_200_AND_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_BETWEEN_200_AND_300HP_MORE_3_YEARS;
+            }
+            case MORE_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_MORE_300HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
+                return "unknown pipelayer type during calculation";
             }
         }
     }
