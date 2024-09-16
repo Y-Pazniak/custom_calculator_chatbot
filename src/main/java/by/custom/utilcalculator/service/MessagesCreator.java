@@ -137,10 +137,17 @@ public class MessagesCreator {
                         Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"));
             }
             case TRAILERS_OTHER -> {
-                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
-                        getHelpSelfpropelledPowerString(), "\n",
+                return stringBuilderAppender(".", "\n", bundle.getString("answers.details.trailersOther_lifting_capacity"), "\n",
+                        String.format("%s %s", Command.HELP.getCommand(), bundle.getString("answers.details.trailers_other_lifting_capacity")), "\n",
                         Command.TRAILERS_OTHER_FULL.getCommand(), " ", bundle.getString("answers.details.trailersOther"), "\n",
                         Command.TRAILERS_OTHER_HALF.getCommand(), " ", bundle.getString("answers.details.halftrailersOther"), "\n");
+            }
+            case ROAD_MAINTENANCE -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                        Command.POWER_BETWEEN_100_220.getCommand(), " ", bundle.getString("answers.details.power.100_220"), "\n",
+                        Command.POWER_MORE_220.getCommand(), " ", bundle.getString("answers.details.power.more_220"));
             }
         }
         System.out.println("self-propelled volume error during next step message building");
@@ -165,7 +172,7 @@ public class MessagesCreator {
                 Command.WHEELED_CRANES.getCommand(), " ", bundle.getString("answers.details.wheeled_cranes"), "\n",
                 Command.PIPELAYERS.getCommand(), " ", bundle.getString("answers.details.pipelayers"), "\n",
                 Command.TRAILERS_OTHER.getCommand(), " ", bundle.getString("answers.details.trailers_other"), "\n",
-                Command.ROAD_MAINTENANCE_VEHICLES.getCommand(), " ", bundle.getString("answers.details.road_maintenance_vehicles"), "\n",
+                Command.ROAD_MAINTENANCE.getCommand(), " ", bundle.getString("answers.details.road_maintenance_vehicles"), "\n",
 
                 Command.FORESTRY_VEHICLES.getCommand(), " ", bundle.getString("answers.details.forestry_vehicles"), "\n",
                 Command.FORWADERS.getCommand(), " ", bundle.getString("answers.details.forwaders"), "\n",
@@ -226,6 +233,11 @@ public class MessagesCreator {
 
     public String getSelfPropelledPowerHelp() {
         return stringBuilderAppender(bundle.getString("answers.help.self_propelled_power"), "\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
+    }
+
+    public String getTrailersOtherHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.trailers_lifting_capacity"), "\n", "\n",
                 bundle.getString("answers.help.friendly_advice"));
     }
 
@@ -530,6 +542,14 @@ public class MessagesCreator {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.130_200")));
             }
+            case BETWEEN_100_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.100_220")));
+            }
+            case MORE_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_220")));
+            }
             case MORE_300 -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_300")));
@@ -582,6 +602,10 @@ public class MessagesCreator {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.trailers_other")));
             }
+            case ROAD_MAINTENANCE -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.road_maintenance_vehicles")));
+            }
         }
         return sb.toString();
     }
@@ -601,6 +625,7 @@ public class MessagesCreator {
     private String trimFirstAndLastLetters(final String toTrim) {
         return toTrim.substring(1, toTrim.length() - 1);
     }
+
 
     private static class MessagesCreatorHolder {
         private static final MessagesCreator MESSAGES_CREATOR = new MessagesCreator();

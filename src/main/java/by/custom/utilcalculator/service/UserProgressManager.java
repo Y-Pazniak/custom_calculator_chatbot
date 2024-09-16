@@ -242,6 +242,9 @@ public class UserProgressManager {
 
             case TRAILERS_OTHER_FULL -> userProgress.setSelfPropelledPower(SelfPropelledPower.TRAILERS_OTHER_FULL);
             case TRAILERS_OTHER_HALF -> userProgress.setSelfPropelledPower(SelfPropelledPower.TRAILERS_OTHER_HALF);
+
+            case POWER_BETWEEN_100_220 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_100_220);
+            case POWER_MORE_220 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_220);
         }
         userProgressStorage.save(userProgress);
     }
@@ -338,9 +341,10 @@ public class UserProgressManager {
             case WHEEL_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.WHEEL_LOADER);
             case TAMPING_MACHINES -> userProgress.setSelfPropelledType(SelfPropelledType.TAMPING_MACHINE);
             case FRONT_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.FRONT_LOADER);
-            case WHEELED_CRANES ->  userProgress.setSelfPropelledType(SelfPropelledType.WHEELED_CRANES);
-            case PIPELAYERS ->  userProgress.setSelfPropelledType(SelfPropelledType.PIPELAYERS);
+            case WHEELED_CRANES -> userProgress.setSelfPropelledType(SelfPropelledType.WHEELED_CRANES);
+            case PIPELAYERS -> userProgress.setSelfPropelledType(SelfPropelledType.PIPELAYERS);
             case TRAILERS_OTHER -> userProgress.setSelfPropelledType(SelfPropelledType.TRAILERS_OTHER);
+            case ROAD_MAINTENANCE -> userProgress.setSelfPropelledType(SelfPropelledType.ROAD_MAINTENANCE);
         }
 
         userProgressStorage.save(userProgress);
@@ -349,6 +353,9 @@ public class UserProgressManager {
 
     public String processHelpRequest(final String chatID) throws UtilsborException {
         final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (userProgress.getSelfPropelledType() == SelfPropelledType.TRAILERS_OTHER) {
+            return messagesCreator.getTrailersOtherHelp();
+        }
         if (userProgress.getNextStep() == Step.SELF_PROPELLED_POWER) {
             return messagesCreator.getSelfPropelledPowerHelp();
         }

@@ -119,6 +119,11 @@ public class HelperTree {
         fieldsToCommands.put(SelfPropelledPower.TRAILERS_OTHER_FULL, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.TRAILERS_OTHER_HALF, Command.SELF_PROPELLED_POWER);
 
+        //road maintenance
+        fieldsToCommands.put(SelfPropelledType.ROAD_MAINTENANCE, Command.SELF_PROPELLED_TYPE);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_100_220, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.MORE_220, Command.SELF_PROPELLED_POWER);
+
         return fieldsToCommands;
     }
 

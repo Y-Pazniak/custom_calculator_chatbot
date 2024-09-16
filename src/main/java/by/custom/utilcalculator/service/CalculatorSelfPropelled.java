@@ -51,9 +51,30 @@ public class CalculatorSelfPropelled {
             case TRAILERS_OTHER -> {
                 return countPriceForTrailers(userProgress);
             }
+            case ROAD_MAINTENANCE -> {
+                return countPriceForRoadMaintenance(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForRoadMaintenance(UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_100 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_MORE_3_YEARS;
+            }
+            case BETWEEN_100_220 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_100_AND_220HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_100_AND_220HP_MORE_3_YEARS;
+            }
+            case MORE_220 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
+                return "unknown pipelayer type during calculation";
             }
         }
     }

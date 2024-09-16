@@ -168,6 +168,15 @@ public class Price {
     public static final String SELF_PROPELLED_PIPELAYERS_MORE_300HP_LESS_OR_3_YEARS = "167066.25";
     public static final String SELF_PROPELLED_PIPELAYERS_MORE_300HP_MORE_3_YEARS = "668265.00";
 
+    //price for "self-propelled -> trailers"
     public static final String SELF_PROPELLED_TRAILERS_LESS_OR_3_YEARS = "66826.50";
     public static final String SELF_PROPELLED_TRAILERS_MORE_3_YEARS = "46778.55 ";
+
+    //price for "self-propelled -> road maintenance"
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_LESS_OR_3_YEARS = "18711.42";
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_MORE_3_YEARS = "72840.89";
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_100_AND_220HP_LESS_OR_3_YEARS = "27398.87";
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_100_AND_220HP_MORE_3_YEARS = "110263.73";
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_LESS_OR_3_YEARS = "31408.46";
+    public static final String SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_MORE_3_YEARS = "128975.15";
 }
