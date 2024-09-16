@@ -95,7 +95,7 @@ public enum Command {
     PIPELAYERS("/pipelayers", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
     TRAILERS_OTHER("/trailers_other", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
     ROAD_MAINTENANCE("/road_maintenance", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
-    FORESTRY_VEHICLES("/forestry_vehicles", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
+    FORESTRY("/forestry", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
     FORWADERS("/forwaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
     TIMBER_LOADERS("/timber_loaders", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
     WHEELED_TRACTORS("/wheeled_tractors", SELF_PROPELLED_TYPE, Step.SELF_PROPELLED_POWER),
@@ -149,8 +149,11 @@ public enum Command {
 
     //power of road maintenance
     POWER_BETWEEN_100_220("/between_100_220", SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_MORE_220("/more_220", SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_MORE_220("/more_220", SELF_PROPELLED_POWER, Step.CAR_AGE),
 
+    //power of forestry
+    POWER_BETWEEN_20_100("/between_20_100",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_BETWEEN_100_300("/between_100_300", SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;
