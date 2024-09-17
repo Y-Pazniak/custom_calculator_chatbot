@@ -149,7 +149,7 @@ public class MessagesCreator {
                         Command.POWER_BETWEEN_100_220.getCommand(), " ", bundle.getString("answers.details.power.100_220"), "\n",
                         Command.POWER_MORE_220.getCommand(), " ", bundle.getString("answers.details.power.more_220"));
             }
-            case FORESTRY -> {
+            case FORESTRY, FORWADERS -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
                         getHelpSelfpropelledPowerString(), "\n",
                         Command.POWER_BETWEEN_20_100.getCommand(), " ", bundle.getString("answers.details.power.20_100"), "\n",
@@ -624,6 +624,10 @@ public class MessagesCreator {
             case FORESTRY -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.forestry_vehicles")));
+            }
+            case FORWADERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.forwaders")));
             }
         }
         return sb.toString();

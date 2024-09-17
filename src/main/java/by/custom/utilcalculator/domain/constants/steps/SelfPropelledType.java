@@ -11,5 +11,6 @@ public enum SelfPropelledType implements StepsIndicator {
     PIPELAYERS,
     TRAILERS_OTHER,
     ROAD_MAINTENANCE,
-    FORESTRY
+    FORESTRY,
+    FORWADERS
 }
