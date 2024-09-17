@@ -147,6 +147,9 @@ public class HelperTree {
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_280_340, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_340_380, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.MORE_380, Command.SELF_PROPELLED_POWER);
+
+        //crawler tractors
+        fieldsToCommands.put(SelfPropelledType.CRAWLER_TRACTORS, Command.SELF_PROPELLED_TYPE);
         return fieldsToCommands;
     }
 

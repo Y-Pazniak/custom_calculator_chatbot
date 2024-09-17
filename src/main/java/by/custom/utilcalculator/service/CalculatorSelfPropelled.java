@@ -66,6 +66,9 @@ public class CalculatorSelfPropelled {
             case WHEELED_TRACTORS -> {
                 return countPriceForWheeledTractors(userProgress);
             }
+            case CRAWLER_TRACTORS -> {
+                return countPriceForCrawlerTractors(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
@@ -73,7 +76,25 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForWheeledTractors(UserProgress userProgress) {
+    private String countPriceForCrawlerTractors(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_100 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_CRAWLER_TRACTORS_LESS_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_CRAWLER_TRACTORS_LESS_100HP_MORE_3_YEARS;
+            }
+            case BETWEEN_100_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_CRAWLER_TRACTORS_BETWEEN_100_AND_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_CRAWLER_TRACTORS_BETWEEN_100_AND_200HP_MORE_3_YEARS;
+            }
+            case MORE_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_CRAWLER_TRACTORS_MORE_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_CRAWLER_TRACTORS_MORE_200HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
+                return "unknown timber loader type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForWheeledTractors(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case BETWEEN_5p5_30 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_5p5_AND_30HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_5p5_AND_30HP_MORE_3_YEARS;
@@ -107,12 +128,12 @@ public class CalculatorSelfPropelled {
             }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
-                return "unknown timber loader type during calculation";
+                return "unknown wheeled tractor type during calculation";
             }
         }
     }
 
-    private String countPriceForTimberLoaders(UserProgress userProgress) {
+    private String countPriceForTimberLoaders(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case BETWEEN_20_100 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_TIMBER_LOADERS_BETWEEN_20_AND_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_TIMBER_LOADERS_BETWEEN_20_AND_100HP_MORE_3_YEARS;
@@ -130,7 +151,7 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForForwaders(UserProgress userProgress) {
+    private String countPriceForForwaders(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case BETWEEN_20_100 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FORWADERS_BETWEEN_20_AND_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FORWADERS_BETWEEN_20_AND_100HP_MORE_3_YEARS;
@@ -148,7 +169,7 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForForestry(UserProgress userProgress) {
+    private String countPriceForForestry(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case BETWEEN_20_100 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_20_AND_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_BETWEEN_20_AND_100HP_MORE_3_YEARS;
@@ -166,7 +187,7 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForRoadMaintenance(UserProgress userProgress) {
+    private String countPriceForRoadMaintenance(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case LESS_100 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_LESS_100HP_MORE_3_YEARS;
@@ -184,11 +205,11 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForTrailers(UserProgress userProgress) {
+    private String countPriceForTrailers(final UserProgress userProgress) {
         return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_TRAILERS_LESS_OR_3_YEARS : Price.SELF_PROPELLED_TRAILERS_MORE_3_YEARS;
     }
 
-    private String countPriceForPipelayers(UserProgress userProgress) {
+    private String countPriceForPipelayers(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case LESS_130 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_LESS_130HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_LESS_130HP_MORE_3_YEARS;
@@ -209,7 +230,7 @@ public class CalculatorSelfPropelled {
         }
     }
 
-    private String countPriceForWheelCranes(UserProgress userProgress) {
+    private String countPriceForWheelCranes(final UserProgress userProgress) {
         switch (userProgress.getSelfPropelledPower()) {
             case LESS_170 -> {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_CRANES_LESS_170HP_MORE_3_YEARS;

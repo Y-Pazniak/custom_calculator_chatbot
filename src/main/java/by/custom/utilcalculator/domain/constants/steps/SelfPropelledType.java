@@ -14,5 +14,6 @@ public enum SelfPropelledType implements StepsIndicator {
     FORESTRY,
     FORWADERS,
     TIMBER_LOADERS,
-    WHEELED_TRACTORS
+    WHEELED_TRACTORS,
+    CRAWLER_TRACTORS
 }
