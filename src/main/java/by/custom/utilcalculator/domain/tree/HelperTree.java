@@ -132,6 +132,9 @@ public class HelperTree {
         //forwaders
         fieldsToCommands.put(SelfPropelledType.FORWADERS, Command.SELF_PROPELLED_TYPE);
 
+        //timber loaders
+        fieldsToCommands.put(SelfPropelledType.TIMBER_LOADERS, Command.SELF_PROPELLED_TYPE);
+
         return fieldsToCommands;
     }
 

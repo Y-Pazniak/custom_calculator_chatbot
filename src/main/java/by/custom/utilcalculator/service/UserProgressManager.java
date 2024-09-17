@@ -350,6 +350,7 @@ public class UserProgressManager {
             case ROAD_MAINTENANCE -> userProgress.setSelfPropelledType(SelfPropelledType.ROAD_MAINTENANCE);
             case FORESTRY -> userProgress.setSelfPropelledType(SelfPropelledType.FORESTRY);
             case FORWADERS -> userProgress.setSelfPropelledType(SelfPropelledType.FORWADERS);
+            case TIMBER_LOADERS -> userProgress.setSelfPropelledType(SelfPropelledType.TIMBER_LOADERS);
         }
 
         userProgressStorage.save(userProgress);

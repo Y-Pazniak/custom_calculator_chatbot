@@ -88,7 +88,7 @@ public class MessageRouter {
             case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE ->
                     answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
             case GRADERS, BULLDOZERS, EXCAVATORS, WHEEL_LOADERS, TAMPING_MACHINES, FRONT_LOADERS, WHEELED_CRANES,
-                 PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE, FORESTRY, FORWADERS ->
+                 PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS ->
                     answer = userProgressManager.processSelfPropelledType(requestingCommand, chatID);
             case HELP -> answer = userProgressManager.processHelpRequest(chatID);
             case null, default -> answer = getSorryMessage();
