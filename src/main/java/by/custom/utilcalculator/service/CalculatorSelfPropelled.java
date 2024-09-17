@@ -69,9 +69,39 @@ public class CalculatorSelfPropelled {
             case CRAWLER_TRACTORS -> {
                 return countPriceForCrawlerTractors(userProgress);
             }
+            case COMBINE_HARVESTERS -> {
+                return countPriceForCombineHarvesters(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForCombineHarvesters(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case BETWEEN_25_160 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_25_AND_160HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_25_AND_160HP_MORE_3_YEARS;
+            }
+            case BETWEEN_160_220 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_160_AND_220HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_160_AND_220HP_MORE_3_YEARS;
+            }
+            case BETWEEN_220_255 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_220_AND_255HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_220_AND_255HP_MORE_3_YEARS;
+            }
+            case BETWEEN_255_325 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_255_AND_325HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_255_AND_325HP_MORE_3_YEARS;
+            }
+            case BETWEEN_325_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_325_AND_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_BETWEEN_325_AND_400HP_MORE_3_YEARS;
+            }
+            case MORE_400 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_MORE_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_MORE_400HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
+                return "unknown timber loader type during calculation";
             }
         }
     }
