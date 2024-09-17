@@ -70,10 +70,12 @@ public class MessageRouter {
                  M2_VOLUME_BETWEEN_2500_5000_CM, M2_VOLUME_BETWEEN_5000_10000_CM, M2_VOLUME_MORE_10000_CM,
                  POWER_LESS_100, POWER_100_140, POWER_140_200, POWER_MORE_200, POWER_100_200, POWER_200_300,
                  POWER_300_400, POWER_MORE_400, POWER_LESS_170, POWER_170_250, POWER_BETWEEN_100_220, POWER_MORE_220,
-                 POWER_MORE_250, POWER_100_125,POWER_BETWEEN_20_100, POWER_BETWEEN_100_300,
+                 POWER_MORE_250, POWER_100_125, POWER_BETWEEN_20_100, POWER_BETWEEN_100_300,
                  POWER_125_150, POWER_MORE_150, POWER_LESS_40, POWER_40_80, POWER_MORE_80, POWER_5_50, POWER_50_100,
                  POWER_200_250, POWER_250_300, POWER_LESS_130, POWER_130_200, POWER_MORE_300, TRAILERS_OTHER_FULL,
-                 TRAILERS_OTHER_HALF ->
+                 TRAILERS_OTHER_HALF, POWER_BETWEEN_5p5_30, POWER_BETWEEN_30_60, POWER_BETWEEN_60_90,
+                 POWER_BETWEEN_90_130, POWER_BETWEEN_130_180, POWER_BETWEEN_180_220, POWER_BETWEEN_220_280,
+                 POWER_BETWEEN_280_340, POWER_BETWEEN_340_380, POWER_MORE_380 ->
                     answer = userProgressManager.processEngineVolumeOrPower(requestingCommand, chatID);
             case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
                     answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
@@ -88,7 +90,7 @@ public class MessageRouter {
             case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE ->
                     answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
             case GRADERS, BULLDOZERS, EXCAVATORS, WHEEL_LOADERS, TAMPING_MACHINES, FRONT_LOADERS, WHEELED_CRANES,
-                 PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS ->
+                 PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS ->
                     answer = userProgressManager.processSelfPropelledType(requestingCommand, chatID);
             case HELP -> answer = userProgressManager.processHelpRequest(chatID);
             case null, default -> answer = getSorryMessage();

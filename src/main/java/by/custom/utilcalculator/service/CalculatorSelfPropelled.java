@@ -63,9 +63,51 @@ public class CalculatorSelfPropelled {
             case TIMBER_LOADERS -> {
                 return countPriceForTimberLoaders(userProgress);
             }
+            case WHEELED_TRACTORS -> {
+                return countPriceForWheeledTractors(userProgress);
+            }
             case null, default -> {
                 System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countPriceForWheeledTractors(UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case BETWEEN_5p5_30 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_5p5_AND_30HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_5p5_AND_30HP_MORE_3_YEARS;
+            }
+            case BETWEEN_30_60 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_30_AND_60HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_30_AND_60HP_MORE_3_YEARS;
+            }
+            case BETWEEN_60_90 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_60_AND_90HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_60_AND_90HP_MORE_3_YEARS;
+            }
+            case BETWEEN_90_130 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_90_AND_130HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_90_AND_130HP_MORE_3_YEARS;
+            }
+            case BETWEEN_130_180 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_130_AND_180HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_130_AND_180HP_MORE_3_YEARS;
+            }
+            case BETWEEN_180_220 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_180_AND_220HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_180_AND_220HP_MORE_3_YEARS;
+            }
+            case BETWEEN_220_280 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_220_AND_280HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_220_AND_280HP_MORE_3_YEARS;
+            }
+            case BETWEEN_280_340 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_280_AND_340HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_280_AND_340HP_MORE_3_YEARS;
+            }
+            case BETWEEN_340_380 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_340_AND_380HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_BETWEEN_340_AND_380HP_MORE_3_YEARS;
+            }
+            case MORE_380 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_MORE_380HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_MORE_380HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
+                return "unknown timber loader type during calculation";
             }
         }
     }

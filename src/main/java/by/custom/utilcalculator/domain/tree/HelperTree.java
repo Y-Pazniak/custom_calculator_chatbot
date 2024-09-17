@@ -135,6 +135,18 @@ public class HelperTree {
         //timber loaders
         fieldsToCommands.put(SelfPropelledType.TIMBER_LOADERS, Command.SELF_PROPELLED_TYPE);
 
+        //wheeled tractors
+        fieldsToCommands.put(SelfPropelledType.WHEELED_TRACTORS, Command.SELF_PROPELLED_TYPE);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_5p5_30, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_30_60, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_60_90, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_90_130, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_130_180, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_180_220, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_220_280, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_280_340, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_340_380, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.MORE_380, Command.SELF_PROPELLED_POWER);
         return fieldsToCommands;
     }
 
