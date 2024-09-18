@@ -4,18 +4,13 @@ import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.CarAge;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class CalculatorSelfPropelled {
-    private final DateTimeFormatter formatter;
 
     private static class CalculatorSelfPropelledHolder {
         private static final CalculatorSelfPropelled CALCULATOR_SELF_PROPELLED = new CalculatorSelfPropelled();
     }
 
     private CalculatorSelfPropelled() {
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH-mm-ss");
     }
 
     public static CalculatorSelfPropelled getInstance() {
@@ -72,9 +67,51 @@ public class CalculatorSelfPropelled {
             case COMBINE_HARVESTERS -> {
                 return countPriceForCombineHarvesters(userProgress);
             }
+            case FORAGE_HARVESTERS -> {
+                return countForForageHarvesters(userProgress);
+            }
+            case AGRICULTURAL_VEHICLES -> {
+                return countForAgriculturalVehicles(userProgress);
+            }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown self-propelled type during calculation");
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countForAgriculturalVehicles(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case BETWEEN_100_120 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_BETWEEN_100_AND_120HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_BETWEEN_100_AND_120HP_MORE_3_YEARS;
+            }
+            case BETWEEN_120_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_BETWEEN_120_AND_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_BETWEEN_120_AND_300HP_MORE_3_YEARS;
+            }
+            case MORE_300 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_MORE_300HP_MORE_3_YEARS;
+            }
+            case SELF_PROPELLED_MOWERS -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_SELF_PROPELLED_MOWERS_LESS_OR_3_YEARS : Price.SELF_PROPELLED_AGRICULTURAL_VEHICLES_SELF_PROPELLED_MOWERS_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown agricultural type during calculation";
+            }
+        }
+    }
+
+    private String countForForageHarvesters(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_295 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FORAGE_HARVESTERS_LESS_295HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FORAGE_HARVESTERS_LESS_295HP_MORE_3_YEARS;
+            }
+            case BETWEEN_295_401 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FORAGE_HARVESTERS_BETWEEN_295_AND_401HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FORAGE_HARVESTERS_BETWEEN_295_AND_401HP_MORE_3_YEARS;
+            }
+            case MORE_401 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FORAGE_HARVESTERS_MORE_401HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FORAGE_HARVESTERS_MORE_401HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown forage type during calculation";
             }
         }
     }
@@ -100,8 +137,7 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_COMBINE_HARVESTERS_MORE_400HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_COMBINE_HARVESTERS_MORE_400HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
-                return "unknown timber loader type during calculation";
+                return "unknown combine harvester type during calculation";
             }
         }
     }
@@ -118,8 +154,7 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_CRAWLER_TRACTORS_MORE_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_CRAWLER_TRACTORS_MORE_200HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
-                return "unknown timber loader type during calculation";
+                return "unknown crawler tractor type during calculation";
             }
         }
     }
@@ -157,7 +192,6 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_WHEELED_TRACTORS_MORE_380HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_WHEELED_TRACTORS_MORE_380HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
                 return "unknown wheeled tractor type during calculation";
             }
         }
@@ -175,7 +209,6 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_TIMBER_LOADERS_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_TIMBER_LOADERS_MORE_300HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
                 return "unknown timber loader type during calculation";
             }
         }
@@ -193,7 +226,6 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_FORWADERS_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_FORWADERS_MORE_300HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
                 return "unknown forwader type during calculation";
             }
         }
@@ -211,8 +243,7 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_300HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
-                return "unknown pipelayer type during calculation";
+                return "unknown forestry vehicle type during calculation";
             }
         }
     }
@@ -229,8 +260,7 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_ROAD_MAINTENANCE_MORE_220HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
-                return "unknown pipelayer type during calculation";
+                return "unknown road maintanance type during calculation";
             }
         }
     }
@@ -254,7 +284,6 @@ public class CalculatorSelfPropelled {
                 return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_PIPELAYERS_MORE_300HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_PIPELAYERS_MORE_300HP_MORE_3_YEARS;
             }
             case null, default -> {
-                System.out.println(LocalDateTime.now().format(formatter) + ": unknown pipelayer type during calculation");
                 return "unknown pipelayer type during calculation";
             }
         }

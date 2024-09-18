@@ -266,6 +266,13 @@ public class UserProgressManager {
             case POWER_BETWEEN_255_325 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_255_325);
             case POWER_BETWEEN_325_400 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_325_400);
 
+            case POWER_LESS_295 -> userProgress.setSelfPropelledPower(SelfPropelledPower.LESS_295);
+            case POWER_BETWEEN_295_401 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_295_401);
+            case POWER_MORE_401 -> userProgress.setSelfPropelledPower(SelfPropelledPower.MORE_401);
+
+            case POWER_BETWEEN_100_120 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_100_120);
+            case POWER_BETWEEN_120_300 -> userProgress.setSelfPropelledPower(SelfPropelledPower.BETWEEN_120_300);
+            case SELF_PROPELLED_MOWERS -> userProgress.setSelfPropelledPower(SelfPropelledPower.SELF_PROPELLED_MOWERS);
         }
         userProgressStorage.save(userProgress);
     }
@@ -372,6 +379,8 @@ public class UserProgressManager {
             case WHEELED_TRACTORS -> userProgress.setSelfPropelledType(SelfPropelledType.WHEELED_TRACTORS);
             case CRAWLER_TRACTORS -> userProgress.setSelfPropelledType(SelfPropelledType.CRAWLER_TRACTORS);
             case COMBINE_HARVESTERS -> userProgress.setSelfPropelledType(SelfPropelledType.COMBINE_HARVESTERS);
+            case FORAGE_HARVESTERS -> userProgress.setSelfPropelledType(SelfPropelledType.FORAGE_HARVESTERS);
+            case AGRICULTURAL_VEHICLES -> userProgress.setSelfPropelledType(SelfPropelledType.AGRICULTURAL_VEHICLES);
         }
 
         userProgressStorage.save(userProgress);

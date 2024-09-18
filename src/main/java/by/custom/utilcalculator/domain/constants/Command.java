@@ -172,7 +172,17 @@ public enum Command {
     POWER_BETWEEN_160_220("/between_160_220",SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_BETWEEN_220_255("/between_220_255",SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_BETWEEN_255_325("/between_255_325",SELF_PROPELLED_POWER, Step.CAR_AGE),
-    POWER_BETWEEN_325_400("/between_325_400",SELF_PROPELLED_POWER, Step.CAR_AGE);
+    POWER_BETWEEN_325_400("/between_325_400",SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of forage harvesters
+    POWER_LESS_295("/less_295",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_BETWEEN_295_401("/between_295_401",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_401("/more_401",SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of agricultural vehicles
+    POWER_BETWEEN_100_120("/between_100_120",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_BETWEEN_120_300("/between_120_300",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    SELF_PROPELLED_MOWERS("/self_propelled_mowers",SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;

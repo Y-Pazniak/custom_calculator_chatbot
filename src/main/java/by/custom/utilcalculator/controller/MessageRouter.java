@@ -76,7 +76,8 @@ public class MessageRouter {
                  TRAILERS_OTHER_HALF, POWER_BETWEEN_5p5_30, POWER_BETWEEN_30_60, POWER_BETWEEN_60_90,
                  POWER_BETWEEN_90_130, POWER_BETWEEN_130_180, POWER_BETWEEN_180_220, POWER_BETWEEN_220_280,
                  POWER_BETWEEN_280_340, POWER_BETWEEN_340_380, POWER_MORE_380, POWER_BETWEEN_25_160,
-                 POWER_BETWEEN_160_220, POWER_BETWEEN_220_255, POWER_BETWEEN_255_325, POWER_BETWEEN_325_400 ->
+                 POWER_BETWEEN_160_220, POWER_BETWEEN_220_255, POWER_BETWEEN_255_325, POWER_BETWEEN_325_400,
+                 POWER_LESS_295, POWER_BETWEEN_295_401, POWER_MORE_401, POWER_BETWEEN_100_120, POWER_BETWEEN_120_300, SELF_PROPELLED_MOWERS ->
                     answer = userProgressManager.processEngineVolumeOrPower(requestingCommand, chatID);
             case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
                     answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
@@ -92,7 +93,7 @@ public class MessageRouter {
                     answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
             case GRADERS, BULLDOZERS, EXCAVATORS, WHEEL_LOADERS, TAMPING_MACHINES, FRONT_LOADERS, WHEELED_CRANES,
                  PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS,
-                 CRAWLER_TRACTORS, COMBINE_HARVESTERS ->
+                 CRAWLER_TRACTORS, COMBINE_HARVESTERS, FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES ->
                     answer = userProgressManager.processSelfPropelledType(requestingCommand, chatID);
             case HELP -> answer = userProgressManager.processHelpRequest(chatID);
             case null, default -> answer = getSorryMessage();

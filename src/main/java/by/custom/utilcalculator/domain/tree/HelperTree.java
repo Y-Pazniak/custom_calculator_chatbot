@@ -159,6 +159,19 @@ public class HelperTree {
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_255_325, Command.SELF_PROPELLED_POWER);
         fieldsToCommands.put(SelfPropelledPower.BETWEEN_325_400, Command.SELF_PROPELLED_POWER);
 
+        //forage harvesters
+        fieldsToCommands.put(SelfPropelledType.FORAGE_HARVESTERS, Command.SELF_PROPELLED_TYPE);
+        fieldsToCommands.put(SelfPropelledPower.LESS_295, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_295_401, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.MORE_401, Command.SELF_PROPELLED_POWER);
+
+
+        //agricultural vehicles
+        fieldsToCommands.put(SelfPropelledType.AGRICULTURAL_VEHICLES, Command.SELF_PROPELLED_TYPE);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_100_120, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.BETWEEN_120_300, Command.SELF_PROPELLED_POWER);
+        fieldsToCommands.put(SelfPropelledPower.SELF_PROPELLED_MOWERS, Command.SELF_PROPELLED_POWER);
+
         return fieldsToCommands;
     }
 
