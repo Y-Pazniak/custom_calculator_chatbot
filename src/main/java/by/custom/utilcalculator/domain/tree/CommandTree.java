@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 
 public class CommandTree {
     private final Map<StepsIndicator, Command> fieldsToCommands;
+    private final Map<Command, StepsIndicator> commandsToFields;
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
         fieldsToCommands = HelperTree.fillFieldsToCommandsMap();
+        commandsToFields = HelperTree.fillCommandsToFields(fieldsToCommands);
         treeRoot = HelperTree.buildTree();
     }
 
@@ -29,13 +31,24 @@ public class CommandTree {
         return fieldsToCommands;
     }
 
+    public Map<Command, StepsIndicator> getCommandsToFields() {
+        return commandsToFields;
+    }
+
     public boolean validateCommandFromNode(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
+    public static boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+        Command command = requestingCommand.getFamily() == null ? requestingCommand : requestingCommand.getFamily();
+        return CommandTree.getInstance().validateCommandFromNode(command, userProgress);
+    }
+
+    public static Step getNextStep(final UserProgress userProgress) {
+        return CommandTree.getInstance().getNextStepFromNode(userProgress);
+    }
+
     public Step getNextStepFromNode(final UserProgress userProgress) {
-        System.out.println("current node: " + getNode(userProgress).getKey());
-        System.out.println("next step: " + getNode(userProgress).getNextStep());
         return getNode(userProgress).getNextStep();
     }
 

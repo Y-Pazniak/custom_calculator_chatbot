@@ -103,4 +103,12 @@ public class HelperTree {
             }
         }
     }
+
+    public static Map<Command, StepsIndicator> fillCommandsToFields(Map<StepsIndicator, Command> fieldsToCommands) {
+        Map<Command, StepsIndicator> commandsToFields = new HashMap<>();
+        for (Map.Entry<StepsIndicator, Command> entry : fieldsToCommands.entrySet()) {
+            commandsToFields.put(entry.getValue(), entry.getKey());
+        }
+        return commandsToFields;
+    }
 }

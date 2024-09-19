@@ -2,11 +2,23 @@ package by.custom.utilcalculator.service;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.steps.EngineType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
+import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+import by.custom.utilcalculator.domain.tree.CommandTree;
 
-import static by.custom.utilcalculator.domain.constants.steps.EngineType.ELECTRIC;
-import static by.custom.utilcalculator.domain.constants.steps.EngineType.GASOLINE;
+import java.util.List;
+import java.util.Map;
+
+import static by.custom.utilcalculator.domain.constants.steps.BusesAndTrucksTransportType.*;
+import static by.custom.utilcalculator.domain.constants.steps.EngineType.*;
+import static by.custom.utilcalculator.domain.constants.steps.GeneralTransportType.*;
+import static by.custom.utilcalculator.domain.constants.steps.TrailerO4Type.*;
+import static by.custom.utilcalculator.domain.constants.steps.Weight.*;
+import static by.custom.utilcalculator.domain.constants.steps.CountryOrigin.*;
+import static by.custom.utilcalculator.domain.constants.steps.OwnersType.*;
+import static by.custom.utilcalculator.domain.constants.steps.CarAge.*;
+import static by.custom.utilcalculator.domain.constants.steps.TruckUnitClass.*;
+import static by.custom.utilcalculator.domain.constants.steps.EngineVolume.*;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -174,7 +186,42 @@ public class MessagesCreator {
     public String getUserChoiceSequence(final UserProgress userProgress) {
         final StringBuilder sb = new StringBuilder();
         sb.append(bundle.getString("answers.summary.beginning"));
+        List<Command> userPath = userProgress.getUserPath();
 
+        for (int i = 0; i < userPath.size(); i++) {
+            Command localCommand = userPath.get(i);
+            for (Map.Entry<StepsIndicator, Command> entry : CommandTree.getInstance().getFieldsToCommands().entrySet()) {
+                if (localCommand.equals(entry.getValue())) {
+                    switch (entry.getKey()) {
+                        case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
+                                addSequenceGeneralTransportType(userProgress, sb);
+                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> addSequenceBusOrTruckType(userProgress, sb);
+                        case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
+                             BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
+                                addSequenceWeight(userProgress, sb);
+                        case EAES, OTHER -> addSequenceCountryOrigin(userProgress, sb);
+                        case PHYSICAL, JURIDICAL -> addSequenceOwnerType(userProgress, sb);
+                        case LESS_OR_3_YEARS, MORE_3_YEARS -> addSequenceAge(userProgress, sb);
+                        case TRUCK_UNITS_EXCEPT_6_CLASS, TRUCK_UNITS_6_CLASS ->
+                                addSequenceTruckUnitClass(userProgress, sb);
+                        case TRAILERS, HALF_TRAILERS -> addSequenceTrailerType(userProgress, sb);
+                        case GASOLINE, ELECTRIC -> addSequenceEngineType(userProgress, sb);
+                        case LESS_1000, BETWEEN_1000_AND_2000, BETWEEN_2000_AND_3000, BETWEEN_3000_AND_3500, MORE_3500,
+                             LESS_2500, BETWEEN_2500_AND_5000, BETWEEN_5000_AND_10000, MORE_10000 ->
+                                addSequenceEnginePower(userProgress, sb);
+                        case null, default -> {
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        return sb.toString();
+    }
+
+    private void addSequenceGeneralTransportType(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getGeneralTransportType()) {
             case null -> {
             }
@@ -183,7 +230,9 @@ public class MessagesCreator {
             case SELF_PROPELLED_VEHICLES -> {
             }
         }
+    }
 
+    private void addSequenceBusOrTruckType(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getBusesOrTrucksType()) {
             case null -> {
             }
@@ -192,7 +241,9 @@ public class MessagesCreator {
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
             case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
         }
+    }
 
+    private void addSequenceWeight(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getWeight()) {
             case null -> {
             }
@@ -203,59 +254,64 @@ public class MessagesCreator {
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_3d5_and_5_tons"));
             case BETWEEN_5_AND_8 -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_5_and_8_tons"));
             case BETWEEN_8_AND_12 -> sb.append(bundle.getString("answers.summary.weight.n1_n3.between_8_and_12_tons"));
-            case BETWEEN_12_AND_20 ->
+            case BETWEEN_12_AND_20, FROM_12_TILL_20_TONS ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
-            case BETWEEN_20_AND_50 ->
-                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
-            case FROM_12_TILL_20_TONS ->
-                    sb.append(bundle.getString("answers.summary.weight.n1_n3.between_12_and_20_tons"));
-            case FROM_20_TILL_50_TONS ->
+            case BETWEEN_20_AND_50, FROM_20_TILL_50_TONS ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_20_and_50_tons"));
         }
+    }
 
+    private void addSequenceCountryOrigin(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getCountryOrigin()) {
             case null -> {
             }
             case EAES -> sb.append(bundle.getString("answers.summary.eaes"));
             case OTHER -> sb.append(bundle.getString("answers.summary.other"));
         }
+    }
 
+    private void addSequenceOwnerType(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getOwnersType()) {
             case null -> {
             }
             case PHYSICAL -> sb.append(bundle.getString("answers.summary.physical"));
             case JURIDICAL -> sb.append(bundle.getString("answers.summary.juridical"));
         }
+    }
 
+    private void addSequenceAge(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getCarAge()) {
             case null -> {
             }
             case LESS_OR_3_YEARS -> sb.append(bundle.getString("answers.summary.less.3"));
             case MORE_3_YEARS -> sb.append(bundle.getString("answers.summary.between.3.and.7"));
         }
+    }
 
+    private void addSequenceTruckUnitClass(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getTruckUnitClass()) {
             case null -> {
             }
             case TRUCK_UNITS_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.6_class"));
             case TRUCK_UNITS_EXCEPT_6_CLASS -> sb.append(bundle.getString("answers.summary.truck.except_6"));
         }
+    }
 
+    private void addSequenceTrailerType(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getTrailerO4Type()) {
             case null -> {
             }
             case TRAILERS -> sb.append(bundle.getString("answers.summary.trailersO4details"));
             case HALF_TRAILERS -> sb.append(bundle.getString("answers.summary.halftrailersO4details"));
         }
+    }
 
-        if (userProgress.getEngineType() == ELECTRIC) {
-            sb.append(bundle.getString("answers.summary.electro"));
-        } else {
-            if (userProgress.getEngineType() == GASOLINE) {
-                sb.append(bundle.getString("answers.summary.gas"));
-            }
-        }
+    private void addSequenceEngineType(final UserProgress userProgress, final StringBuilder sb) {
+        String s = userProgress.getEngineType() == ELECTRIC ? bundle.getString("answers.summary.electro") : bundle.getString("answers.summary.gas");
+        sb.append(s);
+    }
 
+    private void addSequenceEnginePower(final UserProgress userProgress, final StringBuilder sb) {
         switch (userProgress.getVolume()) {
             case null -> {
             }
@@ -296,7 +352,6 @@ public class MessagesCreator {
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.more_10000")));
             }
         }
-        return sb.toString();
     }
 
     private String stringBuilderAppender(final String... strings) {

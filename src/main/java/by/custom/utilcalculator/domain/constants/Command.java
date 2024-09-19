@@ -8,7 +8,6 @@ public enum Command {
     ENGINE_VOLUME("volume", null),
     WEIGHT("weight", null),
     TRAILERS_O4_TYPE("trailers_o4_type", null),
-    //GENERAL_TRANSPORT_TYPE("general transport type", null),
 
     //main command - start the calculator
     START("/start", null),
@@ -49,8 +48,8 @@ public enum Command {
     ELECTRIC("/electric", null),
 
     //type of engine command for buses and trucks
-    GASOLINE_TYPE_ENGINE_BUSES("/gasoline_buses", null),
-    ELECTRIC_TYPE_ENGINE_BUSES("/electric_buses", null),
+//    GASOLINE_TYPE_ENGINE_BUSES("/gasoline_buses", null),
+//    ELECTRIC_TYPE_ENGINE_BUSES("/electric_buses", null),
 
     //m1 engine volume command
     VOLUME_LESS_1000_CM("/less_1000", ENGINE_VOLUME),
