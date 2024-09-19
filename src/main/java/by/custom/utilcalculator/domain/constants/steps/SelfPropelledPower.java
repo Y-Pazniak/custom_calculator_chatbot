@@ -51,5 +51,9 @@ public enum SelfPropelledPower implements StepsIndicator {
     MORE_401,
     BETWEEN_100_120,
     BETWEEN_120_300,
+    LESS_200,
+    BETWEEN_200_650,
+    BETWEEN_650_1750,
+    MORE_1750,
     SELF_PROPELLED_MOWERS
 }

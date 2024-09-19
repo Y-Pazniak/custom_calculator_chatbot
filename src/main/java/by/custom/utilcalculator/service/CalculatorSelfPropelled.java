@@ -73,8 +73,31 @@ public class CalculatorSelfPropelled {
             case AGRICULTURAL_VEHICLES -> {
                 return countForAgriculturalVehicles(userProgress);
             }
+            case OFF_ROAD_DUMP_TRUCKS -> {
+                return countForOffRoadDumpTrucks(userProgress);
+            }
             case null, default -> {
                 return "unknown self-propelled type during calculation";
+            }
+        }
+    }
+
+    private String countForOffRoadDumpTrucks(final UserProgress userProgress) {
+        switch (userProgress.getSelfPropelledPower()) {
+            case LESS_200 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_LESS_200HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_LESS_200HP_MORE_3_YEARS;
+            }
+            case BETWEEN_200_650 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_BETWEEN_200_650HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_BETWEEN_200_650HP_MORE_3_YEARS;
+            }
+            case BETWEEN_650_1750 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_BETWEEN_650_1750HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_BETWEEN_650_1750HP_MORE_3_YEARS;
+            }
+            case MORE_1750 -> {
+                return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_MORE_1750HP_LESS_OR_3_YEARS : Price.SELF_PROPELLED_OFFROADS_DUMP_TRUCKS_MORE_1750HP_MORE_3_YEARS;
+            }
+            case null, default -> {
+                return "unknown dump truck during calculation";
             }
         }
     }

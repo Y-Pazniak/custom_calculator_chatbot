@@ -202,6 +202,14 @@ public class MessagesCreator {
                         Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"), "\n",
                         Command.SELF_PROPELLED_MOWERS.getCommand(), " ", bundle.getString("answers.details.power.self_mowers"));
             }
+            case OFF_ROAD_DUMP_TRUCKS -> {
+                return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                        getHelpSelfpropelledPowerString(), "\n",
+                        Command.POWER_LESS_200.getCommand(), " ", bundle.getString("answers.details.power.less_200"), "\n",
+                        Command.POWER_BETWEEN_200_650.getCommand(), " ", bundle.getString("answers.details.power.200_650"), "\n",
+                        Command.POWER_BETWEEN_650_1750.getCommand(), " ", bundle.getString("answers.details.power.650_1750"), "\n",
+                        Command.POWER_MORE_1750.getCommand(), " ", bundle.getString("answers.details.power.more_1750"));
+            }
         }
         System.out.println("self-propelled volume error during next step message building");
         return "self-propelled volume error during next step message building";
@@ -247,8 +255,8 @@ public class MessagesCreator {
 
     private String getTruckUnitClass() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.truck.type"), "\n",
-                Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"), "\n",
-                Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
+                Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"), "\n",
+                Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"));
     }
 
     private String getTruckUnitWeight() {
@@ -708,6 +716,22 @@ public class MessagesCreator {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.self_mowers")));
             }
+            case LESS_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_200")));
+            }
+            case BETWEEN_200_650 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.200_650")));
+            }
+            case BETWEEN_650_1750 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.650_1750")));
+            }
+            case MORE_1750 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_1750")));
+            }
         }
         switch (userProgress.getSelfPropelledType()) {
             case null -> {
@@ -783,6 +807,10 @@ public class MessagesCreator {
             case AGRICULTURAL_VEHICLES -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.agricultural_vehicles")));
+            }
+            case OFF_ROAD_DUMP_TRUCKS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.off_road_dump_trucks")));
             }
         }
         return sb.toString();

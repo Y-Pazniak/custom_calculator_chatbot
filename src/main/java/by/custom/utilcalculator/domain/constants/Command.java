@@ -182,7 +182,13 @@ public enum Command {
     //power of agricultural vehicles
     POWER_BETWEEN_100_120("/between_100_120",SELF_PROPELLED_POWER, Step.CAR_AGE),
     POWER_BETWEEN_120_300("/between_120_300",SELF_PROPELLED_POWER, Step.CAR_AGE),
-    SELF_PROPELLED_MOWERS("/self_propelled_mowers",SELF_PROPELLED_POWER, Step.CAR_AGE);
+    SELF_PROPELLED_MOWERS("/self_propelled_mowers",SELF_PROPELLED_POWER, Step.CAR_AGE),
+
+    //power of off-road dump trucks
+    POWER_LESS_200("/less_200",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_BETWEEN_200_650("/between_200_650",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_BETWEEN_650_1750("/between_650_1750",SELF_PROPELLED_POWER, Step.CAR_AGE),
+    POWER_MORE_1750("/more_1750",SELF_PROPELLED_POWER, Step.CAR_AGE);
 
     private final String command;
     private final Command family;
