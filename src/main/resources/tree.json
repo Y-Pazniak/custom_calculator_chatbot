@@ -239,7 +239,30 @@
     },
     {
       "key": "SELF_PROPELLED_VEHICLES",
-      "children": []
+      "description": "node for the request of the list of other vehicles, except m1, buses and trucks",
+      "nextStep": "PARTICULAR_TRANSPORT_TYPE",
+      "children": [
+        {
+          "key": "SELF_PROPELLED_TYPE",
+          "description": "Graders and levelers with power plant power",
+          "nextStep": "ENGINE_VOLUME",
+          "children": [
+            {
+              "key": "ENGINE_VOLUME",
+              "description": "we unite volumes of graders into one node",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "AGE",
+                  "description": "we unite AGE branches into one node to make code shorter",
+                  "nextStep": "FAREWELL",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
