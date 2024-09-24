@@ -39,6 +39,8 @@ public class UserProgressManager {
         switch (requestingCommand) {
             case M1 -> userProgress.setGeneralTransportType(GeneralTransportType.M1);
             case BUSES_AND_TRUCKS -> userProgress.setGeneralTransportType(GeneralTransportType.BUSES_AND_TRUCKS);
+            case SELF_PROPELLED_VEHICLES ->
+                    userProgress.setGeneralTransportType(GeneralTransportType.SELF_PROPELLED_VEHICLES);
         }
 
         userProgressStorage.save(userProgress);
@@ -74,10 +76,14 @@ public class UserProgressManager {
             case TIMBER_LOADERS -> userProgress.setParticularTransportType(ParticularTransportType.TIMBER_LOADERS);
             case WHEELED_TRACTORS -> userProgress.setParticularTransportType(ParticularTransportType.WHEELED_TRACTORS);
             case CRAWLER_TRACTORS -> userProgress.setParticularTransportType(ParticularTransportType.CRAWLER_TRACTORS);
-            case COMBINE_HARVESTERS -> userProgress.setParticularTransportType(ParticularTransportType.COMBINE_HARVESTERS);
-            case FORAGE_HARVESTERS -> userProgress.setParticularTransportType(ParticularTransportType.FORAGE_HARVESTERS);
-            case AGRICULTURAL_VEHICLES -> userProgress.setParticularTransportType(ParticularTransportType.AGRICULTURAL_VEHICLES);
-            case OFF_ROAD_DUMP_TRUCKS -> userProgress.setParticularTransportType(ParticularTransportType.OFF_ROAD_DUMP_TRUCKS);
+            case COMBINE_HARVESTERS ->
+                    userProgress.setParticularTransportType(ParticularTransportType.COMBINE_HARVESTERS);
+            case FORAGE_HARVESTERS ->
+                    userProgress.setParticularTransportType(ParticularTransportType.FORAGE_HARVESTERS);
+            case AGRICULTURAL_VEHICLES ->
+                    userProgress.setParticularTransportType(ParticularTransportType.AGRICULTURAL_VEHICLES);
+            case OFF_ROAD_DUMP_TRUCKS ->
+                    userProgress.setParticularTransportType(ParticularTransportType.OFF_ROAD_DUMP_TRUCKS);
         }
 
         userProgressStorage.save(userProgress);
@@ -93,8 +99,7 @@ public class UserProgressManager {
 
         switch (requestingCommand) {
             case LESS_2_TONS -> userProgress.setWeight(Weight.LESS_2_TONS);
-            case BETWEEN_2_5_AND_3_5_TONS ->
-                    userProgress.setWeight(Weight.BETWEEN_2_5_AND_3_5);
+            case BETWEEN_2_5_AND_3_5_TONS -> userProgress.setWeight(Weight.BETWEEN_2_5_AND_3_5);
             case BETWEEN_3_5_AND_5_TONS -> userProgress.setWeight(Weight.BETWEEN_3_5_AND_5);
             case BETWEEN_5_AND_8_TONS -> userProgress.setWeight(Weight.BETWEEN_5_AND_8);
             case BETWEEN_8_AND_12_TONS -> userProgress.setWeight(Weight.BETWEEN_8_AND_12);

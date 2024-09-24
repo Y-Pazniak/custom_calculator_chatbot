@@ -55,7 +55,7 @@ public class MessageRouter {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-            case M1, BUSES_AND_TRUCKS ->
+            case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                     answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
             case PHYSICAL, JURIDICAL -> answer = userProgressManager.processOwnerType(requestingCommand, chatID);

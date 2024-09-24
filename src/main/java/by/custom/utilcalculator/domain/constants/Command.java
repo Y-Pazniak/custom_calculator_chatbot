@@ -9,6 +9,7 @@ public enum Command {
     WEIGHT("weight", null),
     TRAILERS_O4_TYPE("trailers_o4_type", null),
     SELF_PROPELLED_TYPE("self_propelled_type", null),
+    SELF_PROPELLED_POWER("self_propelled_power", null),
 
     //main command - start the calculator
     START("/start", null),

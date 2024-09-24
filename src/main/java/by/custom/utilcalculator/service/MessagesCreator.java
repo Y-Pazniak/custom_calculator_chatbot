@@ -195,7 +195,8 @@ public class MessagesCreator {
                     switch (entry.getKey()) {
                         case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                                 addSequenceGeneralTransportType(userProgress, sb);
-                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> addSequenceParticularTransportType(userProgress, sb);
+                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
+                                addSequenceParticularTransportType(userProgress, sb);
                         case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
                              BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
                                 addSequenceWeight(userProgress, sb);
@@ -222,12 +223,14 @@ public class MessagesCreator {
     }
 
     private void addSequenceGeneralTransportType(final UserProgress userProgress, final StringBuilder sb) {
+
         switch (userProgress.getGeneralTransportType()) {
             case null -> {
             }
             case M1 -> sb.append(bundle.getString("answers.summary.m1"));
             case BUSES_AND_TRUCKS -> sb.append(bundle.getString("answers.summary.except_m1"));
             case SELF_PROPELLED_VEHICLES -> {
+                sb.append(bundle.getString("answers.summary.self_propelled_vehicles"));
             }
         }
     }
@@ -241,7 +244,25 @@ public class MessagesCreator {
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
             case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
 
-
+            case GRADER -> sb.append(bundle.getString("answers.summary.grader"));
+            case BULLDOZER -> sb.append(bundle.getString("answers.summary.bulldozer"));
+            case EXCAVATOR -> sb.append(bundle.getString("answers.summary.excavator"));
+            case WHEEL_LOADER -> sb.append(bundle.getString("answers.summary.wheel_loader"));
+            case TAMPING_MACHINE -> sb.append(bundle.getString("answers.details.tamping_machines"));
+            case FRONT_LOADER -> sb.append(bundle.getString("answers.details.front_loaders"));
+            case WHEELED_CRANES -> sb.append(bundle.getString("answers.details.wheeled_cranes"));
+            case PIPELAYERS -> sb.append(bundle.getString("answers.details.pipelayers"));
+            case TRAILERS_OTHER -> sb.append(bundle.getString("answers.details.trailers_other"));
+            case ROAD_MAINTENANCE -> sb.append(bundle.getString("answers.details.road_maintenance_vehicles"));
+            case FORESTRY -> sb.append(bundle.getString("answers.details.forestry_vehicles"));
+            case FORWADERS -> sb.append(bundle.getString("answers.details.forwaders"));
+            case TIMBER_LOADERS -> sb.append(bundle.getString("answers.details.timber_loaders"));
+            case WHEELED_TRACTORS -> sb.append(bundle.getString("answers.details.wheeled_tractors"));
+            case CRAWLER_TRACTORS -> sb.append(bundle.getString("answers.details.crawler_tractors"));
+            case COMBINE_HARVESTERS -> sb.append(bundle.getString("answers.details.combine_harvesters"));
+            case FORAGE_HARVESTERS -> sb.append(bundle.getString("answers.details.forage_harvesters"));
+            case AGRICULTURAL_VEHICLES -> sb.append(bundle.getString("answers.details.agricultural_vehicles"));
+            case OFF_ROAD_DUMP_TRUCKS -> sb.append(bundle.getString("answers.details.off_road_dump_trucks"));
         }
     }
 
@@ -352,6 +373,227 @@ public class MessagesCreator {
             case MORE_10000 -> {
                 sb.append(",");
                 sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.volume.m2_m3.more_10000")));
+            }
+            case LESS_40 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_40")));
+            }
+            case BETWEEN_40_80 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.40_80")));
+            }
+            case MORE_80 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_80")));
+            }
+            case LESS_100 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.100")));
+            }
+            case BETWEEN_100_125 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheel_loaders.100_125")));
+            }
+            case BETWEEN_100_140 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.140")));
+            }
+            case BETWEEN_125_150 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheel_loaders.125_150")));
+            }
+            case MORE_150 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.more_150")));
+            }
+            case BETWEEN_140_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.200")));
+            }
+            case LESS_170 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.170")));
+            }
+            case MORE_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.graders.more_200")));
+            }
+            case BETWEEN_170_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.250")));
+            }
+            case MORE_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.excavators.more_250")));
+            }
+            case BETWEEN_100_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.200")));
+            }
+            case BETWEEN_200_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.300")));
+            }
+            case BETWEEN_300_400 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.400")));
+            }
+            case MORE_400 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.bulldozers.more_400")));
+            }
+            case BETWEEN_5_50 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.5p5_50")));
+            }
+            case BETWEEN_50_100 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.50_100")));
+            }
+            case BETWEEN_200_250 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.200_250")));
+            }
+            case BETWEEN_250_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.250_300")));
+            }
+            case LESS_130 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_130")));
+            }
+            case BETWEEN_130_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.130_200")));
+            }
+            case BETWEEN_100_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.100_220")));
+            }
+            case MORE_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_220")));
+            }
+            case MORE_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_300")));
+            }
+            case TRAILERS_OTHER_FULL -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.trailersOther")));
+            }
+            case TRAILERS_OTHER_HALF -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.halftrailersOther")));
+            }
+            case BETWEEN_20_100 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.20_100")));
+            }
+            case BETWEEN_100_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.100_300")));
+            }
+            case BETWEEN_5p5_30 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.5p5_30")));
+            }
+            case BETWEEN_30_60 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.30_60")));
+            }
+            case BETWEEN_60_90 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.60_90")));
+            }
+            case BETWEEN_90_130 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.90_130")));
+
+            }
+            case BETWEEN_130_180 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.130_180")));
+            }
+            case BETWEEN_180_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.180_220")));
+            }
+            case BETWEEN_220_280 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.220_280")));
+            }
+            case BETWEEN_280_340 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.280_340")));
+            }
+            case BETWEEN_340_380 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.340_380")));
+            }
+            case MORE_380 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_380")));
+            }
+            case BETWEEN_25_160 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.25_160")));
+            }
+            case BETWEEN_160_220 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.160_220")));
+            }
+            case BETWEEN_220_255 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.220_255")));
+            }
+            case BETWEEN_255_325 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.255_325")));
+            }
+            case BETWEEN_325_400 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.325_400")));
+            }
+            case LESS_295 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_295")));
+            }
+            case BETWEEN_295_401 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.295_401")));
+            }
+            case MORE_401 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_401")));
+            }
+            case BETWEEN_100_120 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.100_120")));
+            }
+            case BETWEEN_120_300 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.120_300")));
+            }
+            case SELF_PROPELLED_MOWERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.self_mowers")));
+            }
+            case LESS_200 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.less_200")));
+            }
+            case BETWEEN_200_650 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.200_650")));
+            }
+            case BETWEEN_650_1750 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.650_1750")));
+            }
+            case MORE_1750 -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.power.more_1750")));
             }
         }
     }
