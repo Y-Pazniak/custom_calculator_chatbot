@@ -265,6 +265,20 @@ public class UserProgressManager {
         return messagesCreator.getSummaryAnswer(userProgress);
     }
 
+    public String processHelpRequest(final String chatID) throws UtilsborException {
+        final UserProgress userProgress = userProgressStorage.get(chatID);
+        if (userProgress.getParticularTransportType() == ParticularTransportType.TRAILERS_OTHER) {
+            return messagesCreator.getTrailersOtherHelp();
+        }
+        if (userProgress.getNextStep() == Step.ENGINE_VOLUME) {
+            return messagesCreator.getSelfPropelledPowerHelp();
+        }
+        if (userProgress.getGeneralTransportType() == GeneralTransportType.SELF_PROPELLED_VEHICLES) {
+            return messagesCreator.getSelfPropelledHelp();
+        }
+        return "help request denied";
+    }
+
     private static class BotFieldsManagerHolder {
         private static final UserProgressManager USER_PROGRESS_MANAGER = new UserProgressManager();
     }

@@ -81,6 +81,7 @@ public class MessageRouter {
                     answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
             case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE ->
                     answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
+            case HELP -> answer = userProgressManager.processHelpRequest(chatID);
             case null, default -> answer = getSorryMessage();
         }
         return answer;

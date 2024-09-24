@@ -34,6 +34,7 @@ public class MessagesCreator {
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) {
         final Step step = userProgress.getNextStep();
+        System.out.println("Next step: " + step);
         switch (step) {
             case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
@@ -184,10 +185,144 @@ public class MessagesCreator {
                         Command.VOLUME_BETWEEN_5000_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.between_5000_10000"), "\n",
                         Command.VOLUME_MORE_10000_CM.getCommand(), " ", bundle.getString("answers.summary.volume.m2_m3.more_10000"));
             }
-            case null, default -> {
-                return "unknown general transport type";
+            case SELF_PROPELLED_VEHICLES -> {
+                switch (userProgress.getParticularTransportType()) {
+                    case GRADER -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                                Command.POWER_100_140.getCommand(), " ", bundle.getString("answers.details.graders.140"), "\n",
+                                Command.POWER_140_200.getCommand(), " ", bundle.getString("answers.details.graders.200"), "\n",
+                                Command.POWER_MORE_200.getCommand(), " ", bundle.getString("answers.details.graders.more_200"));
+                    }
+                    case BULLDOZER -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                                Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
+                                Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
+                                Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
+                                Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
+                    }
+                    case EXCAVATOR, WHEELED_CRANES -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_170.getCommand(), " ", bundle.getString("answers.details.excavators.170"), "\n",
+                                Command.POWER_170_250.getCommand(), " ", bundle.getString("answers.details.excavators.250"), "\n",
+                                Command.POWER_MORE_250.getCommand(), " ", bundle.getString("answers.details.excavators.more_250"));
+                    }
+                    case WHEEL_LOADER -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                                Command.POWER_100_125.getCommand(), " ", bundle.getString("answers.details.wheel_loaders.100_125"), "\n",
+                                Command.POWER_125_150.getCommand(), " ", bundle.getString("answers.details.wheel_loaders.125_150"), "\n",
+                                Command.POWER_MORE_150.getCommand(), " ", bundle.getString("answers.details.excavators.more_150"));
+                    }
+                    case TAMPING_MACHINE -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_40.getCommand(), " ", bundle.getString("answers.details.power.less_40"), "\n",
+                                Command.POWER_40_80.getCommand(), " ", bundle.getString("answers.details.power.40_80"), "\n",
+                                Command.POWER_MORE_80.getCommand(), " ", bundle.getString("answers.details.power.more_80"));
+                    }
+                    case FRONT_LOADER -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_5_50.getCommand(), " ", bundle.getString("answers.details.power.5p5_50"), "\n",
+                                Command.POWER_50_100.getCommand(), " ", bundle.getString("answers.details.power.50_100"), "\n",
+                                Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
+                                Command.POWER_200_250.getCommand(), " ", bundle.getString("answers.details.power.200_250"), "\n",
+                                Command.POWER_250_300.getCommand(), " ", bundle.getString("answers.details.power.250_300"), "\n",
+                                Command.POWER_300_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.400"), "\n",
+                                Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
+                    }
+                    case PIPELAYERS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_130.getCommand(), " ", bundle.getString("answers.details.power.less_130"), "\n",
+                                Command.POWER_130_200.getCommand(), " ", bundle.getString("answers.details.power.130_200"), "\n",
+                                Command.POWER_200_300.getCommand(), " ", bundle.getString("answers.details.bulldozers.300"), "\n",
+                                Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"));
+                    }
+                    case TRAILERS_OTHER -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("answers.details.trailersOther_lifting_capacity"), "\n",
+                                String.format("%s %s", Command.HELP.getCommand(), bundle.getString("answers.details.trailers_other_lifting_capacity")), "\n",
+                                Command.TRAILERS_OTHER_FULL.getCommand(), " ", bundle.getString("answers.details.trailersOther"), "\n",
+                                Command.TRAILERS_OTHER_HALF.getCommand(), " ", bundle.getString("answers.details.halftrailersOther"), "\n");
+                    }
+                    case ROAD_MAINTENANCE -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                                Command.POWER_BETWEEN_100_220.getCommand(), " ", bundle.getString("answers.details.power.100_220"), "\n",
+                                Command.POWER_MORE_220.getCommand(), " ", bundle.getString("answers.details.power.more_220"));
+                    }
+                    case FORESTRY, FORWADERS, TIMBER_LOADERS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_BETWEEN_20_100.getCommand(), " ", bundle.getString("answers.details.power.20_100"), "\n",
+                                Command.POWER_BETWEEN_100_300.getCommand(), " ", bundle.getString("answers.details.power.100_300"), "\n",
+                                Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"));
+                    }
+                    case WHEELED_TRACTORS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_BETWEEN_5p5_30.getCommand(), " ", bundle.getString("answers.details.power.5p5_30"), "\n",
+                                Command.POWER_BETWEEN_30_60.getCommand(), " ", bundle.getString("answers.details.power.30_60"), "\n",
+                                Command.POWER_BETWEEN_60_90.getCommand(), " ", bundle.getString("answers.details.power.60_90"), "\n",
+                                Command.POWER_BETWEEN_90_130.getCommand(), " ", bundle.getString("answers.details.power.90_130"), "\n",
+                                Command.POWER_BETWEEN_130_180.getCommand(), " ", bundle.getString("answers.details.power.130_180"), "\n",
+                                Command.POWER_BETWEEN_180_220.getCommand(), " ", bundle.getString("answers.details.power.180_220"), "\n",
+                                Command.POWER_BETWEEN_220_280.getCommand(), " ", bundle.getString("answers.details.power.220_280"), "\n",
+                                Command.POWER_BETWEEN_280_340.getCommand(), " ", bundle.getString("answers.details.power.280_340"), "\n",
+                                Command.POWER_BETWEEN_340_380.getCommand(), " ", bundle.getString("answers.details.power.340_380"), "\n",
+                                Command.POWER_MORE_380.getCommand(), " ", bundle.getString("answers.details.power.more_380"));
+                    }
+                    case CRAWLER_TRACTORS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_100.getCommand(), " ", bundle.getString("answers.details.graders.100"), "\n",
+                                Command.POWER_100_200.getCommand(), " ", bundle.getString("answers.details.bulldozers.200"), "\n",
+                                Command.POWER_MORE_200.getCommand(), " ", bundle.getString("answers.details.graders.more_200"));
+                    }
+                    case COMBINE_HARVESTERS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_BETWEEN_25_160.getCommand(), " ", bundle.getString("answers.details.power.25_160"), "\n",
+                                Command.POWER_BETWEEN_160_220.getCommand(), " ", bundle.getString("answers.details.power.160_220"), "\n",
+                                Command.POWER_BETWEEN_220_255.getCommand(), " ", bundle.getString("answers.details.power.220_255"), "\n",
+                                Command.POWER_BETWEEN_255_325.getCommand(), " ", bundle.getString("answers.details.power.255_325"), "\n",
+                                Command.POWER_BETWEEN_325_400.getCommand(), " ", bundle.getString("answers.details.power.325_400"), "\n",
+                                Command.POWER_MORE_400.getCommand(), " ", bundle.getString("answers.details.bulldozers.more_400"));
+                    }
+                    case FORAGE_HARVESTERS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_295.getCommand(), " ", bundle.getString("answers.details.power.less_295"), "\n",
+                                Command.POWER_BETWEEN_295_401.getCommand(), " ", bundle.getString("answers.details.power.295_401"), "\n",
+                                Command.POWER_MORE_401.getCommand(), " ", bundle.getString("answers.details.power.more_401"));
+                    }
+                    case AGRICULTURAL_VEHICLES -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_BETWEEN_100_120.getCommand(), " ", bundle.getString("answers.details.power.100_120"), "\n",
+                                Command.POWER_BETWEEN_120_300.getCommand(), " ", bundle.getString("answers.details.power.120_300"), "\n",
+                                Command.POWER_MORE_300.getCommand(), " ", bundle.getString("answers.details.power.more_300"), "\n",
+                                Command.SELF_PROPELLED_MOWERS.getCommand(), " ", bundle.getString("answers.details.power.self_mowers"));
+                    }
+                    case OFF_ROAD_DUMP_TRUCKS -> {
+                        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.power"), "\n",
+                                getHelpSelfpropelledPowerString(), "\n",
+                                Command.POWER_LESS_200.getCommand(), " ", bundle.getString("answers.details.power.less_200"), "\n",
+                                Command.POWER_BETWEEN_200_650.getCommand(), " ", bundle.getString("answers.details.power.200_650"), "\n",
+                                Command.POWER_BETWEEN_650_1750.getCommand(), " ", bundle.getString("answers.details.power.650_1750"), "\n",
+                                Command.POWER_MORE_1750.getCommand(), " ", bundle.getString("answers.details.power.more_1750"));
+                    }
+                }
             }
         }
+        return "unknown engine volume";
     }
 
     public String getAgeAuto() {
@@ -227,7 +362,10 @@ public class MessagesCreator {
                     switch (entry.getKey()) {
                         case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                                 addSequenceGeneralTransportType(userProgress, sb);
-                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
+                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4, GRADER, BULLDOZER, EXCAVATOR, WHEEL_LOADER,
+                             TAMPING_MACHINE, FRONT_LOADER, WHEELED_CRANES, PIPELAYERS, TRAILERS_OTHER,
+                             ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS, CRAWLER_TRACTORS,
+                             COMBINE_HARVESTERS, FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES, OFF_ROAD_DUMP_TRUCKS ->
                                 addSequenceParticularTransportType(userProgress, sb);
                         case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
                              BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
@@ -273,25 +411,82 @@ public class MessagesCreator {
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
             case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
 
-            case GRADER -> sb.append(bundle.getString("answers.summary.grader"));
-            case BULLDOZER -> sb.append(bundle.getString("answers.summary.bulldozer"));
-            case EXCAVATOR -> sb.append(bundle.getString("answers.summary.excavator"));
-            case WHEEL_LOADER -> sb.append(bundle.getString("answers.summary.wheel_loader"));
-            case TAMPING_MACHINE -> sb.append(bundle.getString("answers.details.tamping_machines"));
-            case FRONT_LOADER -> sb.append(bundle.getString("answers.details.front_loaders"));
-            case WHEELED_CRANES -> sb.append(bundle.getString("answers.details.wheeled_cranes"));
-            case PIPELAYERS -> sb.append(bundle.getString("answers.details.pipelayers"));
-            case TRAILERS_OTHER -> sb.append(bundle.getString("answers.details.trailers_other"));
-            case ROAD_MAINTENANCE -> sb.append(bundle.getString("answers.details.road_maintenance_vehicles"));
-            case FORESTRY -> sb.append(bundle.getString("answers.details.forestry_vehicles"));
-            case FORWADERS -> sb.append(bundle.getString("answers.details.forwaders"));
-            case TIMBER_LOADERS -> sb.append(bundle.getString("answers.details.timber_loaders"));
-            case WHEELED_TRACTORS -> sb.append(bundle.getString("answers.details.wheeled_tractors"));
-            case CRAWLER_TRACTORS -> sb.append(bundle.getString("answers.details.crawler_tractors"));
-            case COMBINE_HARVESTERS -> sb.append(bundle.getString("answers.details.combine_harvesters"));
-            case FORAGE_HARVESTERS -> sb.append(bundle.getString("answers.details.forage_harvesters"));
-            case AGRICULTURAL_VEHICLES -> sb.append(bundle.getString("answers.details.agricultural_vehicles"));
-            case OFF_ROAD_DUMP_TRUCKS -> sb.append(bundle.getString("answers.details.off_road_dump_trucks"));
+            case GRADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.grader")));
+            }
+            case BULLDOZER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.bulldozer")));
+            }
+            case EXCAVATOR -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.excavator")));
+            }
+            case WHEEL_LOADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.summary.wheel_loader")));
+            }
+            case TAMPING_MACHINE -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.tamping_machines")));
+            }
+            case FRONT_LOADER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.front_loaders")));
+            }
+            case WHEELED_CRANES -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheeled_cranes")));
+            }
+            case PIPELAYERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.pipelayers")));
+            }
+            case TRAILERS_OTHER -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.trailers_other")));
+            }
+            case ROAD_MAINTENANCE -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.road_maintenance_vehicles")));
+            }
+            case FORESTRY -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.forestry_vehicles")));
+            }
+            case FORWADERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.forwaders")));
+            }
+            case TIMBER_LOADERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.timber_loaders")));
+            }
+            case WHEELED_TRACTORS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.wheeled_tractors")));
+            }
+            case CRAWLER_TRACTORS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.crawler_tractors")));
+            }
+            case COMBINE_HARVESTERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.combine_harvesters")));
+            }
+            case FORAGE_HARVESTERS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.forage_harvesters")));
+            }
+            case AGRICULTURAL_VEHICLES -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.agricultural_vehicles")));
+            }
+            case OFF_ROAD_DUMP_TRUCKS -> {
+                sb.append(",");
+                sb.append(trimFirstAndLastLetters(bundle.getString("answers.details.off_road_dump_trucks")));
+            }
         }
     }
 
@@ -633,6 +828,26 @@ public class MessagesCreator {
             stringBuilder.append(string);
         }
         return stringBuilder.toString();
+    }
+
+    private String getHelpSelfpropelledPowerString() {
+        return String.format("%s %s", Command.HELP.getCommand(), bundle.getString("answers.details.self_propelled_power"));
+    }
+
+    public String getSelfPropelledHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.self_propelled"), "\n", "\n",
+                bundle.getString("answers.help.trailers_for_self_propelled"), "\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
+    }
+
+    public String getSelfPropelledPowerHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.self_propelled_power"), "\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
+    }
+
+    public String getTrailersOtherHelp() {
+        return stringBuilderAppender(bundle.getString("answers.help.trailers_lifting_capacity"), "\n", "\n",
+                bundle.getString("answers.help.friendly_advice"));
     }
 
     public String getSummaryAnswer(final UserProgress userProgress) {
