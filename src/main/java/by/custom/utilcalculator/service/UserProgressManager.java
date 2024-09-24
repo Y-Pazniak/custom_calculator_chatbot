@@ -192,7 +192,7 @@ public class UserProgressManager {
         return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processEngineVolume(final Command requestingCommand, final String chatID) throws UtilsborException {
+    public String processEngineVolumeOrPower(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
         final String message;
@@ -200,25 +200,95 @@ public class UserProgressManager {
         if (!CommandTree.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
-        processEngineVolume(userProgress, requestingCommand, chatID);
+        processEngineVolumeOrPower(userProgress, requestingCommand, chatID);
         message = messagesCreator.getSummaryAnswer(userProgress);
         return message;
     }
 
-    private void processEngineVolume(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
+    private void processEngineVolumeOrPower(final UserProgress userProgress, final Command requestingCommand, final String chatID) throws UtilsborException {
         if (!CommandTree.validateCommand(requestingCommand, userProgress)) {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
-            case Command.VOLUME_LESS_1000_CM -> userProgress.setVolume(EngineVolume.LESS_1000);
-            case Command.VOLUME_BETWEEN_1000_2000_CM -> userProgress.setVolume(EngineVolume.BETWEEN_1000_AND_2000);
-            case Command.VOLUME_BETWEEN_2000_3000_CM -> userProgress.setVolume(EngineVolume.BETWEEN_2000_AND_3000);
-            case Command.VOLUME_BETWEEN_3000_3500_CM -> userProgress.setVolume(EngineVolume.BETWEEN_3000_AND_3500);
-            case VOLUME_MORE_3500_CM -> userProgress.setVolume(EngineVolume.MORE_3500);
-            case Command.VOLUME_LESS_2500_CM -> userProgress.setVolume(EngineVolume.LESS_2500);
-            case Command.VOLUME_BETWEEN_2500_5000_CM -> userProgress.setVolume(EngineVolume.BETWEEN_2500_AND_5000);
-            case Command.VOLUME_BETWEEN_5000_10000_CM -> userProgress.setVolume(EngineVolume.BETWEEN_5000_AND_10000);
-            case Command.VOLUME_MORE_10000_CM -> userProgress.setVolume(EngineVolume.MORE_10000);
+            case Command.VOLUME_LESS_1000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_1000);
+            case Command.VOLUME_BETWEEN_1000_2000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_1000_AND_2000);
+            case Command.VOLUME_BETWEEN_2000_3000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_2000_AND_3000);
+            case Command.VOLUME_BETWEEN_3000_3500_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_3000_AND_3500);
+            case Command.VOLUME_MORE_3500_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_3500);
+            case Command.VOLUME_LESS_2500_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_2500);
+            case Command.VOLUME_BETWEEN_2500_5000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_2500_AND_5000);
+            case Command.VOLUME_BETWEEN_5000_10000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_5000_AND_10000);
+            case Command.VOLUME_MORE_10000_CM -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_10000);
+
+            case Command.POWER_LESS_100 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_100);
+            case Command.POWER_100_140 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_140);
+            case Command.POWER_140_200 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_140_200);
+            case Command.POWER_MORE_200 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_200);
+
+            case Command.POWER_100_200 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_200);
+            case Command.POWER_200_300 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_200_300);
+            case Command.POWER_300_400 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_300_400);
+            case Command.POWER_MORE_400 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_400);
+
+            case Command.POWER_LESS_170 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_170);
+            case Command.POWER_170_250 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_170_250);
+            case Command.POWER_MORE_250 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_250);
+
+            case Command.POWER_100_125 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_125);
+            case Command.POWER_125_150 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_125_150);
+            case Command.POWER_MORE_150 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_150);
+
+            case Command.POWER_LESS_40 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_40);
+            case Command.POWER_40_80 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_40_80);
+            case Command.POWER_MORE_80 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_80);
+
+            case Command.POWER_5_50 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_5_50);
+            case Command.POWER_50_100 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_50_100);
+            case Command.POWER_200_250 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_200_250);
+            case Command.POWER_250_300 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_250_300);
+
+            case Command.POWER_LESS_130 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_130);
+            case Command.POWER_130_200 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_130_200);
+            case Command.POWER_MORE_300 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_300);
+
+            case TRAILERS_OTHER_FULL -> userProgress.setVolumeOrPower(EngineVolumeOrPower.TRAILERS_OTHER_FULL);
+            case TRAILERS_OTHER_HALF -> userProgress.setVolumeOrPower(EngineVolumeOrPower.TRAILERS_OTHER_HALF);
+
+            case POWER_BETWEEN_100_220 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_220);
+            case POWER_MORE_220 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_220);
+
+            case POWER_BETWEEN_20_100 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_20_100);
+            case POWER_BETWEEN_100_300 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_300);
+
+            case POWER_BETWEEN_5p5_30 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_5p5_30);
+            case POWER_BETWEEN_30_60 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_30_60);
+            case POWER_BETWEEN_60_90 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_60_90);
+            case POWER_BETWEEN_90_130 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_90_130);
+            case POWER_BETWEEN_130_180 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_130_180);
+            case POWER_BETWEEN_180_220 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_180_220);
+            case POWER_BETWEEN_220_280 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_220_280);
+            case POWER_BETWEEN_280_340 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_280_340);
+            case POWER_BETWEEN_340_380 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_340_380);
+            case POWER_MORE_380 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_380);
+
+            case POWER_BETWEEN_25_160 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_25_160);
+            case POWER_BETWEEN_160_220 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_160_220);
+            case POWER_BETWEEN_220_255 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_220_255);
+            case POWER_BETWEEN_255_325 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_255_325);
+            case POWER_BETWEEN_325_400 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_325_400);
+
+            case POWER_LESS_295 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_295);
+            case POWER_BETWEEN_295_401 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_295_401);
+            case POWER_MORE_401 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_401);
+
+            case POWER_BETWEEN_100_120 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_100_120);
+            case POWER_BETWEEN_120_300 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_120_300);
+            case SELF_PROPELLED_MOWERS -> userProgress.setVolumeOrPower(EngineVolumeOrPower.SELF_PROPELLED_MOWERS);
+
+            case POWER_LESS_200 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.LESS_200);
+            case POWER_BETWEEN_200_650 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_200_650);
+            case POWER_BETWEEN_650_1750 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.BETWEEN_650_1750);
+            case POWER_MORE_1750 -> userProgress.setVolumeOrPower(EngineVolumeOrPower.MORE_1750);
         }
         userProgressStorage.save(userProgress);
     }

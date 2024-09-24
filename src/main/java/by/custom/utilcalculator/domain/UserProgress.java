@@ -15,7 +15,7 @@ public class UserProgress implements Serializable {
     private OwnersType ownersType = null;
     private CarAge carAge = null;
     private EngineType engineType = null;
-    private EngineVolume engineVolume = null;
+    private EngineVolumeOrPower engineVolumeOrPower = null;
     private ParticularTransportType particularTransportType = null;
     private TruckUnitClass truckUnitClass = null;
     private Weight weight = null;
@@ -138,13 +138,13 @@ public class UserProgress implements Serializable {
         return engineType;
     }
 
-    public void setVolume(final EngineVolume volumeOfEngine) {
-        this.engineVolume = volumeOfEngine;
+    public void setVolumeOrPower(final EngineVolumeOrPower volumeOfEngine) {
+        this.engineVolumeOrPower = volumeOfEngine;
         addUserStatusToPath(volumeOfEngine);
     }
 
-    public EngineVolume getVolume() {
-        return engineVolume;
+    public EngineVolumeOrPower getVolumeOrPower() {
+        return engineVolumeOrPower;
     }
 
     public void setTruckUnitType(final TruckUnitClass truckUnit) {

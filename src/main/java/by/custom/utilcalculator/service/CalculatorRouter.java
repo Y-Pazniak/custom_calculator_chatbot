@@ -12,7 +12,7 @@ public class CalculatorRouter {
                 return CalculatorExceptM1.getInstance().calculate(userProgress);
             }
             case SELF_PROPELLED_VEHICLES -> {
-                return "Self-propelled vehicle";
+                return CalculatorSelfPropelled.getInstance().calculate(userProgress);
             }
             case null, default -> {
                 return "unknown type of vehicle";

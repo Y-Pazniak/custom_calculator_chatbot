@@ -18,7 +18,7 @@ import static by.custom.utilcalculator.domain.constants.steps.CountryOrigin.*;
 import static by.custom.utilcalculator.domain.constants.steps.OwnersType.*;
 import static by.custom.utilcalculator.domain.constants.steps.CarAge.*;
 import static by.custom.utilcalculator.domain.constants.steps.TruckUnitClass.*;
-import static by.custom.utilcalculator.domain.constants.steps.EngineVolume.*;
+import static by.custom.utilcalculator.domain.constants.steps.EngineVolumeOrPower.*;
 
 public class MessagesCreator {
     private final BundleResourcesServant bundle;
@@ -34,7 +34,6 @@ public class MessagesCreator {
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) {
         final Step step = userProgress.getNextStep();
-        System.out.println("Next step: " + step);
         switch (step) {
             case GENERAL_TRANSPORT_TYPE -> {
                 return getGreeting();
@@ -49,7 +48,7 @@ public class MessagesCreator {
                 return getTypeOfEngine();
             }
             case ENGINE_VOLUME -> {
-                return getEngineVolume(userProgress);
+                return getEngineVolumeOrPower(userProgress);
             }
             case COUNTRY_ORIGIN -> {
                 return getCountryOrigin();
@@ -60,7 +59,6 @@ public class MessagesCreator {
             case TRUCK_UNIT_CLASS -> {
                 return getTruckUnitClass();
             }
-
             case TRAILERS_O4_TYPE -> {
                 return getO4TrailersTypes();
             }
@@ -168,7 +166,7 @@ public class MessagesCreator {
                 Command.ELECTRIC.getCommand(), " ", bundle.getString("answers.details.electric.engine"));
     }
 
-    public String getEngineVolume(final UserProgress userProgress) {
+    public String getEngineVolumeOrPower(final UserProgress userProgress) {
         switch (userProgress.getGeneralTransportType()) {
             case M1 -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.volume.engine"), "\n",
@@ -378,8 +376,18 @@ public class MessagesCreator {
                         case TRAILERS, HALF_TRAILERS -> addSequenceTrailerType(userProgress, sb);
                         case GASOLINE, ELECTRIC -> addSequenceEngineType(userProgress, sb);
                         case LESS_1000, BETWEEN_1000_AND_2000, BETWEEN_2000_AND_3000, BETWEEN_3000_AND_3500, MORE_3500,
-                             LESS_2500, BETWEEN_2500_AND_5000, BETWEEN_5000_AND_10000, MORE_10000 ->
-                                addSequenceEnginePower(userProgress, sb);
+                             LESS_2500, BETWEEN_2500_AND_5000, BETWEEN_5000_AND_10000, MORE_10000, BETWEEN_5p5_30,
+                             BETWEEN_30_60, BETWEEN_60_90, BETWEEN_90_130, BETWEEN_130_180, BETWEEN_180_220,
+                             BETWEEN_220_280, BETWEEN_280_340, BETWEEN_340_380, MORE_380, BETWEEN_25_160,
+                             BETWEEN_160_220, BETWEEN_220_255, BETWEEN_255_325, BETWEEN_325_400, BETWEEN_5_50, LESS_40,
+                             BETWEEN_40_80, BETWEEN_50_100, MORE_80, LESS_100, BETWEEN_20_100, BETWEEN_100_125,
+                             BETWEEN_100_140, BETWEEN_100_300, BETWEEN_125_150, LESS_130, MORE_150, BETWEEN_130_200,
+                             BETWEEN_140_200, LESS_170, MORE_200, BETWEEN_170_250, MORE_250, BETWEEN_100_200,
+                             BETWEEN_100_220, MORE_220, BETWEEN_200_250, BETWEEN_250_300, BETWEEN_200_300, MORE_300,
+                             BETWEEN_300_400, MORE_400, TRAILERS_OTHER_FULL, TRAILERS_OTHER_HALF, LESS_295,
+                             BETWEEN_295_401, MORE_401, BETWEEN_100_120, BETWEEN_120_300, LESS_200, BETWEEN_200_650,
+                             BETWEEN_650_1750, MORE_1750, SELF_PROPELLED_MOWERS ->
+                                addSequenceEngineVolumeOrPower(userProgress, sb);
                         case null, default -> {
                         }
                     }
@@ -558,8 +566,8 @@ public class MessagesCreator {
         sb.append(s);
     }
 
-    private void addSequenceEnginePower(final UserProgress userProgress, final StringBuilder sb) {
-        switch (userProgress.getVolume()) {
+    private void addSequenceEngineVolumeOrPower(final UserProgress userProgress, final StringBuilder sb) {
+        switch (userProgress.getVolumeOrPower()) {
             case null -> {
             }
             case LESS_1000 -> {

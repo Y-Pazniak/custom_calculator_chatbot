@@ -89,7 +89,7 @@ public class CalculatorM1 {
     }
 
     private String getPriceForJuridicalGasolineBetween3And7Years(final UserProgress userProgress) {
-        switch (userProgress.getVolume()) {
+        switch (userProgress.getVolumeOrPower()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_MORE_3_YEARS;
             }
@@ -115,7 +115,7 @@ public class CalculatorM1 {
     }
 
     private String getPriceForJuridicalGasolineLess3Years(final UserProgress userProgress) {
-        switch (userProgress.getVolume()) {
+        switch (userProgress.getVolumeOrPower()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_LESS_OR_3_YEARS;
             }

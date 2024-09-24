@@ -1,6 +1,6 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum EngineVolume implements StepsIndicator {
+public enum EngineVolumeOrPower implements StepsIndicator {
     LESS_1000,
     BETWEEN_1000_AND_2000,
     BETWEEN_2000_AND_3000,
