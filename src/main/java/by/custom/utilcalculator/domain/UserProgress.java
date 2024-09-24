@@ -16,7 +16,7 @@ public class UserProgress implements Serializable {
     private CarAge carAge = null;
     private EngineType engineType = null;
     private EngineVolume engineVolume = null;
-    private BusesAndTrucksTransportType busesOrTrucksType = null;
+    private ParticularTransportType particularTransportType = null;
     private TruckUnitClass truckUnitClass = null;
     private Weight weight = null;
     private TrailerO4Type trailersO4Type = null;
@@ -88,13 +88,13 @@ public class UserProgress implements Serializable {
         addUserStatusToPath(transportType);
     }
 
-    public BusesAndTrucksTransportType getBusesOrTrucksType() {
-        return busesOrTrucksType;
+    public ParticularTransportType getParticularTransportType() {
+        return particularTransportType;
     }
 
-    public void setBusesOrTrucksType(final BusesAndTrucksTransportType busesOrTrucksType) {
-        this.busesOrTrucksType = busesOrTrucksType;
-        addUserStatusToPath(busesOrTrucksType);
+    public void setParticularTransportType(final ParticularTransportType particularTransportType) {
+        this.particularTransportType = particularTransportType;
+        addUserStatusToPath(particularTransportType);
     }
 
     public void setWeight(final Weight weight) {

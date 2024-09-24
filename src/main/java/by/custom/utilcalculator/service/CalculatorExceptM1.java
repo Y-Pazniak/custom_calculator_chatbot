@@ -17,7 +17,7 @@ public class CalculatorExceptM1 {
     }
 
     public String calculate(final UserProgress userProgress) {
-        switch (userProgress.getBusesOrTrucksType()) {
+        switch (userProgress.getParticularTransportType()) {
             case N1_N3 -> {
                 return countForN1N3price(userProgress);
             }

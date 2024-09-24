@@ -21,10 +21,10 @@ public class HelperTree {
         fieldsToCommands.put(GeneralTransportType.BUSES_AND_TRUCKS, Command.BUSES_AND_TRUCKS);
         fieldsToCommands.put(GeneralTransportType.SELF_PROPELLED_VEHICLES, Command.SELF_PROPELLED_VEHICLES);
         //vehicle type m1-m3
-        fieldsToCommands.put(BusesAndTrucksTransportType.N1_N3, Command.N1_N3);
-        fieldsToCommands.put(BusesAndTrucksTransportType.M2_M3, Command.M2_M3);
-        fieldsToCommands.put(BusesAndTrucksTransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
-        fieldsToCommands.put(BusesAndTrucksTransportType.TRAILERS_O4, Command.TRAILERS_O4);
+        fieldsToCommands.put(ParticularTransportType.N1_N3, Command.N1_N3);
+        fieldsToCommands.put(ParticularTransportType.M2_M3, Command.M2_M3);
+        fieldsToCommands.put(ParticularTransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
+        fieldsToCommands.put(ParticularTransportType.TRAILERS_O4, Command.TRAILERS_O4);
         //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
         fieldsToCommands.put(Weight.LESS_2_TONS, Command.WEIGHT);
         fieldsToCommands.put(Weight.BETWEEN_2_5_AND_3_5, Command.WEIGHT);

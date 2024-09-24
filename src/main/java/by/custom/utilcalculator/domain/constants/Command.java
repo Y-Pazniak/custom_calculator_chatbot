@@ -71,7 +71,29 @@ public enum Command {
 
     //trailers O4 types
     TRAILERS_04_TYPE("/trailers_o4_type", TRAILERS_O4_TYPE),
-    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", TRAILERS_O4_TYPE);
+    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", TRAILERS_O4_TYPE),
+
+    //other vehicles
+    HELP("/help", null),
+    GRADERS("/graders", SELF_PROPELLED_TYPE),
+    BULLDOZERS("/bulldozers", SELF_PROPELLED_TYPE),
+    EXCAVATORS("/excavators", SELF_PROPELLED_TYPE),
+    WHEEL_LOADERS("/wheel_loaders", SELF_PROPELLED_TYPE),
+    TAMPING_MACHINES("/tamping_machines", SELF_PROPELLED_TYPE),
+    FRONT_LOADERS("/front_loaders", SELF_PROPELLED_TYPE),
+    WHEELED_CRANES("/wheeled_cranes", SELF_PROPELLED_TYPE),
+    PIPELAYERS("/pipelayers", SELF_PROPELLED_TYPE),
+    TRAILERS_OTHER("/trailers_other", SELF_PROPELLED_TYPE),
+    ROAD_MAINTENANCE("/road_maintenance", SELF_PROPELLED_TYPE),
+    FORESTRY("/forestry", SELF_PROPELLED_TYPE),
+    FORWADERS("/forwaders", SELF_PROPELLED_TYPE),
+    TIMBER_LOADERS("/timber_loaders", SELF_PROPELLED_TYPE),
+    WHEELED_TRACTORS("/wheeled_tractors", SELF_PROPELLED_TYPE),
+    CRAWLER_TRACTORS("/crawler_tractors", SELF_PROPELLED_TYPE),
+    COMBINE_HARVESTERS("/combine_harvesters", SELF_PROPELLED_TYPE),
+    FORAGE_HARVESTERS("/forage_harvesters", SELF_PROPELLED_TYPE),
+    AGRICULTURAL_VEHICLES("/agricultural_vehicles", SELF_PROPELLED_TYPE),
+    OFF_ROAD_DUMP_TRUCKS("/dump_trucks", SELF_PROPELLED_TYPE);
 
     private final String command;
     private final Command family;

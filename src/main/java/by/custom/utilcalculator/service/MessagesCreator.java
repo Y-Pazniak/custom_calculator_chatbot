@@ -9,7 +9,7 @@ import by.custom.utilcalculator.domain.tree.CommandTree;
 import java.util.List;
 import java.util.Map;
 
-import static by.custom.utilcalculator.domain.constants.steps.BusesAndTrucksTransportType.*;
+import static by.custom.utilcalculator.domain.constants.steps.ParticularTransportType.*;
 import static by.custom.utilcalculator.domain.constants.steps.EngineType.*;
 import static by.custom.utilcalculator.domain.constants.steps.GeneralTransportType.*;
 import static by.custom.utilcalculator.domain.constants.steps.TrailerO4Type.*;
@@ -107,7 +107,7 @@ public class MessagesCreator {
     }
 
     public String getTransportWeight(final UserProgress userProgress) {
-        switch (userProgress.getBusesOrTrucksType()) {
+        switch (userProgress.getParticularTransportType()) {
             case N1_N3 -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
                         Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
@@ -195,7 +195,7 @@ public class MessagesCreator {
                     switch (entry.getKey()) {
                         case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                                 addSequenceGeneralTransportType(userProgress, sb);
-                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> addSequenceBusOrTruckType(userProgress, sb);
+                        case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 -> addSequenceParticularTransportType(userProgress, sb);
                         case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
                              BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
                                 addSequenceWeight(userProgress, sb);
@@ -232,14 +232,16 @@ public class MessagesCreator {
         }
     }
 
-    private void addSequenceBusOrTruckType(final UserProgress userProgress, final StringBuilder sb) {
-        switch (userProgress.getBusesOrTrucksType()) {
+    private void addSequenceParticularTransportType(final UserProgress userProgress, final StringBuilder sb) {
+        switch (userProgress.getParticularTransportType()) {
             case null -> {
             }
             case N1_N3 -> sb.append(bundle.getString("answers.summary.n1_n3"));
             case M2_M3 -> sb.append(bundle.getString("answers.summary.m2_m3"));
             case TRUCK_UNITS -> sb.append(bundle.getString("answers.summary.truck_unit"));
             case TRAILERS_O4 -> sb.append(bundle.getString("answers.summary.trailersO4"));
+
+
         }
     }
 

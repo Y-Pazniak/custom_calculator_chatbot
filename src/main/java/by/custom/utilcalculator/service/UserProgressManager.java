@@ -45,7 +45,7 @@ public class UserProgressManager {
         return messagesCreator.getSummaryAnswer(userProgress);
     }
 
-    public String processN1_N3TransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
+    public String processParticularTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
 
@@ -53,10 +53,31 @@ public class UserProgressManager {
             throw new InvalidOrderCommandException(chatID, requestingCommand);
         }
         switch (requestingCommand) {
-            case N1_N3 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.N1_N3);
-            case M2_M3 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.M2_M3);
-            case TRUCK_UNITS -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.TRUCK_UNITS);
-            case TRAILERS_O4 -> userProgress.setBusesOrTrucksType(BusesAndTrucksTransportType.TRAILERS_O4);
+            //buses and trucks
+            case N1_N3 -> userProgress.setParticularTransportType(ParticularTransportType.N1_N3);
+            case M2_M3 -> userProgress.setParticularTransportType(ParticularTransportType.M2_M3);
+            case TRUCK_UNITS -> userProgress.setParticularTransportType(ParticularTransportType.TRUCK_UNITS);
+            case TRAILERS_O4 -> userProgress.setParticularTransportType(ParticularTransportType.TRAILERS_O4);
+            //self-propelled vehicles
+            case GRADERS -> userProgress.setParticularTransportType(ParticularTransportType.GRADER);
+            case BULLDOZERS -> userProgress.setParticularTransportType(ParticularTransportType.BULLDOZER);
+            case EXCAVATORS -> userProgress.setParticularTransportType(ParticularTransportType.EXCAVATOR);
+            case WHEEL_LOADERS -> userProgress.setParticularTransportType(ParticularTransportType.WHEEL_LOADER);
+            case TAMPING_MACHINES -> userProgress.setParticularTransportType(ParticularTransportType.TAMPING_MACHINE);
+            case FRONT_LOADERS -> userProgress.setParticularTransportType(ParticularTransportType.FRONT_LOADER);
+            case WHEELED_CRANES -> userProgress.setParticularTransportType(ParticularTransportType.WHEELED_CRANES);
+            case PIPELAYERS -> userProgress.setParticularTransportType(ParticularTransportType.PIPELAYERS);
+            case TRAILERS_OTHER -> userProgress.setParticularTransportType(ParticularTransportType.TRAILERS_OTHER);
+            case ROAD_MAINTENANCE -> userProgress.setParticularTransportType(ParticularTransportType.ROAD_MAINTENANCE);
+            case FORESTRY -> userProgress.setParticularTransportType(ParticularTransportType.FORESTRY);
+            case FORWADERS -> userProgress.setParticularTransportType(ParticularTransportType.FORWADERS);
+            case TIMBER_LOADERS -> userProgress.setParticularTransportType(ParticularTransportType.TIMBER_LOADERS);
+            case WHEELED_TRACTORS -> userProgress.setParticularTransportType(ParticularTransportType.WHEELED_TRACTORS);
+            case CRAWLER_TRACTORS -> userProgress.setParticularTransportType(ParticularTransportType.CRAWLER_TRACTORS);
+            case COMBINE_HARVESTERS -> userProgress.setParticularTransportType(ParticularTransportType.COMBINE_HARVESTERS);
+            case FORAGE_HARVESTERS -> userProgress.setParticularTransportType(ParticularTransportType.FORAGE_HARVESTERS);
+            case AGRICULTURAL_VEHICLES -> userProgress.setParticularTransportType(ParticularTransportType.AGRICULTURAL_VEHICLES);
+            case OFF_ROAD_DUMP_TRUCKS -> userProgress.setParticularTransportType(ParticularTransportType.OFF_ROAD_DUMP_TRUCKS);
         }
 
         userProgressStorage.save(userProgress);

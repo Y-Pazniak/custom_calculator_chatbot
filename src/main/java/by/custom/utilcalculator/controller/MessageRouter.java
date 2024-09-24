@@ -55,27 +55,32 @@ public class MessageRouter {
                 userProgressManager.createNewUserProgress(chatID);
                 answer = getGreetingMessage();
             }
-            case M1, BUSES_AND_TRUCKS -> answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
+            case M1, BUSES_AND_TRUCKS ->
+                    answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
             case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
-            case PHYSICAL, JURIDICAL ->
-                    answer = userProgressManager.processOwnerType(requestingCommand, chatID);
+            case PHYSICAL, JURIDICAL -> answer = userProgressManager.processOwnerType(requestingCommand, chatID);
             case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
                     answer = userProgressManager.processCarAge(requestingCommand, chatID);
-            case GASOLINE, ELECTRIC ->
-                    answer = userProgressManager.processEngineType(requestingCommand, chatID);
+            case GASOLINE, ELECTRIC -> answer = userProgressManager.processEngineType(requestingCommand, chatID);
             case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,
                  VOLUME_BETWEEN_3000_3500_CM, VOLUME_MORE_3500_CM, VOLUME_LESS_2500_CM,
                  VOLUME_BETWEEN_2500_5000_CM, VOLUME_BETWEEN_5000_10000_CM, VOLUME_MORE_10000_CM ->
                     answer = userProgressManager.processEngineVolume(requestingCommand, chatID);
-            case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4 ->
-                    answer = userProgressManager.processN1_N3TransportType(requestingCommand, chatID);
+            case N1_N3, M2_M3, TRUCK_UNITS, TRAILERS_O4, GRADERS, BULLDOZERS, EXCAVATORS, WHEEL_LOADERS,
+                 TAMPING_MACHINES, FRONT_LOADERS, WHEELED_CRANES, PIPELAYERS, TRAILERS_OTHER, ROAD_MAINTENANCE,
+                 FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS, CRAWLER_TRACTORS, COMBINE_HARVESTERS,
+                 FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES, OFF_ROAD_DUMP_TRUCKS ->
+                    answer = userProgressManager.processParticularTransportType(requestingCommand, chatID);
             case LESS_2_TONS, BETWEEN_2_5_AND_3_5_TONS, BETWEEN_3_5_AND_5_TONS, BETWEEN_5_AND_8_TONS,
                  BETWEEN_8_AND_12_TONS,
                  BETWEEN_12_AND_20_TONS, BETWEEN_20_AND_50_TONS ->
                     answer = userProgressManager.processN1_N3TransportWeight(requestingCommand, chatID);
-            case TRUCK_UNITS_6_CLASS, TRUCK_UNITS_OTHER -> answer = userProgressManager.processTruckUnitClass(requestingCommand, chatID);
-            case TRUCK_UNITS_12_20_TONS, TRUCK_UNITS_20_50_TONS -> answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
-            case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE -> answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
+            case TRUCK_UNITS_6_CLASS, TRUCK_UNITS_OTHER ->
+                    answer = userProgressManager.processTruckUnitClass(requestingCommand, chatID);
+            case TRUCK_UNITS_12_20_TONS, TRUCK_UNITS_20_50_TONS ->
+                    answer = userProgressManager.processTruckUnitWeight(requestingCommand, chatID);
+            case TRAILERS_04_TYPE, HALF_TRAILERS_04_TYPE ->
+                    answer = userProgressManager.processTrailersO4Type(requestingCommand, chatID);
             case null, default -> answer = getSorryMessage();
         }
         return answer;
