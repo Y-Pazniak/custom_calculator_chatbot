@@ -80,8 +80,8 @@ public class MessagesCreator {
 
     private String getTruckUnitClass() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.truck.type"), "\n",
-                Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"), "\n",
-                Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"));
+                Command.TRUCK_UNITS_OTHER.getCommand(), " ", bundle.getString("answers.details.truck.except_6"), "\n",
+                Command.TRUCK_UNITS_6_CLASS.getCommand(), " ", bundle.getString("answers.details.truck.6_class"));
     }
 
     public String getGreeting() {
