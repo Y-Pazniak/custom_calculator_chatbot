@@ -180,22 +180,23 @@ public class HelperTree {
     }
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
-        URL res = HelperTree.class.getClassLoader().getResource("tree.json");
-        File file;
-        try {
-            assert res != null;
-            file = Paths.get(res.toURI()).toFile();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            throw new UtilsborCommandTreeReadingException("Tree reading has failed", e);
+        InputStream inputStream = HelperTree.class.getClassLoader().getResourceAsStream("tree.json");
+        if (inputStream == null) {
+            throw new UtilsborCommandTreeReadingException("Tree reading has been failed", null);
         }
 
         Node treeRootJson;
 
         try {
-            treeRootJson = mapper.readValue(file, Node.class);
+            treeRootJson = mapper.readValue(inputStream, Node.class);
         } catch (IOException e) {
             throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (treeRootJson != null) {
