@@ -44,9 +44,9 @@ public class UserProgress implements Serializable {
                     lastNumber = i;
                     break;
                 }
-                if (!needAddCommand) {
-                    break;
-                }
+            }
+            if (!needAddCommand) {
+                break;
             }
         }
 
