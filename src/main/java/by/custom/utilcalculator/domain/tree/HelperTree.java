@@ -6,9 +6,6 @@ import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class HelperTree {
@@ -180,28 +177,24 @@ public class HelperTree {
     }
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
-        URL res = HelperTree.class.getClassLoader().getResource("tree.json");
-        File file;
-        try {
-            assert res != null;
-            file = Paths.get(res.toURI()).toFile();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            throw new UtilsborCommandTreeReadingException("Tree reading has failed", e);
-        }
+        try (InputStream inputStream = HelperTree.class.getClassLoader().getResourceAsStream("tree.json")) {
+            if (inputStream == null) {
+                throw new UtilsborCommandTreeReadingException("the tree file reading has been failed ", "InputStream is null. Impossible to find or to read the json tree file");
+            }
+            Node treeRootJson;
+            try {
+                treeRootJson = mapper.readValue(inputStream, Node.class);
+            } catch (IOException e) {
+                throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
+            }
+            if (treeRootJson != null) {
+                fillParents(treeRootJson);
+            }
+            return treeRootJson;
 
-        Node treeRootJson;
-
-        try {
-            treeRootJson = mapper.readValue(file, Node.class);
         } catch (IOException e) {
-            throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
+            throw new UtilsborCommandTreeReadingException("Error closing tree source file", e);
         }
-
-        if (treeRootJson != null) {
-            fillParents(treeRootJson);
-        }
-        return treeRootJson;
     }
 
     private static void fillParents(final Node node) {
