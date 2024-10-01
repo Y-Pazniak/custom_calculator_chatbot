@@ -179,7 +179,7 @@ public class HelperTree {
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
         try (InputStream inputStream = HelperTree.class.getClassLoader().getResourceAsStream("tree.json")) {
             if (inputStream == null) {
-                throw new UtilsborCommandTreeReadingException("the tree file reading has been failed :(", "InputStream is null. Impossible to find or to read the json tree file");
+                throw new UtilsborCommandTreeReadingException("the tree file reading has been failed ", "InputStream is null. Impossible to find or to read the json tree file");
             }
             Node treeRootJson;
             try {
