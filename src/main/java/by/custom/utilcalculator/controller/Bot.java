@@ -36,7 +36,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                System.getProperty("custom_chatbot_token");
+                System.getProperty("custom_chatbot_test_token");
     }
 
     //method describes what to do after receiving message
