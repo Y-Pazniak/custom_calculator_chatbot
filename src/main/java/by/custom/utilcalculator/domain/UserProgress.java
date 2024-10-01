@@ -37,8 +37,8 @@ public class UserProgress implements Serializable {
 
         for (int i = 0; i < userPath.size(); i++) {
             Command localCommand = userPath.get(i);
-            for (Map.Entry<Command, StepsIndicator> entry : CommandTree.getInstance().getCommandsToFields().entrySet()) {
-                if (entry.getKey().equals(localCommand) && entry.getValue().getClass().equals(stepsIndicatorClass)) {
+            for (Map.Entry<StepsIndicator, Command> entry : fieldsToCommands.entrySet()) {
+                if (entry.getKey().getClass().equals(stepsIndicatorClass) && localCommand.equals(entry.getValue())) {
                     needAddCommand = false;
                     userPath.set(i, command);
                     lastNumber = i;
