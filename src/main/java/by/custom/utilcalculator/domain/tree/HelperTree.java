@@ -6,9 +6,6 @@ import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class HelperTree {
@@ -180,29 +177,24 @@ public class HelperTree {
     }
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
-        InputStream inputStream = HelperTree.class.getClassLoader().getResourceAsStream("tree.json");
-        if (inputStream == null) {
-            throw new UtilsborCommandTreeReadingException("Tree reading has been failed", null);
-        }
-
-        Node treeRootJson;
-
-        try {
-            treeRootJson = mapper.readValue(inputStream, Node.class);
-        } catch (IOException e) {
-            throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (InputStream inputStream = HelperTree.class.getClassLoader().getResourceAsStream("tree.json")) {
+            if (inputStream == null) {
+                throw new UtilsborCommandTreeReadingException("the tree file reading has been failed :(", "InputStream is null. Impossible to find or to read the json tree file");
             }
-        }
+            Node treeRootJson;
+            try {
+                treeRootJson = mapper.readValue(inputStream, Node.class);
+            } catch (IOException e) {
+                throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
+            }
+            if (treeRootJson != null) {
+                fillParents(treeRootJson);
+            }
+            return treeRootJson;
 
-        if (treeRootJson != null) {
-            fillParents(treeRootJson);
+        } catch (IOException e) {
+            throw new UtilsborCommandTreeReadingException("Error closing tree source file", e);
         }
-        return treeRootJson;
     }
 
     private static void fillParents(final Node node) {
