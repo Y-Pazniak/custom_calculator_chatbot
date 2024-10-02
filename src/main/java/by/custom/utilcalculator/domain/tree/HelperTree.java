@@ -213,10 +213,19 @@ public class HelperTree {
         }
     }
 
-    public static Map<Command, StepsIndicator> fillCommandsToFields(Map<StepsIndicator, Command> fieldsToCommands) {
-        Map<Command, StepsIndicator> commandsToFields = new HashMap<>();
+    public static Map<Command, List<StepsIndicator>> fillCommandsToFields(Map<StepsIndicator, Command> fieldsToCommands) {
+        Map<Command, List<StepsIndicator>> commandsToFields = new HashMap<>();
         for (Map.Entry<StepsIndicator, Command> entry : fieldsToCommands.entrySet()) {
-            commandsToFields.put(entry.getValue(), entry.getKey());
+            Command localCommand = entry.getValue();
+            StepsIndicator localIndicator = entry.getKey();
+            List<StepsIndicator> list;
+            if (!commandsToFields.containsKey(localCommand)) {
+                list = new ArrayList<>();
+                list.add(localIndicator);
+                commandsToFields.put(localCommand, list);
+            } else {
+                commandsToFields.get(localCommand).add(localIndicator);
+            }
         }
         return commandsToFields;
     }
