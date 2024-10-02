@@ -49,13 +49,11 @@ public class UserProgress implements Serializable {
                 break;
             }
         }
-
         if (needAddCommand) {
             userPath.add(command);
         } else {
             userPath.subList(lastNumber + 1, userPath.size()).clear();
         }
-
     }
 
     public Step getNextStep() {
