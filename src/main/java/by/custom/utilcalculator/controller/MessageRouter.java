@@ -45,7 +45,7 @@ public class MessageRouter {
             return new SendMessage(chatID, getExceptionText(e));
         }
         SendMessage sendMessage = new SendMessage(chatID, answer);
-        sendMessage.setParseMode("HTML");
+        sendMessage.setParseMode("HTML"); //123213213
         return sendMessage;
     }
 
