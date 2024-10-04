@@ -12,6 +12,7 @@ public class Node {
     private final List<Node> children;
     private final Command key;
     private final Step nextStep;
+    private final String description;
 
 
     public Node(@JsonProperty("parent") final Node parent,
@@ -22,6 +23,7 @@ public class Node {
         this.key = key;
         children = new ArrayList<>();
         this.nextStep = nextStep;
+        this.description = description;
     }
 
     public Node getParent() {
@@ -42,5 +44,9 @@ public class Node {
 
     public Step getNextStep() {
         return nextStep;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
