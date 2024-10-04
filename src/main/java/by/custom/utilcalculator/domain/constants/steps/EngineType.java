@@ -1,5 +1,5 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum TypeOfEngine implements StepsIndicator {
+public enum EngineType implements StepsIndicator {
     GASOLINE, ELECTRIC
 }

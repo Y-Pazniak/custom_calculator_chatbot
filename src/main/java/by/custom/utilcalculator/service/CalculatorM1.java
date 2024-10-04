@@ -4,15 +4,15 @@ import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.*;
 
-public class CalculatorPassenger {
+public class CalculatorM1 {
     private static class CalculatorHolder {
-        private static final CalculatorPassenger CALCULATOR_INSTANCE = new CalculatorPassenger();
+        private static final CalculatorM1 CALCULATOR_INSTANCE = new CalculatorM1();
     }
 
-    private CalculatorPassenger() {
+    private CalculatorM1() {
     }
 
-    public static CalculatorPassenger getInstance() {
+    public static CalculatorM1 getInstance() {
         return CalculatorHolder.CALCULATOR_INSTANCE;
     }
 
@@ -51,7 +51,7 @@ public class CalculatorPassenger {
     }
 
     private String countForJuridicalPrice(final UserProgress userProgress) {
-        switch (userProgress.getTypeOfEngine()) {
+        switch (userProgress.getEngineType()) {
             case ELECTRIC -> {
                 return countForElectricAutoPrice(userProgress);
             }
@@ -89,7 +89,7 @@ public class CalculatorPassenger {
     }
 
     private String getPriceForJuridicalGasolineBetween3And7Years(final UserProgress userProgress) {
-        switch (userProgress.getVolumeOfEngine()) {
+        switch (userProgress.getVolumeOrPower()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_MORE_3_YEARS;
             }
@@ -115,7 +115,7 @@ public class CalculatorPassenger {
     }
 
     private String getPriceForJuridicalGasolineLess3Years(final UserProgress userProgress) {
-        switch (userProgress.getVolumeOfEngine()) {
+        switch (userProgress.getVolumeOrPower()) {
             case LESS_1000 -> {
                 return Price.PASSENGER_OTHER_GASOLINE_1000_LESS_OR_3_YEARS;
             }

@@ -2,9 +2,11 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -12,10 +14,12 @@ import java.util.stream.Collectors;
 
 public class CommandTree {
     private final Map<StepsIndicator, Command> fieldsToCommands;
+    private final Map<Command, List<StepsIndicator>> commandsToFields;
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
         fieldsToCommands = HelperTree.fillFieldsToCommandsMap();
+        commandsToFields = HelperTree.fillCommandsToFields(fieldsToCommands);
         treeRoot = HelperTree.buildTree();
     }
 
@@ -27,8 +31,25 @@ public class CommandTree {
         return fieldsToCommands;
     }
 
-    public boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+    public Map<Command, List<StepsIndicator>> getCommandsToFields() {
+        return commandsToFields;
+    }
+
+    public boolean validateCommandFromNode(final Command requestingCommand, final UserProgress userProgress) {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
+    }
+
+    public static boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+        Command command = requestingCommand.getFamily() == null ? requestingCommand : requestingCommand.getFamily();
+        return CommandTree.getInstance().validateCommandFromNode(command, userProgress);
+    }
+
+    public static Step getNextStep(final UserProgress userProgress) {
+        return CommandTree.getInstance().getNextStepFromNode(userProgress);
+    }
+
+    public Step getNextStepFromNode(final UserProgress userProgress) {
+        return getNode(userProgress).getNextStep();
     }
 
     public boolean isRequestingCommandAcceptable(final Command requestingCommand, final Node node) {
@@ -61,17 +82,16 @@ public class CommandTree {
 
     public Node getNode(final UserProgress userProgress) {
         Node node = treeRoot;
-        final Command[] userPath = userProgress.getUserPath();
-
+        final List<Command> userPath = userProgress.getUserPath();
         for (Command userStep : userPath) {
-            if (!Objects.isNull(userStep)) {
-                for (Node kid : node.getChildren()) {
-                    if (kid.getKey().equals(userStep)) {
-                        node = kid;
-                    }
+            for (Node kid : node.getChildren()) {
+                if (kid.getKey().equals(userStep)) {
+                    node = kid;
+                    break;
                 }
             }
         }
+
         return node;
     }
 
