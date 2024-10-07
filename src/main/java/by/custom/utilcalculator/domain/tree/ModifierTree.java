@@ -43,15 +43,25 @@ public class ModifierTree {
     public static void addNode(final Node parent, final Command key, final String description, final Step nextStep) throws UtilsborCommandTreeReadingException {
         Node newNode = new Node(parent, key, description, nextStep);
         //File file = readTreeFile(); - doesn't work properly during development - changes data only in /target/classes/
-        File file = new File("src/main/resources/tree.json"); //works fine with /src/main/resources/
+
+        //remove after testing
+        File file = new File("src/main/resources/tree_test.json"); //works fine with /src/main/resources/
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         Node root;
         try {
             root = mapper.readValue(file, Node.class);
         } catch (IOException e) {
             throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
         }
-
         root.getChildren().add(newNode);
+
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, root);
         } catch (IOException e) {

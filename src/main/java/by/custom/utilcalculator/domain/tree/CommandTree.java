@@ -14,10 +14,10 @@ public class CommandTree {
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
+        FillerTree.fillTreeJson();
         fieldsToCommands = fillFieldsToCommandsMap();
         commandsToFields = fillCommandsToFields(fieldsToCommands);
         treeRoot = ModifierTree.buildTree();
-        ModifierTree.addNode(null, Command.AGE, "test", Step.FAREWELL);
     }
 
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {

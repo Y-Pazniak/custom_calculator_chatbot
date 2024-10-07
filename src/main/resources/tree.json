@@ -237,11 +237,5 @@
         } ]
       } ]
     } ]
-  }, {
-    "parent" : null,
-    "key" : "AGE",
-    "description" : "test",
-    "nextStep" : "FAREWELL",
-    "children" : [ ]
-  } ]
+  }]
 }
