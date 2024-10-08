@@ -52,17 +52,17 @@ public class CommandTree {
         fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL);
         fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL);
         //age step
-        fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.AGE);
-        fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.AGE);
+        fieldsToCommands.put(CarAge.LESS_OR_3_YEARS, Command.LESS_3_YEARS_AGE);
+        fieldsToCommands.put(CarAge.MORE_3_YEARS, Command.MORE_THAN_3_YEARS_AGE);
         //type of engine step
         fieldsToCommands.put(EngineType.ELECTRIC, Command.ELECTRIC);
         fieldsToCommands.put(EngineType.GASOLINE, Command.GASOLINE);
         //engine's volume step
-        fieldsToCommands.put(EngineVolumeOrPower.LESS_1000, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_1000_AND_2000, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_2000_AND_3000, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_3000_AND_3500, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_3500, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(EngineVolumeOrPower.LESS_1000, Command.VOLUME_LESS_1000_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_1000_AND_2000, Command.VOLUME_BETWEEN_1000_2000_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_2000_AND_3000, Command.VOLUME_BETWEEN_2000_3000_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_3000_AND_3500, Command.VOLUME_BETWEEN_3000_3500_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_3500, Command.VOLUME_MORE_3500_CM);
         //truck units step
         fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_6_CLASS, Command.TRUCK_UNITS_6_CLASS);
         fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS, Command.TRUCK_UNITS_OTHER);
