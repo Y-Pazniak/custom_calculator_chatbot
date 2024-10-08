@@ -14,7 +14,7 @@ public class CommandTree {
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
-        FillerTree.fillTreeJson();
+        ModifierTree.fillTreeByNodes();
         fieldsToCommands = fillFieldsToCommandsMap();
         commandsToFields = fillCommandsToFields(fieldsToCommands);
         treeRoot = ModifierTree.buildTree();
