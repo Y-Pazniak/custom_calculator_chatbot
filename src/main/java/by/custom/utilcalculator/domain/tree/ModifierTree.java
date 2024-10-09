@@ -71,7 +71,7 @@ public class ModifierTree {
         }
 
         Node localNode = root;
-        if (root != null) {
+        if (root != null) { //searching for the proper node according to user's path
             for (Command command : userProgress.getUserPath()) {
                 for (Node node : localNode.getChildren()) {
                     if (node.getKey().equals(command)) {
