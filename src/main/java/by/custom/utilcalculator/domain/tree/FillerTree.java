@@ -13,7 +13,8 @@ public class FillerTree {
         Node root = new Node(Command.START, "base node to start - runs automatically", Step.GENERAL_TRANSPORT_TYPE, null);
         //general transport type
         Node m1 = new Node(Command.M1, "M1 - passenger's vehicles", Step.COUNTRY_ORIGIN, null);
-        root.addKid(m1);
+        Node busesAndTrucks = new Node(Command.BUSES_AND_TRUCKS, "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks)", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        root.addKids(m1, busesAndTrucks);
         //m1 country origin
         Node eaes = new Node(Command.EAES, "branch for M1 vehicles from EAES (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia)", Step.OWNERS_TYPE, null);
         Node otherCountries = new Node(Command.OTHER_COUNTRIES, "it means any country except EAES countries", Step.OWNERS_TYPE, null);
@@ -58,6 +59,9 @@ public class FillerTree {
         gasolineM1Between2000_3000.addKids(gasolineM1Between2000And3000AgeLessThreeYears, gasolineM1Between2000And3000AgeMoreThreeYears);
         gasolineM1Between3000_3500.addKids(gasolineM1Between3000And3500AgeLessThreeYears, gasolineM1Between3000And3500AgeMoreThreeYears);
         gasolineM1more3500.addKids(gasolineM1More3500AgeLessThreeYears, gasolineM1More3500AgeMoreThreeYears);
+
+        //buses and trucks types
+        Node TrucksN1N2N3 = new Node(Command.N1_N3, "trucks", Step.WEIGHT, null);
 
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, root);
