@@ -14,7 +14,7 @@ public class CommandTree {
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
-        ModifierTree.fillTreeByNodes();
+        //ModifierTree.fillTreeByNodes();
         fieldsToCommands = fillFieldsToCommandsMap();
         commandsToFields = fillCommandsToFields(fieldsToCommands);
         treeRoot = ModifierTree.buildTree();
@@ -32,19 +32,19 @@ public class CommandTree {
         fieldsToCommands.put(ParticularTransportType.TRUCK_UNITS, Command.TRUCK_UNITS);
         fieldsToCommands.put(ParticularTransportType.TRAILERS_O4, Command.TRAILERS_O4);
         //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
-        fieldsToCommands.put(Weight.LESS_2_TONS, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_2_5_AND_3_5, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_3_5_AND_5, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_5_AND_8, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_8_AND_12, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_12_AND_20, Command.WEIGHT);
-        fieldsToCommands.put(Weight.BETWEEN_20_AND_50, Command.WEIGHT);
+        fieldsToCommands.put(Weight.LESS_2P5_TONS, Command.LESS_2P5_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_2_5_AND_3_5, Command.BETWEEN_2_5_AND_3_5_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_3_5_AND_5, Command.BETWEEN_3_5_AND_5_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_5_AND_8, Command.BETWEEN_5_AND_8_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_8_AND_12, Command.BETWEEN_8_AND_12_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_12_AND_20, Command.BETWEEN_12_AND_20_TONS);
+        fieldsToCommands.put(Weight.BETWEEN_20_AND_50, Command.BETWEEN_20_AND_50_TONS);
 
         //m2-m3 gasoline volume
-        fieldsToCommands.put(EngineVolumeOrPower.LESS_2500, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_2500_AND_5000, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5000_AND_10000, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_10000, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(EngineVolumeOrPower.LESS_2500, Command.VOLUME_LESS_2500_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_2500_AND_5000, Command.VOLUME_BETWEEN_2500_5000_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5000_AND_10000, Command.VOLUME_BETWEEN_5000_10000_CM);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_10000, Command.VOLUME_MORE_10000_CM);
         //country step
         fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
         fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
@@ -67,11 +67,11 @@ public class CommandTree {
         fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_6_CLASS, Command.TRUCK_UNITS_6_CLASS);
         fieldsToCommands.put(TruckUnitClass.TRUCK_UNITS_EXCEPT_6_CLASS, Command.TRUCK_UNITS_OTHER);
         //truck units weight step
-        fieldsToCommands.put(Weight.FROM_12_TILL_20_TONS, Command.WEIGHT);
-        fieldsToCommands.put(Weight.FROM_20_TILL_50_TONS, Command.WEIGHT);
+        fieldsToCommands.put(Weight.FROM_12_TILL_20_TONS, Command.TRUCK_UNITS_12_20_TONS);
+        fieldsToCommands.put(Weight.FROM_20_TILL_50_TONS, Command.TRUCK_UNITS_20_50_TONS);
         //trailers O4 type
-        fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_O4_TYPE);
-        fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.TRAILERS_O4_TYPE);
+//        fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_O4_TYPE);
+//        fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.TRAILERS_O4_TYPE);
 
         //other vehicles -> graders
         fieldsToCommands.put(ParticularTransportType.GRADER, Command.SELF_PROPELLED_TYPE);

@@ -98,7 +98,7 @@ public class UserProgressManager {
         }
 
         switch (requestingCommand) {
-            case LESS_2_TONS -> userProgress.setWeight(Weight.LESS_2_TONS);
+            case LESS_2P5_TONS -> userProgress.setWeight(Weight.LESS_2P5_TONS);
             case BETWEEN_2_5_AND_3_5_TONS -> userProgress.setWeight(Weight.BETWEEN_2_5_AND_3_5);
             case BETWEEN_3_5_AND_5_TONS -> userProgress.setWeight(Weight.BETWEEN_3_5_AND_5);
             case BETWEEN_5_AND_8_TONS -> userProgress.setWeight(Weight.BETWEEN_5_AND_8);

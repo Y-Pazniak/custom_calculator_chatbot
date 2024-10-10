@@ -28,7 +28,6 @@ public class ModifierTree {
     }
 
     public static void fillTreeByNodes() {
-        String filePath = "src/main/resources/tree_test.json";
         File file = getTreeFile();
         FillerTree.fillTreeJson(mapper, file);
     }

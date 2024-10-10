@@ -83,7 +83,7 @@ public class MessageRouter {
                  FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS, CRAWLER_TRACTORS, COMBINE_HARVESTERS,
                  FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES, OFF_ROAD_DUMP_TRUCKS ->
                     answer = userProgressManager.processParticularTransportType(requestingCommand, chatID);
-            case LESS_2_TONS, BETWEEN_2_5_AND_3_5_TONS, BETWEEN_3_5_AND_5_TONS, BETWEEN_5_AND_8_TONS,
+            case LESS_2P5_TONS, BETWEEN_2_5_AND_3_5_TONS, BETWEEN_3_5_AND_5_TONS, BETWEEN_5_AND_8_TONS,
                  BETWEEN_8_AND_12_TONS,
                  BETWEEN_12_AND_20_TONS, BETWEEN_20_AND_50_TONS ->
                     answer = userProgressManager.processN1_N3TransportWeight(requestingCommand, chatID);

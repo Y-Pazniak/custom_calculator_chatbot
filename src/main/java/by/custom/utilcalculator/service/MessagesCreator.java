@@ -143,7 +143,7 @@ public class MessagesCreator {
         switch (userProgress.getParticularTransportType()) {
             case N1_N3 -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
-                        Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
+                        Command.LESS_2P5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
                         Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
                         Command.BETWEEN_3_5_AND_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_3d5_and_5_tons"), "\n",
                         Command.BETWEEN_5_AND_8_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_5_and_8_tons"), "\n",
@@ -367,7 +367,7 @@ public class MessagesCreator {
                              ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS, CRAWLER_TRACTORS,
                              COMBINE_HARVESTERS, FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES, OFF_ROAD_DUMP_TRUCKS ->
                                 addSequenceParticularTransportType(userProgress, sb);
-                        case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
+                        case LESS_2P5_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
                              BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
                                 addSequenceWeight(userProgress, sb);
                         case EAES, OTHER -> addSequenceCountryOrigin(userProgress, sb);
@@ -504,7 +504,7 @@ public class MessagesCreator {
         switch (userProgress.getWeight()) {
             case null -> {
             }
-            case LESS_2_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
+            case LESS_2P5_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
             case BETWEEN_2_5_AND_3_5 ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_2d5_and_3d5_tons"));
             case BETWEEN_3_5_AND_5 ->

@@ -6,8 +6,8 @@ public enum Command {
     //command families - not commands actually, just markers
     //AGE("age", null),
     ENGINE_VOLUME("volume", null),
-    WEIGHT("weight", null),
-    TRAILERS_O4_TYPE("trailers_o4_type", null),
+    //WEIGHT("weight", null),
+    //TRAILERS_O4_TYPE("trailers_o4_type", null),
     SELF_PROPELLED_TYPE("self_propelled_type", null),
 
     //main command - start the calculator
@@ -25,13 +25,13 @@ public enum Command {
     TRAILERS_O4("/trailers_o4", null),
 
     //vehicle's weight for "exceptM1 -> n1, n2, n3" branch
-    LESS_2_TONS("/less_2p5", WEIGHT),
-    BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5", WEIGHT),
-    BETWEEN_3_5_AND_5_TONS("/3p5_5", WEIGHT),
-    BETWEEN_5_AND_8_TONS("/5_8", WEIGHT),
-    BETWEEN_8_AND_12_TONS("/8_12", WEIGHT),
-    BETWEEN_12_AND_20_TONS("/12_20", WEIGHT),
-    BETWEEN_20_AND_50_TONS("/20_50", WEIGHT),
+    LESS_2P5_TONS("/less_2p5", null),
+    BETWEEN_2_5_AND_3_5_TONS("/2p5_3p5", null),
+    BETWEEN_3_5_AND_5_TONS("/3p5_5", null),
+    BETWEEN_5_AND_8_TONS("/5_8", null),
+    BETWEEN_8_AND_12_TONS("/8_12", null),
+    BETWEEN_12_AND_20_TONS("/12_20", null),
+    BETWEEN_20_AND_50_TONS("/20_50", null),
 
     //country command
     EAES("/eaes", null),
@@ -56,22 +56,22 @@ public enum Command {
     VOLUME_MORE_3500_CM("/more_3500", null),
 
     //m2, m3 engine volume command
-    VOLUME_LESS_2500_CM("/less_2500", ENGINE_VOLUME),
-    VOLUME_BETWEEN_2500_5000_CM("/2500_5000", ENGINE_VOLUME),
-    VOLUME_BETWEEN_5000_10000_CM("/5000_10000", ENGINE_VOLUME),
-    VOLUME_MORE_10000_CM("/more_10000", ENGINE_VOLUME),
+    VOLUME_LESS_2500_CM("/less_2500", null),
+    VOLUME_BETWEEN_2500_5000_CM("/2500_5000", null),
+    VOLUME_BETWEEN_5000_10000_CM("/5000_10000", null),
+    VOLUME_MORE_10000_CM("/more_10000", null),
 
     //truck units class
     TRUCK_UNITS_6_CLASS("/6_class", null),
     TRUCK_UNITS_OTHER("/except_6_class", null),
 
     //truck units weight
-    TRUCK_UNITS_12_20_TONS("/12_20_tons", WEIGHT),
-    TRUCK_UNITS_20_50_TONS("/20_50_tons", WEIGHT),
+    TRUCK_UNITS_12_20_TONS("/12_20_tons", null),
+    TRUCK_UNITS_20_50_TONS("/20_50_tons", null),
 
     //trailers O4 types
-    TRAILERS_04_TYPE("/trailers_o4_type", TRAILERS_O4_TYPE),
-    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", TRAILERS_O4_TYPE),
+    TRAILERS_04_TYPE("/trailers_o4_type", null),
+    HALF_TRAILERS_04_TYPE("/semi_trailers_o4_type", null),
 
     //other vehicles
     HELP("/help", null),
