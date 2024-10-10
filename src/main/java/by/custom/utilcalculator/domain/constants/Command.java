@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 public enum Command {
     //command families - not commands actually, just markers
-    AGE("age", null),
+    //AGE("age", null),
     ENGINE_VOLUME("volume", null),
     WEIGHT("weight", null),
     TRAILERS_O4_TYPE("trailers_o4_type", null),
@@ -41,19 +41,19 @@ public enum Command {
     JURIDICAL("/juridical", null),
 
     //age command
-    LESS_3_YEARS_AGE("/3_or_less_years", Command.AGE),
-    MORE_THAN_3_YEARS_AGE("/more_3_years", Command.AGE),
+    LESS_3_YEARS_AGE("/3_or_less_years", null),
+    MORE_THAN_3_YEARS_AGE("/more_3_years", null),
 
     //type of engine command for m1
     GASOLINE("/gasoline", null),
     ELECTRIC("/electric", null),
 
     //m1 engine volume command
-    VOLUME_LESS_1000_CM("/less_1000", ENGINE_VOLUME),
-    VOLUME_BETWEEN_1000_2000_CM("/1000_2000", ENGINE_VOLUME),
-    VOLUME_BETWEEN_2000_3000_CM("/2000_3000", ENGINE_VOLUME),
-    VOLUME_BETWEEN_3000_3500_CM("/3000_3500", ENGINE_VOLUME),
-    VOLUME_MORE_3500_CM("/more_3500", ENGINE_VOLUME),
+    VOLUME_LESS_1000_CM("/less_1000", null),
+    VOLUME_BETWEEN_1000_2000_CM("/1000_2000", null),
+    VOLUME_BETWEEN_2000_3000_CM("/2000_3000", null),
+    VOLUME_BETWEEN_3000_3500_CM("/3000_3500", null),
+    VOLUME_MORE_3500_CM("/more_3500", null),
 
     //m2, m3 engine volume command
     VOLUME_LESS_2500_CM("/less_2500", ENGINE_VOLUME),

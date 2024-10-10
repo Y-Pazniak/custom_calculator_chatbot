@@ -5,6 +5,8 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.domain.tree.CommandTree;
+import by.custom.utilcalculator.domain.tree.ModifierTree;
+import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class MessagesCreator {
     }
 
     //this method builds next questions for user to interact with chatbot
-    public String buildNextStepQuestion(final UserProgress userProgress) {
+    public String buildNextStepQuestion(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         final Step step = userProgress.getNextStep();
         switch (step) {
             case GENERAL_TRANSPORT_TYPE -> {
@@ -329,10 +331,10 @@ public class MessagesCreator {
                 Command.MORE_THAN_3_YEARS_AGE.getCommand(), " ", bundle.getString("answers.details.between.3.and.7"), "\n");
     }
 
-    public String getResultAndFarewell(final UserProgress userProgress) {
+    public String getResultAndFarewell(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + CalculatorRouter.calculate(userProgress) + " " +
+                        bundle.getString("answers.summary.price") + " " + ModifierTree.getPrice(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
@@ -859,7 +861,11 @@ public class MessagesCreator {
     }
 
     public String getSummaryAnswer(final UserProgress userProgress) {
-        return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
+        try {
+            return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
+        } catch (UtilsborCommandTreeReadingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String trimFirstAndLastLetters(final String toTrim) {
