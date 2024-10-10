@@ -70,8 +70,8 @@ public class CommandTree {
         fieldsToCommands.put(Weight.FROM_12_TILL_20_TONS, Command.TRUCK_UNITS_12_20_TONS);
         fieldsToCommands.put(Weight.FROM_20_TILL_50_TONS, Command.TRUCK_UNITS_20_50_TONS);
         //trailers O4 type
-//        fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_O4_TYPE);
-//        fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.TRAILERS_O4_TYPE);
+        fieldsToCommands.put(TrailerO4Type.TRAILERS, Command.TRAILERS_04_TYPE);
+        fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.HALF_TRAILERS_04_TYPE);
 
         //other vehicles -> graders
         fieldsToCommands.put(ParticularTransportType.GRADER, Command.SELF_PROPELLED_TYPE);

@@ -4,7 +4,6 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,8 +69,8 @@ public class FillerTree {
         Node truckN1N2N3 = new Node(Command.N1_N3, "trucks", Step.WEIGHT, null);
         Node busM2M3 = new Node(Command.M2_M3, "trucks", Step.ENGINE_TYPE, null);
         Node truckUnit = new Node(Command.TRUCK_UNITS, "truck units - do not confuse with trucks", Step.TRUCK_UNIT_CLASS, null);
-        Node trailer = new Node(Command.TRAILERS_O4, "truck units - do not confuse with trucks", Step.TRAILERS_O4_TYPE, null);
-        busesAndTrucks.addKids(truckN1N2N3, busM2M3, truckUnit, trailer);
+        Node trailerO4 = new Node(Command.TRAILERS_O4, "truck units - do not confuse with trucks", Step.TRAILERS_O4_TYPE, null);
+        busesAndTrucks.addKids(truckN1N2N3, busM2M3, truckUnit, trailerO4);
         //root -> buses and trucks -> trucks -> weight
         Node less2p5tons = new Node(Command.LESS_2P5_TONS, "", Step.AGE, null);
         Node between2p5and3p5tons = new Node(Command.BETWEEN_2_5_AND_3_5_TONS, "", Step.AGE, null);
@@ -135,20 +134,38 @@ public class FillerTree {
         Node truckUnits6class = new Node(Command.TRUCK_UNITS_6_CLASS, "truck units with eco class 6", Step.WEIGHT, null);
         truckUnit.addKids(truckUnitsOther, truckUnits6class);
         //root -> buses and trucks -> truck units -> other except 6 class
-        Node truckUnitOtherBetween12and20tons = new Node(Command.BETWEEN_12_AND_20_TONS, "", Step.AGE, null);
-        Node truckUnitOtherBetween20and50tons = new Node(Command.BETWEEN_20_AND_50_TONS, "", Step.AGE, null);
+        Node truckUnitOtherBetween12and20tons = new Node(Command.TRUCK_UNITS_12_20_TONS, "", Step.AGE, null);
+        Node truckUnitOtherBetween20and50tons = new Node(Command.TRUCK_UNITS_20_50_TONS, "", Step.AGE, null);
         truckUnitsOther.addKids(truckUnitOtherBetween12and20tons, truckUnitOtherBetween20and50tons);
         //root -> buses and trucks -> truck units -> 6 class
-        Node truckUnit6classBetween12and20tons = new Node(Command.BETWEEN_12_AND_20_TONS, "", Step.AGE, null);
-        Node truckUnit6classBetween20and50tons = new Node(Command.BETWEEN_20_AND_50_TONS, "", Step.AGE, null);
+        Node truckUnit6classBetween12and20tons = new Node(Command.TRUCK_UNITS_12_20_TONS, "", Step.AGE, null);
+        Node truckUnit6classBetween20and50tons = new Node(Command.TRUCK_UNITS_20_50_TONS, "", Step.AGE, null);
         truckUnits6class.addKids(truckUnit6classBetween12and20tons, truckUnit6classBetween20and50tons);
         //root -> buses and trucks -> truck units -> other except 6 class -> age
-        Node truckUnitOtherBetween12and20tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_LESS_OR_3_YEARS);
-        Node truckUnitOtherBetween12and20tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS);
-        Node truckUnitOtherBetween20and50tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_LESS_OR_3_YEARS);
-        Node truckUnitOtherBetween20and50tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_MORE_3_YEARS);
+        Node truckUnitOtherBetween12and20tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_LESS_OR_3_YEARS);
+        Node truckUnitOtherBetween12and20tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_12_20_TONS_MORE_3_YEARS);
+        Node truckUnitOtherBetween20and50tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_20_50_TONS_LESS_OR_3_YEARS);
+        Node truckUnitOtherBetween20and50tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_EXCEPT_6_CLASS_20_50_TONS_MORE_3_YEARS);
         truckUnitOtherBetween12and20tons.addKids(truckUnitOtherBetween12and20tonsAgeLessThreeYears, truckUnitOtherBetween12and20tonsAgeMoreThreeYears);
         truckUnitOtherBetween20and50tons.addKids(truckUnitOtherBetween20and50tonsAgeLessThreeYears, truckUnitOtherBetween20and50tonsAgeMoreThreeYears);
+        //root -> buses and trucks -> truck units -> 6 class -> age
+        Node truckUnit6classBetween12and20tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_LESS_OR_3_YEARS);
+        Node truckUnit6classBetween12and20tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS);
+        Node truckUnit6classBetween20and50tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_LESS_OR_3_YEARS);
+        Node truckUnit6classBetween20and50tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_MORE_3_YEARS);
+        truckUnit6classBetween12and20tons.addKids(truckUnit6classBetween12and20tonsAgeLessThreeYears, truckUnit6classBetween12and20tonsAgeMoreThreeYears);
+        truckUnit6classBetween20and50tons.addKids(truckUnit6classBetween20and50tonsAgeLessThreeYears, truckUnit6classBetween20and50tonsAgeMoreThreeYears);
+        //root -> buses and trucks -> trailers
+        Node trailersMassMore10tons = new Node(Command.TRAILERS_04_TYPE, "there are two types of O4 trailers: trailers and semitrailers", Step.AGE, null);
+        Node halfTrailersMassMore10tons = new Node(Command.HALF_TRAILERS_04_TYPE, "there are two types of O4 trailers: trailers and semitrailers", Step.AGE, null);
+        trailerO4.addKids(trailersMassMore10tons, halfTrailersMassMore10tons);
+        //root -> buses and trucks -> trailers o4 -> age
+        Node trailersMassMore10tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_LESS_OR_3_YEARS);
+        Node trailersMassMore10tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_MORE_3_YEARS);
+        Node halfTrailersMassMore10tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_LESS_OR_3_YEARS);
+        Node halfTrailersMassMore10tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRAILERS_TRAILERS_AND_HALF_TRAILERS_MORE_3_YEARS);
+        trailersMassMore10tons.addKids(trailersMassMore10tonsAgeLessThreeYears, trailersMassMore10tonsAgeMoreThreeYears);
+        halfTrailersMassMore10tons.addKids(halfTrailersMassMore10tonsAgeLessThreeYears, halfTrailersMassMore10tonsAgeMoreThreeYears);
         /*end buses and trucks*/
 
         try {
