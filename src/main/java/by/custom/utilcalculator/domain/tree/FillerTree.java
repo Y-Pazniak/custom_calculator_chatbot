@@ -4,44 +4,49 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.Price;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.checkerframework.checker.units.qual.C;
+
 import java.io.File;
 import java.io.IOException;
 
 public class FillerTree {
     public static void fillTreeJson(final ObjectMapper mapper, final File file) {
-        //root node - start
+        //root node (start)
         Node root = new Node(Command.START, "base node to start - runs automatically", Step.GENERAL_TRANSPORT_TYPE, null);
-        //general transport type
+        //root -> general transport type
         Node m1 = new Node(Command.M1, "M1 - passenger's vehicles", Step.COUNTRY_ORIGIN, null);
-        root.addKid(m1);
-        //m1 country origin
+        Node busesAndTrucks = new Node(Command.BUSES_AND_TRUCKS, "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks)", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        root.addKids(m1, busesAndTrucks);
+
+        /*start m1*/
+        //root -> m1 -> country origin
         Node eaes = new Node(Command.EAES, "branch for M1 vehicles from EAES (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia)", Step.OWNERS_TYPE, null);
         Node otherCountries = new Node(Command.OTHER_COUNTRIES, "it means any country except EAES countries", Step.OWNERS_TYPE, null);
         m1.addKids(eaes, otherCountries);
-        //m1 owners type - eaes
+        //root -> m1 -> country origin -> owners type
         Node physical = new Node(Command.PHYSICAL, "common person, who does not represent any company", Step.AGE, null);
         Node juridical = new Node(Command.JURIDICAL, "branch for companies who want to purchase a passenger M1 car from EAES", Step.AGE, null);
         eaes.addKids(physical, juridical);
-        //m1 owners type - other countries
+        //root -> m1 -> owners type -> other countries
         Node otherCountriesJuridical = new Node(Command.JURIDICAL, "branch for companies who want to purchase a passenger M1 car except EAES", Step.ENGINE_TYPE, null);
         otherCountries.addKids(physical, otherCountriesJuridical);
-        //m1 - other countries - juridical - type of engine
+        //root -> m1 -> other countries -> juridical -> type of engine
         Node electricTypeEngine = new Node(Command.ELECTRIC, "if car has pure electric engine, it will be different branch", Step.AGE, null);
         Node gasolineTypeEngine = new Node(Command.GASOLINE, "if car has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME, null);
         otherCountriesJuridical.addKids(electricTypeEngine, gasolineTypeEngine);
-        //m1 - other - juridical - gasoline - engine volume
+        //root -> m1 -> other -> juridical -> gasoline -> engine volume
         Node gasolineM1Less1000 = new Node(Command.VOLUME_LESS_1000_CM, "", Step.AGE, null);
         Node gasolineM1Between1000_2000 = new Node(Command.VOLUME_BETWEEN_1000_2000_CM, "", Step.AGE, null);
         Node gasolineM1Between2000_3000 = new Node(Command.VOLUME_BETWEEN_2000_3000_CM, "", Step.AGE, null);
         Node gasolineM1Between3000_3500 = new Node(Command.VOLUME_BETWEEN_3000_3500_CM, "", Step.AGE, null);
         Node gasolineM1more3500 = new Node(Command.VOLUME_MORE_3500_CM, "", Step.AGE, null);
         gasolineTypeEngine.addKids(gasolineM1Less1000, gasolineM1Between1000_2000, gasolineM1Between2000_3000, gasolineM1Between3000_3500, gasolineM1more3500);
-        //m1 age eaes
+        //root -> m1 -> eaes/other countries+physical -> age
         Node threeYearsAndLessM1 = new Node(Command.LESS_3_YEARS_AGE, "three and less years old car", Step.FAREWELL, Price.PASSENGER_3_OR_LESS_YEARS);
         Node moreThanThreeYearsM1 = new Node(Command.MORE_THAN_3_YEARS_AGE, "more than three years old car", Step.FAREWELL, Price.PASSENGER_MORE_3_YEARS);
         physical.addKids(threeYearsAndLessM1, moreThanThreeYearsM1);
         juridical.addKids(threeYearsAndLessM1, moreThanThreeYearsM1);
-        //m1 age other
+        //root -> m1 -> other countries -> juridical -> age
         Node gasolineM1Less1000AgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.PASSENGER_OTHER_GASOLINE_1000_LESS_OR_3_YEARS);
         Node gasolineM1Less1000AgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.PASSENGER_OTHER_GASOLINE_1000_MORE_3_YEARS);
         Node gasolineM1Between1000And2000AgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.PASSENGER_OTHER_GASOLINE_1000_2000_LESS_OR_3_YEARS);
@@ -58,6 +63,93 @@ public class FillerTree {
         gasolineM1Between2000_3000.addKids(gasolineM1Between2000And3000AgeLessThreeYears, gasolineM1Between2000And3000AgeMoreThreeYears);
         gasolineM1Between3000_3500.addKids(gasolineM1Between3000And3500AgeLessThreeYears, gasolineM1Between3000And3500AgeMoreThreeYears);
         gasolineM1more3500.addKids(gasolineM1More3500AgeLessThreeYears, gasolineM1More3500AgeMoreThreeYears);
+        /*end m1*/
+
+        /*start buses and trucks*/
+        //root -> buses and trucks
+        Node truckN1N2N3 = new Node(Command.N1_N3, "trucks", Step.WEIGHT, null);
+        Node busM2M3 = new Node(Command.M2_M3, "trucks", Step.ENGINE_TYPE, null);
+        Node truckUnit = new Node(Command.TRUCK_UNITS, "truck units - do not confuse with trucks", Step.TRUCK_UNIT_CLASS, null);
+        Node trailer = new Node(Command.TRAILERS_O4, "truck units - do not confuse with trucks", Step.TRAILERS_O4_TYPE, null);
+        busesAndTrucks.addKids(truckN1N2N3, busM2M3, truckUnit, trailer);
+        //root -> buses and trucks -> trucks -> weight
+        Node less2p5tons = new Node(Command.LESS_2P5_TONS, "", Step.AGE, null);
+        Node between2p5and3p5tons = new Node(Command.BETWEEN_2_5_AND_3_5_TONS, "", Step.AGE, null);
+        Node between3p5and5tons = new Node(Command.BETWEEN_3_5_AND_5_TONS, "", Step.AGE, null);
+        Node between5and8tons = new Node(Command.BETWEEN_5_AND_8_TONS, "", Step.AGE, null);
+        Node between8and12tons = new Node(Command.BETWEEN_8_AND_12_TONS, "", Step.AGE, null);
+        Node between12and20tons = new Node(Command.BETWEEN_12_AND_20_TONS, "", Step.AGE, null);
+        Node between20and50tons = new Node(Command.BETWEEN_20_AND_50_TONS, "", Step.AGE, null);
+        truckN1N2N3.addKids(less2p5tons, between2p5and3p5tons, between3p5and5tons, between5and8tons, between8and12tons, between12and20tons, between20and50tons);
+        //root -> buses and trucks -> trucks -> weight -> age
+        Node trucksLess2p5tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_LESS_OR_3_YEARS);
+        Node trucksLess2p5tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_LESS_2P5_MORE_3_YEARS);
+        Node trucksBetween2p5and3p5tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_2P5_3P5_LESS_OR_3_YEARS);
+        Node trucksBetween2p5and3p5tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_2P5_3P5_MORE_3_YEARS);
+        Node trucksBetween3p5and5tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_3P5_5_LESS_OR_3_YEARS);
+        Node trucksBetween3p5and5tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_3P5_5_MORE_3_YEARS);
+        Node trucksBetween5and8tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_LESS_OR_3_YEARS);
+        Node trucksBetween5and8tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_5_8_MORE_3_YEARS);
+        Node trucksBetween8and12tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_8_12_LESS_OR_3_YEARS);
+        Node trucksBetween8and12tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_8_12_MORE_3_YEARS);
+        Node trucksBetween12and20tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_12_20_LESS_OR_3_YEARS);
+        Node trucksBetween12and20tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_12_20_MORE_3_YEARS);
+        Node trucksBetween20and50tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_LESS_OR_3_YEARS);
+        Node trucksBetween20and50tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_N1_N3_BETWEEN_20_50_MORE_3_YEARS);
+        less2p5tons.addKids(trucksLess2p5tonsAgeLessThreeYears, trucksLess2p5tonsAgeMoreThreeYears);
+        between2p5and3p5tons.addKids(trucksBetween2p5and3p5tonsAgeLessThreeYears, trucksBetween2p5and3p5tonsAgeMoreThreeYears);
+        between3p5and5tons.addKids(trucksBetween3p5and5tonsAgeLessThreeYears, trucksBetween3p5and5tonsAgeMoreThreeYears);
+        between5and8tons.addKids(trucksBetween5and8tonsAgeLessThreeYears, trucksBetween5and8tonsAgeMoreThreeYears);
+        between8and12tons.addKids(trucksBetween8and12tonsAgeLessThreeYears, trucksBetween8and12tonsAgeMoreThreeYears);
+        between12and20tons.addKids(trucksBetween12and20tonsAgeLessThreeYears, trucksBetween12and20tonsAgeMoreThreeYears);
+        between20and50tons.addKids(trucksBetween20and50tonsAgeLessThreeYears, trucksBetween20and50tonsAgeMoreThreeYears);
+        //root -> buses and trucks -> buses -> engine type
+        Node busesElectricTypeEngine = new Node(Command.ELECTRIC, "if bus has pure electric engine, it will be different branch", Step.AGE, null);
+        Node busesGasolineTypeEngine = new Node(Command.GASOLINE, "if bus has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME, null);
+        busM2M3.addKids(busesElectricTypeEngine, busesGasolineTypeEngine);
+        //root -> buses and trucks -> buses -> engine type -> electric -> age
+        Node busesElectricAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_ELECTRIC_LESS_OR_3_YEARS);
+        Node busesElectricAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_ELECTRIC_MORE_3_YEARS);
+        busesElectricTypeEngine.addKids(busesElectricAgeLessThreeYears, busesElectricAgeMoreThreeYears);
+        //root -> buses and trucks -> buses -> engine type -> gasoline
+        Node busesGasolineLess2500volume = new Node(Command.VOLUME_LESS_2500_CM, "", Step.AGE, null);
+        Node busesGasolineBetween2500and5000volume = new Node(Command.VOLUME_BETWEEN_2500_5000_CM, "", Step.AGE, null);
+        Node busesGasolineBetween5000and10000volume = new Node(Command.VOLUME_BETWEEN_5000_10000_CM, "", Step.AGE, null);
+        Node busesGasolineMore10000volume = new Node(Command.VOLUME_MORE_10000_CM, "", Step.AGE, null);
+        busesGasolineTypeEngine.addKids(busesGasolineLess2500volume, busesGasolineBetween2500and5000volume, busesGasolineBetween5000and10000volume, busesGasolineMore10000volume);
+        //root -> buses and trucks -> buses -> engine type -> gasoline -> age
+        Node busesGasolineLess2500volumeAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_LESS_OR_3_YEARS);
+        Node busesGasolineLess2500volumeAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_MORE_3_YEARS);
+        Node busesGasolineBetween2500and5000volumeAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_LESS_OR_3_YEARS);
+        Node busesGasolineBetween2500and5000volumeAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_2500_5000_MORE_3_YEARS);
+        Node busesGasolineBetween5000and10000volumeAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_LESS_OR_3_YEARS);
+        Node busesGasolineBetween5000and10000volumeAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_5000_10000_MORE_3_YEARS);
+        Node busesGasolineMore10000volumeAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_LESS_OR_3_YEARS);
+        Node busesGasolineMore10000volumeAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_GASOLINE_MORE_10000_MORE_3_YEARS);
+        busesGasolineLess2500volume.addKids(busesGasolineLess2500volumeAgeLessThreeYears, busesGasolineLess2500volumeAgeMoreThreeYears);
+        busesGasolineBetween2500and5000volume.addKids(busesGasolineBetween2500and5000volumeAgeLessThreeYears, busesGasolineBetween2500and5000volumeAgeMoreThreeYears);
+        busesGasolineBetween5000and10000volume.addKids(busesGasolineBetween5000and10000volumeAgeLessThreeYears, busesGasolineBetween5000and10000volumeAgeMoreThreeYears);
+        busesGasolineMore10000volume.addKids(busesGasolineMore10000volumeAgeLessThreeYears, busesGasolineMore10000volumeAgeMoreThreeYears);
+        //root -> buses and trucks -> truck units
+        Node truckUnitsOther = new Node(Command.TRUCK_UNITS_OTHER, "truck units except eco class 6", Step.WEIGHT, null);
+        Node truckUnits6class = new Node(Command.TRUCK_UNITS_6_CLASS, "truck units with eco class 6", Step.WEIGHT, null);
+        truckUnit.addKids(truckUnitsOther, truckUnits6class);
+        //root -> buses and trucks -> truck units -> other except 6 class
+        Node truckUnitOtherBetween12and20tons = new Node(Command.BETWEEN_12_AND_20_TONS, "", Step.AGE, null);
+        Node truckUnitOtherBetween20and50tons = new Node(Command.BETWEEN_20_AND_50_TONS, "", Step.AGE, null);
+        truckUnitsOther.addKids(truckUnitOtherBetween12and20tons, truckUnitOtherBetween20and50tons);
+        //root -> buses and trucks -> truck units -> 6 class
+        Node truckUnit6classBetween12and20tons = new Node(Command.BETWEEN_12_AND_20_TONS, "", Step.AGE, null);
+        Node truckUnit6classBetween20and50tons = new Node(Command.BETWEEN_20_AND_50_TONS, "", Step.AGE, null);
+        truckUnits6class.addKids(truckUnit6classBetween12and20tons, truckUnit6classBetween20and50tons);
+        //root -> buses and trucks -> truck units -> other except 6 class -> age
+        Node truckUnitOtherBetween12and20tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_LESS_OR_3_YEARS);
+        Node truckUnitOtherBetween12and20tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_12_20_TONS_MORE_3_YEARS);
+        Node truckUnitOtherBetween20and50tonsAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_LESS_OR_3_YEARS);
+        Node truckUnitOtherBetween20and50tonsAgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_TRUCK_UNITS_6_CLASS_20_50_TONS_MORE_3_YEARS);
+        truckUnitOtherBetween12and20tons.addKids(truckUnitOtherBetween12and20tonsAgeLessThreeYears, truckUnitOtherBetween12and20tonsAgeMoreThreeYears);
+        truckUnitOtherBetween20and50tons.addKids(truckUnitOtherBetween20and50tonsAgeLessThreeYears, truckUnitOtherBetween20and50tonsAgeMoreThreeYears);
+        /*end buses and trucks*/
 
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, root);
