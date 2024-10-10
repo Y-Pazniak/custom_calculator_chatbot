@@ -5,6 +5,8 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.domain.tree.CommandTree;
+import by.custom.utilcalculator.domain.tree.ModifierTree;
+import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class MessagesCreator {
     }
 
     //this method builds next questions for user to interact with chatbot
-    public String buildNextStepQuestion(final UserProgress userProgress) {
+    public String buildNextStepQuestion(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         final Step step = userProgress.getNextStep();
         switch (step) {
             case GENERAL_TRANSPORT_TYPE -> {
@@ -141,7 +143,7 @@ public class MessagesCreator {
         switch (userProgress.getParticularTransportType()) {
             case N1_N3 -> {
                 return stringBuilderAppender(".", "\n", bundle.getString("questions.users.weight.n1_n3"), "\n",
-                        Command.LESS_2_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
+                        Command.LESS_2P5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.less_2_tons"), "\n",
                         Command.BETWEEN_2_5_AND_3_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_2d5_and_3d5_tons"), "\n",
                         Command.BETWEEN_3_5_AND_5_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_3d5_and_5_tons"), "\n",
                         Command.BETWEEN_5_AND_8_TONS.getCommand(), " ", bundle.getString("answers.details.weight.n1_n3.between_5_and_8_tons"), "\n",
@@ -329,10 +331,10 @@ public class MessagesCreator {
                 Command.MORE_THAN_3_YEARS_AGE.getCommand(), " ", bundle.getString("answers.details.between.3.and.7"), "\n");
     }
 
-    public String getResultAndFarewell(final UserProgress userProgress) {
+    public String getResultAndFarewell(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + CalculatorRouter.calculate(userProgress) + " " +
+                        bundle.getString("answers.summary.price") + " " + ModifierTree.getPrice(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }
@@ -365,7 +367,7 @@ public class MessagesCreator {
                              ROAD_MAINTENANCE, FORESTRY, FORWADERS, TIMBER_LOADERS, WHEELED_TRACTORS, CRAWLER_TRACTORS,
                              COMBINE_HARVESTERS, FORAGE_HARVESTERS, AGRICULTURAL_VEHICLES, OFF_ROAD_DUMP_TRUCKS ->
                                 addSequenceParticularTransportType(userProgress, sb);
-                        case LESS_2_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
+                        case LESS_2P5_TONS, BETWEEN_2_5_AND_3_5, BETWEEN_3_5_AND_5, BETWEEN_5_AND_8, BETWEEN_8_AND_12,
                              BETWEEN_12_AND_20, BETWEEN_20_AND_50, FROM_12_TILL_20_TONS, FROM_20_TILL_50_TONS ->
                                 addSequenceWeight(userProgress, sb);
                         case EAES, OTHER -> addSequenceCountryOrigin(userProgress, sb);
@@ -502,7 +504,7 @@ public class MessagesCreator {
         switch (userProgress.getWeight()) {
             case null -> {
             }
-            case LESS_2_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
+            case LESS_2P5_TONS -> sb.append(bundle.getString("answers.summary.weight.n1_n3.less_2_tons"));
             case BETWEEN_2_5_AND_3_5 ->
                     sb.append(bundle.getString("answers.summary.weight.n1_n3.between_2d5_and_3d5_tons"));
             case BETWEEN_3_5_AND_5 ->
@@ -859,7 +861,11 @@ public class MessagesCreator {
     }
 
     public String getSummaryAnswer(final UserProgress userProgress) {
-        return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
+        try {
+            return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
+        } catch (UtilsborCommandTreeReadingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String trimFirstAndLastLetters(final String toTrim) {

@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
 public enum Weight implements StepsIndicator {
-    LESS_2_TONS,
+    LESS_2P5_TONS,
     BETWEEN_2_5_AND_3_5,
     BETWEEN_3_5_AND_5,
     BETWEEN_5_AND_8,
