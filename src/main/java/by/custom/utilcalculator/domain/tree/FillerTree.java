@@ -15,7 +15,8 @@ public class FillerTree {
         //root -> general transport type
         Node m1 = new Node(Command.M1, "M1 - passenger's vehicles", Step.COUNTRY_ORIGIN, null);
         Node busesAndTrucks = new Node(Command.BUSES_AND_TRUCKS, "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks)", Step.PARTICULAR_TRANSPORT_TYPE, null);
-        root.addKids(m1, busesAndTrucks);
+        Node selfPropelledVehicles = new Node(Command.SELF_PROPELLED_VEHICLES, "other vehicles, except m1, buses and trucks", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        root.addKids(m1, busesAndTrucks, selfPropelledVehicles);
 
         /*start m1*/
         //root -> m1 -> country origin
@@ -167,6 +168,34 @@ public class FillerTree {
         trailersMassMore10tons.addKids(trailersMassMore10tonsAgeLessThreeYears, trailersMassMore10tonsAgeMoreThreeYears);
         halfTrailersMassMore10tons.addKids(halfTrailersMassMore10tonsAgeLessThreeYears, halfTrailersMassMore10tonsAgeMoreThreeYears);
         /*end buses and trucks*/
+
+        /*start self-propelled vehicles*/
+        //root -> self-propelled -> help
+        Node help = new Node(Command.HELP, "help reques from user", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        //root -> self-propelled -> graders
+        Node graders = new Node(Command.GRADERS, "graders and planners", Step.ENGINE_VOLUME, null);
+        //root -> self-propelled -> graders -> power
+        Node gradersPowerLess100 = new Node(Command.POWER_LESS_100, "graders less 100 power", Step.AGE, null);
+        Node gradersPowerBetween100and140 = new Node(Command.POWER_100_140, "graders power 100-140 hp", Step.AGE, null);
+        Node gradersPowerBetween140and200 = new Node(Command.POWER_140_200, "graders power 140-200 hp", Step.AGE, null);
+        Node gradersPowerMore200 = new Node(Command.POWER_MORE_200, "graders power more 200 hp", Step.AGE, null);
+        graders.addKids(gradersPowerLess100, gradersPowerBetween100and140, gradersPowerBetween140and200, gradersPowerMore200);
+        //root -> self-propelled -> graders -> power -> age
+        Node gradersPowerLess100AgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_LESS_100HP_LESS_OR_3_YEARS);
+        Node gradersPowerLess100AgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_LESS_100HP_MORE_3_YEARS);
+        Node gradersPowerBetween100and140LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_LESS_OR_3_YEARS);
+        Node gradersPowerBetween100and140MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_MORE_3_YEARS);
+        Node gradersPowerBetween140and200LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_LESS_OR_3_YEARS);
+        Node gradersPowerBetween140and200MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_MORE_3_YEARS);
+        Node gradersPowerMore200LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_MORE_200HP_LESS_OR_3_YEARS);
+        Node gradersPowerMore200MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_MORE_200HP_MORE_3_YEARS);
+        gradersPowerLess100.addKids(gradersPowerLess100AgeLessThreeYears, gradersPowerLess100AgeMoreThreeYears);
+        gradersPowerBetween100and140.addKids(gradersPowerBetween100and140LessThreeYears, gradersPowerBetween100and140MoreThreeYears);
+        gradersPowerBetween140and200.addKids(gradersPowerBetween140and200LessThreeYears, gradersPowerBetween140and200MoreThreeYears);
+        gradersPowerMore200.addKids(gradersPowerMore200LessThreeYears, gradersPowerMore200MoreThreeYears);
+
+        selfPropelledVehicles.addKids(help, graders);
+        /*end self-propelled vehicles */
 
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, root);

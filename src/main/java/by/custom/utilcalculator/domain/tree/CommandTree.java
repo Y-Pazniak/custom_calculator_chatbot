@@ -74,11 +74,11 @@ public class CommandTree {
         fieldsToCommands.put(TrailerO4Type.HALF_TRAILERS, Command.HALF_TRAILERS_04_TYPE);
 
         //other vehicles -> graders
-        fieldsToCommands.put(ParticularTransportType.GRADER, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.LESS_100, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_140, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_140_200, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_200, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.GRADER, Command.GRADERS);
+        fieldsToCommands.put(EngineVolumeOrPower.LESS_100, Command.POWER_LESS_100);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_140, Command.POWER_100_140);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_140_200, Command.POWER_140_200);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_200, Command.POWER_MORE_200);
         //other vehicles -> bulldozers
         fieldsToCommands.put(ParticularTransportType.BULLDOZER, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_200, Command.ENGINE_VOLUME);
@@ -95,50 +95,40 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_125, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_125_150, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_150, Command.ENGINE_VOLUME);
-
         //other vehicles -> temping machines
         fieldsToCommands.put(ParticularTransportType.TAMPING_MACHINE, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.LESS_40, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_40_80, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_80, Command.ENGINE_VOLUME);
-
         //other vehicles -> front loaders
         fieldsToCommands.put(ParticularTransportType.FRONT_LOADER, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5_50, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_50_100, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_200_250, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_250_300, Command.ENGINE_VOLUME);
-
         //other vehicles -> wheel cranes
         fieldsToCommands.put(ParticularTransportType.WHEELED_CRANES, Command.SELF_PROPELLED_TYPE);
-
         //other vehicles -> pipelayers
         fieldsToCommands.put(ParticularTransportType.PIPELAYERS, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.LESS_130, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_130_200, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_300, Command.ENGINE_VOLUME);
-
         //trailers
         fieldsToCommands.put(ParticularTransportType.TRAILERS_OTHER, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.TRAILERS_OTHER_FULL, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.TRAILERS_OTHER_HALF, Command.ENGINE_VOLUME);
-
         //road maintenance
         fieldsToCommands.put(ParticularTransportType.ROAD_MAINTENANCE, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_220, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_220, Command.ENGINE_VOLUME);
-
         //forestry
         fieldsToCommands.put(ParticularTransportType.FORESTRY, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_20_100, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_300, Command.ENGINE_VOLUME);
-
         //forwaders
         fieldsToCommands.put(ParticularTransportType.FORWADERS, Command.SELF_PROPELLED_TYPE);
-
         //timber loaders
         fieldsToCommands.put(ParticularTransportType.TIMBER_LOADERS, Command.SELF_PROPELLED_TYPE);
-
         //wheeled tractors
         fieldsToCommands.put(ParticularTransportType.WHEELED_TRACTORS, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5p5_30, Command.ENGINE_VOLUME);
@@ -151,10 +141,8 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_280_340, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_340_380, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_380, Command.ENGINE_VOLUME);
-
         //crawler tractors
         fieldsToCommands.put(ParticularTransportType.CRAWLER_TRACTORS, Command.SELF_PROPELLED_TYPE);
-
         //combine_harvesters
         fieldsToCommands.put(ParticularTransportType.COMBINE_HARVESTERS, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_25_160, Command.ENGINE_VOLUME);
@@ -162,19 +150,16 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_220_255, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_255_325, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_325_400, Command.ENGINE_VOLUME);
-
         //forage harvesters
         fieldsToCommands.put(ParticularTransportType.FORAGE_HARVESTERS, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.LESS_295, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_295_401, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_401, Command.ENGINE_VOLUME);
-
         //agricultural vehicles
         fieldsToCommands.put(ParticularTransportType.AGRICULTURAL_VEHICLES, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_120, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_120_300, Command.ENGINE_VOLUME);
         fieldsToCommands.put(EngineVolumeOrPower.SELF_PROPELLED_MOWERS, Command.ENGINE_VOLUME);
-
         //off-road dump trucks
         fieldsToCommands.put(ParticularTransportType.OFF_ROAD_DUMP_TRUCKS, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.LESS_200, Command.ENGINE_VOLUME);
@@ -219,8 +204,7 @@ public class CommandTree {
     }
 
     public static boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
-        Command command = requestingCommand.getFamily() == null ? requestingCommand : requestingCommand.getFamily();
-        return CommandTree.getInstance().validateCommandFromNode(command, userProgress);
+        return CommandTree.getInstance().validateCommandFromNode(requestingCommand, userProgress);
     }
 
     public static Step getNextStep(final UserProgress userProgress) {
