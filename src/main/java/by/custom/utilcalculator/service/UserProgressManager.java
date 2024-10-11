@@ -340,7 +340,7 @@ public class UserProgressManager {
         if (userProgress.getParticularTransportType() == ParticularTransportType.TRAILERS_OTHER) {
             return messagesCreator.getTrailersOtherHelp();
         }
-        if (userProgress.getNextStep() == Step.ENGINE_VOLUME) {
+        if (userProgress.getNextStep() == Step.ENGINE_VOLUME_POWER) {
             return messagesCreator.getSelfPropelledPowerHelp();
         }
         if (userProgress.getGeneralTransportType() == GeneralTransportType.SELF_PROPELLED_VEHICLES) {

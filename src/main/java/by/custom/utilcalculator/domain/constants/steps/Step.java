@@ -7,7 +7,7 @@ public enum Step {
     OWNERS_TYPE,
     WEIGHT,
     ENGINE_TYPE,
-    ENGINE_VOLUME,
+    ENGINE_VOLUME_POWER,
     TRUCK_UNIT_CLASS,
     TRAILERS_O4_TYPE,
     AGE,
