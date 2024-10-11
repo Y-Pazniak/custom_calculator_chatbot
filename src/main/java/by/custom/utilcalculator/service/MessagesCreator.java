@@ -49,7 +49,7 @@ public class MessagesCreator {
             case ENGINE_TYPE -> {
                 return getTypeOfEngine();
             }
-            case ENGINE_VOLUME -> {
+            case ENGINE_VOLUME_POWER -> {
                 return getEngineVolumeOrPower(userProgress);
             }
             case COUNTRY_ORIGIN -> {

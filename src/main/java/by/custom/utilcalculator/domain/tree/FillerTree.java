@@ -15,7 +15,8 @@ public class FillerTree {
         //root -> general transport type
         Node m1 = new Node(Command.M1, "M1 - passenger's vehicles", Step.COUNTRY_ORIGIN, null);
         Node busesAndTrucks = new Node(Command.BUSES_AND_TRUCKS, "any vehicle, except M1 and self-propelled vehicles and trailers for them (buses, trucks, trailers for trucks)", Step.PARTICULAR_TRANSPORT_TYPE, null);
-        root.addKids(m1, busesAndTrucks);
+        Node selfPropelledVehicles = new Node(Command.SELF_PROPELLED_VEHICLES, "other vehicles, except m1, buses and trucks", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        root.addKids(m1, busesAndTrucks, selfPropelledVehicles);
 
         /*start m1*/
         //root -> m1 -> country origin
@@ -31,7 +32,7 @@ public class FillerTree {
         otherCountries.addKids(physical, otherCountriesJuridical);
         //root -> m1 -> other countries -> juridical -> type of engine
         Node electricTypeEngine = new Node(Command.ELECTRIC, "if car has pure electric engine, it will be different branch", Step.AGE, null);
-        Node gasolineTypeEngine = new Node(Command.GASOLINE, "if car has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME, null);
+        Node gasolineTypeEngine = new Node(Command.GASOLINE, "if car has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME_POWER, null);
         otherCountriesJuridical.addKids(electricTypeEngine, gasolineTypeEngine);
         //root -> m1 -> other -> juridical -> gasoline -> engine volume
         Node gasolineM1Less1000 = new Node(Command.VOLUME_LESS_1000_CM, "", Step.AGE, null);
@@ -104,7 +105,7 @@ public class FillerTree {
         between20and50tons.addKids(trucksBetween20and50tonsAgeLessThreeYears, trucksBetween20and50tonsAgeMoreThreeYears);
         //root -> buses and trucks -> buses -> engine type
         Node busesElectricTypeEngine = new Node(Command.ELECTRIC, "if bus has pure electric engine, it will be different branch", Step.AGE, null);
-        Node busesGasolineTypeEngine = new Node(Command.GASOLINE, "if bus has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME, null);
+        Node busesGasolineTypeEngine = new Node(Command.GASOLINE, "if bus has gasoline or hybrid engine, it will be different branch", Step.ENGINE_VOLUME_POWER, null);
         busM2M3.addKids(busesElectricTypeEngine, busesGasolineTypeEngine);
         //root -> buses and trucks -> buses -> engine type -> electric -> age
         Node busesElectricAgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.EXCEPT_PASSENGER_M2_M3_ELECTRIC_LESS_OR_3_YEARS);
@@ -167,6 +168,59 @@ public class FillerTree {
         trailersMassMore10tons.addKids(trailersMassMore10tonsAgeLessThreeYears, trailersMassMore10tonsAgeMoreThreeYears);
         halfTrailersMassMore10tons.addKids(halfTrailersMassMore10tonsAgeLessThreeYears, halfTrailersMassMore10tonsAgeMoreThreeYears);
         /*end buses and trucks*/
+
+        /*start self-propelled vehicles*/
+        //root -> self-propelled -> help
+        Node help = new Node(Command.HELP, "help reques from user", Step.PARTICULAR_TRANSPORT_TYPE, null);
+        //root -> self-propelled -> graders
+        Node graders = new Node(Command.GRADERS, "graders and planners", Step.ENGINE_VOLUME_POWER, null);
+        //root -> self-propelled -> graders -> power
+        Node gradersPowerLess100 = new Node(Command.POWER_LESS_100, "graders less 100 power", Step.AGE, null);
+        Node gradersPowerBetween100and140 = new Node(Command.POWER_100_140, "graders power 100-140 hp", Step.AGE, null);
+        Node gradersPowerBetween140and200 = new Node(Command.POWER_140_200, "graders power 140-200 hp", Step.AGE, null);
+        Node gradersPowerMore200 = new Node(Command.POWER_MORE_200, "graders power more 200 hp", Step.AGE, null);
+        graders.addKids(gradersPowerLess100, gradersPowerBetween100and140, gradersPowerBetween140and200, gradersPowerMore200);
+        //root -> self-propelled -> graders -> power -> age
+        Node gradersPowerLess100AgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_LESS_100HP_LESS_OR_3_YEARS);
+        Node gradersPowerLess100AgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_LESS_100HP_MORE_3_YEARS);
+        Node gradersPowerBetween100and140LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_LESS_OR_3_YEARS);
+        Node gradersPowerBetween100and140MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_100_AND_140HP_MORE_3_YEARS);
+        Node gradersPowerBetween140and200LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_LESS_OR_3_YEARS);
+        Node gradersPowerBetween140and200MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_BETWEEN_140_AND_200HP_MORE_3_YEARS);
+        Node gradersPowerMore200LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_MORE_200HP_LESS_OR_3_YEARS);
+        Node gradersPowerMore200MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_GRADERS_MORE_200HP_MORE_3_YEARS);
+        gradersPowerLess100.addKids(gradersPowerLess100AgeLessThreeYears, gradersPowerLess100AgeMoreThreeYears);
+        gradersPowerBetween100and140.addKids(gradersPowerBetween100and140LessThreeYears, gradersPowerBetween100and140MoreThreeYears);
+        gradersPowerBetween140and200.addKids(gradersPowerBetween140and200LessThreeYears, gradersPowerBetween140and200MoreThreeYears);
+        gradersPowerMore200.addKids(gradersPowerMore200LessThreeYears, gradersPowerMore200MoreThreeYears);
+        //root -> self-propelled -> bulldozers
+        Node bulldozers = new Node(Command.BULLDOZERS, "bulldozers with power", Step.ENGINE_VOLUME_POWER, null);
+        //root -> self-propelled -> bulldozers -> power
+        Node bulldozersPowerLess100 = new Node(Command.POWER_LESS_100, "", Step.AGE, null);
+        Node bulldozersPowerBetween100and200 = new Node(Command.POWER_100_200, "", Step.AGE, null);
+        Node bulldozersPowerBetween200and300 = new Node(Command.POWER_200_300, "", Step.AGE, null);
+        Node bulldozersPowerBetween300and400 = new Node(Command.POWER_300_400, "", Step.AGE, null);
+        Node bulldozersPowerMore400 = new Node(Command.POWER_MORE_400, "", Step.AGE, null);
+        bulldozers.addKids(bulldozersPowerLess100, bulldozersPowerBetween100and200, bulldozersPowerBetween200and300, bulldozersPowerBetween300and400, bulldozersPowerMore400);
+        //root -> self-propelled -> bulldozers -> power -> age
+        Node bulldozersPowerLess100AgeLessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_LESS_100HP_LESS_OR_3_YEARS);
+        Node bulldozersPowerLess100AgeMoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_LESS_100HP_MORE_3_YEARS);
+        Node bulldozersPowerBetween100and200LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_100_AND_200HP_LESS_OR_3_YEARS);
+        Node bulldozersPowerBetween100and200MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_100_AND_200HP_MORE_3_YEARS);
+        Node bulldozersPowerBetween200and300LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_200_AND_300HP_LESS_OR_3_YEARS);
+        Node bulldozersPowerBetween200and300MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_200_AND_300HP_MORE_3_YEARS);
+        Node bulldozersPowerBetween300and400LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_300_AND_400HP_LESS_OR_3_YEARS);
+        Node bulldozersPowerBetween300and400MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_BETWEEN_300_AND_400HP_MORE_3_YEARS);
+        Node bulldozersPowerMore400LessThreeYears = new Node(Command.LESS_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_MORE_400HP_LESS_OR_3_YEARS);
+        Node bulldozersPowerMore400MoreThreeYears = new Node(Command.MORE_THAN_3_YEARS_AGE, "", Step.FAREWELL, Price.SELF_PROPELLED_BULLDOZERS_MORE_400HP_MORE_3_YEARS);
+        bulldozersPowerLess100.addKids(bulldozersPowerLess100AgeLessThreeYears, bulldozersPowerLess100AgeMoreThreeYears);
+        bulldozersPowerBetween100and200.addKids(bulldozersPowerBetween100and200LessThreeYears, bulldozersPowerBetween100and200MoreThreeYears);
+        bulldozersPowerBetween200and300.addKids(bulldozersPowerBetween200and300LessThreeYears, bulldozersPowerBetween200and300MoreThreeYears);
+        bulldozersPowerBetween300and400.addKids(bulldozersPowerBetween300and400LessThreeYears, bulldozersPowerBetween300and400MoreThreeYears);
+        bulldozersPowerMore400.addKids(bulldozersPowerMore400LessThreeYears, bulldozersPowerMore400MoreThreeYears);
+
+        selfPropelledVehicles.addKids(help, graders, bulldozers);
+        /*end self-propelled vehicles */
 
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, root);
