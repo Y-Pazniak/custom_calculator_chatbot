@@ -80,11 +80,11 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_140_200, Command.POWER_140_200);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_200, Command.POWER_MORE_200);
         //other vehicles -> bulldozers
-        fieldsToCommands.put(ParticularTransportType.BULLDOZER, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_200, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_200_300, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_300_400, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_400, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.BULLDOZER, Command.BULLDOZERS);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_200, Command.POWER_100_200);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_200_300, Command.POWER_200_300);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_300_400, Command.POWER_300_400);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_400, Command.POWER_MORE_400);
         //other vehicles -> excavators
         fieldsToCommands.put(ParticularTransportType.EXCAVATOR, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.LESS_170, Command.ENGINE_VOLUME);

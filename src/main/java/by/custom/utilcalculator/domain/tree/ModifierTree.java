@@ -33,17 +33,14 @@ public class ModifierTree {
     }
 
     private static File getTreeFile() {
-        //File file = readTreeFile(); - doesn't work properly during development - changes data only in /target/classes/
+        File file = null;
 
-        //remove after testing
-        File file = new File("src/main/resources/tree_test.json"); //works fine with /src/main/resources/
-        if (!file.exists() || file.length() == 0) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            file = readTreeFile();
+        } catch (UtilsborCommandTreeReadingException e) {
+            e.printStackTrace();
         }
+
         return file;
     }
 
