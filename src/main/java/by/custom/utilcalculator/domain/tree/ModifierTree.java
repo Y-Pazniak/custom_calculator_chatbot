@@ -27,11 +27,6 @@ public class ModifierTree {
         return treeRootJson;
     }
 
-    public static void fillTreeByNodes() {
-        File file = getTreeFile();
-        FillerTree.fillTreeJson(mapper, file);
-    }
-
     private static File getTreeFile() {
         File file = null;
 

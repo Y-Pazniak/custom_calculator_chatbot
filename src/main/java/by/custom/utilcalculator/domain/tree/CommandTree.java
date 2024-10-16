@@ -86,20 +86,20 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_300_400, Command.POWER_300_400);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_400, Command.POWER_MORE_400);
         //other vehicles -> excavators
-        fieldsToCommands.put(ParticularTransportType.EXCAVATOR, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.LESS_170, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_170_250, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_250, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.EXCAVATOR, Command.EXCAVATORS);
+        fieldsToCommands.put(EngineVolumeOrPower.LESS_170, Command.POWER_LESS_170);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_170_250, Command.POWER_170_250);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_250, Command.POWER_MORE_250);
         //other vehicles -> wheel loaders
-        fieldsToCommands.put(ParticularTransportType.WHEEL_LOADER, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_125, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_125_150, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_150, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.WHEEL_LOADER, Command.WHEEL_LOADERS);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_100_125, Command.POWER_100_125);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_125_150, Command.POWER_125_150);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_150, Command.POWER_MORE_150);
         //other vehicles -> temping machines
-        fieldsToCommands.put(ParticularTransportType.TAMPING_MACHINE, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.LESS_40, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_40_80, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.MORE_80, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.TAMPING_MACHINE, Command.TAMPING_MACHINES);
+        fieldsToCommands.put(EngineVolumeOrPower.LESS_40, Command.POWER_LESS_40);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_40_80, Command.POWER_40_80);
+        fieldsToCommands.put(EngineVolumeOrPower.MORE_80, Command.POWER_MORE_80);
         //other vehicles -> front loaders
         fieldsToCommands.put(ParticularTransportType.FRONT_LOADER, Command.SELF_PROPELLED_TYPE);
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5_50, Command.ENGINE_VOLUME);
