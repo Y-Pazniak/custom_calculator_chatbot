@@ -101,11 +101,11 @@ public class CommandTree {
         fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_40_80, Command.POWER_40_80);
         fieldsToCommands.put(EngineVolumeOrPower.MORE_80, Command.POWER_MORE_80);
         //other vehicles -> front loaders
-        fieldsToCommands.put(ParticularTransportType.FRONT_LOADER, Command.SELF_PROPELLED_TYPE);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5_50, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_50_100, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_200_250, Command.ENGINE_VOLUME);
-        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_250_300, Command.ENGINE_VOLUME);
+        fieldsToCommands.put(ParticularTransportType.FRONT_LOADER, Command.FRONT_LOADERS);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_5_50, Command.POWER_5_50);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_50_100, Command.POWER_50_100);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_200_250, Command.POWER_200_250);
+        fieldsToCommands.put(EngineVolumeOrPower.BETWEEN_250_300, Command.POWER_250_300);
         //other vehicles -> wheel cranes
         fieldsToCommands.put(ParticularTransportType.WHEELED_CRANES, Command.SELF_PROPELLED_TYPE);
         //other vehicles -> pipelayers

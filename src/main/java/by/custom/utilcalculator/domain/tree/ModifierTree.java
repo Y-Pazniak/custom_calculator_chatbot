@@ -27,18 +27,6 @@ public class ModifierTree {
         return treeRootJson;
     }
 
-    private static File getTreeFile() {
-        File file = null;
-
-        try {
-            file = readTreeFile();
-        } catch (UtilsborCommandTreeReadingException e) {
-            e.printStackTrace();
-        }
-
-        return file;
-    }
-
     private static File readTreeFile() throws UtilsborCommandTreeReadingException {
         File file;
         try {
