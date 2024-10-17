@@ -704,6 +704,7 @@
         {
           "key": "EXCAVATORS",
           "nextStep": "ENGINE_VOLUME_POWER",
+          "price": null,
           "children": [
             {
               "key": "POWER_LESS_170",
@@ -857,6 +858,1271 @@
                   "key": "MORE_THAN_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>668265.00</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "WHEEL_LOADERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>16 706.63</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>511 890.99</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_100_125",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>22 052.75</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>837 336.05</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_125_150",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>26 730.60</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>837 336.05</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_150",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>29 403.66</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>1 075 238.39</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "TAMPING_MACHINES",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_40",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>24 191.19</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>65 890.93</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_40_80",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>38 759.37</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>80 191.80</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_80",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>46 511.24</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>100 239.75</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "FRONT_LOADERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_5_50",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b> 6 682.65</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>40 095.90 </b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_50_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>28 067.13</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>66 826.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_100_200",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>41 432.43</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>113 605.05</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_200_250",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>30 071.93</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>133 653.00</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_250_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>80 793.24</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>200 479.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_300_400",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>94 425.84</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>233 892.75</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_400",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>174 350.34</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>467 785.50</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "WHEELED_CRANES",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_170",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>76 850.48</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>296 041.40</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_170_250",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>151 696.16</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>638 193.08</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_250",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>202 484.30</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>1 591 138.97</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "PIPELAYERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_130",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>66 826.50</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>200 479.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_130_200",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>106 922.40</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>334 132.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_200_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>140 335.65</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>467 785.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>167 066.25</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>668 265.00</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "TRAILERS_OTHER",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "TRAILERS_OTHER_FULL",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>6 682.65</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>46 778.55</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "TRAILERS_OTHER_HALF",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>6 682.65</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>46 778.55</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "ROAD_MAINTENANCE",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>18 711.42</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>72 840.89</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_100_220",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>27 398.87</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>110 263.73</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_220",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>31 408.46</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>128 975.15</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "FORESTRY",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_20_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>53 461.20</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>334 132.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_100_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>96 898.43</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>400 959.00</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>120 287.70</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>467 785.50</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "FORWADERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_20_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>53 461.20</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>334 132.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_100_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>96 898.43</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>400 959.00</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_300",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>120 287.70</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>467 785.50</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "TIMBER_LOADERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_20_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>53 461.20</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>66 826.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_100_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>96 898.43</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>300 719.25</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>120 287.70</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>400 959.00</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "WHEELED_TRACTORS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_5p5_30",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>2 673.06</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>12 028.77</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_30_60",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>6 749.48</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>19 379.69</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_60_90",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>20 916.69</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>96 831.60</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_90_130",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>48 449.21</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>116 211.28</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_130_180",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>67 762.07</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>154 970.65</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_180_220",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>77 451.91</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>178 226.28</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_220_280",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>88 144.15</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>211 104.91</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_280_340",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>139 466.91</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>290 561.62</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_340_380",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>44 773.76</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>167 066.25</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_380",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>60 143.85</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>267 306.00</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "CRAWLER_TRACTORS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_100",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>10 023.98</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>46 778.55</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_100_200",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>16 706.63</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>66 826.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_200",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>60 143.85</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>187 114.20</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "COMBINE_HARVESTERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_25_160",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>16 038.36</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>58 807.32</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_160_220",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>24 057.54</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>88 210.98</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_220_255",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>36 754.58</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>117 614.64</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_255_325",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>43 437.23</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>147 018.30</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_325_400",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>56 802.53</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>199 944.89</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_400",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>80 191.80</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>303 793.27</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "FORAGE_HARVESTERS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_295",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>33 413.25</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>85 270.61</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_295_401",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>61 480.38</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>176 421.96</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_401",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>96 230.16</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>352 843.92</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "AGRICULTURAL_VEHICLES",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_BETWEEN_100_120",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>13 365.30</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>66 826.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_120_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>53 461.20</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>200 479.50</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_300",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>106 922.40</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>267 306.00</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "SELF_PROPELLED_MOWERS",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>26 730.60</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>97 967.65</b>",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "OFF_ROAD_DUMP_TRUCKS",
+          "nextStep": "ENGINE_VOLUME_POWER",
+          "children": [
+            {
+              "key": "POWER_LESS_200",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>149 691.36</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>233 892.75</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_200_650",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>232 422.57</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>341 617.07</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_BETWEEN_650_1750",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>275 993.45</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>352 843.92</b>",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "POWER_MORE_1750",
+              "nextStep": "AGE",
+              "children": [
+                {
+                  "key": "LESS_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>408 309.92</b>",
+                  "children": []
+                },
+                {
+                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "nextStep": "FAREWELL",
+                  "price": "<b>441 054.90</b>",
                   "children": []
                 }
               ]
