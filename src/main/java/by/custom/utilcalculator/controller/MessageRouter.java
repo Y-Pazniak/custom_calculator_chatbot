@@ -44,9 +44,7 @@ public class MessageRouter {
             e.printStackTrace();
             return new SendMessage(chatID, getExceptionText(e));
         }
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatID);
-        sendMessage.setText(answer);
+        SendMessage sendMessage = new SendMessage(chatID, answer);
         sendMessage.setParseMode("HTML");
         return sendMessage;
     }

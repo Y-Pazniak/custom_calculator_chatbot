@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class CommandTree {
     private final Map<StepsIndicator, Command> fieldsToCommands;
-    private final Map<Command, StepsIndicator> commandsToFields;
+    private final Map<Command, List<StepsIndicator>> commandsToFields;
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
@@ -31,7 +31,7 @@ public class CommandTree {
         return fieldsToCommands;
     }
 
-    public Map<Command, StepsIndicator> getCommandsToFields() {
+    public Map<Command, List<StepsIndicator>> getCommandsToFields() {
         return commandsToFields;
     }
 
