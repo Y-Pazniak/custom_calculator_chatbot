@@ -50,7 +50,7 @@ public class ModifierTree {
     }
 
     private static InputStream getTreeInputStream() {
-        return ModifierTree.class.getClassLoader().getResourceAsStream("tree_test.json");
+        return ModifierTree.class.getClassLoader().getResourceAsStream("tree.json");
     }
 
     private static void fillParents(final Node node) {
