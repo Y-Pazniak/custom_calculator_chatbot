@@ -44,8 +44,9 @@ public class MessageRouter {
             e.printStackTrace();
             return new SendMessage(chatID, getExceptionText(e));
         }
-
-        return new SendMessageHandler(chatID, answer, "HTML");
+        SendMessage sendMessage = new SendMessage(chatID, answer);
+        sendMessage.setParseMode("HTML");
+        return sendMessage;
     }
 
     private String route(final String usersMessage, final String chatID) throws UtilsborException {
