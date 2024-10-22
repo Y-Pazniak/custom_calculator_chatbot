@@ -7,6 +7,7 @@ import by.custom.utilcalculator.controller.Bot;
 
 public class Main {
     public static void main(final String[] args) {
+        //new branch for our experiments
         final Bot localBot = Bot.getBot();
 
         try {
