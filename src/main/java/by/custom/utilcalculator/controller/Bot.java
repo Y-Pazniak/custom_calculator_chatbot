@@ -22,7 +22,6 @@ public class Bot extends TelegramLongPollingBot {
     //private constructor to avoid wrong bot's creation
     private Bot() {
         //need MessageRouter object to work with it after - to proceed user's messages
-        //ModifierTree.fillTreeByNodes();
         messageRouter = MessageRouter.getInstance();
         CommandTree.getInstance();
     }
@@ -36,7 +35,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return
-                System.getProperty("custom_chatbot_test_token");
+                System.getProperty("custom_chatbot_token");
     }
 
     //method describes what to do after receiving message
