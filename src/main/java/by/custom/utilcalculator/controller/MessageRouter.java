@@ -55,7 +55,7 @@ public class MessageRouter {
         switch (requestingCommand) {
             case START -> {
                 userProgressManager.createNewUserProgress(chatID);
-                answer = getGreetingMessage();
+                answer = userProgressManager.processStart(requestingCommand, chatID);
             }
             case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                     answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);

@@ -1,11 +1,13 @@
 {
   "key": "START",
   "nextStep": "GENERAL_TRANSPORT_TYPE",
+  "nextMessage": "Бесплатно рассчитаю стоимость утильсбора в Беларуси. \nВыберите тип авто:\n/cars - легковой автомобиль (кат. M1);\n/buses_and_trucks - транспорт других категорий, кроме M1;\n/self_propelled_vehicles - самоходные машины и/или прицепы к ним.",
   "price": null,
   "children": [
     {
       "key": "M1",
       "nextStep": "COUNTRY_ORIGIN",
+      "nextMessage": "\nОткуда везем автомобиль?\n/eaes - для автомобилей из России и ЕАЭС;\n/other - для автомобилей из других стран.",
       "price": null,
       "children": [
         {

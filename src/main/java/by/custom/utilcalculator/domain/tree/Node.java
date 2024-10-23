@@ -15,15 +15,18 @@ public class Node {
     private List<Node> children;
     private final Command key;
     private final Step nextStep;
+    private final String nextMessage;
     private final String price;
 
     public Node(@JsonProperty("key") final Command key,
                 @JsonProperty("description") final String description,
                 @JsonProperty("nextStep") final Step nextStep,
+                @JsonProperty("nextMessage") final String nextMessage,
                 @JsonProperty("price") @Nullable final String price) {
         this.key = key;
         children = new ArrayList<>();
         this.nextStep = nextStep;
+        this.nextMessage = nextMessage;
         this.price = price;
     }
 
@@ -51,15 +54,7 @@ public class Node {
         return nextStep;
     }
 
-    public void addKid(final Node kid) {
-        kid.setParent(this);
-        children.add(kid);
-    }
-
-    public void addKids(final Node... kids) {
-        for (Node kid : kids) {
-            kid.setParent(this);
-            children.add(kid);
-        }
+    public String getNextMessage(){
+        return nextMessage;
     }
 }

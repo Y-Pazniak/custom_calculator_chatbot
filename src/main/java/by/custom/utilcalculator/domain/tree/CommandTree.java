@@ -211,8 +211,16 @@ public class CommandTree {
         return CommandTree.getInstance().getNextStepFromNode(userProgress);
     }
 
+    public static String getNextMessage(final UserProgress userProgress) {
+        return CommandTree.getInstance().getNextMessageFromNode(userProgress);
+    }
+
     public Step getNextStepFromNode(final UserProgress userProgress) {
         return getNode(userProgress).getNextStep();
+    }
+
+    public String getNextMessageFromNode(final UserProgress userProgress) {
+        return getNode(userProgress).getNextMessage();
     }
 
     public boolean isRequestingCommandAcceptable(final Command requestingCommand, final Node node) {

@@ -60,6 +60,10 @@ public class UserProgress implements Serializable {
         return CommandTree.getNextStep(this);
     }
 
+    public String getNextMessage() {
+        return CommandTree.getNextMessage(this);
+    }
+
     public GeneralTransportType getGeneralTransportType() {
         return generalTransportType;
     }

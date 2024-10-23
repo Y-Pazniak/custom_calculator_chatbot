@@ -35,6 +35,12 @@ public class MessagesCreator {
 
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
+        final String nextMessage = userProgress.getNextMessage();
+
+        if (nextMessage != null) {
+            return nextMessage;
+        }
+
         final Step step = userProgress.getNextStep();
         switch (step) {
             case GENERAL_TRANSPORT_TYPE -> {
@@ -352,8 +358,10 @@ public class MessagesCreator {
     //this method builds summary string with user choices (just to show the user's path)
     public String getUserChoiceSequence(final UserProgress userProgress) {
         final StringBuilder sb = new StringBuilder();
-        sb.append(bundle.getString("answers.summary.beginning"));
         List<Command> userPath = userProgress.getUserPath();
+        if (!userPath.isEmpty()) {
+            sb.append(bundle.getString("answers.summary.beginning"));
+        }
 
         for (int i = 0; i < userPath.size(); i++) {
             Command localCommand = userPath.get(i);

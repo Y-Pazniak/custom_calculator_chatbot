@@ -28,6 +28,18 @@ public class UserProgressManager {
         userProgressStorage.save(userProgress);
     }
 
+    public String processStart(final Command requestingCommand, final String chatID) throws UtilsborException {
+        final UserProgress userProgress;
+        userProgress = userProgressStorage.get(chatID);
+
+        if (!CommandTree.validateCommand(requestingCommand, userProgress)) {
+            throw new InvalidOrderCommandException(chatID, requestingCommand);
+        }
+
+        userProgressStorage.save(userProgress);
+        return messagesCreator.getSummaryAnswer(userProgress);
+    }
+
     public String processGeneralTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;
         userProgress = userProgressStorage.get(chatID);
