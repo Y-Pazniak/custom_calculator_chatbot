@@ -5,54 +5,112 @@ import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.CommandTree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class UserProgress implements Serializable {
-    private TransportType transportType = null;
+    private GeneralTransportType generalTransportType = null;
     private CountryOrigin countryOrigin = null;
     private OwnersType ownersType = null;
     private CarAge carAge = null;
-    private TypeOfEngine typeOfEngine = null;
-    private VolumeOfEngine volumeOfEngine = null;
+    private EngineType engineType = null;
+    private EngineVolumeOrPower engineVolumeOrPower = null;
+    private ParticularTransportType particularTransportType = null;
+    private TruckUnitClass truckUnitClass = null;
+    private Weight weight = null;
+    private TrailerO4Type trailersO4Type = null;
     private final String chatID;
-    private Step currentQuestion;
+    private final List<Command> userPath;
 
     public UserProgress(final String chatID) {
         this.chatID = chatID;
+        userPath = new ArrayList<>();
     }
 
-    public TransportType getTransportType(){
-        return transportType;
+    private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
+        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
+        Command command = fieldsToCommands.get(stepsIndicator);
+        Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
+        boolean needAddCommand = true;
+        int lastNumber = 0;
+
+        for (int i = 0; i < userPath.size(); i++) {
+            Command localCommand = userPath.get(i);
+            for (Map.Entry<StepsIndicator, Command> entry : fieldsToCommands.entrySet()) {
+                if (entry.getKey().getClass().equals(stepsIndicatorClass) && localCommand.equals(entry.getValue())) {
+                    needAddCommand = false;
+                    userPath.set(i, command);
+                    lastNumber = i;
+                    break;
+                }
+            }
+            if (!needAddCommand) {
+                break;
+            }
+        }
+        if (needAddCommand) {
+            userPath.add(command);
+        } else {
+            userPath.subList(lastNumber + 1, userPath.size()).clear();
+        }
+    }
+
+    public Step getNextStep() {
+        return CommandTree.getNextStep(this);
+    }
+
+    public String getNextMessage() {
+        return CommandTree.getNextMessage(this);
+    }
+
+    public GeneralTransportType getGeneralTransportType() {
+        return generalTransportType;
     }
 
     public CountryOrigin getCountryOrigin() {
         return countryOrigin;
     }
 
-    public Command[] getUserPath() {
-        final Command[] userPath = new Command[6];
-        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
-        userPath[0] = fieldsToCommands.get(getTransportType()); //0 cell contains type of transport
-        userPath[1] = fieldsToCommands.get(getCountryOrigin()); //1 cell contains country origin
-        userPath[2] = fieldsToCommands.get(getOwnersType()); //2 cell contains owners type
-        userPath[3] = fieldsToCommands.get(getCarAge()); //3 cell contains car age
-        userPath[4] = fieldsToCommands.get(getTypeOfEngine()); //4 cell contains type of engine
-        userPath[5] = fieldsToCommands.get(getVolumeOfEngine()); //5 cell contains engine volume
+    public List<Command> getUserPath() {
         return userPath;
     }
 
-    public void setTransportType(final TransportType transportType) {
-        final int stepID = 0;
-        cleanStepsAfterCurrent(stepID);
-        currentQuestion = Step.TRANSPORT_TYPE;
-        this.transportType = transportType;
+    public TrailerO4Type getTrailerO4Type() {
+        return trailersO4Type;
+    }
+
+    public void setTrailerO4Type(final TrailerO4Type trailersO4Type) {
+        this.trailersO4Type = trailersO4Type;
+        addUserStatusToPath(trailersO4Type);
+    }
+
+    public void setGeneralTransportType(final GeneralTransportType transportType) {
+        this.generalTransportType = transportType;
+        addUserStatusToPath(transportType);
+    }
+
+    public ParticularTransportType getParticularTransportType() {
+        return particularTransportType;
+    }
+
+    public void setParticularTransportType(final ParticularTransportType particularTransportType) {
+        this.particularTransportType = particularTransportType;
+        addUserStatusToPath(particularTransportType);
+    }
+
+    public void setWeight(final Weight weight) {
+        this.weight = weight;
+        addUserStatusToPath(weight);
+    }
+
+    public Weight getWeight() {
+        return weight;
     }
 
     public void setCountryOrigin(final CountryOrigin countryOrigin) {
-        final int stepID = 1;
-        cleanStepsAfterCurrent(stepID);
-        currentQuestion = Step.COUNTRY_ORIGIN;
         this.countryOrigin = countryOrigin;
+        addUserStatusToPath(countryOrigin);
     }
 
     public OwnersType getOwnersType() {
@@ -60,10 +118,8 @@ public class UserProgress implements Serializable {
     }
 
     public void setOwnersType(final OwnersType ownersType) {
-        final int stepID = 2;
-        cleanStepsAfterCurrent(stepID);
-        currentQuestion = Step.OWNERS_TYPE;
         this.ownersType = ownersType;
+        addUserStatusToPath(ownersType);
     }
 
     public CarAge getCarAge() {
@@ -71,89 +127,38 @@ public class UserProgress implements Serializable {
     }
 
     public void setCarAge(final CarAge carAge) {
-        cleanStepsAfterCurrent(4);
-        currentQuestion = Step.CAR_AGE;
         this.carAge = carAge;
+        addUserStatusToPath(carAge);
     }
 
-    public TypeOfEngine getTypeOfEngine() {
-        return typeOfEngine;
+    public void setEngineType(final EngineType typeOfEngine) {
+        this.engineType = typeOfEngine;
+        addUserStatusToPath(typeOfEngine);
     }
 
-    public void setTypeOfEngine(final TypeOfEngine typeOfEngine) {
-        cleanStepsAfterCurrent(3);
-        currentQuestion = Step.TYPE_OF_ENGINE;
-        this.typeOfEngine = typeOfEngine;
+    public EngineType getEngineType() {
+        return engineType;
     }
 
-    public VolumeOfEngine getVolumeOfEngine() {
-        return volumeOfEngine;
+    public void setVolumeOrPower(final EngineVolumeOrPower volumeOfEngine) {
+        this.engineVolumeOrPower = volumeOfEngine;
+        addUserStatusToPath(volumeOfEngine);
     }
 
-    public void setVolumeOfEngine(final VolumeOfEngine volumeOfEngine) {
-        final int stepID = 4;
-        cleanStepsAfterCurrent(stepID);
-        currentQuestion = Step.VOLUME_OF_ENGINE;
-        this.volumeOfEngine = volumeOfEngine;
+    public EngineVolumeOrPower getVolumeOrPower() {
+        return engineVolumeOrPower;
+    }
+
+    public void setTruckUnitType(final TruckUnitClass truckUnit) {
+        this.truckUnitClass = truckUnit;
+        addUserStatusToPath(truckUnit);
+    }
+
+    public TruckUnitClass getTruckUnitClass() {
+        return this.truckUnitClass;
     }
 
     public String getChatID() {
         return chatID;
-    }
-
-    //method checks for last answered question and sends next step, which depends on current user's answers
-    public Step getNextStep() {
-        switch (currentQuestion) {
-            case TRANSPORT_TYPE -> {
-                if (transportType == TransportType.M1) {
-                    return Step.COUNTRY_ORIGIN;
-                }
-            }
-            case COUNTRY_ORIGIN -> {
-                return Step.OWNERS_TYPE;
-            }
-            case OWNERS_TYPE -> {
-                if (ownersType == OwnersType.PHYSICAL || countryOrigin == CountryOrigin.EAES) {
-                    return Step.CAR_AGE;
-                } else {
-                    return Step.TYPE_OF_ENGINE;
-                }
-            }
-            case TYPE_OF_ENGINE -> {
-                if (typeOfEngine == TypeOfEngine.GASOLINE) {
-                    return Step.VOLUME_OF_ENGINE;
-                } else {
-                    return Step.CAR_AGE;
-                }
-            }
-            case VOLUME_OF_ENGINE -> {
-                return Step.CAR_AGE;
-            }
-            case CAR_AGE, FAREWELL -> {
-                return Step.FAREWELL;
-            }
-            case null, default -> {
-                return Step.TRANSPORT_TYPE;
-            }
-        }
-        return Step.TRANSPORT_TYPE;
-    }
-
-    private void cleanStepsAfterCurrent(final int stepCleaner) {
-        if (stepCleaner <= 0) {
-            this.countryOrigin = null;
-        }
-        if (stepCleaner <= 1) {
-            this.ownersType = null;
-        }
-        if (stepCleaner <= 2) {
-            this.typeOfEngine = null;
-        }
-        if (stepCleaner <= 3) {
-            this.volumeOfEngine = null;
-        }
-        if (stepCleaner <= 4) {
-            this.carAge = null;
-        }
     }
 }
