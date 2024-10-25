@@ -66,22 +66,26 @@
           "key": "OTHER_COUNTRIES",
           "nextStep": "OWNERS_TYPE",
           "price": null,
+          "nextMessage": "questions.m1.other.ownertype",
           "children": [
             {
               "key": "PHYSICAL",
               "nextStep": "AGE",
               "price": null,
+              "nextMessage": "questions.m1.other.agePhysical",
               "children": [
                 {
                   "key": "LESS_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>544,5</b>",
+                  "nextMessage": "answer.final.farewell",
                   "children": []
                 },
                 {
                   "key": "MORE_THAN_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>816,7</b>",
+                  "nextMessage": "answer.final.farewell",
                   "children": []
                 }
               ]
@@ -90,22 +94,26 @@
               "key": "JURIDICAL",
               "nextStep": "ENGINE_TYPE",
               "price": null,
+              "nextMessage": "questions.m1.other.engineType",
               "children": [
                 {
                   "key": "ELECTRIC",
                   "nextStep": "AGE",
                   "price": null,
+                  "nextMessage": "questions.m1.other.electricAge",
                   "children": [
                     {
                       "key": "LESS_3_YEARS_AGE",
                       "nextStep": "FAREWELL",
                       "price": "<b>544,5</b>",
+                      "nextMessage": "answer.final.farewell",
                       "children": []
                     },
                     {
                       "key": "MORE_THAN_3_YEARS_AGE",
                       "nextStep": "FAREWELL",
                       "price": "<b>816,7</b>",
+                      "nextMessage": "answer.final.farewell",
                       "children": []
                     }
                   ]
@@ -114,22 +122,26 @@
                   "key": "GASOLINE",
                   "nextStep": "ENGINE_VOLUME_POWER",
                   "price": null,
+                  "nextMessage": "questions.m1.other.gasolinePower",
                   "children": [
                     {
                       "key": "VOLUME_LESS_1000_CM",
                       "nextStep": "AGE",
                       "price": null,
+                      "nextMessage": "questions.m1.other.gasolinePower.less1000",
                       "children": [
                         {
                           "key": "LESS_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>3145,69</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.less1000.less3age",
                           "children": []
                         },
                         {
                           "key": "MORE_THAN_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>8026,93</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.less1000.more3age",
                           "children": []
                         }
                       ]
@@ -138,17 +150,20 @@
                       "key": "VOLUME_BETWEEN_1000_2000_CM",
                       "nextStep": "AGE",
                       "price": null,
+                      "nextMessage": "questions.m1.other.gasolinePower.1000_2000",
                       "children": [
                         {
                           "key": "LESS_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>11 645,24</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.1000_2000.less3age",
                           "children": []
                         },
                         {
                           "key": "MORE_THAN_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b> 20 485,71</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.1000_2000.more3age",
                           "children": []
                         }
                       ]
@@ -157,17 +172,20 @@
                       "key": "VOLUME_BETWEEN_2000_3000_CM",
                       "nextStep": "AGE",
                       "price": null,
+                      "nextMessage": "questions.m1.other.gasolinePower.2000_3000",
                       "children": [
                         {
                           "key": "LESS_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>32 727,55 </b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.2000_3000.less3age",
                           "children": []
                         },
                         {
                           "key": "MORE_THAN_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>49 548,46</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.2000_3000.more3age",
                           "children": []
                         }
                       ]
@@ -176,17 +194,20 @@
                       "key": "VOLUME_BETWEEN_3000_3500_CM",
                       "nextStep": "AGE",
                       "price": null,
+                      "nextMessage": "questions.m1.other.gasolinePower.3000_3500",
                       "children": [
                         {
                           "key": "LESS_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>37 577,8</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.3000_3500.less3age",
                           "children": []
                         },
                         {
                           "key": "MORE_THAN_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>57 528,9</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.3000_3500.more3age",
                           "children": []
                         }
                       ]
@@ -195,17 +216,20 @@
                       "key": "VOLUME_MORE_3500_CM",
                       "nextStep": "AGE",
                       "price": null,
+                      "nextMessage": "questions.m1.other.gasolinePower.more_3500",
                       "children": [
                         {
                           "key": "LESS_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>47 851,65</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.more_3500.less3age",
                           "children": []
                         },
                         {
                           "key": "MORE_THAN_3_YEARS_AGE",
                           "nextStep": "FAREWELL",
                           "price": "<b>62 906,01</b>",
+                          "nextMessage": "questions.m1.other.gasolinePower.more_3500.more3age",
                           "children": []
                         }
                       ]
