@@ -64,6 +64,10 @@ public class UserProgress implements Serializable {
         return CommandTree.getNextMessage(this);
     }
 
+    public String getPrice() {
+        return CommandTree.getPrice(this);
+    }
+
     public GeneralTransportType getGeneralTransportType() {
         return generalTransportType;
     }

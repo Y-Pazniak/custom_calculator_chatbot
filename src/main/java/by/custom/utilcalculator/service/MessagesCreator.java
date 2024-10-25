@@ -7,10 +7,8 @@ import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.domain.tree.CommandTree;
 import by.custom.utilcalculator.domain.tree.ModifierTree;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
-
 import java.util.List;
 import java.util.Map;
-
 import static by.custom.utilcalculator.domain.constants.steps.ParticularTransportType.*;
 import static by.custom.utilcalculator.domain.constants.steps.EngineType.*;
 import static by.custom.utilcalculator.domain.constants.steps.GeneralTransportType.*;
@@ -35,49 +33,17 @@ public class MessagesCreator {
 
     //this method builds next questions for user to interact with chatbot
     public String buildNextStepQuestion(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
-        final String nextMessage = userProgress.getNextMessage();
-
-        if (nextMessage != null) {
-            return nextMessage;
+        String nextMessage;
+        try {
+            nextMessage = bundle.getString(userProgress.getNextMessage());
+        } catch (NullPointerException e) {
+            nextMessage = bundle.getString("answers.sorry");
         }
-
-        final Step step = userProgress.getNextStep();
-        switch (step) {
-            case GENERAL_TRANSPORT_TYPE -> {
-                return getGreeting();
-            }
-            case PARTICULAR_TRANSPORT_TYPE -> {
-                return getTransportType(userProgress);
-            }
-            case WEIGHT -> {
-                return getTransportWeight(userProgress);
-            }
-            case ENGINE_TYPE -> {
-                return getTypeOfEngine();
-            }
-            case ENGINE_VOLUME_POWER -> {
-                return getEngineVolumeOrPower(userProgress);
-            }
-            case COUNTRY_ORIGIN -> {
-                return getCountryOrigin();
-            }
-            case OWNERS_TYPE -> {
-                return getTypeOfOwner();
-            }
-            case TRUCK_UNIT_CLASS -> {
-                return getTruckUnitClass();
-            }
-            case TRAILERS_O4_TYPE -> {
-                return getO4TrailersTypes();
-            }
-            case AGE -> {
-                return getAgeAuto();
-            }
-            case FAREWELL -> {
-                return getResultAndFarewell(userProgress);
-            }
+        if (userProgress.getNextStep().equals(Step.FAREWELL)) {
+            nextMessage = nextMessage + bundle.getString("answer.final.farewell");
+            nextMessage = String.format(nextMessage, userProgress.getPrice());
         }
-        return bundle.getString("answers.sorry");
+        return nextMessage;
     }
 
     private String getO4TrailersTypes() {
@@ -870,7 +836,7 @@ public class MessagesCreator {
 
     public String getSummaryAnswer(final UserProgress userProgress) {
         try {
-            return getUserChoiceSequence(userProgress) + buildNextStepQuestion(userProgress);
+            return /*getUserChoiceSequence(userProgress) +*/ buildNextStepQuestion(userProgress);
         } catch (UtilsborCommandTreeReadingException e) {
             throw new RuntimeException(e);
         }

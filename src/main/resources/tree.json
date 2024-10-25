@@ -1,35 +1,39 @@
 {
   "key": "START",
   "nextStep": "GENERAL_TRANSPORT_TYPE",
-  "nextMessage": "Бесплатно рассчитаю стоимость утильсбора в Беларуси. \nВыберите тип авто:\n/cars - легковой автомобиль (кат. M1);\n/buses_and_trucks - транспорт других категорий, кроме M1;\n/self_propelled_vehicles - самоходные машины и/или прицепы к ним.",
   "price": null,
+  "nextMessage": "questions.general",
   "children": [
     {
       "key": "M1",
       "nextStep": "COUNTRY_ORIGIN",
-      "nextMessage": "\nОткуда везем автомобиль?\n/eaes - для автомобилей из России и ЕАЭС;\n/other - для автомобилей из других стран.",
       "price": null,
+      "nextMessage": "questions.m1.origin",
       "children": [
         {
           "key": "EAES",
           "nextStep": "OWNERS_TYPE",
           "price": null,
+          "nextMessage": "questions.m1.eaes.ownertype",
           "children": [
             {
               "key": "PHYSICAL",
               "nextStep": "AGE",
               "price": null,
+              "nextMessage": "questions.m1.eaes.agePhysical",
               "children": [
                 {
                   "key": "LESS_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>544,5</b>",
+                  "nextMessage": "questions.m1.eaes.physical.less3age.result",
                   "children": []
                 },
                 {
                   "key": "MORE_THAN_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>816,7</b>",
+                  "nextMessage": "questions.m1.eaes.physical.more3age.result",
                   "children": []
                 }
               ]
@@ -38,17 +42,20 @@
               "key": "JURIDICAL",
               "nextStep": "AGE",
               "price": null,
+              "nextMessage": "questions.m1.eaes.ageJuridical",
               "children": [
                 {
                   "key": "LESS_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>544,5</b>",
+                  "nextMessage": "questions.m1.eaes.juridical.less3age.result",
                   "children": []
                 },
                 {
                   "key": "MORE_THAN_3_YEARS_AGE",
                   "nextStep": "FAREWELL",
                   "price": "<b>816,7</b>",
+                  "nextMessage": "questions.m1.eaes.juridical.more3age.result",
                   "children": []
                 }
               ]

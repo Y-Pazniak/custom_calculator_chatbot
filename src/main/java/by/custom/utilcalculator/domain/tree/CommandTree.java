@@ -215,12 +215,20 @@ public class CommandTree {
         return CommandTree.getInstance().getNextMessageFromNode(userProgress);
     }
 
+    public static String getPrice(final UserProgress userProgress) {
+        return CommandTree.getInstance().getPriceFromNode(userProgress);
+    }
+
     public Step getNextStepFromNode(final UserProgress userProgress) {
         return getNode(userProgress).getNextStep();
     }
 
     public String getNextMessageFromNode(final UserProgress userProgress) {
         return getNode(userProgress).getNextMessage();
+    }
+
+    public String getPriceFromNode(final UserProgress userProgress) {
+        return getNode(userProgress).getPrice();
     }
 
     public boolean isRequestingCommandAcceptable(final Command requestingCommand, final Node node) {
