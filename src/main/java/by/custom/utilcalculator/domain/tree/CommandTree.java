@@ -215,7 +215,7 @@ public class CommandTree {
         return CommandTree.getInstance().getNextMessageFromNode(userProgress);
     }
 
-    public static String getPrice(final UserProgress userProgress) {
+    public static Double getPrice(final UserProgress userProgress) {
         return CommandTree.getInstance().getPriceFromNode(userProgress);
     }
 
@@ -227,7 +227,7 @@ public class CommandTree {
         return getNode(userProgress).getNextMessage();
     }
 
-    public String getPriceFromNode(final UserProgress userProgress) {
+    public Double getPriceFromNode(final UserProgress userProgress) {
         return getNode(userProgress).getPrice();
     }
 

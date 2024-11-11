@@ -5,7 +5,6 @@ import by.custom.utilcalculator.domain.constants.steps.Step;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +15,13 @@ public class Node {
     private final Command key;
     private final Step nextStep;
     private final String nextMessage;
-    private final String price;
+    private final Double price;
 
     public Node(@JsonProperty("key") final Command key,
                 @JsonProperty("description") final String description,
                 @JsonProperty("nextStep") final Step nextStep,
                 @JsonProperty("nextMessage") final String nextMessage,
-                @JsonProperty("price") @Nullable final String price) {
+                @JsonProperty("price") final Double price) {
         this.key = key;
         children = new ArrayList<>();
         this.nextStep = nextStep;
@@ -46,7 +45,7 @@ public class Node {
         return key;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 

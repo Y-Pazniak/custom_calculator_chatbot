@@ -25,7 +25,7 @@ public class ModifierTree {
         return treeRootJson;
     }
 
-    public static String getPrice(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
+    public static Double getPrice(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         Node root;
         try {
             root = mapper.readValue(getTreeInputStream(), Node.class);
@@ -46,7 +46,7 @@ public class ModifierTree {
                 }
             }
         }
-        return "error during calculation";
+        return null;
     }
 
     private static InputStream getTreeInputStream() {
