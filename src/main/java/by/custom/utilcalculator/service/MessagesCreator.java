@@ -38,12 +38,21 @@ public class MessagesCreator {
             nextMessage = bundle.getString(userProgress.getNextMessage());
         } catch (NullPointerException e) {
             nextMessage = bundle.getString("answers.sorry");
+        } catch (Exception e) {
+            e.printStackTrace();
+            nextMessage = bundle.getString("answers.sorry");
         }
         if (userProgress.getNextStep().equals(Step.FAREWELL)) {
-            nextMessage = nextMessage + bundle.getString("answer.final.farewell");
-            nextMessage = String.format(nextMessage, userProgress.getPrice().getAmount(), userProgress.getPrice().getCurrencyType());
+            nextMessage = getFarewellMessage(nextMessage, userProgress);
         }
         return nextMessage;
+    }
+
+    private String getFarewellMessage(final String nextMessage, final UserProgress userProgress){
+        String farewellMessage;
+        farewellMessage = nextMessage + bundle.getString("answer.final.farewell");
+        farewellMessage = String.format(farewellMessage, userProgress.getPrice().getAmount(), userProgress.getPrice().getCurrencyType());
+        return farewellMessage;
     }
 
     private String getO4TrailersTypes() {
