@@ -204,7 +204,7 @@ public class CommandTree {
         return isRequestingCommandAcceptable(requestingCommand, getNode(userProgress));
     }
 
-    public static boolean validateCommand(final Command requestingCommand, final UserProgress userProgress) {
+    public static boolean isValidCommand(final Command requestingCommand, final UserProgress userProgress) {
         return CommandTree.getInstance().validateCommandFromNode(requestingCommand, userProgress);
     }
 
