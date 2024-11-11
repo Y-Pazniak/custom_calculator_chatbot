@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.domain.tree;
 
+import by.custom.utilcalculator.domain.Price;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
@@ -25,7 +26,7 @@ public class ModifierTree {
         return treeRootJson;
     }
 
-    public static Double getPrice(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
+    public static Price getPrice(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         Node root;
         try {
             root = mapper.readValue(getTreeInputStream(), Node.class);

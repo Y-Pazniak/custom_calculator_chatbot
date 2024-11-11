@@ -41,7 +41,7 @@ public class MessagesCreator {
         }
         if (userProgress.getNextStep().equals(Step.FAREWELL)) {
             nextMessage = nextMessage + bundle.getString("answer.final.farewell");
-            nextMessage = String.format(nextMessage, userProgress.getPrice());
+            nextMessage = String.format(nextMessage, userProgress.getPrice().getAmount(), userProgress.getPrice().getCurrencyType());
         }
         return nextMessage;
     }

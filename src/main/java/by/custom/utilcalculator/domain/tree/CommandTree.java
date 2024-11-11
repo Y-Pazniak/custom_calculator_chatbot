@@ -1,5 +1,6 @@
 package by.custom.utilcalculator.domain.tree;
 
+import by.custom.utilcalculator.domain.Price;
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
@@ -215,7 +216,7 @@ public class CommandTree {
         return CommandTree.getInstance().getNextMessageFromNode(userProgress);
     }
 
-    public static Double getPrice(final UserProgress userProgress) {
+    public static Price getPrice(final UserProgress userProgress) {
         return CommandTree.getInstance().getPriceFromNode(userProgress);
     }
 
@@ -227,7 +228,7 @@ public class CommandTree {
         return getNode(userProgress).getNextMessage();
     }
 
-    public Double getPriceFromNode(final UserProgress userProgress) {
+    public Price getPriceFromNode(final UserProgress userProgress) {
         return getNode(userProgress).getPrice();
     }
 

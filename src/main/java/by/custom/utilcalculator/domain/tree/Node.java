@@ -1,32 +1,40 @@
 package by.custom.utilcalculator.domain.tree;
 
+import by.custom.utilcalculator.domain.Price;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.CurrencyType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
     @JsonIgnore
     private Node parent;
-    private List<Node> children;
+    private final List<Node> children;
     private final Command key;
     private final Step nextStep;
     private final String nextMessage;
-    private final Double price;
+    @Nullable
+    private final Price price;
 
     public Node(@JsonProperty("key") final Command key,
                 @JsonProperty("description") final String description,
                 @JsonProperty("nextStep") final Step nextStep,
                 @JsonProperty("nextMessage") final String nextMessage,
-                @JsonProperty("price") final Double price) {
+                @JsonProperty("price") @Nullable final Double price) {
         this.key = key;
         children = new ArrayList<>();
         this.nextStep = nextStep;
         this.nextMessage = nextMessage;
-        this.price = price;
+        if (price != null) {
+            this.price = new Price(price, CurrencyType.BYN);
+        } else {
+            this.price = null;
+        }
     }
 
     public Node getParent() {
@@ -45,7 +53,7 @@ public class Node {
         return key;
     }
 
-    public Double getPrice() {
+    public Price getPrice() {
         return price;
     }
 
@@ -53,7 +61,7 @@ public class Node {
         return nextStep;
     }
 
-    public String getNextMessage(){
+    public String getNextMessage() {
         return nextMessage;
     }
 }
