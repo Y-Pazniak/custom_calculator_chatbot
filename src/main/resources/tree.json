@@ -23,14 +23,14 @@
               "nextMessage": "questions.m1.eaes.agePhysical",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "544.5",
                   "nextMessage": "questions.m1.eaes.physical.less3age.result",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "816.7",
                   "nextMessage": "questions.m1.eaes.physical.more3age.result",
@@ -45,14 +45,15 @@
               "nextMessage": "questions.m1.eaes.ageJuridical",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "544.5",
                   "nextMessage": "questions.m1.eaes.juridical.less3age.result",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
+                  "command": "/more_3_years",
                   "nextStep": "FAREWELL",
                   "price": "816.7",
                   "nextMessage": "questions.m1.eaes.juridical.more3age.result",
@@ -63,7 +64,7 @@
           ]
         },
         {
-          "key": "OTHER_COUNTRIES",
+          "key": "OTHER",
           "nextStep": "OWNERS_TYPE",
           "price": null,
           "nextMessage": "questions.m1.other.ownertype",
@@ -75,14 +76,14 @@
               "nextMessage": "questions.m1.other.agePhysical",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "544.5",
                   "nextMessage": "questions.m1.other.physical.less3age.result",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "816.7",
                   "nextMessage": "questions.m1.other.physical.more3age.result",
@@ -103,14 +104,14 @@
                   "nextMessage": "questions.m1.other.juridical.electricAge",
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "544.5",
                       "nextMessage": "questions.m1.other.juridical.electric.less3age.result",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "816.7",
                       "nextMessage": "questions.m1.other.juridical.electric.more3age.result",
@@ -131,14 +132,14 @@
                       "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000",
                       "children": [
                         {
-                          "key": "LESS_3_YEARS_AGE",
+                          "key": "LESS_OR_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "3145.69",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000.less3age",
                           "children": []
                         },
                         {
-                          "key": "MORE_THAN_3_YEARS_AGE",
+                          "key": "MORE_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "8026.93",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000.more3age",
@@ -153,14 +154,14 @@
                       "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000",
                       "children": [
                         {
-                          "key": "LESS_3_YEARS_AGE",
+                          "key": "LESS_OR_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "11645.24",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000.less3age",
                           "children": []
                         },
                         {
-                          "key": "MORE_THAN_3_YEARS_AGE",
+                          "key": "MORE_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": " 20485.71",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000.more3age",
@@ -175,14 +176,14 @@
                       "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000",
                       "children": [
                         {
-                          "key": "LESS_3_YEARS_AGE",
+                          "key": "LESS_OR_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "32727.55",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000.less3age",
                           "children": []
                         },
                         {
-                          "key": "MORE_THAN_3_YEARS_AGE",
+                          "key": "MORE_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "49548.46",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000.more3age",
@@ -197,14 +198,14 @@
                       "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500",
                       "children": [
                         {
-                          "key": "LESS_3_YEARS_AGE",
+                          "key": "LESS_OR_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "37577.8",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500.less3age",
                           "children": []
                         },
                         {
-                          "key": "MORE_THAN_3_YEARS_AGE",
+                          "key": "MORE_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "57528.9",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500.more3age",
@@ -219,14 +220,14 @@
                       "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500",
                       "children": [
                         {
-                          "key": "LESS_3_YEARS_AGE",
+                          "key": "LESS_OR_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "47851.65",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500.less3age",
                           "children": []
                         },
                         {
-                          "key": "MORE_THAN_3_YEARS_AGE",
+                          "key": "MORE_3_YEARS",
                           "nextStep": "FAREWELL",
                           "price": "62906.01",
                           "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500.more3age",
@@ -258,13 +259,14 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
+                  "command": "/3_or_less_years",
                   "nextStep": "FAREWELL",
                   "price": "17316.78",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "25161.63",
                   "children": []
@@ -277,13 +279,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "18653.31",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "27137.37",
                   "children": []
@@ -296,13 +298,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "19524.96",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "29055.0",
                   "children": []
@@ -315,13 +317,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "20338.5",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "46488.0",
                   "children": []
@@ -334,13 +336,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "28822.56",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "78564.72",
                   "children": []
@@ -353,13 +355,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "32715.93",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "114302.37",
                   "children": []
@@ -372,13 +374,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "89082.63",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "187695.3",
                   "children": []
@@ -398,13 +400,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "4900.5",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "8167.5",
                   "children": []
@@ -422,13 +424,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "18246.54",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "18478.98",
                       "children": []
@@ -441,13 +443,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "64211.55",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "97218.03",
                       "children": []
@@ -460,13 +462,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "71707.74",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "92046.24",
                       "children": []
@@ -479,13 +481,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "82922.97",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "130515.06",
                       "children": []
@@ -512,13 +514,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "56018.04",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "228488.52",
                       "children": []
@@ -531,13 +533,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "66012.96",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "134059.77",
                       "children": []
@@ -557,13 +559,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "32948.37",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "134408.43",
                       "children": []
@@ -576,13 +578,13 @@
                   "price": null,
                   "children": [
                     {
-                      "key": "LESS_3_YEARS_AGE",
+                      "key": "LESS_OR_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "38817.48",
                       "children": []
                     },
                     {
-                      "key": "MORE_THAN_3_YEARS_AGE",
+                      "key": "MORE_3_YEARS",
                       "nextStep": "FAREWELL",
                       "price": "78855.27",
                       "children": []
@@ -604,13 +606,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "23244.0",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "78448.5",
                   "children": []
@@ -623,13 +625,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "23244.0",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "78448.5",
                   "children": []
@@ -662,13 +664,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "21384.48",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "56802.53",
                   "children": []
@@ -681,13 +683,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "78454.31",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "205491.49",
                   "children": []
@@ -700,13 +702,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "82664.38",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "223133.68",
                   "children": []
@@ -719,13 +721,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "112335.35",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "332795.97",
                   "children": []
@@ -744,13 +746,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "26730.60",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "113605.05",
                   "children": []
@@ -762,13 +764,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "AGE",
                   "price": "40095.90",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "167066.25",
                   "children": []
@@ -780,13 +782,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "53461.20",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "270647.33",
                   "children": []
@@ -806,13 +808,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "26730.60",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "80191.80",
                   "children": []
@@ -825,13 +827,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "81327.85",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "233892.75",
                   "children": []
@@ -844,13 +846,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96831.60",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "367545.75",
                   "children": []
@@ -863,13 +865,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "112335.35",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "467785.50",
                   "children": []
@@ -882,13 +884,13 @@
               "price": null,
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "100239.75",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "668265.00",
                   "children": []
@@ -906,13 +908,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "16706.63",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "511890.99",
                   "children": []
@@ -924,13 +926,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "22052.75",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "837336.05",
                   "children": []
@@ -942,13 +944,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "26730.60",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "837336.05",
                   "children": []
@@ -960,13 +962,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "29403.66",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "1075238.39",
                   "children": []
@@ -984,13 +986,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "24191.19",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "65890.93",
                   "children": []
@@ -1002,13 +1004,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "38759.37",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "80191.80",
                   "children": []
@@ -1020,13 +1022,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "46511.24",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "100239.75",
                   "children": []
@@ -1044,13 +1046,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": " 6682.65",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "40095.90",
                   "children": []
@@ -1062,13 +1064,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "28067.13",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "66826.50",
                   "children": []
@@ -1080,13 +1082,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "41432.43",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "113605.05",
                   "children": []
@@ -1098,13 +1100,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "30071.93",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "133653.00",
                   "children": []
@@ -1116,13 +1118,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "80793.24",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "200479.50",
                   "children": []
@@ -1134,13 +1136,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "94425.84",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "233892.75",
                   "children": []
@@ -1152,13 +1154,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "174350.34",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "467785.50",
                   "children": []
@@ -1176,13 +1178,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "76850.48",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "296041.40",
                   "children": []
@@ -1194,13 +1196,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "151696.16",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "638193.08",
                   "children": []
@@ -1212,13 +1214,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "202484.30",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "1591138.97",
                   "children": []
@@ -1236,13 +1238,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "66826.50",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "200479.50",
                   "children": []
@@ -1254,13 +1256,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "106922.40",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "334132.50",
                   "children": []
@@ -1272,13 +1274,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "140335.65",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "467785.50",
                   "children": []
@@ -1290,13 +1292,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "167066.25",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "668265.00",
                   "children": []
@@ -1314,13 +1316,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "6682.65",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "46778.55",
                   "children": []
@@ -1332,13 +1334,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "6682.65",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "46778.55",
                   "children": []
@@ -1356,13 +1358,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "18711.42",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "72840.89",
                   "children": []
@@ -1374,13 +1376,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "27398.87",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "110263.73",
                   "children": []
@@ -1392,13 +1394,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "31408.46",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "128975.15",
                   "children": []
@@ -1416,13 +1418,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "53461.20",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "334132.50",
                   "children": []
@@ -1434,13 +1436,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96898.43",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "400959.00",
                   "children": []
@@ -1452,13 +1454,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "120287.70",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "467785.50",
                   "children": []
@@ -1476,13 +1478,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "53461.20",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "334132.50",
                   "children": []
@@ -1494,13 +1496,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96898.43",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "400959.00",
                   "children": []
@@ -1511,13 +1513,13 @@
               "key": "POWER_MORE_300",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "120287.70",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "467785.50",
                   "children": []
@@ -1535,13 +1537,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "53461.20",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "66826.50",
                   "children": []
@@ -1553,13 +1555,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96898.43",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "300719.25",
                   "children": []
@@ -1571,13 +1573,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "120287.70",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "400959.00",
                   "children": []
@@ -1595,13 +1597,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "2673.06",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "12028.77",
                   "children": []
@@ -1613,13 +1615,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "6749.48",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "19379.69",
                   "children": []
@@ -1631,13 +1633,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "20916.69",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96831.60",
                   "children": []
@@ -1649,13 +1651,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "48449.21",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "116211.28",
                   "children": []
@@ -1667,13 +1669,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "67762.07",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "154970.65",
                   "children": []
@@ -1685,13 +1687,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "77451.91",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "178226.28",
                   "children": []
@@ -1703,13 +1705,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "88144.15",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "211104.91",
                   "children": []
@@ -1721,13 +1723,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "139466.91",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "290561.62",
                   "children": []
@@ -1739,13 +1741,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "44773.76",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "167066.25",
                   "children": []
@@ -1757,13 +1759,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "60143.85",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "267306.00",
                   "children": []
@@ -1781,13 +1783,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "10023.98",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "46778.55",
                   "children": []
@@ -1799,13 +1801,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "16706.63",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "66826.50",
                   "children": []
@@ -1817,13 +1819,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "60143.85",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "187114.20",
                   "children": []
@@ -1841,13 +1843,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "16038.36",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "58807.32",
                   "children": []
@@ -1859,13 +1861,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "24057.54",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "88210.98",
                   "children": []
@@ -1877,13 +1879,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "36754.58",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "117614.64",
                   "children": []
@@ -1895,13 +1897,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "43437.23",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "147018.30",
                   "children": []
@@ -1913,13 +1915,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "56802.53",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "199944.89",
                   "children": []
@@ -1931,13 +1933,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "80191.80",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "303793.27",
                   "children": []
@@ -1955,13 +1957,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "33413.25",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "85270.61",
                   "children": []
@@ -1973,13 +1975,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "61480.38",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "176421.96",
                   "children": []
@@ -1991,13 +1993,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "96230.16",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "352843.92",
                   "children": []
@@ -2015,13 +2017,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "13365.30",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "66826.50",
                   "children": []
@@ -2033,13 +2035,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "53461.20",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "200479.50",
                   "children": []
@@ -2051,13 +2053,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "106922.40",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "267306.00",
                   "children": []
@@ -2069,13 +2071,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "26730.60",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "97967.65",
                   "children": []
@@ -2093,13 +2095,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "149691.36",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "233892.75",
                   "children": []
@@ -2111,13 +2113,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "232422.57",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "341617.07",
                   "children": []
@@ -2129,13 +2131,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "275993.45",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "352843.92",
                   "children": []
@@ -2147,13 +2149,13 @@
               "nextStep": "AGE",
               "children": [
                 {
-                  "key": "LESS_3_YEARS_AGE",
+                  "key": "LESS_OR_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "408309.92",
                   "children": []
                 },
                 {
-                  "key": "MORE_THAN_3_YEARS_AGE",
+                  "key": "MORE_3_YEARS",
                   "nextStep": "FAREWELL",
                   "price": "441054.90",
                   "children": []
@@ -2166,26 +2168,3 @@
     }
   ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -59,9 +59,9 @@ public class MessageRouter {
             }
             case M1, BUSES_AND_TRUCKS, SELF_PROPELLED_VEHICLES ->
                     answer = userProgressManager.processGeneralTransportType(requestingCommand, chatID);
-            case EAES, OTHER_COUNTRIES -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
+            case EAES, OTHER -> answer = userProgressManager.processCarOrigin(requestingCommand, chatID);
             case PHYSICAL, JURIDICAL -> answer = userProgressManager.processOwnerType(requestingCommand, chatID);
-            case LESS_3_YEARS_AGE, MORE_THAN_3_YEARS_AGE ->
+            case LESS_OR_3_YEARS, MORE_3_YEARS ->
                     answer = userProgressManager.processCarAge(requestingCommand, chatID);
             case GASOLINE, ELECTRIC -> answer = userProgressManager.processEngineType(requestingCommand, chatID);
             case VOLUME_LESS_1000_CM, VOLUME_BETWEEN_1000_2000_CM, VOLUME_BETWEEN_2000_3000_CM,

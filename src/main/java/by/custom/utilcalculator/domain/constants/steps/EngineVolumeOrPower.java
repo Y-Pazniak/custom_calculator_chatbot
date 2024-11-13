@@ -1,11 +1,11 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
 public enum EngineVolumeOrPower implements StepsIndicator {
-    LESS_1000,
-    BETWEEN_1000_AND_2000,
-    BETWEEN_2000_AND_3000,
-    BETWEEN_3000_AND_3500,
-    MORE_3500,
+    VOLUME_LESS_1000_CM,
+    VOLUME_BETWEEN_1000_2000_CM,
+    VOLUME_BETWEEN_2000_3000_CM,
+    VOLUME_BETWEEN_3000_3500_CM,
+    VOLUME_MORE_3500_CM,
     LESS_2500,
     BETWEEN_2500_AND_5000,
     BETWEEN_5000_AND_10000,
@@ -64,5 +64,10 @@ public enum EngineVolumeOrPower implements StepsIndicator {
     BETWEEN_200_650,
     BETWEEN_650_1750,
     MORE_1750,
-    SELF_PROPELLED_MOWERS
+    SELF_PROPELLED_MOWERS;
+
+    @Override
+    public String getName() {
+        return this.name();
+    }
 }

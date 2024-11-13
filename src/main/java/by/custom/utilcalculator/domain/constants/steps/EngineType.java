@@ -1,5 +1,10 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
 public enum EngineType implements StepsIndicator {
-    GASOLINE, ELECTRIC
+    GASOLINE, ELECTRIC;
+
+    @Override
+    public String getName() {
+        return this.name();
+    }
 }
