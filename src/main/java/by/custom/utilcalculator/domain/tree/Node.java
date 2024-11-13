@@ -4,6 +4,7 @@ import by.custom.utilcalculator.domain.Price;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.CurrencyType;
 import by.custom.utilcalculator.domain.constants.steps.Step;
+import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,11 +21,14 @@ public class Node {
     private final String nextMessage;
     @Nullable
     private final Price price;
+    @JsonIgnore
+    private final StepsIndicator stepsIndicator;
 
     public Node(@JsonProperty("key") final Command key,
                 @JsonProperty("description") final String description,
                 @JsonProperty("nextStep") final Step nextStep,
                 @JsonProperty("nextMessage") final String nextMessage,
+                @JsonProperty("command") final String command,
                 @JsonProperty("price") @Nullable final Double price) {
         this.key = key;
         children = new ArrayList<>();
@@ -35,6 +39,7 @@ public class Node {
         } else {
             this.price = null;
         }
+        stepsIndicator = Command.getStepIndicatorByCommand(key);
     }
 
     public Node getParent() {
@@ -63,5 +68,9 @@ public class Node {
 
     public String getNextMessage() {
         return nextMessage;
+    }
+
+    public StepsIndicator getStepsIndicator() {
+        return stepsIndicator;
     }
 }

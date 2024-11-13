@@ -3,6 +3,7 @@ package by.custom.utilcalculator.domain;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.CommandTree;
+import by.custom.utilcalculator.domain.tree.Node;
 
 import java.io.Serializable;
 import java.util.ArrayList;
