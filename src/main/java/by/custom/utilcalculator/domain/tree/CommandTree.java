@@ -17,7 +17,7 @@ public class CommandTree {
         //ModifierTree.fillTreeByNodes();
         fieldsToCommands = fillFieldsToCommandsMap();
         commandsToFields = fillCommandsToFields(fieldsToCommands);
-        treeRoot = ModifierTree.buildTree();
+        treeRoot = TreeModifier.buildTree();
     }
 
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {

@@ -5,7 +5,7 @@ import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import by.custom.utilcalculator.domain.tree.CommandTree;
-import by.custom.utilcalculator.domain.tree.ModifierTree;
+import by.custom.utilcalculator.domain.tree.TreeModifier;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 
 import java.util.List;
@@ -334,7 +334,7 @@ public class MessagesCreator {
     public String getResultAndFarewell(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
         return stringBuilderAppender("." +
                         "\n" +
-                        bundle.getString("answers.summary.price") + " " + ModifierTree.getPrice(userProgress) + " " +
+                        bundle.getString("answers.summary.price") + " " + TreeModifier.getPrice(userProgress) + " " +
                         bundle.getString("answers.summary.byn") + "\n",
                 bundle.getString("answers.summary.goodbye.add.info"));
     }

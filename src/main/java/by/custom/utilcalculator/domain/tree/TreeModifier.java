@@ -4,16 +4,14 @@ import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ModifierTree {
+public class TreeModifier {
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static Node treeRootJson;
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
-        Node treeRootJson;
         try {
             treeRootJson = mapper.readValue(getTreeInputStream(), Node.class);
         } catch (IOException e) {
@@ -26,15 +24,8 @@ public class ModifierTree {
     }
 
     public static String getPrice(final UserProgress userProgress) throws UtilsborCommandTreeReadingException {
-        Node root;
-        try {
-            root = mapper.readValue(getTreeInputStream(), Node.class);
-        } catch (IOException e) {
-            throw new UtilsborCommandTreeReadingException("Error reading tree ", e);
-        }
-
-        Node localNode = root;
-        if (root != null) { //searching for the proper node according to user's path
+        Node localNode = treeRootJson;
+        if (treeRootJson != null) { //searching for the proper node according to user's path
             for (Command command : userProgress.getUserPath()) {
                 for (Node node : localNode.getChildren()) {
                     if (node.getKey().equals(command)) {
@@ -50,7 +41,7 @@ public class ModifierTree {
     }
 
     private static InputStream getTreeInputStream() {
-        return ModifierTree.class.getClassLoader().getResourceAsStream("tree.json");
+        return TreeModifier.class.getClassLoader().getResourceAsStream("tree.json");
     }
 
     private static void fillParents(final Node node) {
