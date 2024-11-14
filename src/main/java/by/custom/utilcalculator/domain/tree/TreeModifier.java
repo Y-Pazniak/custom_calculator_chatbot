@@ -2,6 +2,7 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.UserProgress;
 import by.custom.utilcalculator.domain.constants.Command;
+import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.exception.UtilsborCommandTreeReadingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class TreeModifier {
                 for (Node node : localNode.getChildren()) {
                     if (node.getKey().equals(command)) {
                         localNode = node;
-                        if (node.getPrice() != null) {
+                        if (node.getPrice() != null && node.getChildren().isEmpty()) {
                             return node.getPrice();
                         }
                     }
