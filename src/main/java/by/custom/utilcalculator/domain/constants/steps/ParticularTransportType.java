@@ -26,5 +26,10 @@ public enum ParticularTransportType implements StepsIndicator {
     COMBINE_HARVESTERS,
     FORAGE_HARVESTERS,
     AGRICULTURAL_VEHICLES,
-    OFF_ROAD_DUMP_TRUCKS
+    OFF_ROAD_DUMP_TRUCKS;
+
+    @Override
+    public String getName() {
+        return this.name();
+    }
 }

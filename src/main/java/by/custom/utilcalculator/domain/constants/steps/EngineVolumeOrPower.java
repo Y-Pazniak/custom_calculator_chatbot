@@ -64,5 +64,10 @@ public enum EngineVolumeOrPower implements StepsIndicator {
     BETWEEN_200_650,
     BETWEEN_650_1750,
     MORE_1750,
-    SELF_PROPELLED_MOWERS
+    SELF_PROPELLED_MOWERS;
+
+    @Override
+    public String getName() {
+        return this.name();
+    }
 }

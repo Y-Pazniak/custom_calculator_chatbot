@@ -9,5 +9,10 @@ public enum Weight implements StepsIndicator {
     BETWEEN_12_AND_20,
     BETWEEN_20_AND_50,
     FROM_12_TILL_20_TONS,
-    FROM_20_TILL_50_TONS
+    FROM_20_TILL_50_TONS;
+
+    @Override
+    public String getName() {
+        return this.name();
+    }
 }
