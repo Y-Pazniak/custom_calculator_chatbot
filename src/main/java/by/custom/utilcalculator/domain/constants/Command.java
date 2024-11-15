@@ -1,7 +1,9 @@
 package by.custom.utilcalculator.domain.constants;
 
 
-import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+import by.custom.utilcalculator.domain.constants.steps.*;
+
+import java.util.Set;
 
 public enum Command {
     //command families - not commands actually, just markers
@@ -208,5 +210,23 @@ public enum Command {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("No such command for stepIndicator: " + stepsIndicator, e);
         }
+    }
+
+    public static StepsIndicator getStepIndicatorByCommand(final Command command) {
+        Set<Class<? extends StepsIndicator>> setOfSteps = Set.of(CarAge.class, CountryOrigin.class, EngineType.class, EngineVolumeOrPower.class, GeneralTransportType.class, OwnersType.class, ParticularTransportType.class, TrailerO4Type.class, TruckUnitClass.class, Weight.class);
+        StepsIndicator stepsIndicator = null;
+        for (Class<? extends StepsIndicator> stepClass : setOfSteps) {
+            try {
+                Enum<?> enumValue = Enum.valueOf(stepClass.asSubclass(Enum.class), command.name());
+                if (enumValue instanceof StepsIndicator) {
+                    stepsIndicator = (StepsIndicator) enumValue;
+                    break;
+                }
+            } catch (Exception _){}
+        }
+        if (stepsIndicator == null) {
+            throw new IllegalArgumentException("No such command for stepIndicator: " + command);
+        }
+        return stepsIndicator;
     }
 }
