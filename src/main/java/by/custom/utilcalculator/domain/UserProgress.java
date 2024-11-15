@@ -29,23 +29,17 @@ public class UserProgress implements Serializable {
     }
 
     private void addUserStatusToPath(final StepsIndicator stepsIndicator) {
-        final Map<StepsIndicator, Command> fieldsToCommands = CommandTree.getInstance().getFieldsToCommands();
-        Command command = fieldsToCommands.get(stepsIndicator);
-        Class<? extends StepsIndicator> stepsIndicatorClass = stepsIndicator.getClass();
+        Command command = Command.getCommandByStepIndicator(stepsIndicator);
         boolean needAddCommand = true;
         int lastNumber = 0;
 
         for (int i = 0; i < userPath.size(); i++) {
-            Command localCommand = userPath.get(i);
-            for (Map.Entry<StepsIndicator, Command> entry : fieldsToCommands.entrySet()) {
-                if (entry.getKey().getClass().equals(stepsIndicatorClass) && localCommand.equals(entry.getValue())) {
-                    needAddCommand = false;
-                    userPath.set(i, command);
-                    lastNumber = i;
-                    break;
-                }
-            }
-            if (!needAddCommand) {
+            Command tempCommand = userPath.get(i);
+            StepsIndicator tempIndicator = Command.getStepIndicatorByCommand(tempCommand);
+            if (tempIndicator.getClass().equals(stepsIndicator.getClass())) {
+                lastNumber = i;
+                userPath.add(i, command);
+                needAddCommand = false;
                 break;
             }
         }
