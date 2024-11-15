@@ -1,6 +1,8 @@
 package by.custom.utilcalculator.domain.constants;
 
 
+import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
+
 public enum Command {
     //command families - not commands actually, just markers
     ENGINE_VOLUME("volume"),
@@ -198,5 +200,13 @@ public enum Command {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Command getCommandByStepIndicator(final StepsIndicator stepsIndicator) {
+        try {
+            return Command.valueOf(stepsIndicator.getName());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("No such command for stepIndicator: " + stepsIndicator, e);
+        }
     }
 }
