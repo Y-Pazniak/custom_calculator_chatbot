@@ -13,7 +13,7 @@ public class CommandTree {
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
-        treeRoot = ModifierTree.buildTree();
+        treeRoot = TreeModifier.buildTree();
     }
 
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ModifierTree {
+public class TreeModifier {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static Node buildTree() throws UtilsborCommandTreeReadingException {
@@ -50,7 +50,7 @@ public class ModifierTree {
     }
 
     private static InputStream getTreeInputStream() {
-        return ModifierTree.class.getClassLoader().getResourceAsStream("tree.json");
+        return TreeModifier.class.getClassLoader().getResourceAsStream("tree.json");
     }
 
     private static void fillParents(final Node node) {
