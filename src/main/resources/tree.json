@@ -1,28 +1,61 @@
 {
   "key": "START",
+  "nextStep": "GENERAL_TRANSPORT_TYPE",
+  "price": null,
+  "nextMessage": "questions.general",
   "children": [
     {
       "key": "M1",
+      "nextStep": "COUNTRY_ORIGIN",
+      "price": null,
+      "nextMessage": "questions.m1.origin",
       "children": [
         {
           "key": "EAES",
+          "nextStep": "OWNERS_TYPE",
+          "price": null,
+          "nextMessage": "questions.m1.eaes.ownertype",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
+              "key": "PHYSICAL",
+              "nextStep": "AGE",
+              "price": null,
+              "nextMessage": "questions.m1.eaes.agePhysical",
               "children": [
                 {
-                  "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
+                  "key": "LESS_OR_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "544.5",
+                  "nextMessage": "questions.m1.eaes.physical.less3age.result",
+                  "children": []
+                },
+                {
+                  "key": "MORE_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "816.7",
+                  "nextMessage": "questions.m1.eaes.physical.more3age.result",
                   "children": []
                 }
               ]
             },
             {
-              "key": "JURIDICAL_PERSON",
+              "key": "JURIDICAL",
+              "nextStep": "AGE",
+              "price": null,
+              "nextMessage": "questions.m1.eaes.ageJuridical",
               "children": [
                 {
-                  "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
+                  "key": "LESS_OR_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "544.5",
+                  "nextMessage": "questions.m1.eaes.juridical.less3age.result",
+                  "children": []
+                },
+                {
+                  "key": "MORE_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "816.7",
+                  "nextMessage": "questions.m1.eaes.juridical.more3age.result",
                   "children": []
                 }
               ]
@@ -30,43 +63,176 @@
           ]
         },
         {
-          "key": "OTHER_COUNTRIES",
+          "key": "OTHER",
+          "nextStep": "OWNERS_TYPE",
+          "price": null,
+          "nextMessage": "questions.m1.other.ownertype",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
+              "key": "PHYSICAL",
+              "nextStep": "AGE",
+              "price": null,
+              "nextMessage": "questions.m1.other.agePhysical",
               "children": [
                 {
-                  "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
+                  "key": "LESS_OR_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "544.5",
+                  "nextMessage": "questions.m1.other.physical.less3age.result",
+                  "children": []
+                },
+                {
+                  "key": "MORE_3_YEARS",
+                  "nextStep": "FAREWELL",
+                  "price": "816.7",
+                  "nextMessage": "questions.m1.other.physical.more3age.result",
                   "children": []
                 }
               ]
             },
             {
-              "key": "JURIDICAL_PERSON",
+              "key": "JURIDICAL",
+              "nextStep": "ENGINE_TYPE",
+              "price": null,
+              "nextMessage": "questions.m1.other.juridical.engineType",
               "children": [
                 {
-                  "key": "GASOLINE_TYPE_ENGINE",
+                  "key": "ELECTRIC",
+                  "nextStep": "AGE",
+                  "price": null,
+                  "nextMessage": "questions.m1.other.juridical.electricAge",
                   "children": [
                     {
-                      "key": "VOLUME",
-                      "children": [
-                        {
-                          "key": "AGE",
-                          "description": "no slash because this command unites several another commands with slash",
-                          "children": []
-                        }
-                      ]
+                      "key": "LESS_OR_3_YEARS",
+                      "nextStep": "FAREWELL",
+                      "price": "544.5",
+                      "nextMessage": "questions.m1.other.juridical.electric.less3age.result",
+                      "children": []
+                    },
+                    {
+                      "key": "MORE_3_YEARS",
+                      "nextStep": "FAREWELL",
+                      "price": "816.7",
+                      "nextMessage": "questions.m1.other.juridical.electric.more3age.result",
+                      "children": []
                     }
                   ]
                 },
                 {
-                  "key": "ELECTRIC_TYPE_ENGINE",
+                  "key": "GASOLINE",
+                  "nextStep": "ENGINE_VOLUME_POWER",
+                  "price": null,
+                  "nextMessage": "questions.m1.other.juridical.gasolinePower",
                   "children": [
                     {
-                      "key": "AGE",
-                      "description": "no slash because this command unites several another commands with slash",
-                      "children": []
+                      "key": "VOLUME_LESS_1000_CM",
+                      "nextStep": "AGE",
+                      "price": null,
+                      "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000",
+                      "children": [
+                        {
+                          "key": "LESS_OR_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "3145.69",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000.less3age",
+                          "children": []
+                        },
+                        {
+                          "key": "MORE_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "8026.93",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.less1000.more3age",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "VOLUME_BETWEEN_1000_2000_CM",
+                      "nextStep": "AGE",
+                      "price": null,
+                      "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000",
+                      "children": [
+                        {
+                          "key": "LESS_OR_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "11645.24",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000.less3age",
+                          "children": []
+                        },
+                        {
+                          "key": "MORE_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": " 20485.71",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.1000_2000.more3age",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "VOLUME_BETWEEN_2000_3000_CM",
+                      "nextStep": "AGE",
+                      "price": null,
+                      "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000",
+                      "children": [
+                        {
+                          "key": "LESS_OR_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "32727.55",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000.less3age",
+                          "children": []
+                        },
+                        {
+                          "key": "MORE_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "49548.46",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.2000_3000.more3age",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "VOLUME_BETWEEN_3000_3500_CM",
+                      "nextStep": "AGE",
+                      "price": null,
+                      "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500",
+                      "children": [
+                        {
+                          "key": "LESS_OR_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "37577.8",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500.less3age",
+                          "children": []
+                        },
+                        {
+                          "key": "MORE_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "57528.9",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.3000_3500.more3age",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "key": "VOLUME_MORE_3500_CM",
+                      "nextStep": "AGE",
+                      "price": null,
+                      "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500",
+                      "children": [
+                        {
+                          "key": "LESS_OR_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "47851.65",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500.less3age",
+                          "children": []
+                        },
+                        {
+                          "key": "MORE_3_YEARS",
+                          "nextStep": "FAREWELL",
+                          "price": "62906.01",
+                          "nextMessage": "questions.m1.other.juridical.gasolinePower.more_3500.more3age",
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 }
@@ -75,12 +241,6 @@
           ]
         }
       ]
-    },
-    {
-      "key": "EXCEPT_M1",
-      "children": []
-    },
-    {"key": "TRAILERS",
-      "children": []}
+    }
   ]
 }

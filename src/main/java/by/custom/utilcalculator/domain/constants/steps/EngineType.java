@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum CountryOrigin implements StepsIndicator {
-    EAES, OTHER;
+public enum EngineType implements StepsIndicator {
+    GASOLINE, ELECTRIC;
 
     @Override
     public String getName() {

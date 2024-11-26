@@ -1,7 +1,7 @@
 package by.custom.utilcalculator.domain.constants.steps;
 
-public enum CountryOrigin implements StepsIndicator {
-    EAES, OTHER;
+public enum TrailerO4Type implements StepsIndicator {
+    TRAILERS, HALF_TRAILERS;
 
     @Override
     public String getName() {
