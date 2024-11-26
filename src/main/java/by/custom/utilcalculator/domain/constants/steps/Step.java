@@ -11,5 +11,6 @@ public enum Step {
     TRUCK_UNIT_CLASS,
     TRAILERS_O4_TYPE,
     AGE,
-    FAREWELL
+    FAREWELL;
+
 }

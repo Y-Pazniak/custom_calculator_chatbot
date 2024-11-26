@@ -3,11 +3,11 @@ package by.custom.utilcalculator.domain;
 import by.custom.utilcalculator.domain.constants.Command;
 import by.custom.utilcalculator.domain.constants.steps.*;
 import by.custom.utilcalculator.domain.tree.CommandTree;
+import by.custom.utilcalculator.domain.tree.Node;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UserProgress implements Serializable {
     private GeneralTransportType generalTransportType = null;
@@ -52,6 +52,14 @@ public class UserProgress implements Serializable {
 
     public Step getNextStep() {
         return CommandTree.getNextStep(this);
+    }
+
+    public String getNextMessage() {
+        return CommandTree.getNextMessage(this);
+    }
+
+    public Price getPrice() {
+        return CommandTree.getPrice(this);
     }
 
     public GeneralTransportType getGeneralTransportType() {
