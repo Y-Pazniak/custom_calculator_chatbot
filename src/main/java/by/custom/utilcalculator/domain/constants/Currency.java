@@ -1,11 +1,11 @@
 package by.custom.utilcalculator.domain.constants;
 
-public enum CurrencyType {
+public enum Currency {
     BYN("BYN");
 
     private final String currencyName;
 
-    CurrencyType(final String currencyName) {
+    Currency(final String currencyName) {
         this.currencyName = currencyName;
     }
 

@@ -2,13 +2,14 @@ package by.custom.utilcalculator.domain.tree;
 
 import by.custom.utilcalculator.domain.Price;
 import by.custom.utilcalculator.domain.constants.Command;
-import by.custom.utilcalculator.domain.constants.CurrencyType;
+import by.custom.utilcalculator.domain.constants.Currency;
 import by.custom.utilcalculator.domain.constants.steps.Step;
 import by.custom.utilcalculator.domain.constants.steps.StepsIndicator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,13 @@ public class Node {
                 @JsonProperty("nextStep") final Step nextStep,
                 @JsonProperty("nextMessage") final String nextMessage,
                 @JsonProperty("command") final String command,
-                @JsonProperty("price") @Nullable final Double price) {
+                @JsonProperty("price") @Nullable final BigDecimal price) {
         this.key = key;
         children = new ArrayList<>();
         this.nextStep = nextStep;
         this.nextMessage = nextMessage;
         if (price != null) {
-            this.price = new Price(price, CurrencyType.BYN);
+            this.price = new Price(price, Currency.BYN);
         } else {
             this.price = null;
         }

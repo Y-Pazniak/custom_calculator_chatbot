@@ -10,13 +10,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CommandTree {
-    //private final Map<StepsIndicator, Command> fieldsToCommands;
-    //private final Map<Command, List<StepsIndicator>> commandsToFields;
     private final Node treeRoot;
 
     private CommandTree() throws UtilsborCommandTreeReadingException {
-        //fieldsToCommands = fillFieldsToCommandsMap();
-        //commandsToFields = fillCommandsToFields(fieldsToCommands);
         treeRoot = ModifierTree.buildTree();
     }
 

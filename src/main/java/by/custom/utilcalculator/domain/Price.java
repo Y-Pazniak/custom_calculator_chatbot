@@ -1,21 +1,23 @@
 package by.custom.utilcalculator.domain;
 
-import by.custom.utilcalculator.domain.constants.CurrencyType;
+import by.custom.utilcalculator.domain.constants.Currency;
+
+import java.math.BigDecimal;
 
 public class Price {
-    private final double amount;
-    private final CurrencyType currencyType;
+    private final BigDecimal amount;
+    private final Currency currencyType;
 
-    public Price(final double amount, final CurrencyType currencyType) {
+    public Price(final BigDecimal amount, final Currency currencyType) {
         this.amount = amount;
         this.currencyType = currencyType;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public CurrencyType getCurrencyType() {
+    public Currency getCurrencyType() {
         return currencyType;
     }
 
