@@ -17,20 +17,21 @@ public class CalculatorPassenger {
     }
 
     public String calculate(final UserProgress userProgress) {
-        switch (userProgress.getCountryOrigin()) {
-            case EAES -> {
-                return countMostCommonPrice(userProgress);
-            }
-            case OTHER -> {
-                return countForOtherCountriesPrice(userProgress);
-            }
-            case null -> {
-                return "calculator: countryOrigin is null";
-            }
-            default -> {
-                return "calculator: calculate() unknown error";
-            }
-        }
+        return countForOtherCountriesPrice(userProgress);
+//        switch (userProgress.getCountryOrigin()) {
+//            case EAES -> {
+//                return countMostCommonPrice(userProgress);
+//            }
+//            case OTHER -> {
+//                return countForOtherCountriesPrice(userProgress);
+//            }
+//            case null -> {
+//                return "calculator: countryOrigin is null";
+//            }
+//            default -> {
+//                return "calculator: calculate() unknown error";
+//            }
+//        }
     }
 
     private String countForOtherCountriesPrice(final UserProgress userProgress) {
@@ -68,7 +69,7 @@ public class CalculatorPassenger {
     }
 
     private String countForElectricAutoPrice(final UserProgress userProgress) {
-        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.PASSENGER_3_OR_LESS_YEARS : Price.PASSENGER_MORE_3_YEARS;
+        return userProgress.getCarAge() == CarAge.LESS_OR_3_YEARS ? Price.PASSENGER_OTHER_ELECTRIC_LESS_OR_3_YEARS : Price.PASSENGER_OTHER_ELECTRIC_MORE_3_YEARS;
     }
 
     private String countForGasolineAutoPrice(final UserProgress userProgress) {
@@ -143,10 +144,10 @@ public class CalculatorPassenger {
     private String countMostCommonPrice(final UserProgress userProgress) { //gives prices for all eaes and all physical owners + other countries juridical electric engines
         switch (userProgress.getCarAge()) {
             case LESS_OR_3_YEARS -> {
-                return Price.PASSENGER_3_OR_LESS_YEARS;
+                return Price.PASSENGER_PHYSICAL_3_OR_LESS_YEARS;
             }
             case MORE_3_YEARS -> {
-                return Price.PASSENGER_MORE_3_YEARS;
+                return Price.PASSENGER_PHYSICAL_MORE_3_YEARS;
             }
             case null -> {
                 return "calculator: carAge is null";

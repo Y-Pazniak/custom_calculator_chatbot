@@ -25,9 +25,9 @@ public class MessagesCreator {
             case TRANSPORT_TYPE -> {
                 return getGreeting();
             }
-            case COUNTRY_ORIGIN -> {
-                return getCountryOrigin();
-            }
+//            case COUNTRY_ORIGIN -> {
+//                return getCountryOrigin();
+//            }
             case OWNERS_TYPE -> {
                 return getTypeOfOwner();
             }
@@ -48,17 +48,18 @@ public class MessagesCreator {
     }
 
     public String getGreeting() {
-        return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
+        /*return stringBuilderAppender(bundle.getString("questions.users.greeting"), "\n",
                 Command.M1.getCommand(), " ", bundle.getString("answers.details.m1"), "\n",
                 Command.EXCEPT_M1.getCommand(), " ", bundle.getString("answers.details.except_m1"), "\n",
-                Command.TRAILERS.getCommand(), " ", bundle.getString("answers.details.trailers"));
+                Command.TRAILERS.getCommand(), " ", bundle.getString("answers.details.trailers"));*/
+        return getTypeOfOwner();
     }
 
-    public String getCountryOrigin(){
-        return stringBuilderAppender("\n", bundle.getString("questions.users.country"), "\n",
-                Command.EAES.getCommand(), " ", bundle.getString("answers.details.eaes"), "\n",
-                Command.OTHER_COUNTRIES.getCommand(), " ", bundle.getString("answers.details.other"));
-    }
+//    public String getCountryOrigin(){
+//        return stringBuilderAppender("\n", bundle.getString("questions.users.country"), "\n",
+//                Command.EAES.getCommand(), " ", bundle.getString("answers.details.eaes"), "\n",
+//                Command.OTHER_COUNTRIES.getCommand(), " ", bundle.getString("answers.details.other"));
+//    }
 
     public String getTypeOfEngine() {
         return stringBuilderAppender(".", "\n", bundle.getString("questions.users.type.engine"), "\n",
@@ -90,7 +91,7 @@ public class MessagesCreator {
     }
 
     public String getTypeOfOwner() {
-        return stringBuilderAppender(".", "\n", bundle.getString("questions.users.physical.or.juridical"), "\n",
+        return stringBuilderAppender(bundle.getString("questions.users.physical.or.juridical"), "\n",
                 Command.PHYSICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.physical"), "\n",
                 Command.JURIDICAL_PERSON.getCommand(), " ", bundle.getString("answers.details.juridical"));
     }
