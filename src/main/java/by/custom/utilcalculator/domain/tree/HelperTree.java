@@ -17,13 +17,13 @@ public class HelperTree {
     public static Map<StepsIndicator, Command> fillFieldsToCommandsMap() {
         final Map<StepsIndicator, Command> fieldsToCommands = new HashMap<>(17);
         //vehicle type step
-        fieldsToCommands.put(TransportType.M1, Command.M1);
-        fieldsToCommands.put(TransportType.EXCEPT_M1, Command.EXCEPT_M1);
-        fieldsToCommands.put(TransportType.TRAILERS, Command.TRAILERS);
-
-        //country step
-        fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
-        fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
+//        fieldsToCommands.put(TransportType.M1, Command.M1);
+//        fieldsToCommands.put(TransportType.EXCEPT_M1, Command.EXCEPT_M1);
+//        fieldsToCommands.put(TransportType.TRAILERS, Command.TRAILERS);
+//
+//        //country step
+//        fieldsToCommands.put(CountryOrigin.EAES, Command.EAES);
+//        fieldsToCommands.put(CountryOrigin.OTHER, Command.OTHER_COUNTRIES);
         //type of person step
         fieldsToCommands.put(OwnersType.PHYSICAL, Command.PHYSICAL_PERSON);
         fieldsToCommands.put(OwnersType.JURIDICAL, Command.JURIDICAL_PERSON);

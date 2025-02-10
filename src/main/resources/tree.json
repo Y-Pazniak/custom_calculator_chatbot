@@ -2,23 +2,23 @@
   "key": "START",
   "children": [
     {
-      "key": "M1",
+      "key": "PHYSICAL_PERSON",
       "children": [
         {
-          "key": "EAES",
+          "key": "AGE",
+          "description": "no slash because this command unites several another commands with slash",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "JURIDICAL_PERSON",
+      "children": [
+        {
+          "key": "GASOLINE_TYPE_ENGINE",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
-              "children": [
-                {
-                  "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "key": "JURIDICAL_PERSON",
+              "key": "VOLUME",
               "children": [
                 {
                   "key": "AGE",
@@ -30,57 +30,16 @@
           ]
         },
         {
-          "key": "OTHER_COUNTRIES",
+          "key": "ELECTRIC_TYPE_ENGINE",
           "children": [
             {
-              "key": "PHYSICAL_PERSON",
-              "children": [
-                {
-                  "key": "AGE",
-                  "description": "no slash because this command unites several another commands with slash",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "key": "JURIDICAL_PERSON",
-              "children": [
-                {
-                  "key": "GASOLINE_TYPE_ENGINE",
-                  "children": [
-                    {
-                      "key": "VOLUME",
-                      "children": [
-                        {
-                          "key": "AGE",
-                          "description": "no slash because this command unites several another commands with slash",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "key": "ELECTRIC_TYPE_ENGINE",
-                  "children": [
-                    {
-                      "key": "AGE",
-                      "description": "no slash because this command unites several another commands with slash",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
+              "key": "AGE",
+              "description": "no slash because this command unites several another commands with slash",
+              "children": []
             }
           ]
         }
       ]
-    },
-    {
-      "key": "EXCEPT_M1",
-      "children": []
-    },
-    {"key": "TRAILERS",
-      "children": []}
+    }
   ]
 }

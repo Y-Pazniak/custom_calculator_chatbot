@@ -26,42 +26,38 @@ public class UserProgressManager {
     public void createNewUserProgress(final String chatID) throws UtilsborException {
         final UserProgress userProgress = new UserProgress(chatID);
         userProgressStorage.save(userProgress);
-//        IUserProgressStorage localUserProgressStorage = PostgresUserProgressStorage.getInstance();
-//        UserProgress userProgress = new UserProgress(chatID);
-//        localUserProgressStorage.save(userProgress);
+    }
+
+//    public String processTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
+//        final UserProgress userProgress;
+//        userProgress = userProgressStorage.get(chatID);
+//        final String message;
+//
+//        if (Objects.equals(requestingCommand, Command.M1)) {
+//            userProgress.setTransportType(TransportType.M1);
+//        }
+//
 //        userProgressStorage.save(userProgress);
-    }
+//        message = messagesCreator.getSummaryAnswer(userProgress);
+//        return message;
+//    }
 
-    public String processTransportType(final Command requestingCommand, final String chatID) throws UtilsborException {
-        final UserProgress userProgress;
-        userProgress = userProgressStorage.get(chatID);
-        final String message;
-
-        if (Objects.equals(requestingCommand, Command.M1)) {
-            userProgress.setTransportType(TransportType.M1);
-        }
-
-        userProgressStorage.save(userProgress);
-        message = messagesCreator.getSummaryAnswer(userProgress);
-        return message;
-    }
-
-    public String processCarOrigin(final Command requestingCommand, final String chatID) throws UtilsborException {
-        final UserProgress userProgress;
-        userProgress = userProgressStorage.get(chatID);
-        final String message;
-
-        if (Objects.equals(requestingCommand, Command.EAES)) {
-            userProgress.setCountryOrigin(CountryOrigin.EAES);
-        } else if (Objects.equals(requestingCommand, Command.OTHER_COUNTRIES)) {
-            userProgress.setCountryOrigin(CountryOrigin.OTHER);
-        }
-
-
-        userProgressStorage.save(userProgress);
-        message = messagesCreator.getSummaryAnswer(userProgress);
-        return message;
-    }
+//    public String processCarOrigin(final Command requestingCommand, final String chatID) throws UtilsborException {
+//        final UserProgress userProgress;
+//        userProgress = userProgressStorage.get(chatID);
+//        final String message;
+//
+//        if (Objects.equals(requestingCommand, Command.EAES)) {
+//            userProgress.setCountryOrigin(CountryOrigin.EAES);
+//        } else if (Objects.equals(requestingCommand, Command.OTHER_COUNTRIES)) {
+//            userProgress.setCountryOrigin(CountryOrigin.OTHER);
+//        }
+//
+//
+//        userProgressStorage.save(userProgress);
+//        message = messagesCreator.getSummaryAnswer(userProgress);
+//        return message;
+//    }
 
     public String processOwnerType(final Command requestingCommand, final String chatID) throws UtilsborException {
         final UserProgress userProgress;

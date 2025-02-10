@@ -5,13 +5,13 @@ public enum Command {
     START("/start"),
 
     //type of vehicle
-    M1("/m1"),
-    EXCEPT_M1("/except_m1"),
-    TRAILERS("/trailers"),
+//    M1("/m1"),
+//    EXCEPT_M1("/except_m1"),
+//    TRAILERS("/trailers"),
 
 
-    EAES("/eaes"),
-    OTHER_COUNTRIES("/other"),
+//    EAES("/eaes"),
+//    OTHER_COUNTRIES("/other"),
 
     //second step command
 //    public static final String PHYSICAL_PERSON = "/physical";
