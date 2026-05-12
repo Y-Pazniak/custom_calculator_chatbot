@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import by.custom.utilcalculator.controller.Bot;
 
-public class Main {
+public class    Main {
     //branch for customers edits
     public static void main(final String[] args) {
         final Bot localBot = Bot.getBot();
@@ -16,5 +16,7 @@ public class Main {
         } catch (final TelegramApiException e) {
             e.printStackTrace();
         }
+
+
     }
 }

@@ -156,3 +156,4 @@ public class UserProgressManager {
         private static final UserProgressManager USER_PROGRESS_MANAGER = new UserProgressManager();
     }
 }
+

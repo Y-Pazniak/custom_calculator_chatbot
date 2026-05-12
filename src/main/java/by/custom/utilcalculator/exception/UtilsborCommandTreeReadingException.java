@@ -7,4 +7,8 @@ public class UtilsborCommandTreeReadingException extends URISyntaxException {
     public UtilsborCommandTreeReadingException(final String message, final Throwable cause){
         super(message, cause.getMessage());
     }
+
+    public UtilsborCommandTreeReadingException(final String message){
+        super(message, "");
+    }
 }
